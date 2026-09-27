@@ -198,13 +198,13 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .steps-wrap{position:relative;margin-block-start:clamp(50px,7vw,90px)}
 .steps{position:relative;list-style:none;margin:0;padding:0;display:grid;gap:44px}
 @media (min-width:900px){.steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}}
-.track{position:absolute;inset-inline:0;top:27px;height:1px;background:var(--bark);display:none}
+.track{position:absolute;inset-inline:calc((100% - 80px) / 6);top:27px;height:1px;background:var(--bark);display:none}
 .track i{position:absolute;inset-block:0;inset-inline-start:0;width:100%;background:var(--brass-deep);transform:scaleX(0);transform-origin:right;will-change:transform}
 @media (min-width:900px){.track{display:block}}
-.step{position:relative;display:grid;gap:14px}
+.step{position:relative;display:grid;gap:14px;justify-items:center;text-align:center}
 .step-n{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;line-height:1;text-box:trim-both ex alphabetic;background:var(--paper);border:1.5px solid var(--brass-deep);color:var(--brass-deep);font-family:var(--serif);font-weight:700;font-size:22px;position:relative;z-index:1}
 .step h3{font-size:clamp(1.4rem,2vw,1.75rem);font-weight:700;margin-block-start:10px}
-.step p{color:var(--muted);max-width:24em}
+.step p{color:var(--muted);max-width:22em}
 
 /* ---------- About ---------- */
 .about{padding:clamp(90px,11vw,170px) var(--gutter);max-width:1280px;margin-inline:auto;display:grid;gap:50px;align-items:center}
@@ -242,6 +242,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .rc-btn:hover{background:var(--brass);border-color:var(--brass);color:var(--ink)}
 .rc-btn svg{width:20px;height:20px}
 .rc-dots{display:flex;gap:6px}
+@media (max-width:899px){.rc-btn{display:none}.rc-nav{margin-block-start:26px}}
 .rc-dots button{padding:8px 3px;background:none;border:0}
 .rc-dots i{display:block;width:7px;height:7px;border-radius:999px;background:rgba(238,233,223,.35);transition:width .4s var(--ease-out),background .3s}
 .rc-dots [aria-current="true"] i{width:24px;background:var(--brass)}
