@@ -51,6 +51,9 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .on-dark .eyebrow{color:var(--brass)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:var(--pill);font-weight:700;font-size:16px;text-decoration:none;border:1.5px solid transparent;transition:background .25s,color .25s,border-color .25s,transform .35s var(--ease-out)}
 .btn svg{width:20px;height:20px;flex:none}
+.btn{line-height:1}
+.btn>span,.btn{text-box:trim-both ex alphabetic}
+.head-cta .btn{padding-block-end:3px}
 .btn-brass{background:var(--brass);color:var(--ink)}
 .btn-brass:hover{background:#CFA06A}
 .btn-ghost{border-color:rgba(238,233,223,.45);color:var(--on-dark)}
@@ -164,7 +167,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .areas-head p{max-width:34em;color:var(--muted)}
 .files{display:grid;gap:clamp(24px,4vh,40px)}
 .file{position:sticky;top:calc(var(--i) * 26px + 90px);transform-origin:50% 0;will-change:transform}
-.file-tab{display:inline-flex;align-items:center;gap:10px;margin-inline-start:28px;padding:10px 22px 12px;border-radius:14px 14px 0 0;font-size:14px;font-weight:700;letter-spacing:.06em}
+.file-tab{display:flex;width:fit-content;align-items:center;gap:10px;margin-block-end:-1px;padding:10px 22px 12px;border-radius:14px 14px 0 0;font-size:14px;font-weight:700;letter-spacing:.06em}
 .file-body{border-radius:0 var(--r-md) var(--r-md) var(--r-md);padding:clamp(28px,4vw,52px);display:grid;gap:28px;min-height:clamp(340px,44vh,420px);box-shadow:0 -1px 0 rgba(0,0,0,.04),0 24px 50px -30px rgba(21,36,32,.45)}
 [dir="rtl"] .file-body{border-radius:var(--r-md) 0 var(--r-md) var(--r-md)}
 @media (min-width:900px){.file-body{grid-template-columns:1.1fr 1fr;align-items:start}}
@@ -197,7 +200,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .track i{position:absolute;inset-block:0;inset-inline-start:0;width:100%;background:var(--brass-deep);transform:scaleX(0);transform-origin:right;will-change:transform}
 @media (min-width:900px){.track{display:block}}
 .step{position:relative;display:grid;gap:14px}
-.step-n{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1.5px solid var(--brass-deep);color:var(--brass-deep);font-family:var(--serif);font-weight:700;font-size:22px;position:relative;z-index:1}
+.step-n{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;line-height:1;text-box:trim-both ex alphabetic;background:var(--paper);border:1.5px solid var(--brass-deep);color:var(--brass-deep);font-family:var(--serif);font-weight:700;font-size:22px;position:relative;z-index:1}
 .step h3{font-size:clamp(1.4rem,2vw,1.75rem);font-weight:700;margin-block-start:10px}
 .step p{color:var(--muted);max-width:24em}
 
@@ -218,23 +221,28 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .signature path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .signature small{font-size:12px;color:var(--muted);opacity:.8}
 
-/* ---------- Reviews (slot for real Google reviews) ---------- */
-.reviews{border-radius:var(--r-lg);background:var(--field);color:var(--on-dark);padding:clamp(70px,9vw,130px) var(--gutter)}
-.reviews-in{max-width:1180px;margin-inline:auto}
-.reviews-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+/* ---------- Reviews carousel (curated by the office) ---------- */
+.reviews{position:relative;overflow:hidden;border-radius:var(--r-lg);background:var(--field);color:var(--on-dark);padding:clamp(70px,9vw,130px) 0}
+.reviews-in{max-width:1180px;margin-inline:auto;padding-inline:var(--gutter)}
 .reviews h2{font-size:clamp(2.2rem,4.4vw,4rem);line-height:1.05;margin-block-start:18px}
 .reviews-note{color:var(--on-dark-soft);max-width:26em;margin-block-start:14px}
-.review-grid{list-style:none;margin:clamp(40px,6vw,70px) 0 0;padding:0;display:grid;gap:18px}
-@media (min-width:900px){.review-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.review-grid li{display:flex}
-.review{flex:1;margin:0;display:flex;flex-direction:column;gap:18px;padding:30px;border-radius:var(--r-md);background:rgba(238,233,223,.06);border:1px solid var(--line-dark);transition:transform .45s var(--ease-out),background .3s}
-@media (hover:hover){.review:hover{transform:translateY(-6px);background:rgba(238,233,223,.09)}}
+.rc{margin-block-start:clamp(40px,6vw,70px)}
+.rc-stage{position:relative;height:var(--rc-h,340px);touch-action:pan-y;user-select:none}
+.rc-card{position:absolute;top:0;left:50%;width:var(--rc-w);margin:0;display:flex;flex-direction:column;gap:18px;padding:30px;border-radius:var(--r-md);background:#2E4C44;border:1px solid var(--line-dark);transition:transform .7s var(--ease-out),opacity .5s var(--ease-out),background .4s;cursor:pointer}
+.rc-card.is-active{background:#34564D;cursor:default;box-shadow:0 30px 60px -30px rgba(0,0,0,.55)}
 .stars{display:flex;gap:4px;color:var(--brass)}
 .stars svg{width:16px;height:16px}
-.review blockquote{margin:0;font-family:var(--serif);font-size:clamp(1.2rem,1.6vw,1.45rem);line-height:1.45}
-.review figcaption{margin-block-start:auto;padding-block-start:16px;border-block-start:1px solid var(--line-dark);font-size:15px;color:var(--on-dark-soft)}
-.review figcaption b{display:block;color:var(--on-dark);font-weight:600}
-.btn-ghost-sm{min-height:46px;padding:0 20px;font-size:15px}
+.rc-card blockquote{margin:0;font-family:var(--serif);font-size:clamp(1.2rem,1.6vw,1.45rem);line-height:1.45}
+.rc-card figcaption{margin-block-start:auto;padding-block-start:16px;border-block-start:1px solid var(--line-dark);font-size:15px;color:var(--on-dark-soft)}
+.rc-card figcaption b{display:block;color:var(--on-dark);font-weight:600}
+.rc-nav{display:flex;align-items:center;justify-content:center;gap:22px;margin-block-start:34px}
+.rc-btn{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:transparent;border:1.5px solid rgba(238,233,223,.35);color:var(--on-dark);transition:background .25s,border-color .25s,transform .35s var(--ease-out)}
+.rc-btn:hover{background:var(--brass);border-color:var(--brass);color:var(--ink)}
+.rc-btn svg{width:20px;height:20px}
+.rc-dots{display:flex;gap:6px}
+.rc-dots button{padding:8px 3px;background:none;border:0}
+.rc-dots i{display:block;width:7px;height:7px;border-radius:999px;background:rgba(238,233,223,.35);transition:width .4s var(--ease-out),background .3s}
+.rc-dots [aria-current="true"] i{width:24px;background:var(--brass)}
 
 /* ---------- FAQ ---------- */
 .faq{padding:clamp(90px,11vw,160px) var(--gutter);max-width:1180px;margin-inline:auto;display:grid;gap:40px}
@@ -268,7 +276,9 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .visit-row span:first-child{color:var(--muted)}
 .visit-row span:last-child{font-weight:600}
 .visit-actions{display:flex;flex-wrap:wrap;gap:10px;margin-block-start:26px}
-.copy-ok{font-size:14px;color:var(--brass-deep);min-height:1.4em;margin-block-start:8px}
+.icon-btn{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--stone);text-decoration:none;transition:background .25s,transform .35s var(--ease-out)}
+.icon-btn:hover{background:var(--field);transform:translateY(-2px)}
+.icon-btn svg{width:28px;height:28px}
 
 /* ---------- Final CTA ---------- */
 .final{position:relative;overflow:hidden;isolation:isolate;margin-block-start:var(--inset);border-radius:var(--r-lg);background:var(--ink);color:var(--on-dark);padding:clamp(80px,11vw,160px) var(--gutter);text-align:center;display:grid;justify-items:center}
@@ -549,19 +559,26 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   <!-- REVIEWS -->
   <section class="reviews on-dark" id="reviews" aria-labelledby="reviews-title">
     <div class="reviews-in">
-      <div class="reviews-head">
-        <div>
-          <span class="eyebrow rv">המלצות</span>
-          <h2 id="reviews-title" class="mask"><span class="m"><span>מה אומרים</span></span> <span class="m"><span style="--d:.1s">לקוחות.</span></span></h2>
-          <p class="reviews-note rv" style="--d:.12s">ביקורות אמיתיות מפרופיל Google של המשרד. [יתמלא אחרי פתיחת הפרופיל וקבלת ביקורות]</p>
-        </div>
-        <a class="btn btn-ghost btn-ghost-sm rv" style="--d:.18s" href="#reviews">לכל הביקורות ב-Google</a>
+      <span class="eyebrow rv">המלצות</span>
+      <h2 id="reviews-title" class="mask"><span class="m"><span>מה אומרים</span></span> <span class="m"><span style="--d:.1s">לקוחות.</span></span></h2>
+      <p class="reviews-note rv" style="--d:.12s">[המלצות שנבחרו על ידי המשרד ופורסמו בהסכמת הלקוחות]</p>
+    </div>
+    <div class="rc" role="region" aria-roledescription="קרוסלה" aria-label="המלצות לקוחות">
+      <div class="rc-stage">
+        <figure class="rc-card" data-rc><div class="stars" role="img" aria-label="[דירוג]"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></div><blockquote>[ציטוט מביקורת של לקוח, בהסכמתו. שניים עד שלושה משפטים]</blockquote><figcaption><b>[שם הלקוח]</b>דיני משפחה</figcaption></figure>
+        <figure class="rc-card" data-rc><div class="stars" role="img" aria-label="[דירוג]"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></div><blockquote>[ציטוט מביקורת של לקוח, בהסכמתו. שניים עד שלושה משפטים]</blockquote><figcaption><b>[שם הלקוח]</b>נזיקין וביטוח</figcaption></figure>
+        <figure class="rc-card" data-rc><div class="stars" role="img" aria-label="[דירוג]"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></div><blockquote>[ציטוט מביקורת של לקוח, בהסכמתו. שניים עד שלושה משפטים]</blockquote><figcaption><b>[שם הלקוח]</b>מקרקעין וחוזים</figcaption></figure>
+        <figure class="rc-card" data-rc><div class="stars" role="img" aria-label="[דירוג]"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></div><blockquote>[ציטוט מביקורת של לקוח, בהסכמתו. שניים עד שלושה משפטים]</blockquote><figcaption><b>[שם הלקוח]</b>נוטריון</figcaption></figure>
+        <figure class="rc-card" data-rc><div class="stars" role="img" aria-label="[דירוג]"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></div><blockquote>[ציטוט מביקורת של לקוח, בהסכמתו. שניים עד שלושה משפטים]</blockquote><figcaption><b>[שם הלקוח]</b>דיני משפחה</figcaption></figure>
+        <figure class="rc-card" data-rc><div class="stars" role="img" aria-label="[דירוג]"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></div><blockquote>[ציטוט מביקורת של לקוח, בהסכמתו. שניים עד שלושה משפטים]</blockquote><figcaption><b>[שם הלקוח]</b>נזיקין וביטוח</figcaption></figure>
+        <figure class="rc-card" data-rc><div class="stars" role="img" aria-label="[דירוג]"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></div><blockquote>[ציטוט מביקורת של לקוח, בהסכמתו. שניים עד שלושה משפטים]</blockquote><figcaption><b>[שם הלקוח]</b>מקרקעין וחוזים</figcaption></figure>
       </div>
-      <ul class="review-grid">
-        <li class="rv" style="--d:0ms"><figure class="review"><div class="stars" aria-label="[דירוג]"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></div><blockquote>[ציטוט מתוך ביקורת אמיתית ב-Google, באורך של שניים עד שלושה משפטים]</blockquote><figcaption><b>[שם הלקוח]</b>ביקורת מ-Google</figcaption></figure></li>
-        <li class="rv" style="--d:.1s"><figure class="review"><div class="stars" aria-label="[דירוג]"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></div><blockquote>[ציטוט מתוך ביקורת אמיתית ב-Google]</blockquote><figcaption><b>[שם הלקוח]</b>ביקורת מ-Google</figcaption></figure></li>
-        <li class="rv" style="--d:.2s"><figure class="review"><div class="stars" aria-label="[דירוג]"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></div><blockquote>[ציטוט מתוך ביקורת אמיתית ב-Google, על תחום אחר מהשניים הראשונים]</blockquote><figcaption><b>[שם הלקוח]</b>ביקורת מ-Google</figcaption></figure></li>
-      </ul>
+      <div class="rc-nav">
+        <button class="rc-btn" type="button" data-rc-prev aria-label="ההמלצה הקודמת"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <div class="rc-dots" role="group" aria-label="בחירת המלצה"></div>
+        <button class="rc-btn" type="button" data-rc-next aria-label="ההמלצה הבאה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      </div>
+      <p class="sr-only" aria-live="polite" data-rc-status></p>
     </div>
   </section>
 
@@ -589,11 +606,9 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
         <span class="eyebrow rv">הגעה למשרד</span>
         <h2 id="visit-title" class="addr mask"><span class="m"><span>הרברט סמואל 27</span></span><br><span class="m"><span class="city" style="--d:.1s">חדרה</span></span></h2>
         <div class="visit-actions rv" style="--d:.15s">
-          <a class="btn btn-ink" href="https://waze.com/ul?q=%D7%94%D7%A8%D7%91%D7%A8%D7%98%20%D7%A1%D7%9E%D7%95%D7%90%D7%9C%2027%20%D7%97%D7%93%D7%A8%D7%94&navigate=yes" target="_blank" rel="noopener">ניווט ב-Waze</a>
-          <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=%D7%94%D7%A8%D7%91%D7%A8%D7%98%20%D7%A1%D7%9E%D7%95%D7%90%D7%9C%2027%20%D7%97%D7%93%D7%A8%D7%94" target="_blank" rel="noopener">Google Maps</a>
-          <button class="btn btn-line" type="button" id="copy-addr">העתקת כתובת</button>
+          <a class="icon-btn" href="https://waze.com/ul?q=%D7%94%D7%A8%D7%91%D7%A8%D7%98%20%D7%A1%D7%9E%D7%95%D7%90%D7%9C%2027%20%D7%97%D7%93%D7%A8%D7%94&navigate=yes" target="_blank" rel="noopener" aria-label="ניווט למשרד ב-Waze" title="Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 17.2A8 8 0 1 1 20 11.5c0 2.9-1.8 5.1-4.4 5.9"/><path d="M11.2 17.9h1.9"/><circle cx="8.6" cy="18.6" r="1.6"/><circle cx="15.2" cy="18.6" r="1.6"/><circle cx="10" cy="10" r=".6" fill="currentColor"/><circle cx="15" cy="10" r=".6" fill="currentColor"/><path d="M10 13.2c1.3 1.1 3.6 1.1 5 0"/></svg></a>
+          <a class="icon-btn" href="https://www.google.com/maps/search/?api=1&query=%D7%94%D7%A8%D7%91%D7%A8%D7%98%20%D7%A1%D7%9E%D7%95%D7%90%D7%9C%2027%20%D7%97%D7%93%D7%A8%D7%94" target="_blank" rel="noopener" aria-label="המשרד ב-Google Maps" title="Google Maps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s-7-6.2-7-11.8a7 7 0 0 1 14 0c0 5.6-7 11.8-7 11.8z"/><circle cx="12" cy="9.6" r="2.6"/></svg></a>
         </div>
-        <p class="copy-ok" id="copy-msg" role="status" aria-live="polite"></p>
       </div>
       <div class="visit-list rv" style="--d:.2s">
         <div class="visit-row"><span>טלפון ווואטסאפ</span><span class="num">052-252-1127</span></div>
@@ -621,9 +636,8 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.2c.3 2.4 2.3 4.5 4.8 5.1l1-1.1 2 .9-.4 1.6c-3.8.3-7.9-3.6-7.8-7.4l1.5-.5 1 1.9z"/></svg>
         שלחו הודעה בוואטסאפ
       </a>
-      <a class="btn btn-ghost" href="tel:+972522521127">התקשרו</a>
+      <a class="btn btn-ghost" href="tel:+972522521127"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span class="num">052-252-1127</span></a>
     </div>
-    <p class="number rv" style="--d:.3s">או חייגו: <b class="num">052-252-1127</b></p>
   </section>
 
   <!-- FOOTER -->
@@ -682,34 +696,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
     a.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
   });
 
-  const copyBtn = document.getElementById('copy-addr');
-  const copyMsg = document.getElementById('copy-msg');
-  copyBtn.addEventListener('click', () => {
-    const addr = 'הרברט סמואל 27, חדרה';
-    const done = () => { copyMsg.textContent = 'הכתובת הועתקה'; };
-    try {
-      navigator.clipboard.writeText(addr).then(done, () => { copyMsg.textContent = addr; });
-    } catch (e) { copyMsg.textContent = addr; }
-  });
-
-  // Hebrew on SVG textPath renders inconsistently; place glyphs one by one, counter-clockwise so they read right to left.
-  const SVG_NS = 'http://www.w3.org/2000/svg';
-  document.querySelectorAll('[data-ring]').forEach(g => {
-    const r = parseFloat(g.dataset.ring);
-    const chars = [...g.textContent];
-    const step = 360 / chars.length;
-    g.textContent = '';
-    chars.forEach((ch, i) => {
-      const t = document.createElementNS(SVG_NS, 'text');
-      t.setAttribute('x', '100');
-      t.setAttribute('y', String(100 - r + 4));
-      t.setAttribute('text-anchor', 'middle');
-      t.setAttribute('transform', `rotate(${-i * step} 100 100)`);
-      t.textContent = ch;
-      g.appendChild(t);
-    });
-  });
-
   // Mobile menu works with or without motion.
   let lenis = null;
   const menu = document.getElementById('menu');
@@ -729,6 +715,79 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   menu.querySelector('.menu-close').addEventListener('click', () => setMenu(false));
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
   addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('open')) setMenu(false); });
+
+  // Reviews carousel: centre card plus two each side on desktop, swipe on phones.
+  (() => {
+    const rc = document.querySelector('.rc');
+    const stage = rc.querySelector('.rc-stage');
+    const cards = [...rc.querySelectorAll('[data-rc]')];
+    const dots = rc.querySelector('.rc-dots');
+    const status = rc.querySelector('[data-rc-status]');
+    const n = cards.length;
+    let active = 0;
+    cards.forEach((c, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', `המלצה ${i + 1} מתוך ${n}`);
+      b.innerHTML = '<i></i>';
+      b.addEventListener('click', () => go(i));
+      dots.appendChild(b);
+    });
+    const dotBtns = [...dots.children];
+    function layout() {
+      const wide = innerWidth >= 900;
+      const w = wide ? Math.min(380, stage.clientWidth * 0.34) : Math.min(340, innerWidth * 0.8);
+      stage.style.setProperty('--rc-w', w + 'px');
+      const step1 = wide ? w * 0.78 : w * 0.94;
+      const step2 = wide ? w * 1.42 : w * 2.1;
+      let h = 0;
+      cards.forEach((c, i) => {
+        let o = i - active;
+        if (o > n / 2) o -= n;
+        if (o < -n / 2) o += n;
+        const a = Math.abs(o);
+        const visible = wide ? a <= 2 : a <= 1;
+        const x = (a === 0 ? 0 : a === 1 ? step1 : step2) * -Math.sign(o);
+        const scale = a === 0 ? 1 : a === 1 ? (wide ? .86 : .92) : .72;
+        c.style.transform = `translateX(calc(-50% + ${x}px)) scale(${scale})`;
+        c.style.opacity = visible ? (a === 0 ? 1 : a === 1 ? (wide ? .7 : .45) : .38) : 0;
+        c.style.zIndex = String(10 - a);
+        c.classList.toggle('is-active', a === 0);
+        c.setAttribute('aria-hidden', String(a !== 0));
+        h = Math.max(h, c.offsetHeight);
+      });
+      stage.style.setProperty('--rc-h', h + 'px');
+      dotBtns.forEach((d, i) => d.setAttribute('aria-current', String(i === active)));
+    }
+    function go(i) {
+      active = (i + n) % n;
+      layout();
+      status.textContent = `המלצה ${active + 1} מתוך ${n}`;
+    }
+    rc.querySelector('[data-rc-next]').addEventListener('click', () => go(active + 1));
+    rc.querySelector('[data-rc-prev]').addEventListener('click', () => go(active - 1));
+    rc.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(active + 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(active - 1); }
+    });
+    // RTL: the next card sits to the left, so dragging right brings it in.
+    let x0 = null;
+    stage.addEventListener('pointerdown', e => { x0 = e.clientX; stage.setPointerCapture(e.pointerId); });
+    stage.addEventListener('pointercancel', () => { x0 = null; });
+    stage.addEventListener('pointerup', e => {
+      if (x0 === null) return;
+      const dx = e.clientX - x0; x0 = null;
+      if (Math.abs(dx) > 40) { go(active + (dx > 0 ? 1 : -1)); return; }
+      if (Math.abs(dx) < 8) {
+        const hit = document.elementsFromPoint(e.clientX, e.clientY).find(el => el.matches && el.matches('[data-rc]'));
+        const i = cards.indexOf(hit);
+        if (i > -1 && i !== active) go(i);
+      }
+    });
+    addEventListener('resize', layout);
+    document.fonts && document.fonts.ready.then(layout);
+    layout();
+  })();
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;

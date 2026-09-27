@@ -72,7 +72,9 @@ Secondary fact: legal representation and notary services under one roof.
   mockup; a higher-resolution original is needed for production.
 - Reference of practice areas from an existing listing: `design/assets/ref-practice-areas-screenshot.png`.
 - Existing Golden Pages listing under the same name and address.
-- **No testimonials, no case results, no press coverage, no ratings, no case counts.** A web search found only the
+- **Testimonials policy (owner decision):** in phase one, testimonials are curated by the owner and published on the
+  site itself, with each client's consent. Not pulled from Google.
+- **No testimonials, no case results, no press coverage, no ratings, no case counts yet.** A web search found only the
   Golden Pages listing. None of these may be fabricated. Sections that need them stay out until real material exists.
 
 ## Product Principles
