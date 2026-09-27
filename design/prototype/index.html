@@ -1,0 +1,703 @@
+<title>שוקרון כהן עורך דין ונוטריון</title>
+<meta name="description" content="עורך דין ונוטריון בחדרה. דיני משפחה, נזיקין וביטוח, מקרקעין וחוזים, שירותי נוטריון.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Assistant:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  /* Seriousness */
+  --ink:#152420;          /* eucalyptus ink: hero, text, footer */
+  --field:#24413A;        /* eucalyptus: committed sections */
+  /* Warmth */
+  --brass:#B98A52;        /* accent on dark grounds */
+  --brass-deep:#7E5829;   /* accent text on light grounds */
+  /* Care */
+  --stone:#EEE9DF;        /* warm limestone ground */
+  --bark:#DCD6C9;         /* secondary surface, hairlines */
+  --paper:#F7F4EE;        /* raised surfaces */
+  --muted:#5B625D;        /* body text on light */
+  --on-dark:#EEE9DF;
+  --on-dark-soft:rgba(238,233,223,.72);
+  --line-dark:rgba(238,233,223,.14);
+
+  --serif:"Frank Ruhl Libre", "David Libre", "Times New Roman", serif;
+  --sans:"Assistant", "Heebo", Arial, sans-serif;
+
+  --r-lg:28px; --r-md:18px; --r-sm:12px; --pill:999px;
+  --inset:10px;
+  --gutter:clamp(20px, 4.2vw, 64px);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--stone)}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--serif);font-weight:700;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:fixed;top:12px;inset-inline-start:12px;z-index:300;background:var(--brass);color:var(--ink);padding:10px 16px;border-radius:var(--pill);transform:translateY(-200%);text-decoration:none;font-weight:700}
+.skip:focus{transform:none}
+
+main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 84px);overflow-x:clip}
+@media (min-width:900px){main{padding-block-end:var(--inset)}}
+
+/* ---------- Shared ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.14em;color:var(--brass-deep)}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
+.on-dark .eyebrow{color:var(--brass)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:var(--pill);font-weight:700;font-size:16px;text-decoration:none;border:1.5px solid transparent;transition:background .25s,color .25s,border-color .25s,transform .35s var(--ease-out)}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-brass{background:var(--brass);color:var(--ink)}
+.btn-brass:hover{background:#CFA06A}
+.btn-ghost{border-color:rgba(238,233,223,.45);color:var(--on-dark)}
+.btn-ghost:hover{border-color:var(--on-dark);background:rgba(238,233,223,.08)}
+.btn-ink{background:var(--ink);color:var(--stone)}
+.btn-ink:hover{background:var(--field)}
+.btn-line{border-color:var(--ink);color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--stone)}
+@media (hover:hover){.btn:hover{transform:translateY(-2px)}}
+.num{font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+
+/* word / line mask reveal */
+.m{display:inline-block;overflow:hidden;vertical-align:top;padding-block-end:.12em;margin-block-end:-.12em}
+.m>span{display:inline-block;will-change:transform}
+
+/* ---------- Loader (CSS only, never blocks the page) ---------- */
+.curtain{position:fixed;inset:0;z-index:200;background:var(--ink);color:var(--on-dark);display:grid;place-items:center;animation:curtainUp .9s var(--ease-io) 1.35s forwards}
+.curtain-inner{display:grid;justify-items:center;gap:22px}
+.curtain svg{width:120px;height:120px}
+.curtain .ring{fill:none;stroke:var(--brass);stroke-width:1.5;stroke-dasharray:600;stroke-dashoffset:600;animation:draw 1.1s var(--ease-io) .1s forwards}
+.curtain .mono{font-family:var(--serif);font-weight:700;fill:var(--brass);opacity:0;animation:fadeIn .6s ease .6s forwards}
+.curtain-name{font-family:var(--serif);font-size:22px;letter-spacing:.02em;opacity:0;transform:translateY(10px);animation:rise .7s var(--ease-out) .45s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes curtainUp{to{transform:translateY(-102%);visibility:hidden}}
+
+/* ---------- Header ---------- */
+.site-head{position:absolute;inset-inline:0;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px var(--gutter)}
+.brand{display:flex;flex-direction:column;line-height:1.1;text-decoration:none;color:var(--on-dark)}
+.brand b{font-family:var(--serif);font-size:21px;font-weight:700}
+.brand span{font-size:12.5px;color:var(--on-dark-soft);letter-spacing:.04em;margin-block-start:4px}
+.nav{display:none;gap:30px;font-size:15px}
+.nav a{text-decoration:none;color:var(--on-dark-soft);transition:color .2s}
+.nav a:hover{color:var(--on-dark)}
+.head-cta{display:none;align-items:center;gap:18px}
+.head-cta .phone{color:var(--on-dark);font-weight:600;font-size:15px}
+.head-cta .btn{min-height:44px;padding:0 20px;font-size:15px}
+@media (min-width:1000px){.nav,.head-cta{display:flex}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--ink);color:var(--on-dark);border-radius:var(--r-lg);min-height:clamp(620px,calc(100svh - 20px),940px);display:grid;align-items:end;padding:120px var(--gutter) clamp(28px,5vw,64px)}
+.ruled{position:absolute;inset:-20% 0;z-index:-1;background-image:repeating-linear-gradient(to bottom,transparent 0 43px,rgba(238,233,223,.045) 43px 44px);will-change:transform}
+.ruled::after{content:"";position:absolute;inset-block:0;inset-inline-end:clamp(40px,9vw,140px);width:1px;background:rgba(185,138,82,.22)}
+.hero-grid{display:grid;gap:40px;align-items:end}
+@media (min-width:900px){.hero-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr);gap:clamp(40px,5vw,90px)}}
+.hero h1{font-size:clamp(2.9rem,7.2vw,7.4rem);line-height:.98;font-weight:700}
+.hero h1 .l2{color:var(--brass);font-weight:500}
+.hero-sub{margin-block-start:28px;max-width:34em;font-size:clamp(17px,1.35vw,20px);color:var(--on-dark-soft)}
+.hero-sub strong{color:var(--on-dark);font-weight:600}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-block-start:34px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-block-start:30px;font-size:14px;color:var(--on-dark-soft)}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.hero-meta span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--brass)}
+
+.portrait-wrap{position:relative;justify-self:center;width:min(100%,420px)}
+.portrait{position:relative;aspect-ratio:4/5;border-radius:999px 999px var(--r-md) var(--r-md);overflow:hidden;background:#3a4642;box-shadow:0 30px 80px -30px rgba(0,0,0,.6)}
+.portrait img{position:absolute;inset-inline:0;top:-8%;width:100%;height:116%;object-fit:cover;object-position:50% 30%;will-change:transform}
+.portrait::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(238,233,223,.16)}
+.seal{position:absolute;inset-inline-start:-34px;bottom:34px;width:128px;height:128px;border-radius:50%;background:var(--ink);box-shadow:0 12px 30px -10px rgba(0,0,0,.6)}
+.seal svg{width:100%;height:100%}
+.seal .rot{transform-origin:100px 100px;will-change:transform}
+.seal-text{font-family:var(--sans);font-size:13px;font-weight:700;fill:var(--brass)}
+.seal-mono{font-family:var(--serif);font-weight:700;font-size:40px;fill:var(--on-dark)}
+.seal-sub{font-family:var(--sans);font-size:11px;letter-spacing:2px;fill:var(--brass)}
+@media (max-width:899px){.portrait-wrap{width:min(78%,340px)}.seal{width:104px;height:104px;inset-inline-start:-20px}}
+
+/* ---------- Statement (scroll-scrubbed words) ---------- */
+.statement{padding:clamp(90px,13vw,190px) var(--gutter) clamp(70px,10vw,140px);max-width:1280px;margin-inline:auto}
+.statement p{font-family:var(--serif);font-size:clamp(1.9rem,4.1vw,4rem);line-height:1.22;font-weight:500;text-wrap:pretty}
+.statement .sw{opacity:.16;transition:opacity .25s linear}
+.statement .sw.hl{color:var(--brass-deep)}
+.statement-foot{display:flex;flex-wrap:wrap;align-items:center;gap:18px 30px;margin-block-start:48px;color:var(--muted)}
+
+/* ---------- 30 years ---------- */
+.years{position:relative;overflow:hidden;border-radius:var(--r-lg);background:var(--field);color:var(--on-dark);padding:clamp(60px,8vw,120px) var(--gutter);display:grid;gap:30px;align-items:center}
+@media (min-width:900px){.years{grid-template-columns:auto 1fr;gap:clamp(40px,6vw,100px)}}
+.big30{position:relative;font-family:var(--serif);font-weight:900;font-size:clamp(9rem,26vw,24rem);line-height:.8;letter-spacing:-.04em;direction:ltr}
+.big30 .outline{color:transparent;-webkit-text-stroke:1.5px rgba(185,138,82,.55)}
+.big30 .fill{position:absolute;inset:0;color:var(--brass);clip-path:inset(100% 0 0 0);will-change:clip-path}
+.years h2{font-size:clamp(2rem,3.6vw,3.4rem);line-height:1.12}
+.years p{margin-block-start:18px;max-width:30em;color:var(--on-dark-soft);font-size:18px}
+
+/* ---------- Practice areas: stacked court files ---------- */
+.areas{padding:clamp(90px,12vw,170px) var(--gutter) 40px;max-width:1280px;margin-inline:auto}
+.areas-head{display:grid;gap:18px;margin-block-end:clamp(40px,6vw,70px)}
+.areas-head h2{font-size:clamp(2.3rem,5vw,4.6rem);line-height:1.02}
+.areas-head p{max-width:34em;color:var(--muted)}
+.files{display:grid;gap:clamp(24px,4vh,40px)}
+.file{position:sticky;top:calc(var(--i) * 26px + 90px);transform-origin:50% 0;will-change:transform}
+.file-tab{display:inline-flex;align-items:center;gap:10px;margin-inline-start:28px;padding:10px 22px 12px;border-radius:14px 14px 0 0;font-size:14px;font-weight:700;letter-spacing:.06em}
+.file-body{border-radius:0 var(--r-md) var(--r-md) var(--r-md);padding:clamp(28px,4vw,52px);display:grid;gap:28px;min-height:clamp(340px,44vh,420px);box-shadow:0 -1px 0 rgba(0,0,0,.04),0 24px 50px -30px rgba(21,36,32,.45)}
+[dir="rtl"] .file-body{border-radius:var(--r-md) 0 var(--r-md) var(--r-md)}
+@media (min-width:900px){.file-body{grid-template-columns:1.1fr 1fr;align-items:start}}
+.file h3{font-size:clamp(1.9rem,3.4vw,3.1rem);line-height:1.08}
+.file-lead{margin-block-start:14px;font-size:18px;max-width:28em}
+.file ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.file li{padding-block:13px;border-block-end:1px solid;display:flex;align-items:center;gap:12px;font-size:17px}
+.file li::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.55;flex:none}
+.file-cta{margin-block-start:26px}
+.f1 .file-tab,.f1 .file-body{background:var(--ink);color:var(--on-dark)}
+.f1 li{border-color:var(--line-dark)} .f1 .file-lead{color:var(--on-dark-soft)}
+.f2 .file-tab,.f2 .file-body{background:var(--field);color:var(--on-dark)}
+.f2 li{border-color:var(--line-dark)} .f2 .file-lead{color:var(--on-dark-soft)}
+.f3 .file-tab,.f3 .file-body{background:var(--paper);color:var(--ink)}
+.f3 li{border-color:var(--bark)} .f3 .file-lead{color:var(--muted)}
+.f4 .file-tab,.f4 .file-body{background:var(--brass);color:var(--ink)}
+.f4 li{border-color:rgba(21,36,32,.2)} .f4 .file-lead{color:#2c2a22}
+.f1 .file-tab::before,.f2 .file-tab::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brass)}
+.f3 .file-tab::before,.f4 .file-tab::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink)}
+.draft{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.05em;opacity:.7;margin-block-start:10px}
+
+/* ---------- Notary ---------- */
+.notary{padding:clamp(90px,11vw,160px) var(--gutter);max-width:1280px;margin-inline:auto;display:grid;gap:50px}
+@media (min-width:900px){.notary{grid-template-columns:1fr 1.1fr;gap:clamp(50px,7vw,110px);align-items:start}}
+.notary h2{font-size:clamp(2.2rem,4.4vw,4rem);line-height:1.05;margin-block-start:18px}
+.notary-lead{margin-block-start:22px;color:var(--muted);max-width:30em}
+.fee{margin-block-start:34px;padding:22px 24px;border-radius:var(--r-md);background:var(--paper);border:1px solid var(--bark);display:flex;gap:16px;align-items:flex-start}
+.fee svg{width:26px;height:26px;flex:none;color:var(--brass-deep);margin-block-start:3px}
+.fee p{font-size:16px;color:var(--muted)} .fee b{color:var(--ink)}
+.services{display:grid;gap:0;border-block-start:1px solid var(--ink)}
+.service{display:grid;grid-template-columns:1fr auto;gap:6px 20px;align-items:baseline;padding-block:22px;border-block-end:1px solid var(--bark)}
+.service h3{font-size:clamp(1.35rem,2vw,1.7rem);font-weight:500}
+.service p{grid-column:1/-1;color:var(--muted);font-size:16px}
+.service .tag{font-size:13px;color:var(--brass-deep);font-weight:600}
+
+/* ---------- Process ---------- */
+.process{position:relative;border-radius:var(--r-lg);background:var(--paper);padding:clamp(70px,9vw,130px) var(--gutter)}
+.process-in{max-width:1180px;margin-inline:auto}
+.process h2{font-size:clamp(2.2rem,4.4vw,4rem);line-height:1.05;margin-block-start:18px;max-width:14em}
+.steps-wrap{position:relative;margin-block-start:clamp(50px,7vw,90px)}
+.steps{position:relative;list-style:none;margin:0;padding:0;display:grid;gap:44px}
+@media (min-width:900px){.steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}}
+.track{position:absolute;inset-inline:0;top:27px;height:1px;background:var(--bark);display:none}
+.track i{position:absolute;inset-block:0;inset-inline-start:0;width:100%;background:var(--brass-deep);transform:scaleX(0);transform-origin:right;will-change:transform}
+@media (min-width:900px){.track{display:block}}
+.step{position:relative;display:grid;gap:14px}
+.step-n{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:1.5px solid var(--brass-deep);color:var(--brass-deep);font-family:var(--serif);font-weight:700;font-size:22px;position:relative;z-index:1}
+.step h3{font-size:clamp(1.4rem,2vw,1.75rem);font-weight:700;margin-block-start:10px}
+.step p{color:var(--muted);max-width:24em}
+
+/* ---------- About ---------- */
+.about{padding:clamp(90px,11vw,170px) var(--gutter);max-width:1280px;margin-inline:auto;display:grid;gap:50px;align-items:center}
+@media (min-width:900px){.about{grid-template-columns:.85fr 1.15fr;gap:clamp(50px,7vw,120px)}}
+.about-photo{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/5;max-width:460px;background:var(--bark)}
+.about-photo img{position:absolute;inset-inline:0;top:-8%;width:100%;height:116%;object-fit:cover;object-position:50% 25%;will-change:transform}
+.about h2{font-size:clamp(2.2rem,4.4vw,4rem);line-height:1.05;margin-block-start:18px}
+.about-text{margin-block-start:24px;display:grid;gap:16px;color:var(--muted);font-size:18px;max-width:32em}
+.facts{margin-block-start:34px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-block-start:1px solid var(--bark)}
+.fact{padding:18px 0;border-block-end:1px solid var(--bark);display:grid;gap:2px}
+.fact:nth-child(odd){padding-inline-end:18px}
+.fact dt{font-size:13px;color:var(--muted);letter-spacing:.06em}
+.fact dd{margin:0;font-family:var(--serif);font-size:21px;font-weight:500}
+.signature{margin-block-start:34px;display:grid;gap:4px}
+.signature svg{width:min(300px,80%);height:auto}
+.signature path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.signature small{font-size:12px;color:var(--muted);opacity:.8}
+
+/* ---------- Visit ---------- */
+.visit{border-radius:var(--r-lg);background:var(--bark);padding:clamp(60px,8vw,110px) var(--gutter)}
+.visit-in{max-width:1180px;margin-inline:auto;display:grid;gap:40px}
+@media (min-width:900px){.visit-in{grid-template-columns:1.2fr 1fr;align-items:end}}
+.visit .addr{font-family:var(--serif);font-size:clamp(2.6rem,6.4vw,6rem);font-weight:700;line-height:1;margin-block-start:18px}
+.visit .city{color:var(--brass-deep)}
+.visit-list{display:grid;gap:0;border-block-start:1px solid rgba(21,36,32,.2)}
+.visit-row{display:flex;justify-content:space-between;gap:16px;padding-block:16px;border-block-end:1px solid rgba(21,36,32,.2)}
+.visit-row span:first-child{color:var(--muted)}
+.visit-row span:last-child{font-weight:600}
+.visit-actions{display:flex;flex-wrap:wrap;gap:10px;margin-block-start:26px}
+.copy-ok{font-size:14px;color:var(--brass-deep);min-height:1.4em;margin-block-start:8px}
+
+/* ---------- Final CTA ---------- */
+.final{position:relative;overflow:hidden;isolation:isolate;margin-block-start:var(--inset);border-radius:var(--r-lg);background:var(--ink);color:var(--on-dark);padding:clamp(80px,11vw,160px) var(--gutter);text-align:center;display:grid;justify-items:center}
+.final .ruled{inset:0}
+.stamp{width:clamp(130px,16vw,190px);height:clamp(130px,16vw,190px);margin-block-end:34px;border-radius:50%;opacity:0;transform:scale(1.6) rotate(-35deg)}
+.stamp.in{animation:stamp .75s cubic-bezier(.3,1.4,.5,1) forwards}
+@keyframes stamp{0%{opacity:0;transform:scale(1.6) rotate(-35deg)}60%{opacity:1;transform:scale(.94) rotate(-6deg)}100%{opacity:1;transform:scale(1) rotate(-8deg)}}
+.final h2{font-size:clamp(2.6rem,6.4vw,6.2rem);line-height:1}
+.final p{margin-block-start:22px;color:var(--on-dark-soft);max-width:30em;font-size:19px}
+.final-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-block-start:38px}
+.final .number{margin-block-start:22px;font-size:15px;color:var(--on-dark-soft)}
+.final .number b{color:var(--on-dark);font-size:18px}
+
+/* ---------- Footer ---------- */
+.foot{padding:50px var(--gutter) 30px;max-width:1280px;margin-inline:auto;display:grid;gap:30px;font-size:15px;color:var(--muted)}
+@media (min-width:900px){.foot{grid-template-columns:1.3fr 1fr 1fr;align-items:start}}
+.foot b{display:block;font-family:var(--serif);font-size:20px;color:var(--ink);margin-block-end:6px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.foot a{text-decoration:none} .foot a:hover{color:var(--ink);text-decoration:underline}
+.foot-bottom{grid-column:1/-1;border-block-start:1px solid var(--bark);padding-block-start:22px;font-size:13px}
+
+/* ---------- Mobile contact bar ---------- */
+.dock{position:fixed;inset-inline:0;bottom:0;z-index:50;display:grid;grid-template-columns:1.3fr 1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(21,36,32,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transform:translateY(110%);transition:transform .5s var(--ease-out)}
+.dock.show{transform:none}
+.dock .btn{min-height:54px;font-size:16px}
+@media (min-width:900px){.dock{display:none}}
+
+/* ---------- Motion states (only when JS runs and motion is allowed) ---------- */
+.anim .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out);transition-delay:var(--d,0ms)}
+.anim .rv.in{opacity:1;transform:none}
+.anim .mask .m>span{transform:translateY(112%);transition:transform 1.1s var(--ease-out);transition-delay:var(--d,0ms)}
+.anim .mask.in .m>span{transform:none}
+.anim .hero-in{opacity:0;transform:translateY(22px);animation:rise .9s var(--ease-out) forwards;animation-delay:var(--d)}
+.anim .hero h1 .m>span{transform:translateY(112%);animation:lineUp 1.15s var(--ease-out) forwards;animation-delay:var(--d)}
+@keyframes lineUp{to{transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .curtain{display:none}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}
+  .statement .sw{opacity:1}
+  .big30 .fill{clip-path:none}
+  .stamp{opacity:1;transform:rotate(-8deg)}
+}
+</style>
+
+<a class="skip" href="#content">דלג לתוכן</a>
+
+<div class="curtain" aria-hidden="true">
+  <div class="curtain-inner">
+    <svg viewBox="0 0 120 120"><circle class="ring" cx="60" cy="60" r="54"/><circle class="ring" cx="60" cy="60" r="42" style="animation-delay:.3s"/><text class="mono" x="60" y="72" text-anchor="middle" font-size="34">ש״כ</text></svg>
+    <div class="curtain-name">יוסי שוקרון כהן</div>
+  </div>
+</div>
+
+<div dir="rtl" lang="he">
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero on-dark" aria-labelledby="hero-title">
+    <div class="ruled" data-parallax="-0.06" aria-hidden="true"></div>
+    <header class="site-head">
+      <a class="brand" href="#top"><b>יוסי שוקרון כהן</b><span>עורך דין ונוטריון · חדרה</span></a>
+      <nav class="nav" aria-label="ניווט ראשי">
+        <a href="#areas">תחומי עיסוק</a>
+        <a href="#notary">נוטריון</a>
+        <a href="#about">אודות</a>
+        <a href="#visit">הגעה למשרד</a>
+      </nav>
+      <div class="head-cta">
+        <span class="phone num">052-252-1127</span>
+        <a class="btn btn-brass" data-wa href="https://wa.me/972522521127" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.2c.3 2.4 2.3 4.5 4.8 5.1l1-1.1 2 .9-.4 1.6c-3.8.3-7.9-3.6-7.8-7.4l1.5-.5 1 1.9z"/></svg>
+          וואטסאפ
+        </a>
+      </div>
+    </header>
+
+    <div class="hero-grid">
+      <div>
+        <h1 id="hero-title">
+          <span class="m"><span style="--d:1.55s">ליווי משפטי אישי.</span></span><br>
+          <span class="m"><span class="l2" style="--d:1.7s">30 שנה בחדרה.</span></span>
+        </h1>
+        <p class="hero-sub hero-in" style="--d:1.95s">דיני משפחה, נזיקין וביטוח, מקרקעין וחוזים ושירותי נוטריון. <strong>את התיק שלכם מלווה עו״ד שוקרון כהן בעצמו</strong>, מהשיחה הראשונה ועד סוף הטיפול.</p>
+        <div class="hero-actions hero-in" style="--d:2.1s">
+          <a class="btn btn-brass" data-wa href="https://wa.me/972522521127" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.2c.3 2.4 2.3 4.5 4.8 5.1l1-1.1 2 .9-.4 1.6c-3.8.3-7.9-3.6-7.8-7.4l1.5-.5 1 1.9z"/></svg>
+            שלחו הודעה בוואטסאפ
+          </a>
+          <a class="btn btn-ghost" href="tel:+972522521127">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+            <span class="num">052-252-1127</span>
+          </a>
+        </div>
+        <div class="hero-meta hero-in" style="--d:2.25s">
+          <span>הרברט סמואל 27, חדרה</span>
+          <span>עורך דין ונוטריון</span>
+        </div>
+      </div>
+
+      <div class="portrait-wrap hero-in" style="--d:1.8s">
+        <div class="portrait"><img src="assets/yossi.webp" alt="עו״ד יוסי שוקרון כהן" data-parallax="0.08" fetchpriority="high"></div>
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <g class="rot" data-spin>
+              <circle cx="100" cy="100" r="92" fill="none" stroke="#B98A52" stroke-width="1.2"/>
+              <circle cx="100" cy="100" r="58" fill="none" stroke="#B98A52" stroke-width="1.2"/>
+              <g class="seal-text" data-ring="74">עורך דין ונוטריון · חדרה · שוקרון כהן · </g>
+            </g>
+            <text class="seal-mono" x="100" y="108" text-anchor="middle">ש״כ</text>
+            <text class="seal-sub" x="100" y="128" text-anchor="middle">נוטריון</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="content"></div>
+
+  <!-- STATEMENT -->
+  <section class="statement" aria-label="גישה אישית">
+    <p data-scrub>כשעומדים מול גירושין, תאונה או עסקה גדולה, <span class="hl">הדבר החשוב ביותר</span> הוא לדעת שיש מי שמכיר את התיק שלכם לעומק, עונה לטלפון, ומסביר כל שלב בשפה פשוטה.</p>
+    <div class="statement-foot rv">
+      <span class="eyebrow">בלי מתווכים</span>
+      <span>אתם מדברים ישירות עם עורך הדין שמטפל בתיק.</span>
+    </div>
+  </section>
+
+  <!-- 30 YEARS -->
+  <section class="years on-dark" aria-labelledby="years-title">
+    <div class="big30" aria-hidden="true"><span class="outline">30</span><span class="fill" data-fill>30</span></div>
+    <div>
+      <span class="eyebrow">ותק</span>
+      <h2 id="years-title" class="mask"><span class="m"><span>שלושים שנה של עבודה</span></span> <span class="m"><span style="--d:.1s">משפטית בחדרה</span></span></h2>
+      <p class="rv" style="--d:.15s">היכרות ארוכת שנים עם העיר, עם בתי המשפט באזור ועם האנשים שפונים למשרד. [השכלה ושנת הסמכה, לאישור יוסי]</p>
+    </div>
+  </section>
+
+  <!-- PRACTICE AREAS -->
+  <section class="areas" id="areas" aria-labelledby="areas-title">
+    <div class="areas-head">
+      <span class="eyebrow rv">תחומי עיסוק</span>
+      <h2 id="areas-title" class="mask"><span class="m"><span>ארבעה תחומים,</span></span><br><span class="m"><span style="--d:.1s">עורך דין אחד.</span></span></h2>
+      <p class="rv" style="--d:.15s">בחרו את הנושא ושלחו הודעה. ההודעה בוואטסאפ תיפתח עם שם התחום, כדי שתוכלו פשוט לכתוב מה קרה.</p>
+    </div>
+
+    <div class="files">
+      <article class="file f1" style="--i:0" data-file>
+        <div class="file-tab">דיני משפחה ומעמד אישי</div>
+        <div class="file-body">
+          <div>
+            <h3>כשהמשפחה משתנה, צריך מישהו יציב לצידכם.</h3>
+            <p class="file-lead">ליווי רגיש ודיסקרטי בהליכים שנוגעים בדברים הכי אישיים.</p>
+            <a class="btn btn-brass file-cta" data-wa="דיני משפחה" href="https://wa.me/972522521127" target="_blank" rel="noopener">שאלה בנושא משפחה</a>
+          </div>
+          <div>
+            <ul><li>גירושין והסכמי גירושין</li><li>משמורת והסדרי שהות</li><li>מזונות</li><li>הסכמי ממון וידועים בציבור</li><li>ירושות וצוואות</li></ul>
+            <span class="draft">[רשימה לאישור יוסי]</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="file f2" style="--i:1" data-file>
+        <div class="file-tab">נזיקין וביטוח</div>
+        <div class="file-body">
+          <div>
+            <h3>אחרי פגיעה, הזמן שלכם צריך ללכת להחלמה.</h3>
+            <p class="file-lead">טיפול בתביעה ובהתנהלות מול חברות הביטוח, כדי שלא תצטרכו לעשות את זה לבד.</p>
+            <a class="btn btn-brass file-cta" data-wa="נזיקין וביטוח" href="https://wa.me/972522521127" target="_blank" rel="noopener">שאלה בנושא נזיקין</a>
+          </div>
+          <div>
+            <ul><li>תאונות דרכים</li><li>נזקי גוף</li><li>תביעות מול חברות ביטוח</li><li>תאונות עבודה</li></ul>
+            <span class="draft">[רשימה לאישור יוסי]</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="file f3" style="--i:2" data-file>
+        <div class="file-tab">מקרקעין, נדל״ן וחוזים</div>
+        <div class="file-body">
+          <div>
+            <h3>העסקה הגדולה בחיים ראויה לבדיקה יסודית.</h3>
+            <p class="file-lead">ליווי משפטי בקנייה, במכירה ובכל חוזה שחשוב לכם להבין לפני שחותמים.</p>
+            <a class="btn btn-ink file-cta" data-wa="מקרקעין וחוזים" href="https://wa.me/972522521127" target="_blank" rel="noopener">שאלה בנושא נדל״ן</a>
+          </div>
+          <div>
+            <ul><li>קנייה ומכירה של דירה</li><li>בדיקת חוזים וניסוחם</li><li>רישום בטאבו</li><li>הסכמי שכירות</li></ul>
+            <span class="draft">[רשימה לאישור יוסי]</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="file f4" style="--i:3" data-file>
+        <div class="file-tab">נוטריון</div>
+        <div class="file-body">
+          <div>
+            <h3>אישור נוטריוני, באותו משרד ובאותה שיחה.</h3>
+            <p class="file-lead">אימותים, תרגומים וייפויי כוח, בלי לחפש משרד נוסף.</p>
+            <a class="btn btn-ink file-cta" data-wa="שירותי נוטריון" href="https://wa.me/972522521127" target="_blank" rel="noopener">תיאום אישור נוטריוני</a>
+          </div>
+          <div>
+            <ul><li>אימות חתימה</li><li>העתק נאמן למקור</li><li>תרגום נוטריוני</li><li>ייפוי כוח נוטריוני</li></ul>
+            <span class="draft">[רשימה לאישור יוסי]</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- NOTARY -->
+  <section class="notary" id="notary" aria-labelledby="notary-title">
+    <div>
+      <span class="eyebrow rv">שירותי נוטריון</span>
+      <h2 id="notary-title" class="mask"><span class="m"><span>מסמך שצריך</span></span><br><span class="m"><span style="--d:.1s">חותמת נוטריון?</span></span></h2>
+      <p class="notary-lead rv" style="--d:.1s">שלחו בוואטסאפ צילום של המסמך ואת היעד שלו, ותקבלו תשובה מה צריך להביא לפגישה.</p>
+      <div class="fee rv" style="--d:.2s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <p><b>שכר נוטריון נקבע בתקנות.</b> המחיר לכל שירות לפי התעריף הרשמי, ומוסבר מראש. [לאישור יוסי]</p>
+      </div>
+    </div>
+    <div class="services">
+      <div class="service rv"><h3>אימות חתימה</h3><span class="tag">לשימוש בארץ ובחו״ל</span><p>אישור שהחתימה על המסמך היא שלכם, בנוכחות הנוטריון.</p></div>
+      <div class="service rv" style="--d:.06s"><h3>העתק נאמן למקור</h3><span class="tag">תעודות ומסמכים</span><p>אישור שהעתק של מסמך זהה למקור.</p></div>
+      <div class="service rv" style="--d:.12s"><h3>תרגום נוטריוני</h3><span class="tag">[שפות לאישור]</span><p>אישור שהתרגום נאמן למסמך המקורי.</p></div>
+      <div class="service rv" style="--d:.18s"><h3>ייפוי כוח נוטריוני</h3><span class="tag">בארץ ובחו״ל</span><p>ייפוי כוח שמאומת על ידי נוטריון.</p></div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" aria-labelledby="process-title">
+    <div class="process-in">
+      <span class="eyebrow rv">איך מתחילים</span>
+      <h2 id="process-title" class="mask"><span class="m"><span>שלושה צעדים,</span></span> <span class="m"><span style="--d:.1s">והראשון לוקח דקה.</span></span></h2>
+      <div class="steps-wrap">
+      <div class="track" aria-hidden="true"><i data-track></i></div>
+      <ol class="steps">
+        <li class="step rv"><span class="step-n">1</span><h3>שולחים הודעה או מתקשרים</h3><p>כמה משפטים על מה שקרה מספיקים. אין צורך להכין מסמכים מראש.</p></li>
+        <li class="step rv" style="--d:.12s"><span class="step-n">2</span><h3>נפגשים במשרד</h3><p>פגישה אישית בהרברט סמואל 27, שבה עוברים על המצב ועל האפשרויות.</p></li>
+        <li class="step rv" style="--d:.24s"><span class="step-n">3</span><h3>ליווי עד סוף הטיפול</h3><p>אותו עורך דין לאורך כל הדרך, עם עדכונים ותשובות ישירות.</p></li>
+      </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="about-photo rv"><img src="assets/yossi.webp" alt="" data-parallax="0.07" loading="lazy"></div>
+    <div>
+      <span class="eyebrow rv">אודות</span>
+      <h2 id="about-title" class="mask"><span class="m"><span>עו״ד יוסי</span></span><br><span class="m"><span style="--d:.1s">שוקרון כהן</span></span></h2>
+      <div class="about-text">
+        <p class="rv">עורך דין ונוטריון, 30 שנה במשרד בחדרה. [פסקה אישית קצרה של יוסי: למה בחר במקצוע ואיך הוא עובד עם לקוחות]</p>
+        <p class="rv" style="--d:.08s">המשרד מטפל בתיקים בדיני משפחה, נזיקין וביטוח, מקרקעין וחוזים, ומעניק שירותי נוטריון.</p>
+      </div>
+      <dl class="facts rv" style="--d:.12s">
+        <div class="fact"><dt>ניסיון</dt><dd>30 שנה</dd></div>
+        <div class="fact"><dt>הסמכה</dt><dd>עורך דין ונוטריון</dd></div>
+        <div class="fact"><dt>משרד</dt><dd>חדרה</dd></div>
+        <div class="fact"><dt>השכלה</dt><dd>[לאישור]</dd></div>
+      </dl>
+      <div class="signature" aria-hidden="true">
+        <svg viewBox="0 0 320 90"><path data-sign d="M14 58 C 30 20, 46 18, 44 44 S 36 78, 58 60 S 84 22, 96 40 S 104 70, 124 52 C 138 40, 146 30, 152 46 S 168 66, 186 44 S 214 18, 222 42 S 240 64, 262 46 C 276 36, 290 34, 306 40 M 30 76 C 110 70, 200 70, 300 62"/></svg>
+        <small>חתימה להמחשה</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit" id="visit" aria-labelledby="visit-title">
+    <div class="visit-in">
+      <div>
+        <span class="eyebrow rv">הגעה למשרד</span>
+        <h2 id="visit-title" class="addr mask"><span class="m"><span>הרברט סמואל 27</span></span><br><span class="m"><span class="city" style="--d:.1s">חדרה</span></span></h2>
+        <div class="visit-actions rv" style="--d:.15s">
+          <a class="btn btn-ink" href="https://waze.com/ul?q=%D7%94%D7%A8%D7%91%D7%A8%D7%98%20%D7%A1%D7%9E%D7%95%D7%90%D7%9C%2027%20%D7%97%D7%93%D7%A8%D7%94&navigate=yes" target="_blank" rel="noopener">ניווט ב-Waze</a>
+          <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=%D7%94%D7%A8%D7%91%D7%A8%D7%98%20%D7%A1%D7%9E%D7%95%D7%90%D7%9C%2027%20%D7%97%D7%93%D7%A8%D7%94" target="_blank" rel="noopener">Google Maps</a>
+          <button class="btn btn-line" type="button" id="copy-addr">העתקת כתובת</button>
+        </div>
+        <p class="copy-ok" id="copy-msg" role="status" aria-live="polite"></p>
+      </div>
+      <div class="visit-list rv" style="--d:.2s">
+        <div class="visit-row"><span>טלפון ווואטסאפ</span><span class="num">052-252-1127</span></div>
+        <div class="visit-row"><span>דוא״ל</span><span class="num">shukruny@smile.net.il</span></div>
+        <div class="visit-row"><span>שעות פעילות</span><span>[לאישור]</span></div>
+        <div class="visit-row"><span>חניה</span><span>[לאישור]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final on-dark" aria-labelledby="final-title">
+    <div class="ruled" aria-hidden="true"></div>
+    <svg class="stamp" data-stamp viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="96" fill="#B98A52"/>
+      <circle cx="100" cy="100" r="86" fill="none" stroke="#152420" stroke-width="1.4"/>
+      <circle cx="100" cy="100" r="58" fill="none" stroke="#152420" stroke-width="1.4"/>
+      <g data-ring="72" font-family="Assistant, Arial, sans-serif" font-size="13" font-weight="700" fill="#152420">עורך דין ונוטריון · חדרה · שוקרון כהן · </g>
+      <text x="100" y="110" text-anchor="middle" font-family="Frank Ruhl Libre, serif" font-weight="700" font-size="42" fill="#152420">ש״כ</text>
+    </svg>
+    <h2 id="final-title" class="mask"><span class="m"><span>בואו נדבר</span></span><br><span class="m"><span style="--d:.1s;color:var(--brass)">על מה שקרה.</span></span></h2>
+    <p class="rv" style="--d:.15s">הודעה אחת בוואטסאפ או שיחת טלפון, ועו״ד שוקרון כהן יחזור אליכם.</p>
+    <div class="final-actions rv" style="--d:.25s">
+      <a class="btn btn-brass" data-wa href="https://wa.me/972522521127" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.2c.3 2.4 2.3 4.5 4.8 5.1l1-1.1 2 .9-.4 1.6c-3.8.3-7.9-3.6-7.8-7.4l1.5-.5 1 1.9z"/></svg>
+        שלחו הודעה בוואטסאפ
+      </a>
+      <a class="btn btn-ghost" href="tel:+972522521127">התקשרו</a>
+    </div>
+    <p class="number rv" style="--d:.3s">או חייגו: <b class="num">052-252-1127</b></p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div><b>עו״ד יוסי שוקרון כהן</b>עורך דין ונוטריון<br>הרברט סמואל 27, חדרה</div>
+    <ul><li><a href="#areas">תחומי עיסוק</a></li><li><a href="#notary">נוטריון</a></li><li><a href="#about">אודות</a></li><li><a href="#visit">הגעה למשרד</a></li></ul>
+    <ul><li><span class="num">052-252-1127</span></li><li><span class="num">shukruny@smile.net.il</span></li><li><a href="#top">הצהרת נגישות</a></li><li><a href="#top">מדיניות פרטיות</a></li></ul>
+    <div class="foot-bottom">© 2026 עו״ד יוסי שוקרון כהן. המידע באתר אינו מהווה ייעוץ משפטי.</div>
+  </footer>
+</main>
+
+<nav class="dock" aria-label="יצירת קשר מהירה">
+  <a class="btn btn-brass" data-wa href="https://wa.me/972522521127" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.2c.3 2.4 2.3 4.5 4.8 5.1l1-1.1 2 .9-.4 1.6c-3.8.3-7.9-3.6-7.8-7.4l1.5-.5 1 1.9z"/></svg>
+    וואטסאפ
+  </a>
+  <a class="btn btn-ghost" href="tel:+972522521127">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+    חיוג
+  </a>
+</nav>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const root = document.documentElement;
+  root.setAttribute('dir', 'rtl');
+  root.setAttribute('lang', 'he');
+
+  const WA_NUMBER = '972522521127';
+  const WA_GREETING = 'שלום עו״ד שוקרון כהן, אשמח להתייעץ';
+  document.querySelectorAll('[data-wa]').forEach(a => {
+    const topic = a.getAttribute('data-wa');
+    const text = topic ? `${WA_GREETING} בנושא ${topic}.` : `${WA_GREETING}.`;
+    a.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+  });
+
+  const copyBtn = document.getElementById('copy-addr');
+  const copyMsg = document.getElementById('copy-msg');
+  copyBtn.addEventListener('click', () => {
+    const addr = 'הרברט סמואל 27, חדרה';
+    const done = () => { copyMsg.textContent = 'הכתובת הועתקה'; };
+    try {
+      navigator.clipboard.writeText(addr).then(done, () => { copyMsg.textContent = addr; });
+    } catch (e) { copyMsg.textContent = addr; }
+  });
+
+  // Hebrew on SVG textPath renders inconsistently; place glyphs one by one, counter-clockwise so they read right to left.
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  document.querySelectorAll('[data-ring]').forEach(g => {
+    const r = parseFloat(g.dataset.ring);
+    const chars = [...g.textContent];
+    const step = 360 / chars.length;
+    g.textContent = '';
+    chars.forEach((ch, i) => {
+      const t = document.createElementNS(SVG_NS, 'text');
+      t.setAttribute('x', '100');
+      t.setAttribute('y', String(100 - r + 4));
+      t.setAttribute('text-anchor', 'middle');
+      t.setAttribute('transform', `rotate(${-i * step} 100 100)`);
+      t.textContent = ch;
+      g.appendChild(t);
+    });
+  });
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  root.classList.add('anim');
+
+  // Split scrubbed statement into words, keeping highlighted spans.
+  const scrub = document.querySelector('[data-scrub]');
+  const words = [];
+  Array.from(scrub.childNodes).forEach(node => {
+    const isHl = node.nodeType === 1;
+    const parts = node.textContent.split(/(\s+)/);
+    const frag = document.createDocumentFragment();
+    parts.forEach(p => {
+      if (!p) return;
+      if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+      const s = document.createElement('span');
+      s.className = 'sw' + (isHl ? ' hl' : '');
+      s.textContent = p;
+      words.push(s);
+      frag.appendChild(s);
+    });
+    node.replaceWith(frag);
+  });
+
+  // Reveal on enter (plays once).
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      if (e.target.matches('[data-stamp]')) e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+  document.querySelectorAll('.rv, .mask, [data-stamp]').forEach(el => io.observe(el));
+
+  // Smooth scroll when Lenis is available; native scroll otherwise.
+  let lenis = null;
+  if (window.Lenis) {
+    lenis = new Lenis({ smoothWheel: true, lerp: 0.1 });
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length < 2) { e.preventDefault(); lenis.scrollTo(0); return; }
+      const t = document.querySelector(id);
+      if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -12 }); }
+    }));
+  }
+
+  const clamp01 = v => Math.min(1, Math.max(0, v));
+  const progress = el => {
+    const r = el.getBoundingClientRect(), vh = innerHeight;
+    return clamp01((vh - r.top) / (vh + r.height));
+  };
+
+  const parallax = [...document.querySelectorAll('[data-parallax]')];
+  const spin = document.querySelector('[data-spin]');
+  const fill = document.querySelector('[data-fill]');
+  const track = document.querySelector('[data-track]');
+  const sign = document.querySelector('[data-sign]');
+  const files = [...document.querySelectorAll('[data-file]')];
+  const dock = document.querySelector('.dock');
+  const hero = document.querySelector('.hero');
+  const signLen = sign.getTotalLength();
+  sign.style.strokeDasharray = signLen;
+
+  function frame(t) {
+    if (lenis) lenis.raf(t);
+    const y = scrollY, vh = innerHeight;
+
+    parallax.forEach(el => {
+      const box = el.parentElement.getBoundingClientRect();
+      const p = clamp01((vh - box.top) / (vh + box.height));
+      el.style.transform = `translate3d(0, ${(p - .5) * parseFloat(el.dataset.parallax) * 100}%, 0)`;
+    });
+
+    spin.style.transform = `rotate(${y * 0.12}deg)`;
+
+    const sr = scrub.getBoundingClientRect();
+    const sp = clamp01((vh * 0.82 - sr.top) / (sr.height + vh * 0.25));
+    const lit = Math.round(sp * words.length);
+    words.forEach((w, i) => { w.style.opacity = i < lit ? 1 : .16; });
+
+    const fp = clamp01((progress(fill.parentElement) - .18) / .5);
+    fill.style.clipPath = `inset(${(1 - fp) * 100}% 0 0 0)`;
+
+    const tp = clamp01((progress(track.closest(".steps-wrap")) - .25) / .35);
+    track.style.transform = `scaleX(${tp})`;
+
+    const gp = clamp01((progress(sign.closest('.signature')) - .3) / .35);
+    sign.style.strokeDashoffset = signLen * (1 - gp);
+
+    files.forEach((f, i) => {
+      const next = files[i + 1];
+      if (!next) return;
+      const nr = next.getBoundingClientRect(), fr = f.getBoundingClientRect();
+      const overlap = clamp01((fr.bottom - nr.top) / fr.height);
+      f.style.transform = `scale(${1 - overlap * 0.05})`;
+      f.style.filter = `brightness(${1 - overlap * 0.25})`;
+    });
+
+    dock.classList.toggle('show', hero.getBoundingClientRect().bottom < vh * 0.4);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>

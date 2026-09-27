@@ -62,8 +62,9 @@ Secondary fact: legal representation and notary services under one roof.
 - Domain name.
 
 ## Brand Commitments
-- No existing brand. The owner selected the "Elegant Authority" direction from the first mockup
-  (dark navy, restrained gold, serif headings). Visual details belong in DESIGN.md, not here.
+- No existing brand. The owner's emotional brief for the palette: seriousness, warmth, care.
+- The owner wants high-end, scroll-driven motion as part of the experience.
+- Visual details belong in the direction contract and DESIGN.md, not here.
 - No emojis. No em-dashes in site copy.
 
 ## Evidence on Hand

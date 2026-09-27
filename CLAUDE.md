@@ -85,9 +85,11 @@ Do not mark a task complete unless:
 Generic, templated, "default-looking" output is a failed result, not a done one.
 - Invoke the `ui-ux-pro-max` and `impeccable` skills before implementing UI; use `impeccable` audit/polish before
   calling a section done.
-- Brand aesthetic "Elegant Authority": deep navy (#0B1220 / #16233A) with restrained gold (#C9A24B) and warm cream
-  (#F6F2E9). Frank Ruhl Libre for headings, Assistant for body. Generous spacing, calm and precise, motion subtle
-  and purposeful. Prestige and trust, never flashy.
+- Brand aesthetic (prototype v1, pending approval): the emotional brief is seriousness, warmth, care. Eucalyptus ink
+  (#152420 / #24413A), brass (#B98A52, #7E5829 for text on light), limestone (#EEE9DF / #F7F4EE).
+  Frank Ruhl Libre for headings, Assistant for body. Scroll-driven motion is part of the design (see the direction
+  contract in `.impeccable/surfaces/`), always with a `prefers-reduced-motion` fallback.
+- `design/prototype/index.html` is the visual source of truth once approved.
 - Tokens live in Tailwind/CSS variables only. No raw hex in components.
 - RTL-correct layout: logical properties only (`ms-`/`me-`, `ps-`/`pe-`, `start`/`end`), mirrored directional icons.
 - No emojis anywhere. No em-dashes in site copy.
