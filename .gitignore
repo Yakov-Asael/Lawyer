@@ -2,3 +2,4 @@
 .impeccable/build/
 node_modules/
 .next/
+__pycache__/
