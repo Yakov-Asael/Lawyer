@@ -91,9 +91,10 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .nav{display:none;gap:30px;font-size:15px}
 .nav a{text-decoration:none;color:var(--on-dark-soft);transition:color .2s}
 .nav a:hover{color:var(--on-dark)}
-.head-cta{display:none;align-items:center;gap:18px}
-.head-cta .phone{color:var(--on-dark);font-weight:600;font-size:15px}
+.head-cta{display:none;align-items:center;gap:10px}
 .head-cta .btn{min-height:44px;padding:0 20px;font-size:15px}
+.head-cta .head-call{width:44px;padding:0}
+.head-call svg{width:19px;height:19px}
 @media (min-width:1000px){.nav,.head-cta{display:flex}}
 
 /* ---------- Mobile menu ---------- */
@@ -303,12 +304,21 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .final .number b{color:var(--on-dark);font-size:18px}
 
 /* ---------- Footer ---------- */
-.foot{padding:50px var(--gutter) 30px;max-width:1280px;margin-inline:auto;display:grid;gap:30px;font-size:15px;color:var(--muted)}
-@media (min-width:900px){.foot{grid-template-columns:1.3fr 1fr 1fr;align-items:start}}
-.foot b{display:block;font-family:var(--serif);font-size:20px;color:var(--ink);margin-block-end:6px}
-.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.foot a{text-decoration:none} .foot a:hover{color:var(--ink);text-decoration:underline}
-.foot-bottom{grid-column:1/-1;border-block-start:1px solid var(--bark);padding-block-start:22px;font-size:13px}
+.foot{padding:56px var(--gutter) 34px;max-width:900px;margin-inline:auto;display:grid;justify-items:center;text-align:center;gap:0;color:var(--muted);font-size:15px}
+.foot-mark{width:64px;height:64px;color:var(--brass-deep)}
+.foot b{margin-block-start:16px;font-family:var(--serif);font-size:22px;color:var(--ink)}
+.foot-tag{margin-block-start:6px}
+.foot-icons{display:flex;gap:6px;margin-block-start:22px}
+.foot-icons a{width:46px;height:46px;display:grid;place-items:center;border-radius:50%;color:var(--brass-deep);transition:background .25s,color .25s}
+.foot-icons a:hover{background:var(--bark);color:var(--ink)}
+.foot-icons svg{width:24px;height:24px}
+.foot-links{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 0;max-width:36em}
+.foot-links li{display:flex;align-items:center}
+.foot-links li+li::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--bark);margin-inline:12px}
+.foot-links a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--bark);text-underline-offset:5px}
+.foot-links a:hover{text-decoration-color:var(--brass-deep)}
+.foot-legal{margin-block-start:26px;font-size:13px}
+@media (max-width:600px){.foot-links{gap:12px 20px}.foot-links li+li::before{display:none}}
 
 /* ---------- Mobile contact bar ---------- */
 .dock{position:fixed;inset-inline:0;bottom:0;z-index:50;display:grid;grid-template-columns:1.3fr 1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(21,36,32,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transform:translateY(110%);transition:transform .5s var(--ease-out)}
@@ -319,31 +329,39 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 
 /* ---------- Phone type scale ---------- */
 @media (max-width:600px){
-  body{font-size:16px}
-  .hero h1{font-size:2.35rem;line-height:1.05}
-  .hero-sub{font-size:16px;margin-block-start:20px}
-  .hero-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;margin-block-start:26px}
+  body{font-size:15px}
+  .brand b{font-size:19px}
+  .eyebrow{font-size:12px}
+  .hero h1{font-size:2rem;line-height:1.08}
+  .hero-sub{font-size:15px;margin-block-start:18px}
+  .hero-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;margin-block-start:24px}
   .hero-actions .btn{min-height:48px;padding:0 12px;font-size:15px;gap:8px}
   .hero-actions .btn svg{width:18px;height:18px}
   .hero-actions .btn-icon{width:48px;padding:0}
   .hero-actions .btn-icon svg{width:20px;height:20px}
-  .statement p{font-size:1.45rem;line-height:1.35}
-  .big30{font-size:7.5rem}
-  .years h2,.process h2,.about h2{font-size:1.75rem}
-  .areas-head h2{font-size:1.95rem}
-  .file h3{font-size:1.5rem}
-  .file-lead{font-size:16px}
-  .file li{font-size:16px;padding-block:11px}
-  .step h3{font-size:1.25rem}
-  .about-text{font-size:16px}
-  .fact dd{font-size:18px}
-  .visit h2{font-size:1.75rem}
-  .visit .addr{font-size:1.3rem}
-  .final h2{font-size:2.2rem}
-  .reviews h2,.faq h2{font-size:1.75rem}
-  .qa summary{font-size:1.15rem;padding-block:20px}
-  .qa .ans{font-size:16px}
-  .final p{font-size:17px}
+  .hero-meta{font-size:13px}
+  .statement{padding-block:72px 56px}
+  .statement p{font-size:1.2rem;line-height:1.45}
+  .statement-foot{margin-block-start:30px}
+  .big30{font-size:5.5rem}
+  .years h2,.process h2,.about h2,.reviews h2,.faq h2,.visit h2{font-size:1.55rem}
+  .areas-head h2{font-size:1.65rem}
+  .years p,.about-text,.file-lead,.step p,.visit-desc,.qa .ans{font-size:15px}
+  .file h3{font-size:1.25rem}
+  .file li{font-size:15px;padding-block:10px}
+  .file-tab{font-size:13px;padding:9px 18px 10px}
+  .step h3{font-size:1.1rem}
+  .fact dd{font-size:16px}
+  .rs-card blockquote{font-size:15.5px}
+  .qa summary{font-size:1.02rem;padding-block:18px}
+  .visit .addr{font-size:1.1rem}
+  .final h2{font-size:1.85rem}
+  .final p{font-size:15.5px}
+  .final-actions{flex-wrap:nowrap}
+  .final-actions .btn-icon{width:52px}
+  .btn{font-size:15px}
+  .dock .btn{font-size:15px;min-height:50px}
+  .menu-links a{font-size:1.9rem}
 }
 
 /* ---------- Motion states (only when JS runs and motion is allowed) ---------- */
@@ -389,11 +407,11 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
       </nav>
       <button class="burger" type="button" aria-label="פתיחת תפריט" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
       <div class="head-cta">
-        <span class="phone num">052-252-1127</span>
         <a class="btn btn-brass" data-wa href="https://wa.me/972522521127" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.2c.3 2.4 2.3 4.5 4.8 5.1l1-1.1 2 .9-.4 1.6c-3.8.3-7.9-3.6-7.8-7.4l1.5-.5 1 1.9z"/></svg>
           וואטסאפ
         </a>
+        <a class="btn btn-ghost btn-icon head-call" href="tel:+972522521127" target="_blank" rel="noopener" aria-label="חיוג ל-052-252-1127" title="052-252-1127"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
       </div>
     </header>
 
@@ -646,16 +664,31 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.2c.3 2.4 2.3 4.5 4.8 5.1l1-1.1 2 .9-.4 1.6c-3.8.3-7.9-3.6-7.8-7.4l1.5-.5 1 1.9z"/></svg>
         שלחו הודעה בוואטסאפ
       </a>
-      <a class="btn btn-ghost" href="tel:+972522521127" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span class="num">052-252-1127</span></a>
+      <a class="btn btn-ghost btn-icon" href="tel:+972522521127" target="_blank" rel="noopener" aria-label="חיוג ל-052-252-1127" title="052-252-1127"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="foot">
-    <div><b>עו״ד יוסי שוקרון כהן</b>עורך דין ונוטריון<br>הרברט סמואל 27, חדרה</div>
-    <ul><li><a href="#areas">תחומי עיסוק</a></li><li><a href="#about">אודות</a></li><li><a href="#faq">שאלות נפוצות</a></li><li><a href="#visit">הגעה למשרד</a></li></ul>
-    <ul><li><span class="num">052-252-1127</span></li><li><span class="num">shukruny@smile.net.il</span></li><li><a href="#top">הצהרת נגישות</a></li><li><a href="#top">מדיניות פרטיות</a></li></ul>
-    <div class="foot-bottom">© 2026 עו״ד יוסי שוקרון כהן. המידע באתר אינו מהווה ייעוץ משפטי.</div>
+    <svg class="foot-mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="1.3"/><text x="32" y="39" text-anchor="middle" font-family="Frank Ruhl Libre, serif" font-weight="700" font-size="19" fill="currentColor">ש״כ</text></svg>
+    <b>עו״ד יוסי שוקרון כהן</b>
+    <p class="foot-tag">עורך דין ונוטריון · הרברט סמואל 27, חדרה</p>
+    <div class="foot-icons">
+      <a data-wa href="https://wa.me/972522521127" target="_blank" rel="noopener" aria-label="וואטסאפ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.2c.3 2.4 2.3 4.5 4.8 5.1l1-1.1 2 .9-.4 1.6c-3.8.3-7.9-3.6-7.8-7.4l1.5-.5 1 1.9z"/></svg></a>
+      <a href="tel:+972522521127" target="_blank" rel="noopener" aria-label="חיוג ל-052-252-1127"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a>
+      <a href="https://waze.com/ul?q=%D7%94%D7%A8%D7%91%D7%A8%D7%98%20%D7%A1%D7%9E%D7%95%D7%90%D7%9C%2027%20%D7%97%D7%93%D7%A8%D7%94&navigate=yes" target="_blank" rel="noopener" aria-label="ניווט ב-Waze"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 17.2A8 8 0 1 1 20 11.5c0 2.9-1.8 5.1-4.4 5.9"/><path d="M11.2 17.9h1.9"/><circle cx="8.6" cy="18.6" r="1.6"/><circle cx="15.2" cy="18.6" r="1.6"/><circle cx="10" cy="10" r=".6" fill="currentColor"/><circle cx="15" cy="10" r=".6" fill="currentColor"/><path d="M10 13.2c1.3 1.1 3.6 1.1 5 0"/></svg></a>
+      <a href="https://www.google.com/maps/search/?api=1&query=%D7%94%D7%A8%D7%91%D7%A8%D7%98%20%D7%A1%D7%9E%D7%95%D7%90%D7%9C%2027%20%D7%97%D7%93%D7%A8%D7%94" target="_blank" rel="noopener" aria-label="Google Maps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5s-7-6.2-7-11.8a7 7 0 0 1 14 0c0 5.6-7 11.8-7 11.8z"/><circle cx="12" cy="9.6" r="2.6"/></svg></a>
+    </div>
+    <ul class="foot-links">
+      <li><a href="#areas">תחומי עיסוק</a></li>
+      <li><a href="#about">אודות</a></li>
+      <li><a href="#reviews">המלצות</a></li>
+      <li><a href="#faq">שאלות נפוצות</a></li>
+      <li><a href="#visit">הגעה למשרד</a></li>
+      <li><a href="#top">הצהרת נגישות</a></li>
+      <li><a href="#top">מדיניות פרטיות</a></li>
+    </ul>
+    <p class="foot-legal">© 2026 עו״ד יוסי שוקרון כהן. המידע באתר אינו מהווה ייעוץ משפטי.</p>
   </footer>
 </main>
 
