@@ -8,8 +8,8 @@
 | שלב | מצב |
 |---|---|
 | Brief | הושלם, ב-`PRODUCT.md` |
-| עיצוב | אב-טיפוס v1 ממתין לאישור, ב-`design/prototype/` |
-| Specs | עוד לא התחיל (אחרי אישור העיצוב) |
+| עיצוב | אב-טיפוס ממתין לאישור הפלטה של יוסי, ב-`design/prototype/`. טוקנים ב-`design/tokens.md` |
+| Specs | טיוטה מלאה ב-`specs/` (17 קבצים + חוזה תוכן), ממתינה לאישור |
 | קוד | עוד לא התחיל |
 | Google Business Profile | צ'קליסט ב-`docs/google-business-profile.md` |
 
@@ -29,6 +29,8 @@ CLAUDE.md          כללי העבודה של הפרויקט
 PRODUCT.md         ה-brief: קהל, מיצוב, עובדות, החלטות פתוחות
 design/assets/     תמונות וחומרי מקור מהלקוח
 design/prototype/  אב-טיפוס HTML חי (המוקאפ הנעול)
+design/tokens.md   צבעים, טיפוגרפיה, מרווחים ותנועה
+specs/             spec לכל סקשן + חוזה התוכן
 docs/              משימות שאינן קוד (Google Business Profile)
 .claude/skills/    סקילים: ui-ux-pro-max, impeccable
 .impeccable/       חוזה הכיוון העיצובי וצילומי בדיקה
