@@ -163,20 +163,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .f3 .file-tab::before,.f4 .file-tab::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink)}
 .draft{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.05em;opacity:.7;margin-block-start:10px}
 
-/* ---------- Notary ---------- */
-.notary{padding:clamp(90px,11vw,160px) var(--gutter);max-width:1280px;margin-inline:auto;display:grid;gap:50px}
-@media (min-width:900px){.notary{grid-template-columns:1fr 1.1fr;gap:clamp(50px,7vw,110px);align-items:start}}
-.notary h2{font-size:clamp(2.2rem,4.4vw,4rem);line-height:1.05;margin-block-start:18px}
-.notary-lead{margin-block-start:22px;color:var(--muted);max-width:30em}
-.fee{margin-block-start:34px;padding:22px 24px;border-radius:var(--r-md);background:var(--paper);border:1px solid var(--bark);display:flex;gap:16px;align-items:flex-start}
-.fee svg{width:26px;height:26px;flex:none;color:var(--brass-deep);margin-block-start:3px}
-.fee p{font-size:16px;color:var(--muted)} .fee b{color:var(--ink)}
-.services{display:grid;gap:0;border-block-start:1px solid var(--ink)}
-.service{display:grid;grid-template-columns:1fr auto;gap:6px 20px;align-items:baseline;padding-block:22px;border-block-end:1px solid var(--bark)}
-.service h3{font-size:clamp(1.35rem,2vw,1.7rem);font-weight:500}
-.service p{grid-column:1/-1;color:var(--muted);font-size:16px}
-.service .tag{font-size:13px;color:var(--brass-deep);font-weight:600}
-
 /* ---------- Process ---------- */
 .process{position:relative;border-radius:var(--r-lg);background:var(--paper);padding:clamp(70px,9vw,130px) var(--gutter)}
 .process-in{max-width:1180px;margin-inline:auto}
@@ -248,6 +234,27 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .dock .btn{min-height:54px;font-size:16px}
 @media (min-width:900px){.dock{display:none}}
 
+
+/* ---------- Phone type scale ---------- */
+@media (max-width:600px){
+  body{font-size:16px}
+  .hero h1{font-size:2.35rem;line-height:1.05}
+  .hero-sub{font-size:16px;margin-block-start:20px}
+  .statement p{font-size:1.45rem;line-height:1.35}
+  .big30{font-size:7.5rem}
+  .years h2,.process h2,.about h2{font-size:1.75rem}
+  .areas-head h2{font-size:1.95rem}
+  .file h3{font-size:1.5rem}
+  .file-lead{font-size:16px}
+  .file li{font-size:16px;padding-block:11px}
+  .step h3{font-size:1.25rem}
+  .about-text{font-size:16px}
+  .fact dd{font-size:18px}
+  .visit .addr{font-size:2.3rem}
+  .final h2{font-size:2.2rem}
+  .final p{font-size:17px}
+}
+
 /* ---------- Motion states (only when JS runs and motion is allowed) ---------- */
 .anim .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out);transition-delay:var(--d,0ms)}
 .anim .rv.in{opacity:1;transform:none}
@@ -285,7 +292,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
       <a class="brand" href="#top"><b>יוסי שוקרון כהן</b><span>עורך דין ונוטריון · חדרה</span></a>
       <nav class="nav" aria-label="ניווט ראשי">
         <a href="#areas">תחומי עיסוק</a>
-        <a href="#notary">נוטריון</a>
         <a href="#about">אודות</a>
         <a href="#visit">הגעה למשרד</a>
       </nav>
@@ -430,25 +436,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
     </div>
   </section>
 
-  <!-- NOTARY -->
-  <section class="notary" id="notary" aria-labelledby="notary-title">
-    <div>
-      <span class="eyebrow rv">שירותי נוטריון</span>
-      <h2 id="notary-title" class="mask"><span class="m"><span>מסמך שצריך</span></span><br><span class="m"><span style="--d:.1s">חותמת נוטריון?</span></span></h2>
-      <p class="notary-lead rv" style="--d:.1s">שלחו בוואטסאפ צילום של המסמך ואת היעד שלו, ותקבלו תשובה מה צריך להביא לפגישה.</p>
-      <div class="fee rv" style="--d:.2s">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        <p><b>שכר נוטריון נקבע בתקנות.</b> המחיר לכל שירות לפי התעריף הרשמי, ומוסבר מראש. [לאישור יוסי]</p>
-      </div>
-    </div>
-    <div class="services">
-      <div class="service rv"><h3>אימות חתימה</h3><span class="tag">לשימוש בארץ ובחו״ל</span><p>אישור שהחתימה על המסמך היא שלכם, בנוכחות הנוטריון.</p></div>
-      <div class="service rv" style="--d:.06s"><h3>העתק נאמן למקור</h3><span class="tag">תעודות ומסמכים</span><p>אישור שהעתק של מסמך זהה למקור.</p></div>
-      <div class="service rv" style="--d:.12s"><h3>תרגום נוטריוני</h3><span class="tag">[שפות לאישור]</span><p>אישור שהתרגום נאמן למסמך המקורי.</p></div>
-      <div class="service rv" style="--d:.18s"><h3>ייפוי כוח נוטריוני</h3><span class="tag">בארץ ובחו״ל</span><p>ייפוי כוח שמאומת על ידי נוטריון.</p></div>
-    </div>
-  </section>
-
   <!-- PROCESS -->
   <section class="process" aria-labelledby="process-title">
     <div class="process-in">
@@ -535,7 +522,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   <!-- FOOTER -->
   <footer class="foot">
     <div><b>עו״ד יוסי שוקרון כהן</b>עורך דין ונוטריון<br>הרברט סמואל 27, חדרה</div>
-    <ul><li><a href="#areas">תחומי עיסוק</a></li><li><a href="#notary">נוטריון</a></li><li><a href="#about">אודות</a></li><li><a href="#visit">הגעה למשרד</a></li></ul>
+    <ul><li><a href="#areas">תחומי עיסוק</a></li><li><a href="#about">אודות</a></li><li><a href="#visit">הגעה למשרד</a></li></ul>
     <ul><li><span class="num">052-252-1127</span></li><li><span class="num">shukruny@smile.net.il</span></li><li><a href="#top">הצהרת נגישות</a></li><li><a href="#top">מדיניות פרטיות</a></li></ul>
     <div class="foot-bottom">© 2026 עו״ד יוסי שוקרון כהן. המידע באתר אינו מהווה ייעוץ משפטי.</div>
   </footer>
