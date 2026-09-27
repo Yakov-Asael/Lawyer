@@ -60,6 +60,7 @@ Secondary fact: legal representation and notary services under one roof.
 - Logo / wordmark: none exists; to be designed.
 - Education, admission year, memberships.
 - Domain name.
+- Google Maps embed in the visit section: planned for later; needs the privacy notice (Maps sets cookies).
 
 ## Brand Commitments
 - No existing brand. The owner's emotional brief for the palette: seriousness, warmth, care.

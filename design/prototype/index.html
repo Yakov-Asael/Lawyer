@@ -244,16 +244,11 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .rs-more:hover{text-decoration:underline}
 .rs-card figcaption{margin-block-start:auto;padding-block-start:18px;font-weight:700;color:var(--brass-deep)}
 .rs-card figcaption span{display:block;font-weight:400;font-size:14px;color:var(--muted)}
-.rs-foot{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-block-start:14px;padding-inline:var(--gutter)}
-@media (min-width:900px){.rs-foot{padding-inline:0}}
-.rs-all{display:inline-flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;color:var(--on-dark)}
-.rs-all svg{width:20px;height:20px;transition:transform .35s var(--ease-out)}
-.rs-all:hover svg{transform:translateX(-5px)}
-.rs-arrows{display:none;gap:10px}
-@media (min-width:900px){.rs-arrows{display:flex}}
+.rs-foot{display:none;justify-content:center;margin-block-start:18px}
+@media (min-width:900px){.rs-foot{display:flex}}
+.rs-arrows{display:flex;gap:10px}
 .rs-btn{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:transparent;border:1.5px solid rgba(238,233,223,.35);color:var(--on-dark);transition:background .25s,border-color .25s,opacity .25s}
-.rs-btn:hover:not(:disabled){background:var(--brass);border-color:var(--brass);color:var(--ink)}
-.rs-btn:disabled{opacity:.3;cursor:default}
+.rs-btn:hover{background:var(--brass);border-color:var(--brass);color:var(--ink)}
 .rs-btn svg{width:20px;height:20px}
 
 /* ---------- FAQ ---------- */
@@ -591,7 +586,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
         <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד מציגה אותו במלואו בתוך הכרטיס, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-expanded="false" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>נזיקין וביטוח</span></figcaption></figure></li>
       </ul>
       <div class="rs-foot">
-        <a class="rs-all" href="#reviews">לכל ההמלצות <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a>
         <div class="rs-arrows">
           <button class="rs-btn" type="button" data-rs-prev aria-label="ההמלצות הקודמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           <button class="rs-btn" type="button" data-rs-next aria-label="ההמלצות הבאות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
@@ -740,34 +734,54 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
   addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('open')) setMenu(false); });
 
-  // Reviews slider: native scroll-snap (swipe on phones), arrows on desktop, read-more per card.
+  // Reviews slider: endless loop. One real set sits between two cloned sets; when scrolling
+  // settles in a clone, the track jumps silently by one set width.
   (() => {
     const track = document.querySelector('.rs-track');
-    const cards = [...track.querySelectorAll('[data-rs]')];
-    const prev = document.querySelector('[data-rs-prev]');
-    const next = document.querySelector('[data-rs-next]');
-    cards.forEach(c => {
+    const originals = [...track.querySelectorAll('[data-rs]')];
+    const makeClones = () => originals.map(c => {
+      const k = c.cloneNode(true);
+      k.setAttribute('aria-hidden', 'true');
+      k.inert = true;
+      k.removeAttribute('data-rs');
+      return k;
+    });
+    track.prepend(...makeClones());
+    track.append(...makeClones());
+    const all = [...track.children];
+
+    all.forEach(c => {
       const q = c.querySelector('blockquote');
       const more = c.querySelector('.rs-more');
-      if (q.scrollHeight > q.clientHeight + 2) more.hidden = false;
+      more.hidden = !(q.scrollHeight > q.clientHeight + 2);
       more.addEventListener('click', () => {
         const open = c.classList.toggle('open');
         more.setAttribute('aria-expanded', String(open));
         more.textContent = open ? 'הצג פחות' : 'קראו עוד';
       });
     });
-    const step = () => cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0);
-    // RTL: scrollLeft runs from 0 down to a negative maximum; the next cards are to the left.
-    const update = () => {
-      const max = track.scrollWidth - track.clientWidth;
-      prev.disabled = track.scrollLeft >= -2;
-      next.disabled = track.scrollLeft <= -max + 2;
+
+    const step = () => originals[1].offsetLeft - originals[0].offsetLeft;
+    const setWidth = () => Math.abs(step()) * originals.length;
+    // RTL: scrollLeft is 0 at the start and negative further along.
+    const jumpTo = pos => {
+      track.style.scrollSnapType = 'none';
+      track.scrollLeft = -pos;
+      requestAnimationFrame(() => { track.style.scrollSnapType = ''; });
     };
-    next.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-    prev.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
-    track.addEventListener('scroll', update, { passive: true });
-    addEventListener('resize', update);
-    update();
+    const home = () => jumpTo(setWidth());
+    const wrap = () => {
+      const W = setWidth(), pos = -track.scrollLeft;
+      if (pos < W * 0.5) jumpTo(pos + W);
+      else if (pos > W * 1.5) jumpTo(pos - W);
+    };
+    let t;
+    track.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(wrap, 140); }, { passive: true });
+    document.querySelector('[data-rs-next]').addEventListener('click', () => track.scrollBy({ left: -Math.abs(step()), behavior: 'smooth' }));
+    document.querySelector('[data-rs-prev]').addEventListener('click', () => track.scrollBy({ left: Math.abs(step()), behavior: 'smooth' }));
+    addEventListener('resize', home);
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(home);
+    home();
   })();
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
