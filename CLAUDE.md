@@ -29,7 +29,8 @@ or a phone call started. The site is Hebrew-only and RTL from day one, and must 
 - Tailwind CSS + shadcn/ui, icons via `lucide-react` only
 - Zod for the content contract and any external input
 - Vitest for unit tests, Playwright for visual/E2E checks
-- Deploy: Vercel (to confirm), preview deploy per branch
+- pnpm as package manager
+- Deploy: Vercel, preview deploy per branch
 - Cross-cutting from day one: Hebrew RTL, accessibility (IS 5568), fast mobile load
 
 Don't add dependencies (animation libs, UI kits) or swap stack pieces without flagging it first.
@@ -41,7 +42,9 @@ Don't add dependencies (animation libs, UI kits) or swap stack pieces without fl
 /src/lib/          Pure helpers (contact links, formatting), unit-tested
 /content/          Typed, Zod-validated site copy and office data
 /specs/            One spec per section, derived from the approved mockup
-/design/           Brief, design tokens, mockup links and approved screenshots
+/design/           Design tokens, mockup links, approved screenshots, /assets (photos, references)
+/docs/             Non-code workstreams (e.g. Google Business Profile)
+PRODUCT.md         The brief: users, positioning, confirmed facts, open decisions. Source of truth for content.
 /.claude/skills/   Project skills: ui-ux-pro-max, impeccable
 ```
 
