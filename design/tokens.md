@@ -19,12 +19,12 @@ Emotional brief: seriousness, warmth, care.
 | `stone` | `#EEE9DF` | Page ground | Care |
 | `paper` | `#F7F4EE` | Raised surfaces (process card, file 3, review cards, panels) | Care |
 | `bark` | `#DCD6C9` | Secondary surface (visit), hairlines on light | Care |
-| `muted` | `#5B625D` | Secondary text on light | |
+| `muted` | `#535A55` | Secondary text on light | |
 | `on-dark` | `#EEE9DF` | Text on dark grounds | |
 | `on-dark-soft` | `rgba(238,233,223,.72)` | Secondary text on dark grounds | |
 | `line-dark` | `rgba(238,233,223,.14)` | Hairlines on dark grounds | |
 
-Verified contrast (WCAG): ink on stone 15:1, muted on stone 5.2:1, brass on ink 5.2:1, ink on brass 5.2:1,
+Verified contrast (WCAG): ink on stone 13.3:1, muted on stone 5.9:1, muted on bark 4.9:1, brass on ink 5.2:1, ink on brass 5.2:1,
 brass-deep on stone 5.2:1, on-dark on field 9.1:1. **Never use `brass` for text on light grounds** (2.5:1).
 
 High-contrast mode (accessibility menu) overrides: `muted #2B312D`, `on-dark-soft #FFFFFF`, `brass-deep #5E4019`,
@@ -90,3 +90,16 @@ Every motion has a `prefers-reduced-motion: reduce` fallback (content fully visi
 
 "Ruled legal pad": `repeating-linear-gradient` hairlines every 44px at 4.5% opacity on dark grounds, plus one brass
 margin line at 22% opacity near the inline end. Used in hero, final CTA and the mobile menu only.
+
+## Palette options (under review)
+
+All five pass the same contrast checks (body text ≥4.5:1 on every ground it sits on). Switch between them live in the
+prototype with the "פלטות" button; each has its own link (`#p-<name>`).
+
+| Name | ink | field | brass | brass-deep | stone | paper | bark | muted |
+|---|---|---|---|---|---|---|---|---|
+| eucalyptus (current) | #152420 | #24413A | #B98A52 | #7E5829 | #EEE9DF | #F7F4EE | #DCD6C9 | #535A55 |
+| midnight | #121B29 | #1E3250 | #C98A63 | #8C4A28 | #EFEAE4 | #F8F5F1 | #DED6CC | #565E6A |
+| oxblood | #221416 | #4A2026 | #D3AA6B | #7A5220 | #F1EBE3 | #F9F6F1 | #E0D6CA | #5F5755 |
+| olive | #1C1E16 | #3B4230 | #CFA24A | #6F5410 | #EFECE2 | #F8F6EF | #DEDACB | #5A5C50 |
+| charcoal | #19191B | #2D2D31 | #C8AB80 | #6E5436 | #EEEBE6 | #F8F6F3 | #DDD8D0 | #5B5A57 |
