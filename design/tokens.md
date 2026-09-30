@@ -93,13 +93,17 @@ margin line at 22% opacity near the inline end. Used in hero, final CTA and the 
 
 ## Palette options (under review)
 
-All five pass the same contrast checks (body text ≥4.5:1 on every ground it sits on). Switch between them live in the
-prototype with the "פלטות" button; each has its own link (`#p-<name>`).
+The owner asked for warmer, softer options that still read as serious. All eight pass the same contrast checks
+(body text ≥4.5:1 on every ground it sits on). Switch live in the prototype with the "פלטות" button; each has its own
+link (`#p-<name>`). The cooler midnight, olive and charcoal options were dropped at the owner's request.
 
 | Name | ink | field | brass | brass-deep | stone | paper | bark | muted |
 |---|---|---|---|---|---|---|---|---|
 | eucalyptus (current) | #152420 | #24413A | #B98A52 | #7E5829 | #EEE9DF | #F7F4EE | #DCD6C9 | #535A55 |
-| midnight | #121B29 | #1E3250 | #C98A63 | #8C4A28 | #EFEAE4 | #F8F5F1 | #DED6CC | #565E6A |
+| navygold (first mockup) | #0B1220 | #16233A | #C9A24B | #7A5B18 | #F6F2E9 | #FBF8F2 | #E4DFD3 | #555A63 |
+| walnut | #2A1D17 | #4A3328 | #C8935B | #85502A | #F2EBE2 | #FAF6F0 | #E3D8CA | #5E534B |
+| cedar | #2B1A14 | #5A2E22 | #DDA65E | #86521A | #F3ECE4 | #FAF7F2 | #E6DACD | #5F534B |
+| cocoa | #26201C | #5C4033 | #D6A676 | #88572A | #F4EEE6 | #FBF8F3 | #E7DDD0 | #5E554D |
+| plum | #24161F | #4A2A3D | #D9A95F | #7E5520 | #F3ECE6 | #FAF7F3 | #E4D9D1 | #5E545A |
+| tobacco | #211C16 | #4A4232 | #CFA066 | #7E5A2E | #F2EDE3 | #FAF7F0 | #E2DBCC | #5C5850 |
 | oxblood | #221416 | #4A2026 | #D3AA6B | #7A5220 | #F1EBE3 | #F9F6F1 | #E0D6CA | #5F5755 |
-| olive | #1C1E16 | #3B4230 | #CFA24A | #6F5410 | #EFECE2 | #F8F6EF | #DEDACB | #5A5C50 |
-| charcoal | #19191B | #2D2D31 | #C8AB80 | #6E5436 | #EEEBE6 | #F8F6F3 | #DDD8D0 | #5B5A57 |
