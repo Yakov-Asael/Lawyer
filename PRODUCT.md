@@ -17,9 +17,9 @@ phone, after a Google search or a referral. Their job on the page: decide within
 trustworthy and relevant to their problem, then reach him directly.
 
 ## Product Purpose
-A single-page site for the law office of עו״ד יוסי שוקרון כהן, lawyer and notary in Hadera. It exists to turn a
-visitor into a conversation. Success is a WhatsApp chat or a phone call started. There is no form, booking or
-payment flow in v1.
+A site for the law office of עו״ד יוסי שוקרון כהן, lawyer and notary in Hadera. It exists to turn a
+visitor into a conversation. Success is a WhatsApp chat or a phone call started. There is no booking or payment flow. The only form collects
+testimonials, which Yossi approves in a private panel before anything is published.
 
 ## Positioning
 Two facts no neighboring office can copy:

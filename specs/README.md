@@ -27,6 +27,9 @@ Visual values come from `design/tokens.md`. Data comes from `specs/content-contr
 | 15 | [Accessibility menu](15-accessibility-menu.md) | Draft |
 | 16 | [SEO, metadata and legal pages](16-seo-legal.md) | Draft |
 | 17 | [Terms of use (תקנון)](17-terms.md) | Draft |
+| 18 | [Review submission](18-review-submission.md) | Draft |
+| 19 | [Admin: review moderation](19-admin.md) | Draft |
+| 20 | [Press and cases page (phase 2)](20-press-and-cases.md) | Future |
 | - | [Content contract](content-contract.md) | Draft |
 
 ## Dependencies to approve (CLAUDE.md: flag before adding)
@@ -36,6 +39,10 @@ Visual values come from `design/tokens.md`. Data comes from `specs/content-contr
 | `lenis` | Smooth scroll, part of the approved feel | Native scroll (loses the feel) |
 | `embla-carousel-react` (via shadcn Carousel) | Endless reviews loop with RTL and swipe | Hand-rolled scroll-snap loop as in the prototype |
 | `zod` | Content contract | Already in the locked stack |
+| Postgres (Neon via Vercel) + `drizzle-orm` | Reviews storage and moderation (specs 18, 19) | A hosted form service (loses the approval panel) |
+| `next-auth` (Auth.js) | Google sign-in for Yossi only | Password auth (more to secure) |
+| `resend` | Email Yossi about new reviews | No notification; he checks the panel |
+| Cloudflare Turnstile | Bot protection on the form | Honeypot only |
 
 No animation library (Framer Motion, GSAP). All motion is CSS plus one small rAF scroll hook.
 

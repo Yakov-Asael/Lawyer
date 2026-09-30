@@ -17,7 +17,7 @@ Identity, contact shortcuts, navigation and legal links, compact and centered.
 6. "© {year} עו״ד יוסי שוקרון כהן. המידע באתר אינו מהווה ייעוץ משפטי." 13px.
 
 ## Rules
-Year computed at build time. "המלצות" link hidden when there are no reviews.
+Year computed at build time. "המלצות" link hidden when there are no approved reviews.
 
 ## Acceptance criteria
 - [ ] No line of links starts with a separator at 390px.

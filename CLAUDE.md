@@ -24,7 +24,7 @@ or a phone call started. The site is Hebrew-only and RTL from day one, and must 
    lives in `/content`, never inline in components.
 
 ## Stack (locked)
-- Next.js (App Router), static export where possible
+- Next.js (App Router): static pages plus serverless routes for the review form and the admin (specs 18, 19)
 - TypeScript strict everywhere
 - Tailwind CSS + shadcn/ui, icons via `lucide-react` only
 - Zod for the content contract and any external input
@@ -106,5 +106,7 @@ Don't guess on anything architectural, legal, or brand-related. Present options 
 and ask one focused question.
 
 ## Out of scope (v1)
-Contact form backend, CRM/lead integrations, blog/articles, English version, online booking, CMS.
+CRM/lead integrations, blog/articles, English version, online booking, a general CMS.
+Phase 2 (planned, not now): press and cases page (spec 20).
+In v1 after all: the review form and Yossi's moderation panel (specs 18, 19).
 If asked, acknowledge they're planned for a later version and don't implement them now.

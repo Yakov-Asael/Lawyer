@@ -4,8 +4,11 @@
 Social proof from real clients, curated by the office (not a Google feed), in a compact endless slider.
 
 ## Content
-`reviews[]`: quote, clientName, area, `consentConfirmed: true`. Section heading "מה אומרים לקוחות." and a note line
-(final wording TBD). **If `reviews` is empty the whole section is not rendered** (and removed from nav).
+`reviews[]`: quote, clientName, area, `consentConfirmed: true`. Source: approved rows from the reviews table (spec 19),
+ordered as set in the admin. Section heading "מה אומרים לקוחות." and a note line
+(final wording TBD). **If `reviews` is empty** the slider is not rendered; the section shows a compact invitation instead
+(heading, one line "היו הראשונים לשתף איך היה לעבוד איתנו", and the "השאירו המלצה" button), so the form stays reachable
+from day one. The "המלצות" nav link is hidden while empty.
 
 ## Layout
 - Rounded `field` card; head (eyebrow, H2, note) in the 1180px container.
@@ -13,6 +16,10 @@ Social proof from real clients, curated by the office (not a Google feed), in a 
   4 lines, "קראו עוד" / "הצג פחות" toggle (only when the text overflows), name in `brass-deep` 700 + area in `muted`.
 - ≥900px: three cards visible in the container, arrows centered below (52px round, `on-dark` border; hover `brass`).
 - <900px: one centered card (`100vw - 2 * 11vw - 20px`) with the neighbors peeking on both sides; no arrows, swipe only.
+
+## Adding a review
+A "השאירו המלצה" ghost button with a pen icon sits under the slider (desktop: at the start, arrows at the end;
+phones: centered). It opens the submission dialog (spec 18).
 
 ## Behavior
 - Endless loop in both directions (arrows and swipe never hit an edge).
@@ -34,4 +41,4 @@ cloned slides hidden from assistive tech; the track is keyboard scrollable.
 - [ ] Phone: swipe cycles endlessly; no arrows rendered; peeks visible on both sides after the first swipe.
 - [ ] A screen reader announces each real review once (clones excluded).
 - [ ] "קראו עוד" appears only on clamped quotes and toggles `aria-expanded`.
-- [ ] A review without `consentConfirmed: true` fails the build.
+- [ ] Only approved reviews render; with zero approved reviews the compact invitation shows instead of the slider.

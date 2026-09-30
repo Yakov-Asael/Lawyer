@@ -56,7 +56,7 @@ const Site = z.object({
   practiceAreas: z.array(PracticeArea).length(4),
   process: z.array(ProcessStep).length(3),
   about: z.object({ paragraphs: z.array(z.string()).min(1) }),
-  reviews: z.array(Review),            // section hides itself when empty
+  // reviews are not in this file: they come from the database (approved only), see specs 18 and 19
   faq: z.array(Faq).min(3),
   finalCta: z.object({ line1: z.string(), line2: z.string(), body: z.string() }),
   legal: z.object({ disclaimer: z.string(), accessibilityStatementPath: z.string(), privacyPath: z.string() }),
