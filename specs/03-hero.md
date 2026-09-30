@@ -26,6 +26,10 @@ portrait image, seal.
 - Portrait: arched top (`999px 999px radius-md radius-md`), 4:5, object-position 50% 30%, inner parallax 8%.
 - Seal (`hero` variant) overlaps the portrait's bottom-start corner, 128px (104px phones), rotates `scrollY * 0.12deg`.
 
+## Variants under review
+`data-hero="light"`: same layout on a `paper` ground with ink text and `brass-deep` second line. Kept alongside the
+dark hero until the owner chooses.
+
 ## Motion
 H1 lines mask-reveal after the loader (1.55s, 1.7s); sub, actions, meta and portrait rise in sequence (1.8s to 2.25s).
 Without the loader (repeat visit or reduced motion) the same sequence starts at 0.

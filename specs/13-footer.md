@@ -11,7 +11,7 @@ Identity, contact shortcuts, navigation and legal links, compact and centered.
 2. Name in serif 22px `ink`.
 3. Tagline "עורך דין ונוטריון · הרברט סמואל 27, חדרה" in `muted`.
 4. Icon row, 46px targets, `brass-deep`, hover `bark` background: WhatsApp, call, Waze, Google Maps.
-5. Links: תחומי עיסוק, אודות, המלצות, שאלות נפוצות, הגעה למשרד, הצהרת נגישות, מדיניות פרטיות.
+5. Links: תחומי עיסוק, אודות, המלצות, שאלות נפוצות, הגעה למשרד, תקנון האתר, הצהרת נגישות, מדיניות פרטיות.
    Underlined (`bark` underline, `brass-deep` on hover). Desktop: separated by small dots.
    Phones: no dots (a wrapped line must not start with a dot), gap 12px x 20px.
 6. "© {year} עו״ד יוסי שוקרון כהן. המידע באתר אינו מהווה ייעוץ משפטי." 13px.

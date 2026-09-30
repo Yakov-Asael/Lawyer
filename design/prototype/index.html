@@ -391,6 +391,19 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .pal-opt small{font-size:13px;color:var(--muted);line-height:1.4}
 .pal-share{margin-block-start:12px;font-size:12.5px;color:var(--muted)}
 
+/* Light hero variant (review tool): same layout, paper ground, ink text */
+[data-hero="light"] .hero{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 1px var(--bark);--on-dark:var(--ink);--on-dark-soft:var(--muted);--line-dark:color-mix(in srgb,var(--ink) 14%,transparent)}
+[data-hero="light"] .hero h1 .l2{color:var(--brass-deep)}
+[data-hero="light"] .hero .ruled{background-image:repeating-linear-gradient(to bottom,transparent 0 43px,color-mix(in srgb,var(--ink) 5%,transparent) 43px 44px)}
+[data-hero="light"] .hero .seal{--on-dark:var(--stone);--on-dark-soft:color-mix(in srgb,var(--stone) 72%,transparent)}
+[data-hero="light"] .hero .btn-ghost:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+[data-hero="light"] .hero .portrait{box-shadow:0 30px 70px -35px color-mix(in srgb,var(--ink) 45%,transparent)}
+.pal-mode{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-block-start:10px;padding:10px 12px;border-radius:14px;background:var(--stone)}
+.pal-mode span{font-weight:700;font-size:14px}
+.pal-mode div{display:flex;gap:4px;padding:3px;border-radius:999px;background:var(--paper);border:1px solid var(--bark)}
+.pal-mode button{border:0;background:transparent;padding:7px 14px;border-radius:999px;font-weight:600;font-size:13.5px;color:var(--ink)}
+.pal-mode button[aria-pressed="true"]{background:var(--ink);color:var(--stone)}
+
 /* ---------- Mobile contact bar ---------- */
 .dock{position:fixed;inset-inline:0;bottom:0;z-index:50;display:grid;grid-template-columns:1.3fr 1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--ink) 94%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transform:translateY(110%);transition:transform .5s var(--ease-out)}
 .dock.show{transform:none}
@@ -786,6 +799,8 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 <button class="pal-fab" type="button" aria-expanded="false" aria-controls="pal-panel"><i aria-hidden="true"><b style="background:var(--ink)"></b><b style="background:var(--field)"></b><b style="background:var(--brass)"></b></i>פלטות</button>
 <div class="pal-panel" id="pal-panel" role="dialog" aria-label="בחירת פלטת צבעים" inert>
   <header><b>פלטות צבעים</b><small>כלי לבחירה בלבד</small></header>
+  <div class="pal-mode"><span id="pal-mode-label">פתיח</span><div role="group" aria-labelledby="pal-mode-label"><button type="button" data-hero-mode="dark" aria-pressed="true">כהה</button><button type="button" data-hero-mode="light" aria-pressed="false">בהיר</button></div></div>
+
   <div class="pal-list">
     <button class="pal-opt" type="button" data-pal="eucalyptus" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#152420"></span><span style="background:#24413A"></span><span style="background:#B98A52"></span><span style="background:#DCD6C9"></span><span style="background:#EEE9DF"></span></span><b>אקליפטוס ופליז</b><small>הנוכחית. העץ של חדרה, ירוק עמוק עם חום של פליז.</small></button>
     <button class="pal-opt" type="button" data-pal="navygold" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#0B1220"></span><span style="background:#16233A"></span><span style="background:#C9A24B"></span><span style="background:#E4DFD3"></span><span style="background:#F6F2E9"></span></span><b>נייבי וזהב</b><small>הכיוון מהמוקאפ הראשון. סמכות קלאסית ומכובדת.</small></button>
@@ -986,6 +1001,18 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
     if (!initial) { try { initial = localStorage.getItem(KEY); } catch (e) {} }
     set(initial || 'eucalyptus', false);
     opts.forEach(o => o.addEventListener('click', () => set(o.dataset.pal, true)));
+    // Hero mode (dark / light), stored separately from the palette.
+    const HKEY = 'shc-hero';
+    const modeBtns = [...panel.querySelectorAll('[data-hero-mode]')];
+    const setMode = (m, write) => {
+      if (m !== 'light') m = 'dark';
+      if (m === 'light') root.setAttribute('data-hero', 'light'); else root.removeAttribute('data-hero');
+      modeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.heroMode === m)));
+      if (write) { try { localStorage.setItem(HKEY, m); } catch (e) {} }
+    };
+    let m0 = null; try { m0 = localStorage.getItem(HKEY); } catch (e) {}
+    setMode(m0, false);
+    modeBtns.forEach(b => b.addEventListener('click', () => setMode(b.dataset.heroMode, true)));
     const open = v => { panel.classList.toggle('open', v); panel.inert = !v; fab.setAttribute('aria-expanded', String(v)); };
     fab.addEventListener('click', () => open(!panel.classList.contains('open')));
     addEventListener('keydown', e => { if (e.key === 'Escape' && panel.classList.contains('open')) { open(false); fab.focus(); } });

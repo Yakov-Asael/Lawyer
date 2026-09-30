@@ -27,6 +27,7 @@ within the targets in spec 00.
 | הצהרת נגישות | Accessibility level and standard, what was adapted, known limitations, accessibility contact (name, phone, email), last update date |
 | מדיניות פרטיות | What data is collected (none by forms in v1; analytics and Maps cookies if enabled), purpose, contact |
 | Cookie notice | Only if analytics or the Maps embed are enabled |
+| תקנון האתר | See spec 17 |
 
 Legal texts to be reviewed by Yossi (he is the lawyer). We provide structure and draft, not legal advice.
 

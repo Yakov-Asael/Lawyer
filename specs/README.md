@@ -26,6 +26,7 @@ Visual values come from `design/tokens.md`. Data comes from `specs/content-contr
 | 14 | [Mobile contact dock](14-dock.md) | Draft |
 | 15 | [Accessibility menu](15-accessibility-menu.md) | Draft |
 | 16 | [SEO, metadata and legal pages](16-seo-legal.md) | Draft |
+| 17 | [Terms of use (תקנון)](17-terms.md) | Draft |
 | - | [Content contract](content-contract.md) | Draft |
 
 ## Dependencies to approve (CLAUDE.md: flag before adding)
