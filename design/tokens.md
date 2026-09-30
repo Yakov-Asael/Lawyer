@@ -93,7 +93,7 @@ margin line at 22% opacity near the inline end. Used in hero, final CTA and the 
 
 ## Palette options (under review)
 
-The owner asked for warmer, softer options that still read as serious. All eight pass the same contrast checks
+The owner asked for warmer, softer options that still read as serious. All ten pass the same contrast checks
 (body text ≥4.5:1 on every ground it sits on). Switch live in the prototype with the "פלטות" button; each has its own
 link (`#p-<name>`). The cooler midnight, olive and charcoal options were dropped at the owner's request.
 
@@ -101,6 +101,8 @@ link (`#p-<name>`). The cooler midnight, olive and charcoal options were dropped
 |---|---|---|---|---|---|---|---|---|
 | eucalyptus (current) | #152420 | #24413A | #B98A52 | #7E5829 | #EEE9DF | #F7F4EE | #DCD6C9 | #535A55 |
 | navygold (first mockup) | #0B1220 | #16233A | #C9A24B | #7A5B18 | #F6F2E9 | #FBF8F2 | #E4DFD3 | #555A63 |
+| cleangold (clean, navy + gold) | #14233A | #1F3452 | #CDAE6A | #7A5B18 | #F8F7F4 | #FFFFFF | #E6E3DC | #55565C |
+| clean (clean, navy + steel) | #1B2F4B | #264468 | #D5E0EC | #1E3A5F | #F7F7F8 | #FFFFFF | #E4E4E7 | #52525B |
 | walnut | #2A1D17 | #4A3328 | #C8935B | #85502A | #F2EBE2 | #FAF6F0 | #E3D8CA | #5E534B |
 | cedar | #2B1A14 | #5A2E22 | #DDA65E | #86521A | #F3ECE4 | #FAF7F2 | #E6DACD | #5F534B |
 | cocoa | #26201C | #5C4033 | #D6A676 | #88572A | #F4EEE6 | #FBF8F3 | #E7DDD0 | #5E554D |
