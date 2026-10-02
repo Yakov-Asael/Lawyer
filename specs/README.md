@@ -41,6 +41,7 @@ Rule: nothing that costs money. Every service below runs on its free plan; stay 
 | `lenis` | Smooth scroll, part of the approved feel | MIT, no cost |
 | `embla-carousel-react` (via shadcn Carousel) | Endless reviews loop with RTL and swipe | MIT, no cost |
 | `zod` | Content contract | Already in the locked stack |
+| Netlify (free plan) | Hosting, deploy preview per branch, serverless functions for specs 18 and 19 | Monthly usage quota (bandwidth, function calls), ample for one landing page; commercial use allowed |
 | Neon Postgres (free plan) + `drizzle-orm` | Reviews storage and moderation (specs 18, 19) | 0.5 GB storage; DB sleeps when idle (first request slower) |
 | `next-auth` (Auth.js) | Google sign-in for Yossi only | Open source, no cost |
 | `resend` (free plan) | Email Yossi about new reviews | 3,000 emails/month, 100/day |

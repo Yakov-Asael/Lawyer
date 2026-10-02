@@ -7,7 +7,7 @@
 web
 
 ## Stack
-Next.js (App Router) + TypeScript strict + Tailwind CSS + shadcn/ui, `lucide-react` icons, pnpm, deployed on Vercel.
+Next.js (App Router) + TypeScript strict + Tailwind CSS + shadcn/ui, `lucide-react` icons, pnpm, deployed on Netlify (free plan).
 Chosen by the owner. Full rules in `CLAUDE.md`.
 
 ## Users

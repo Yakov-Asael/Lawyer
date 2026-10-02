@@ -30,7 +30,8 @@ or a phone call started. The site is Hebrew-only and RTL from day one, and must 
 - Zod for the content contract and any external input
 - Vitest for unit tests, Playwright for visual/E2E checks
 - pnpm as package manager
-- Deploy: Vercel, preview deploy per branch
+- Deploy: Netlify (free plan, commercial use allowed), deploy preview per branch. Not Vercel: its free Hobby plan
+  forbids commercial use.
 - Cross-cutting from day one: Hebrew RTL, accessibility (IS 5568), fast mobile load
 
 Approved dependencies and their free-plan limits: `specs/README.md`. Don't add others (animation libs, UI kits), use

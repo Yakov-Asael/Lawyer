@@ -39,7 +39,7 @@ docs/              משימות שאינן קוד (Google Business Profile)
 ## סטאק (לשלב הקוד)
 
 Next.js (App Router), TypeScript strict, Tailwind CSS, shadcn/ui, lucide-react, Zod, Vitest, Playwright, pnpm.
-פריסה ל-Vercel.
+פריסה ל-Netlify (תוכנית חינמית).
 
 ## צפייה באב-טיפוס
 
