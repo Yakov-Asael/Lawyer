@@ -1,4 +1,5 @@
-import { expect, test, type Page } from "@playwright/test";
+import type { Page } from "@playwright/test";
+import { expect, test } from "./fixtures";
 
 /** Spec 00 motion system: reveals, smooth scroll, and the reduced-motion fallback. */
 
@@ -12,10 +13,20 @@ test.describe("motion on", () => {
     await expect(page.locator("html")).toHaveClass(/\blenis\b/);
   });
 
-  test("above-the-fold heading and copy reveal on load", async ({ page }) => {
+  test("hero entrance runs on CSS alone and ends fully visible", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("h1.mask")).toHaveAttribute("data-in", "");
-    await expect.poll(() => opacityOf(page, "section >> nth=0 >> .reveal >> nth=0")).toBe(1);
+    await page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== "running"));
+    const states = await page.evaluate(() =>
+      [...document.querySelectorAll(".hero-in, .hero-line > span")].map((el) => {
+        const s = getComputedStyle(el);
+        return { opacity: s.opacity, transform: s.transform };
+      }),
+    );
+    expect(states.length).toBeGreaterThan(4);
+    for (const s of states) {
+      expect(s.opacity).toBe("1");
+      expect(s.transform).toMatch(/^(none|matrix\(1, 0, 0, 1, 0, 0\))$/);
+    }
   });
 
   test("a block below the fold waits, then reveals once scrolled into view", async ({ page }) => {
@@ -35,9 +46,10 @@ test.describe("motion on", () => {
     await expect(block).toHaveAttribute("data-in", "");
   });
 
-  test("mask keeps the heading as whole text for assistive tech", async ({ page }) => {
+  test("headings keep whole text for assistive tech", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("ליווי משפטי אישי. 30 שנה בחדרה.");
+    await expect(page.locator("#shell-years")).toHaveText("שלושים שנה של עבודה משפטית בחדרה");
   });
 });
 

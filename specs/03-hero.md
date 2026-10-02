@@ -41,6 +41,19 @@ original** (target 1200x1500, served via `next/image`, priority).
 ## Accessibility
 One `<h1>`. Portrait alt: "עו״ד יוסי שוקרון כהן". Seal is decorative (`aria-hidden`).
 
+## Implementation (built)
+- `src/components/hero/Hero.tsx` (server), `IntroCurtain.tsx` (CSS only), rendered first in `<body>`.
+- `MotionBoot` (inline script, first in `<body>`) arms `html.motion` before first paint and marks the first load of the
+  session (`intro`) or a repeat (`intro-seen`) in sessionStorage. Reduced motion: neither, so no curtain and no entrance.
+- **Entrance is CSS only** (`hero-in`, `hero-line`): the hero is always in view at load, so it needs no observer and
+  its text never waits for hydration.
+- **First load: no second entrance after the curtain.** The hero is painted in full under the curtain and the curtain
+  lifting is the reveal. Measured reason: with the entrance after the curtain, LCP on throttled mobile was 5.8s
+  (2.25s of curtain plus the sequence); painted under the curtain it is about 1.1s. Repeat loads play the sequence from 0.
+- Failsafe: if the app never hydrates after the boot script ran, everything reveals after 3s (`motion-failsafe`).
+- Copy: `hero.subEmphasis` (must appear in `hero.sub`), `hero.portraitAlt`.
+- Light variant (`data-hero="light"`) is not built: it waits for the owner's choice.
+
 ## Acceptance criteria
 - [ ] First viewport at 390x844 shows H1, sub, WhatsApp + call; portrait may start below the fold.
 - [ ] LCP element is the H1 or portrait; LCP < 2.5s on mobile 4G throttling.
