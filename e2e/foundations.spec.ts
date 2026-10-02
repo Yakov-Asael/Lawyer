@@ -67,6 +67,13 @@ test.describe("foundations shell", () => {
   test("screenshot", async ({ page }, info) => {
     await page.goto("/");
     await page.evaluate(() => document.fonts.ready);
+    await page.waitForTimeout(450);
+    await page.screenshot({ path: `test-results/screens/reveal-mid-${info.project.name}.png` });
+    // Reveal everything below the fold too, then wait for every transition to settle.
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(300);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForFunction(() => document.getAnimations().every((a) => a.playState !== "running"));
     await page.screenshot({ path: `test-results/screens/foundations-${info.project.name}.png`, fullPage: true });
   });
 });
