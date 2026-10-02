@@ -3,3 +3,29 @@
 node_modules/
 .next/
 __pycache__/
+
+# dependencies / build
+/.pnp
+.pnp.*
+/coverage
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+
+# env files (only the example is committed)
+.env*
+!.env.example
+
+# playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/e2e/__screenshots__/
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+.pnpm-debug.log*

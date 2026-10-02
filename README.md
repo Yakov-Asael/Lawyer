@@ -10,7 +10,7 @@
 | Brief | הושלם, ב-`PRODUCT.md` |
 | עיצוב | אב-טיפוס ממתין לאישור הפלטה של יוסי, ב-`design/prototype/`. טוקנים ב-`design/tokens.md` |
 | Specs | טיוטה מלאה ב-`specs/` (17 קבצים + חוזה תוכן), ממתינה לאישור |
-| קוד | עוד לא התחיל |
+| קוד | Foundations (spec 00 shell + חוזה תוכן) ב-`feat/foundations` |
 | Google Business Profile | צ'קליסט ב-`docs/google-business-profile.md` |
 
 ## תהליך העבודה
@@ -45,3 +45,14 @@ Next.js (App Router), TypeScript strict, Tailwind CSS, shadcn/ui, lucide-react, 
 
 פותחים את `design/prototype/index.html` בדפדפן. הגלילה החלקה (Lenis) נטענת מ-CDN,
 ובלעדיה הדף עובד עם גלילה רגילה.
+
+## פיתוח
+
+```bash
+pnpm install
+pnpm dev          # http://localhost:3000
+pnpm verify       # typecheck + lint + unit tests + build
+pnpm test:e2e     # Playwright ב-1440 וב-390 (דורש pnpm build קודם)
+```
+
+בסביבת ענן: `PW_CHROMIUM_PATH=/opt/pw-browsers/chromium pnpm test:e2e`.

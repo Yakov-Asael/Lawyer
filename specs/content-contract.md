@@ -23,8 +23,7 @@ const Office = z.object({
   hours: z.string().optional(),                   // OPEN
   accessAndParking: z.string().optional(),        // OPEN
   education: z.string().optional(),               // OPEN
-  wazeUrl: z.string().url(),
-  mapsUrl: z.string().url(),
+  // Waze and Maps links are derived from address + city (see helpers), not stored.
 });
 
 const PracticeArea = z.object({
@@ -48,8 +47,15 @@ const Review = z.object({
 
 const Faq = z.object({ question: z.string(), answer: z.string() });
 
+const WhatsappCopy = z.object({
+  message: z.string(),                 // "שלום עו״ד שוקרון כהן, אשמח להתייעץ."
+  topicMessage: z.string(),            // same, with "בנושא {topic}." ({topic} required)
+});
+
 const Site = z.object({
   office: Office,
+  whatsapp: WhatsappCopy,              // pre-filled message copy lives in content, not in helpers
+  ui: z.object({ skipLink: z.string() }), // interface strings owned by no single section
   hero: z.object({ line1: z.string(), line2: z.string(), sub: z.string() }),
   statement: z.object({ text: z.string(), highlight: z.string(), footLabel: z.string(), footText: z.string() }),
   years: z.object({ heading: z.string(), body: z.string() }),
@@ -67,13 +73,22 @@ const Site = z.object({
 
 | Helper | Output |
 |---|---|
-| `waLink(topic?)` | `https://wa.me/{whatsappE164}?text=` + encoded `שלום עו״ד שוקרון כהן, אשמח להתייעץ[ בנושא {topic}].` |
+| `waLink(topic?)` | `https://wa.me/{whatsappE164}?text=` + encoded `whatsapp.message`, or `whatsapp.topicMessage` with `{topic}` filled |
 | `telLink()` | `tel:{phoneE164}` |
-| `wazeLink()` / `mapsLink()` | From `office`, with the address URL-encoded |
+| `mailLink()` | `mailto:{email}` |
+| `wazeLink()` / `mapsLink()` | From `office.address` + `office.city`, URL-encoded |
+
+Pure builders take their data as arguments (`src/lib/contact-links.ts`, unit-tested); `src/lib/contact.ts` binds them
+to the site content for components.
+
+Implementation: `content/schema.ts` (contract), `content/site.ts` (data), `content/index.ts` (parsed `site`,
+imported as `@content`). Every string is also checked for em-dashes and emojis.
 
 ## Rules for copy
 - No em-dashes. No emojis. No promised outcomes (Israel Bar advertising rules).
 - No invented facts. Unknown values stay optional and the UI omits them; they never render as brackets in production.
+- Required copy that is still missing is written as `[placeholder: ...]`. A production build (`VERCEL_ENV=production`)
+  fails while any remains; previews and dev show them.
 - Reviews require `consentConfirmed: true`.
 
 ## Open items to collect from Yossi
