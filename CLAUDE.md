@@ -33,7 +33,8 @@ or a phone call started. The site is Hebrew-only and RTL from day one, and must 
 - Deploy: Vercel, preview deploy per branch
 - Cross-cutting from day one: Hebrew RTL, accessibility (IS 5568), fast mobile load
 
-Don't add dependencies (animation libs, UI kits) or swap stack pieces without flagging it first.
+Approved dependencies and their free-plan limits: `specs/README.md`. Don't add others (animation libs, UI kits), use
+paid tiers, or swap stack pieces without flagging it first.
 
 ## Project layout
 ```

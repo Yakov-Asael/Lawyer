@@ -32,17 +32,22 @@ Visual values come from `design/tokens.md`. Data comes from `specs/content-contr
 | 20 | [Press and cases page (phase 2)](20-press-and-cases.md) | Future |
 | - | [Content contract](content-contract.md) | Draft |
 
-## Dependencies to approve (CLAUDE.md: flag before adding)
+## Dependencies (approved 2026-10-02, free tiers only)
 
-| Package | Why | Alternative |
+Rule: nothing that costs money. Every service below runs on its free plan; stay inside the limits.
+
+| Package / service | Why | Free-plan limit that matters |
 |---|---|---|
-| `lenis` | Smooth scroll, part of the approved feel | Native scroll (loses the feel) |
-| `embla-carousel-react` (via shadcn Carousel) | Endless reviews loop with RTL and swipe | Hand-rolled scroll-snap loop as in the prototype |
+| `lenis` | Smooth scroll, part of the approved feel | MIT, no cost |
+| `embla-carousel-react` (via shadcn Carousel) | Endless reviews loop with RTL and swipe | MIT, no cost |
 | `zod` | Content contract | Already in the locked stack |
-| Postgres (Neon via Vercel) + `drizzle-orm` | Reviews storage and moderation (specs 18, 19) | A hosted form service (loses the approval panel) |
-| `next-auth` (Auth.js) | Google sign-in for Yossi only | Password auth (more to secure) |
-| `resend` | Email Yossi about new reviews | No notification; he checks the panel |
-| Cloudflare Turnstile | Bot protection on the form | Honeypot only |
+| Neon Postgres (free plan) + `drizzle-orm` | Reviews storage and moderation (specs 18, 19) | 0.5 GB storage; DB sleeps when idle (first request slower) |
+| `next-auth` (Auth.js) | Google sign-in for Yossi only | Open source, no cost |
+| `resend` (free plan) | Email Yossi about new reviews | 3,000 emails/month, 100/day |
+| Cloudflare Turnstile | Bot protection on the form | Free |
+| Google Maps embed (iframe, no API key) | Map in the Visit section | Free; no Maps JavaScript API |
+
+Any new paid tier, API key with billing, or extra package: flag first.
 
 No animation library (Framer Motion, GSAP). All motion is CSS plus one small rAF scroll hook.
 
