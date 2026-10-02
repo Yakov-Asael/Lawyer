@@ -21,6 +21,8 @@ type MotionContextValue = {
   /** Freeze page scroll (open menus and dialogs) and release it again. */
   stopScroll: () => void;
   startScroll: () => void;
+  /** Scroll to "#id" (smooth through Lenis when motion runs), move focus there and update the URL. */
+  goToHash: (hash: string) => void;
 };
 
 const noop = () => {};
@@ -31,6 +33,7 @@ const MotionContext = createContext<MotionContextValue>({
   setStilled: noop,
   stopScroll: noop,
   startScroll: noop,
+  goToHash: noop,
 });
 
 export const useMotion = () => useContext(MotionContext);
@@ -52,27 +55,34 @@ function usePrefersReducedMotion(): boolean {
   );
 }
 
+/** Scroll to an in-page target like a native anchor would, but through Lenis when it runs. */
+function goToHash(hash: string, lenis: Lenis | null) {
+  if (hash === "#") {
+    if (lenis) lenis.scrollTo(0);
+    else window.scrollTo({ top: 0 });
+    history.pushState(null, "", window.location.pathname + window.location.search);
+    return;
+  }
+  const target = document.getElementById(decodeURIComponent(hash.slice(1)));
+  if (!target) return;
+
+  if (lenis) lenis.scrollTo(target, { offset: -12 });
+  else target.scrollIntoView();
+  if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+  target.focus({ preventScroll: true });
+  history.pushState(null, "", hash);
+}
+
 /** Same-page anchor links scroll through Lenis and still move focus, like native anchors. */
-function scrollToAnchor(lenis: Lenis, event: MouseEvent) {
+function handleAnchorClick(lenis: Lenis, event: MouseEvent) {
   if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
     return;
   }
   const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href^="#"]');
   const hash = link?.getAttribute("href");
   if (!link || !hash) return;
-
   event.preventDefault();
-  if (hash === "#") {
-    lenis.scrollTo(0);
-    return;
-  }
-  const target = document.getElementById(decodeURIComponent(hash.slice(1)));
-  if (!target) return;
-
-  lenis.scrollTo(target, { offset: -12 });
-  if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
-  target.focus({ preventScroll: true });
-  history.pushState(null, "", hash);
+  goToHash(hash, lenis);
 }
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
@@ -90,7 +100,7 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
     const lenis = new Lenis({ lerp: 0.1, autoRaf: false });
     lenisRef.current = lenis;
     const stopLoop = onFrame((time) => lenis.raf(time));
-    const onClick = (e: MouseEvent) => scrollToAnchor(lenis, e);
+    const onClick = (e: MouseEvent) => handleAnchorClick(lenis, e);
     document.addEventListener("click", onClick);
     return () => {
       document.removeEventListener("click", onClick);
@@ -102,10 +112,11 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
 
   const stopScroll = useCallback(() => lenisRef.current?.stop(), []);
   const startScroll = useCallback(() => lenisRef.current?.start(), []);
+  const goTo = useCallback((hash: string) => goToHash(hash, lenisRef.current), []);
 
   const value = useMemo(
-    () => ({ enabled, stilled, setStilled, stopScroll, startScroll }),
-    [enabled, stilled, stopScroll, startScroll],
+    () => ({ enabled, stilled, setStilled, stopScroll, startScroll, goToHash: goTo }),
+    [enabled, stilled, stopScroll, startScroll, goTo],
   );
 
   return <MotionContext.Provider value={value}>{children}</MotionContext.Provider>;
