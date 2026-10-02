@@ -1,0 +1,241 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * Design tokens: the only place raw values live (design/tokens.md).
+ * Palette is pending Yossi's approval, so every color is a variable: swapping a palette
+ * means changing the values in this block and nothing else.
+ */
+:root {
+  color-scheme: light;
+
+  /* Palette: eucalyptus (default) */
+  --ink: #152420;
+  --field: #24413a;
+  --brass: #b98a52;
+  --brass-deep: #7e5829;
+  --stone: #eee9df;
+  --paper: #f7f4ee;
+  --bark: #dcd6c9;
+  --muted: #535a55;
+  --on-dark: var(--stone);
+  --on-dark-soft: color-mix(in srgb, var(--on-dark) 72%, transparent);
+  --line-dark: color-mix(in srgb, var(--on-dark) 14%, transparent);
+
+  /* Focus ring. brass-deep on light grounds keeps the ring at 3:1+ against stone and paper;
+     dark grounds (.on-dark) switch it to brass. */
+  --focus: var(--brass-deep);
+
+  /* Space and shape */
+  --inset: 10px;
+  --gutter: clamp(20px, 4.2vw, 64px);
+  --content-max: 1180px;
+  --content-wide: 1280px;
+  --section-pad: clamp(70px, 9vw, 130px);
+  --dock-space: 84px;
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* shadcn/ui semantic aliases, mapped onto the palette so primitives inherit the brand. */
+  --background: var(--stone);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--stone);
+  --secondary: var(--bark);
+  --secondary-foreground: var(--ink);
+  --muted-foreground: var(--muted);
+  --accent: var(--brass);
+  --accent-foreground: var(--ink);
+  --border: var(--bark);
+  --input: var(--bark);
+  --ring: var(--focus);
+  --radius: var(--radius-sm);
+}
+
+/* Dark grounds (hero, years, reviews, final CTA): text and focus flip together. */
+.on-dark {
+  --focus: var(--brass);
+  color: var(--on-dark);
+}
+
+@theme inline {
+  /* Brand palette: bg-ink, text-brass-deep, border-bark, ... */
+  --color-ink: var(--ink);
+  --color-field: var(--field);
+  --color-brass: var(--brass);
+  --color-brass-deep: var(--brass-deep);
+  --color-stone: var(--stone);
+  --color-paper: var(--paper);
+  --color-bark: var(--bark);
+  --color-muted: var(--muted);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-soft: var(--on-dark-soft);
+  --color-line-dark: var(--line-dark);
+  --color-focus: var(--focus);
+
+  /* shadcn semantic colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Type: fonts come from next/font in the root layout */
+  --font-serif: var(--font-frank-ruhl), "Frank Ruhl Libre", "David Libre", "Times New Roman", serif;
+  --font-sans: var(--font-assistant), "Assistant", "Heebo", Arial, sans-serif;
+
+  /* Shape */
+  --radius-lg: var(--radius-lg);
+  --radius-md: var(--radius-md);
+  --radius-sm: var(--radius-sm);
+  --radius-pill: var(--radius-pill);
+
+  /* Layout */
+  --spacing-inset: var(--inset);
+  --spacing-gutter: var(--gutter);
+  --spacing-section: var(--section-pad);
+  --container-content: var(--content-max);
+  --container-wide: var(--content-wide);
+
+  /* Motion */
+  --ease-out: var(--ease-out);
+  --ease-io: var(--ease-io);
+
+  /* Breakpoints (tokens.md): phone type scale below 600px, layout stacks below 900px, header nav from 1000px */
+  --breakpoint-tablet: 37.5rem;
+  --breakpoint-desk: 56.25rem;
+  --breakpoint-nav: 62.5rem;
+}
+
+@layer base {
+  html {
+    background: var(--stone);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--stone);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--brass);
+    color: var(--ink);
+  }
+
+  @media (max-width: 600px) {
+    body {
+      font-size: 15px;
+    }
+  }
+}
+
+@layer components {
+  /* Page frame (spec 00): inset around section cards, bottom room for the phone contact dock. */
+  .page-frame {
+    padding-inline: var(--inset);
+    padding-block: var(--inset) calc(var(--inset) + var(--dock-space) + env(safe-area-inset-bottom));
+    overflow-x: clip;
+  }
+
+  @media (min-width: 900px) {
+    .page-frame {
+      padding-block-end: var(--inset);
+    }
+  }
+
+  /* Skip link: first focusable element, hidden until focused. */
+  .skip-link {
+    position: fixed;
+    inset-block-start: 12px;
+    inset-inline-start: 12px;
+    z-index: 300;
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--brass);
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+    transform: translateY(-200%);
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .skip-link:focus-visible {
+    transform: none;
+    outline-color: var(--ink);
+  }
+}
+
+@layer utilities {
+  /* Numbers, phone and email inside Hebrew text: isolated LTR run with even digits. */
+  .num {
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

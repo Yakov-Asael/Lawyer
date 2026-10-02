@@ -23,6 +23,7 @@ Emotional brief: seriousness, warmth, care.
 | `on-dark` | `#EEE9DF` | Text on dark grounds | |
 | `on-dark-soft` | `rgba(238,233,223,.72)` | Secondary text on dark grounds | |
 | `line-dark` | `rgba(238,233,223,.14)` | Hairlines on dark grounds | |
+| `focus` | `brass-deep` on light, `brass` inside `.on-dark` | Keyboard focus ring (2px, 3px offset) | |
 
 Verified contrast (WCAG): ink on stone 13.3:1, muted on stone 5.9:1, muted on bark 4.9:1, brass on ink 5.2:1, ink on brass 5.2:1,
 brass-deep on stone 5.2:1, on-dark on field 9.1:1. **Never use `brass` for text on light grounds** (2.5:1).

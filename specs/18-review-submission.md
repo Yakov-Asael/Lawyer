@@ -28,7 +28,7 @@ Line under the title: "ההמלצה תפורסם באתר רק אחרי אישו
 - Esc and the backdrop close the dialog; focus returns to the opener.
 
 ## Backend
-- `POST /api/reviews` (Next.js route handler, Vercel serverless). Validates with the same Zod schema as the client.
+- `POST /api/reviews` (Next.js route handler, serverless function on Netlify). Validates with the same Zod schema as the client.
 - Stores `{ id, name, area, text, phone?, consentVersion, consentAt, status: "pending", createdAt }`.
 - Spam protection: honeypot field, per-IP rate limit (5 per hour), Cloudflare Turnstile (invisible).
 - Notifies Yossi of a new pending review (email via Resend, or WhatsApp link in the email).
