@@ -552,10 +552,20 @@ html.motion:not(.intro) .hero-line > span {
   }
 }
 
+/* Statement scrub (spec 04): words start dim and light up with reading progress. Motion off: all lit. */
+.motion .scrub-word {
+  transition: opacity 0.25s linear;
+}
+
+.motion .scrub-word:not(.is-lit) {
+  opacity: 0.16;
+}
+
 /* Failsafe: MotionBoot armed motion but the app never hydrated (script error, blocked bundle).
    Reveal everything after 3s. Once React marks html.motion-ready, this rule stops matching. */
 html.motion:not(.motion-ready) .reveal,
-html.motion:not(.motion-ready) .mask .mask-piece > span {
+html.motion:not(.motion-ready) .mask .mask-piece > span,
+html.motion:not(.motion-ready) .scrub-word {
   animation: motion-failsafe 0s 3s forwards;
 }
 
