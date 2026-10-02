@@ -33,6 +33,8 @@ export const buttonVariants = cva(
       },
       size: {
         default: "h-[52px] [&_svg]:size-5",
+        /** Header: 44px, 15px label. */
+        compact: "h-11 text-[15px] tablet:text-[15px] [&_svg]:size-[19px]",
         /** Hero on phones: 48px, tighter padding. */
         hero: "h-12 tablet:h-[52px] [&_svg]:size-[18px] tablet:[&_svg]:size-5",
       },
@@ -40,6 +42,8 @@ export const buttonVariants = cva(
     compoundVariants: [
       { shape: "pill", size: "default", className: "px-[26px]" },
       { shape: "pill", size: "hero", className: "px-3 tablet:px-[26px]" },
+      { shape: "pill", size: "compact", className: "px-5" },
+      { shape: "icon", size: "compact", className: "w-11" },
       { shape: "icon", size: "default", className: "w-[52px] [&_svg]:size-[22px]" },
       { shape: "icon", size: "hero", className: "w-12 tablet:w-[52px] [&_svg]:size-5 tablet:[&_svg]:size-[22px]" },
     ],

@@ -33,6 +33,19 @@ Files: `src/components/header/Header.tsx`, `MobileMenu.tsx`.
 ## Accessibility
 Burger: `aria-label="פתיחת תפריט"`, `aria-expanded`, `aria-controls`. Menu: `role="dialog" aria-modal="true"`.
 
+## Implementation (built)
+- `src/components/header/Header.tsx` (server), `Brand.tsx`, `MobileMenu.tsx` (client: burger + dialog).
+- The header renders in the root layout before `<main>`, absolutely positioned over the hero card (`inset` + `22px gutter`).
+  This keeps the `banner` landmark and lets the skip link jump past the nav. The hero (spec 03) reserves top space for it.
+- The menu is a custom dialog (no Radix), portalled to `<body>`. When open, every other child of `<body>` is `inert`,
+  `html.menu-lock` stops native scroll and Lenis is stopped.
+- A menu link closes the menu first and then calls `goToHash()` from the motion context, because Lenis ignores
+  `scrollTo` while it is stopped. Focus goes to the target section; Esc or the close button returns focus to the burger.
+- The menu also closes when the viewport widens past 1000px.
+- Nav labels and targets live in `content` (`navigation.header`, `navigation.menu`).
+- Known limit: without JavaScript the burger does nothing on phones; contact stays one tap away through the dock
+  (spec 14).
+
 ## Acceptance criteria
 - [ ] At 1440: brand, 4 links, WhatsApp and call icon visible in one row; no phone number text.
 - [ ] At 390: only brand + burger; menu opens, focus lands on "תחומי עיסוק", Esc closes and refocuses the burger.

@@ -330,6 +330,36 @@
   text-box: trim-both ex alphabetic;
 }
 
+/* "Ruled legal pad" texture (tokens.md, Texture): hairlines every 44px plus one brass margin line.
+   Dark grounds only: hero, final CTA, mobile menu. */
+@layer components {
+  .ruled {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0 43px,
+      color-mix(in srgb, var(--on-dark) 4.5%, transparent) 43px 44px
+    );
+  }
+
+  .ruled::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: clamp(40px, 9vw, 140px);
+    width: 1px;
+    background: color-mix(in srgb, var(--brass) 22%, transparent);
+  }
+}
+
+/* Mobile menu open: the page behind does not scroll (spec 02). */
+.menu-lock {
+  overflow: hidden;
+}
+
 /* Seal (spec 01). The stamp lands once when it enters the viewport; without motion it rests in place. */
 @layer components {
   .seal-stamp {
