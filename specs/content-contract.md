@@ -87,7 +87,7 @@ imported as `@content`). Every string is also checked for em-dashes and emojis.
 ## Rules for copy
 - No em-dashes. No emojis. No promised outcomes (Israel Bar advertising rules).
 - No invented facts. Unknown values stay optional and the UI omits them; they never render as brackets in production.
-- Required copy that is still missing is written as `[placeholder: ...]`. A production build (`VERCEL_ENV=production`)
+- Required copy that is still missing is written as `[placeholder: ...]`. A production build (Netlify `CONTEXT=production`)
   fails while any remains; previews and dev show them.
 - Reviews require `consentConfirmed: true`.
 

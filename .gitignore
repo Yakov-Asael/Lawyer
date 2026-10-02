@@ -12,7 +12,7 @@ __pycache__/
 /build
 *.tsbuildinfo
 next-env.d.ts
-.vercel
+.netlify
 
 # env files (only the example is committed)
 .env*
