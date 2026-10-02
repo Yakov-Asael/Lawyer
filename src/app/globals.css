@@ -440,7 +440,7 @@
   transition:
     opacity 0.9s var(--ease-out),
     transform 0.9s var(--ease-out);
-  transition-delay: calc(var(--d, 0ms) + var(--seq, 0ms));
+  transition-delay: var(--d, 0ms);
 }
 
 .motion .mask .mask-piece > span {
@@ -451,7 +451,7 @@
 .motion .mask[data-in] .mask-piece > span {
   transform: none;
   transition: transform 1.1s var(--ease-out);
-  transition-delay: calc(var(--d, 0ms) + var(--seq, 0ms));
+  transition-delay: var(--d, 0ms);
 }
 
 /* Intro curtain (spec 03). Pure CSS: it leaves on its own even if JS fails. MotionBoot marks repeat loads
