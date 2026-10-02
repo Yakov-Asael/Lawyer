@@ -171,7 +171,8 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .areas-head h2{font-size:clamp(2.3rem,5vw,4.6rem);line-height:1.02}
 .areas-head p{max-width:34em;color:var(--muted)}
 .files{display:grid;gap:clamp(24px,4vh,40px)}
-.file{position:sticky;top:calc(var(--i) * 26px + 90px);transform-origin:50% 0;will-change:transform}
+.file{position:sticky;top:calc(var(--i) * 44px + 84px)}
+.file-tab{min-height:44px;box-sizing:border-box}
 .file-tab{display:flex;width:fit-content;align-items:center;gap:10px;margin-block-end:-1px;padding:10px 22px 12px;border-radius:14px 14px 0 0;font-size:14px;font-weight:700;letter-spacing:.06em}
 .file-body{border-radius:0 var(--r-md) var(--r-md) var(--r-md);padding:clamp(28px,4vw,52px);display:grid;gap:28px;min-height:clamp(340px,44vh,420px);box-shadow:0 -1px 0 rgba(0,0,0,.04),0 24px 50px -30px color-mix(in srgb,var(--ink) 45%,transparent)}
 [dir="rtl"] .file-body{border-radius:var(--r-md) 0 var(--r-md) var(--r-md)}
@@ -470,6 +471,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   .file h3{font-size:1.25rem}
   .file li{font-size:15px;padding-block:10px}
   .file-tab{font-size:13px;padding:9px 18px 10px}
+  .file-body{padding-block-start:52px}
   .step h3{font-size:1.1rem}
   .fact dd{font-size:16px}
   .rs-card blockquote{font-size:15.5px}
@@ -1230,7 +1232,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
       if (!next) return;
       const nr = next.getBoundingClientRect(), fr = f.getBoundingClientRect();
       const overlap = clamp01((fr.bottom - nr.top) / fr.height);
-      f.style.transform = `scale(${1 - overlap * 0.05})`;
       f.style.filter = `brightness(${1 - overlap * 0.25})`;
     });
 

@@ -18,15 +18,17 @@ real estate, notary.
   `ink` button on light files).
 
 ## Motion (signature)
-- Files are `position: sticky`, `top: 90px + index * 26px`, so each new file slides over the previous one and the
-  tabs stack like a drawer.
-- A covered file scales to `1 - overlap * .05` and dims (`brightness(1 - overlap * .25)`).
+- Files are `position: sticky`, `top: 84px + index * 44px` (44px = tab height), so each new file slides over the
+  previous one and the tabs stack in one even column, every label fully readable.
+- A covered file only dims (`brightness(1 - overlap * .25)`). No scaling: every file keeps the same width so edges and
+  tabs stay aligned (owner feedback).
 
 ## Behavior
 CTA → `waLink(whatsappTopic)`, e.g. "...אשמח להתייעץ בנושא דיני משפחה."
 
 ## Fallbacks
-Reduced motion: no scaling/dimming (stacking remains, it is layout, not animation).
+Reduced motion: no dimming (stacking remains, it is layout, not animation).
+Phones: body top padding 52px so a covered file shows only a clean strip, not the top of its heading.
 
 ## Accessibility
 Each file is an `<article>` with its headline as `<h3>`; service lists are `<ul>`.
@@ -34,5 +36,6 @@ Each file is an `<article>` with its headline as `<h3>`; service lists are `<ul>
 ## Acceptance criteria
 - [ ] Tab and body touch with zero gap (measured) at 1440 and 390; tab right edge equals body right edge.
 - [ ] Each CTA opens WhatsApp with its own topic in the message.
-- [ ] Scrolling shows all four tabs stacked at the top edge before the section ends.
+- [ ] Scrolling shows all four tabs stacked 44px apart, labels fully readable, before the section ends.
+- [ ] All four bodies share the same left and right edges while stacked (measured).
 - [ ] Service lists come from content; no hardcoded items.
