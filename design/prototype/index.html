@@ -243,7 +243,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 }
 .rs-q{width:34px;height:26px;color:var(--brass)}
 .rs-card blockquote{margin:0;font-size:17px;line-height:1.75;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
-.rs-card.open blockquote{-webkit-line-clamp:unset;display:block}
 .rs-more{align-self:flex-start;background:none;border:0;padding:4px 0;color:var(--brass-deep);font-weight:700;font-size:15px}
 .rs-more:hover{text-decoration:underline}
 .rs-card figcaption{margin-block-start:auto;padding-block-start:18px;font-weight:700;color:var(--brass-deep)}
@@ -420,11 +419,12 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .rvd-head h2{font-size:clamp(1.6rem,3vw,2.1rem)}
 .rvd-note{margin-block-start:8px;color:var(--muted);font-size:15px}
 .rvd form{display:grid;gap:16px;margin-block-start:22px}
-.fld{display:grid;gap:6px}
+.fld{display:grid;gap:6px;align-content:start}
 .fld label{font-weight:600;font-size:14.5px}
 .fld .hint{font-size:13px;color:var(--muted)}
 .fld input,.fld select,.fld textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1.5px solid var(--bark);border-radius:12px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
 .fld textarea{min-height:130px;resize:vertical;line-height:1.6}
+.fld select{appearance:none;-webkit-appearance:none;line-height:inherit;padding-inline-end:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23535A55' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:18px;background-position:left 14px center;cursor:pointer}
 .fld input:focus,.fld select:focus,.fld textarea:focus{outline:none;border-color:var(--brass-deep);box-shadow:0 0 0 3px color-mix(in srgb,var(--brass) 30%,transparent)}
 .fld [aria-invalid="true"]{border-color:#A3332B}
 .fld .err{font-size:13.5px;color:#A3332B;font-weight:600;min-height:0}
@@ -435,6 +435,11 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .consent input{width:22px;height:22px;margin-block-start:2px;accent-color:var(--ink);flex:none}
 .consent label{font-size:14.5px;line-height:1.55}
 .rvd .btn-ink{width:100%}
+.rvr figure{margin:0;display:grid;gap:18px;margin-block-start:6px}
+.rvr .rs-q{width:40px;height:30px;color:var(--brass)}
+.rvr blockquote{margin:0;font-family:var(--serif);font-size:clamp(1.15rem,2.2vw,1.35rem);line-height:1.75}
+.rvr figcaption{padding-block-start:16px;border-block-start:1px solid var(--bark);font-weight:700;color:var(--brass-deep)}
+.rvr figcaption span{display:block;font-weight:400;font-size:14px;color:var(--muted)}
 .rvd-done{text-align:center;display:grid;justify-items:center;gap:10px;padding-block:18px 6px}
 .rvd-done .ok{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--stone)}
 .rvd-done .ok svg{width:30px;height:30px}
@@ -714,12 +719,12 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
     </div>
     <div class="rs" role="region" aria-roledescription="קרוסלה" aria-label="המלצות לקוחות">
       <ul class="rs-track" tabindex="0">
-        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד מציגה אותו במלואו בתוך הכרטיס, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-expanded="false" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>דיני משפחה</span></figcaption></figure></li>
-        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד מציגה אותו במלואו בתוך הכרטיס, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-expanded="false" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>נזיקין וביטוח</span></figcaption></figure></li>
-        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד מציגה אותו במלואו בתוך הכרטיס, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-expanded="false" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>מקרקעין וחוזים</span></figcaption></figure></li>
-        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד מציגה אותו במלואו בתוך הכרטיס, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-expanded="false" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>נוטריון</span></figcaption></figure></li>
-        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד מציגה אותו במלואו בתוך הכרטיס, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-expanded="false" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>דיני משפחה</span></figcaption></figure></li>
-        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד מציגה אותו במלואו בתוך הכרטיס, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-expanded="false" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>נזיקין וביטוח</span></figcaption></figure></li>
+        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד פותחת אותו במלואו בחלון קריאה, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-haspopup="dialog" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>דיני משפחה</span></figcaption></figure></li>
+        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד פותחת אותו במלואו בחלון קריאה, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-haspopup="dialog" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>נזיקין וביטוח</span></figcaption></figure></li>
+        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד פותחת אותו במלואו בחלון קריאה, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-haspopup="dialog" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>מקרקעין וחוזים</span></figcaption></figure></li>
+        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד פותחת אותו במלואו בחלון קריאה, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-haspopup="dialog" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>נוטריון</span></figcaption></figure></li>
+        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד פותחת אותו במלואו בחלון קריאה, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-haspopup="dialog" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>דיני משפחה</span></figcaption></figure></li>
+        <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד פותחת אותו במלואו בחלון קריאה, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-haspopup="dialog" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>נזיקין וביטוח</span></figcaption></figure></li>
       </ul>
       <div class="rs-foot">
         <button class="btn btn-ghost rs-add" type="button" data-review-open aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>השאירו המלצה</button>
@@ -835,6 +840,17 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   </div>
 </div>
 
+<div class="rvd rvr" id="review-read" role="dialog" aria-modal="true" aria-labelledby="rvr-title" inert>
+  <div class="rvd-backdrop" data-read-close></div>
+  <div class="rvd-panel">
+    <div class="rvd-head">
+      <h2 id="rvr-title" class="sr-only">המלצה</h2>
+      <svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"></svg>
+      <button class="a11y-x" type="button" data-read-close aria-label="סגירה"></button>
+    </div>
+    <figure><blockquote></blockquote><figcaption></figcaption></figure>
+  </div>
+</div>
 <div class="rvd" id="review-dialog" role="dialog" aria-modal="true" aria-labelledby="rvd-title" inert>
   <div class="rvd-backdrop" data-review-close></div>
   <div class="rvd-panel">
@@ -956,6 +972,29 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   (() => {
     const track = document.querySelector('.rs-track');
     const originals = [...track.querySelectorAll('[data-rs]')];
+    // Read more: the full review opens in a reader dialog; the card keeps its height.
+    const reader = document.getElementById('review-read');
+    const rQuote = reader.querySelector('blockquote'), rCap = reader.querySelector('figcaption');
+    reader.querySelector('.rs-q').innerHTML = document.querySelector('.rs-q').innerHTML;
+    let readerFrom = null;
+    const setReader = v => {
+      reader.classList.toggle('open', v);
+      reader.inert = !v;
+      mainEl.inert = v;
+      root.classList.toggle('menu-lock', v);
+      if (lenis) v ? lenis.stop() : lenis.start();
+      if (v) requestAnimationFrame(() => requestAnimationFrame(() => reader.querySelector('.a11y-x').focus()));
+      else if (readerFrom) readerFrom.focus({ preventScroll: true });
+    };
+    const openReader = (card, btn) => {
+      rQuote.textContent = card.querySelector('blockquote').textContent;
+      rCap.innerHTML = card.querySelector('figcaption').innerHTML;
+      readerFrom = btn;
+      setReader(true);
+    };
+    reader.querySelectorAll('[data-read-close]').forEach(b => b.addEventListener('click', () => setReader(false)));
+    addEventListener('keydown', e => { if (e.key === 'Escape' && reader.classList.contains('open')) setReader(false); });
+
     const makeClones = () => originals.map(c => {
       const k = c.cloneNode(true);
       k.setAttribute('aria-hidden', 'true');
@@ -971,11 +1010,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
       const q = c.querySelector('blockquote');
       const more = c.querySelector('.rs-more');
       more.hidden = !(q.scrollHeight > q.clientHeight + 2);
-      more.addEventListener('click', () => {
-        const open = c.classList.toggle('open');
-        more.setAttribute('aria-expanded', String(open));
-        more.textContent = open ? 'הצג פחות' : 'קראו עוד';
-      });
+      more.addEventListener('click', () => openReader(c, more));
     });
 
     const step = () => originals[1].offsetLeft - originals[0].offsetLeft;
