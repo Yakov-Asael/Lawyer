@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures";
 
 /** Spec 01 acceptance criteria, checked on every button the page renders. */
 
