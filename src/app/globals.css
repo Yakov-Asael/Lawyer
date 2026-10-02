@@ -229,6 +229,61 @@
   }
 }
 
+/*
+ * Motion system (spec 00). Hidden start states exist only under html.motion, which MotionProvider
+ * adds after hydration and only when motion is allowed. No JS, reduced motion or "stop animations"
+ * means no class, so everything renders in its final state.
+ */
+@layer components {
+  .mask-line {
+    display: inline-block;
+  }
+
+  .mask-line-stacked {
+    display: block;
+  }
+
+  /* Overflow box per piece; the padding keeps Hebrew descenders and nikud inside the clip. */
+  .mask-piece {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-block: 0.06em 0.12em;
+    margin-block: -0.06em -0.12em;
+  }
+
+  .mask-piece > span {
+    display: inline-block;
+  }
+}
+
+.motion .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* The transition lives on the revealed state only: arming the hidden state is instant,
+   so nothing visibly fades out when motion switches on after hydration. */
+.motion .reveal[data-in] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+  transition-delay: var(--d, 0ms);
+}
+
+.motion .mask .mask-piece > span {
+  transform: translateY(112%);
+  will-change: transform;
+}
+
+.motion .mask[data-in] .mask-piece > span {
+  transform: none;
+  transition: transform 1.1s var(--ease-out);
+  transition-delay: var(--d, 0ms);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
