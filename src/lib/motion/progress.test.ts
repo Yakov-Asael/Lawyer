@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { clamp01, remap, viewportProgress } from "./progress";
+import { clamp01, readingProgress, remap, viewportProgress } from "./progress";
 
 describe("clamp01", () => {
   it("clamps to the unit range", () => {
@@ -32,5 +32,24 @@ describe("remap", () => {
   it("acts as a step for a zero-length window", () => {
     expect(remap(0.2, 0.3, 0)).toBe(0);
     expect(remap(0.3, 0.3, 0)).toBe(1);
+  });
+});
+
+describe("readingProgress", () => {
+  const vh = 1000;
+  it("starts when the block top reaches 82% of the viewport", () => {
+    expect(readingProgress({ top: 820, height: 300 }, vh)).toBe(0);
+    expect(readingProgress({ top: 900, height: 300 }, vh)).toBe(0);
+  });
+  it("spans the block height plus 25% of the viewport", () => {
+    // span = 300 + 250 = 550; halfway = 275px of travel
+    expect(readingProgress({ top: 820 - 275, height: 300 }, vh)).toBeCloseTo(0.5);
+    expect(readingProgress({ top: 820 - 550, height: 300 }, vh)).toBe(1);
+  });
+  it("is complete while the block is still fully in view", () => {
+    // Block of 300px finishes at top = 270, i.e. its bottom at 570: well inside a 1000px viewport.
+    const top = 820 - 550;
+    expect(top + 300).toBeLessThan(vh);
+    expect(readingProgress({ top, height: 300 }, vh)).toBe(1);
   });
 });

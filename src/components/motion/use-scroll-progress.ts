@@ -9,12 +9,21 @@ import { useMotion } from "./MotionProvider";
  * (spec 00, `useScrollProgress`). The callback writes styles directly, so scrolling never
  * re-renders React. With motion off it is called once with 1: the effect's final state.
  */
-export function useScrollProgress(ref: RefObject<Element | null>, onProgress: (progress: number) => void): void {
+export type ProgressMeasure = (rect: DOMRect, viewportHeight: number) => number;
+
+export function useScrollProgress(
+  ref: RefObject<Element | null>,
+  onProgress: (progress: number) => void,
+  /** How progress is measured. Default: travel through the whole viewport. */
+  measure: ProgressMeasure = viewportProgress,
+): void {
   const { enabled } = useMotion();
   const callback = useRef(onProgress);
+  const measureRef = useRef(measure);
 
   useEffect(() => {
     callback.current = onProgress;
+    measureRef.current = measure;
   });
 
   useEffect(() => {
@@ -32,7 +41,7 @@ export function useScrollProgress(ref: RefObject<Element | null>, onProgress: (p
       if (y === lastY && h === lastH) return;
       lastY = y;
       lastH = h;
-      callback.current(viewportProgress(el.getBoundingClientRect(), h));
+      callback.current(measureRef.current(el.getBoundingClientRect(), h));
     });
   }, [enabled, ref]);
 }

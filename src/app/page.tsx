@@ -1,5 +1,6 @@
 import { practiceArea, site } from "@content";
 import { Hero } from "@/components/hero/Hero";
+import { Statement } from "@/components/sections/Statement";
 import { Reveal } from "@/components/motion";
 import { ContactButtons, Seal, SectionHeading } from "@/components/shared";
 import { ButtonLink } from "@/components/ui/button";
@@ -18,6 +19,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Statement />
 
       <section id="about" className="px-gutter py-section" aria-labelledby="shell-years">
         <div className="mx-auto max-w-content">
