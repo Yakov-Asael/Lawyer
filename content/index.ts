@@ -1,4 +1,4 @@
-import { PLACEHOLDER_PATTERN, Site } from "./schema";
+import { PLACEHOLDER_PATTERN, Site, type PracticeArea, type PracticeAreaId } from "./schema";
 import { siteContent } from "./site";
 
 export * from "./schema";
@@ -15,6 +15,13 @@ export function findPlaceholders(value: unknown, path = ""): string[] {
 
 /** Parse at import time so a malformed field fails the build, not the visitor. */
 export const site: Site = Site.parse(siteContent);
+
+/** A practice area by id. The contract guarantees all four exist, so a miss is a programming error. */
+export function practiceArea(id: PracticeAreaId): PracticeArea {
+  const area = site.practiceAreas.find((a) => a.id === id);
+  if (!area) throw new Error(`Unknown practice area: ${id}`);
+  return area;
+}
 
 // Placeholders are fine in dev and previews; a production deploy must not ship them.
 // Netlify sets CONTEXT=production only for production deploys (deploy previews use "deploy-preview").
