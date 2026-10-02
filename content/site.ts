@@ -33,6 +33,15 @@ export const siteContent = {
 
   ui: {
     skipLink: "דלג לתוכן",
+    whatsappCta: "שלחו הודעה בוואטסאפ",
+    callLabel: "חיוג ל-{phone}",
+    wazeLabel: "ניווט למשרד ב-Waze",
+    mapsLabel: "המשרד ב-Google Maps",
+  },
+
+  brand: {
+    sealRing: `${office.title} · ${office.city} · שוקרון כהן ·`,
+    sealSub: "נוטריון",
   },
 
   hero: {
@@ -49,6 +58,7 @@ export const siteContent = {
   },
 
   years: {
+    eyebrow: "ותק",
     heading: "שלושים שנה של עבודה משפטית בחדרה",
     body: "היכרות ארוכת שנים עם העיר, עם בתי המשפט באזור ועם האנשים שפונים למשרד.",
   },

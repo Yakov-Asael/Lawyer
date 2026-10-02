@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* `on-dark:` styles apply inside dark grounds (hero, years, reviews, final CTA). */
+@custom-variant on-dark (&:where(.on-dark, .on-dark *));
+
 /*
  * Design tokens: the only place raw values live (design/tokens.md).
  * Palette is pending Yossi's approval, so every color is a variable: swapping a palette
@@ -21,6 +24,8 @@
   --on-dark: var(--stone);
   --on-dark-soft: color-mix(in srgb, var(--on-dark) 72%, transparent);
   --line-dark: color-mix(in srgb, var(--on-dark) 14%, transparent);
+  --brass-hover: color-mix(in srgb, var(--brass) 80%, var(--paper));
+  --seal-shadow: 0 12px 30px -10px rgb(0 0 0 / 0.6);
 
   /* Focus ring. brass-deep on light grounds keeps the ring at 3:1+ against stone and paper;
      dark grounds (.on-dark) switch it to brass. */
@@ -41,6 +46,8 @@
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  /* Overshoot on purpose: the seal presses down like a real stamp (approved prototype, final CTA only). */
+  --ease-stamp: cubic-bezier(0.3, 1.4, 0.5, 1);
 
   /* shadcn/ui semantic aliases, mapped onto the palette so primitives inherit the brand. */
   --background: var(--stone);
@@ -81,6 +88,7 @@
   --color-on-dark: var(--on-dark);
   --color-on-dark-soft: var(--on-dark-soft);
   --color-line-dark: var(--line-dark);
+  --color-brass-hover: var(--brass-hover);
   --color-focus: var(--focus);
 
   /* shadcn semantic colors */
@@ -117,6 +125,9 @@
   --spacing-section: var(--section-pad);
   --container-content: var(--content-max);
   --container-wide: var(--content-wide);
+
+  /* Depth */
+  --shadow-seal: var(--seal-shadow);
 
   /* Motion */
   --ease-out: var(--ease-out);
@@ -226,6 +237,132 @@
     direction: ltr;
     unicode-bidi: isolate;
     font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Type scale (design/tokens.md, Typography). Phone sizes apply at 600px and below. */
+@utility type-hero {
+  font-family: var(--font-serif);
+  font-size: clamp(2.9rem, 7.2vw, 7.4rem);
+  line-height: 0.98;
+  @media (max-width: 600px) {
+    font-size: 2rem;
+    line-height: 1.08;
+  }
+}
+
+@utility type-h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4.4vw, 4rem);
+  line-height: 1.05;
+  @media (max-width: 600px) {
+    font-size: 1.55rem;
+  }
+}
+
+@utility type-h2-areas {
+  font-family: var(--font-serif);
+  font-size: clamp(2.3rem, 5vw, 4.6rem);
+  line-height: 1.02;
+  @media (max-width: 600px) {
+    font-size: 1.65rem;
+  }
+}
+
+@utility type-h2-final {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 6.4vw, 6.2rem);
+  line-height: 1;
+  @media (max-width: 600px) {
+    font-size: 1.85rem;
+  }
+}
+
+@utility type-statement {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 4.1vw, 4rem);
+  line-height: 1.22;
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+    line-height: 1.45;
+  }
+}
+
+@utility type-numeral {
+  font-family: var(--font-serif);
+  font-size: clamp(9rem, 26vw, 24rem);
+  font-weight: 900;
+  line-height: 0.8;
+  @media (max-width: 600px) {
+    font-size: 5.5rem;
+  }
+}
+
+@utility type-h3-file {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 3.4vw, 3.1rem);
+  line-height: 1.08;
+  @media (max-width: 600px) {
+    font-size: 1.25rem;
+  }
+}
+
+@utility type-lead {
+  font-size: 18px;
+  line-height: 1.65;
+  @media (max-width: 600px) {
+    font-size: 15px;
+  }
+}
+
+@utility type-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
+}
+
+/* Optical centering for button labels on the Hebrew x-height (spec 01). */
+@utility text-trim {
+  line-height: 1;
+  text-box: trim-both ex alphabetic;
+}
+
+/* Seal (spec 01). The stamp lands once when it enters the viewport; without motion it rests in place. */
+@layer components {
+  .seal-stamp {
+    transform: rotate(-8deg);
+  }
+
+  .motion .seal-stamp {
+    opacity: 0;
+    transform: scale(1.6) rotate(-35deg);
+  }
+
+  .motion .seal-stamp[data-in] {
+    animation: seal-stamp 0.75s var(--ease-stamp) forwards;
+  }
+
+  .seal-spin {
+    transform-origin: 100px 100px;
+    will-change: transform;
+  }
+}
+
+@keyframes seal-stamp {
+  0% {
+    opacity: 0;
+    transform: scale(1.6) rotate(-35deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.94) rotate(-6deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-8deg);
   }
 }
 

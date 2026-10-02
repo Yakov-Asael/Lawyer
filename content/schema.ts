@@ -70,10 +70,19 @@ export const Site = z
     office: Office,
     whatsapp: WhatsappCopy,
     /** Interface strings that belong to no single section. */
-    ui: z.object({ skipLink: copy }),
+    ui: z.object({
+      skipLink: copy,
+      whatsappCta: copy,
+      /** Accessible name of the icon-only call button. `{phone}` is replaced with office.phoneDisplay. */
+      callLabel: copy.refine((s) => s.includes("{phone}"), "callLabel must contain {phone}"),
+      wazeLabel: copy,
+      mapsLabel: copy,
+    }),
+    /** Seal brand mark (spec 01): ring text around the monogram, and the word under it. */
+    brand: z.object({ sealRing: copy, sealSub: copy }),
     hero: z.object({ line1: copy, line2: copy, sub: copy }),
     statement: z.object({ text: copy, highlight: copy, footLabel: copy, footText: copy }),
-    years: z.object({ heading: copy, body: copy }),
+    years: z.object({ eyebrow: copy, heading: copy, body: copy }),
     practiceAreas: z.array(PracticeArea).length(4),
     process: z.array(ProcessStep).length(3),
     about: z.object({ paragraphs: z.array(copy).min(1) }),
