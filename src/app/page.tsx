@@ -1,6 +1,7 @@
 import { practiceArea, site } from "@content";
 import { Hero } from "@/components/hero/Hero";
 import { Statement } from "@/components/sections/Statement";
+import { About } from "@/components/sections/About";
 import { PracticeAreas } from "@/components/sections/PracticeAreas";
 import { Process } from "@/components/sections/Process";
 import { Years } from "@/components/sections/Years";
@@ -26,9 +27,10 @@ export default function Home() {
       <Years />
       <PracticeAreas />
       <Process />
+      <About />
 
       {/* Shared-component showcase until practice areas (spec 06) and visit (spec 11) replace it. */}
-      <div id="about" className="px-gutter py-section">
+      <div className="px-gutter py-section">
         <div className="mx-auto max-w-content">
           <Reveal delay={200} className=" flex flex-wrap items-center gap-4" data-testid="below-fold-reveal">
             <ContactButtons tone="light" topic={family.whatsappTopic} label={family.ctaLabel} />

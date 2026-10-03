@@ -166,6 +166,12 @@ export const siteContent = {
   ],
 
   about: {
+    eyebrow: "אודות",
+    heading: ["עו״ד יוסי", "שוקרון כהן"],
+    factLabels: { experience: "ניסיון", license: "הסמכה", office: "משרד", education: "השכלה", years: "שנה" },
+    // Same portrait as the hero for now (decorative, so no alt). An office or at-work photo is an open item.
+    photoAlt: "",
+    // signature: added when Yossi's real signature is converted to an SVG path.
     paragraphs: [
       `${office.title}, ${office.yearsOfPractice} שנה במשרד ב${office.city}. [placeholder: פסקה אישית קצרה של יוסי, למה בחר במקצוע ואיך הוא עובד עם לקוחות]`,
       "המשרד מטפל בתיקים בדיני משפחה, נזיקין וביטוח, מקרקעין וחוזים, ומעניק שירותי נוטריון.",
