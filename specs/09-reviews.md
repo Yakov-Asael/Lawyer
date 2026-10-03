@@ -37,9 +37,9 @@ between two cloned sets (`aria-hidden`, `inert`) and a silent jump when scrollin
 cloned slides hidden from assistive tech; the track is keyboard scrollable.
 
 ## Implementation (built)
-- Source: `getApprovedReviews()` (`src/lib/reviews.ts`) reads `content.reviews` (approved, with consent). Pending the
-  owner's choice between adding reviews by hand from the submission email (option A) and a database with an admin
-  panel (specs 18, 19), only this function would change.
+- Source: `getApprovedReviews()` (`src/lib/reviews.ts`) reads `content.reviews` (approved, with consent). Owner's
+  decision (option A): reviews arrive by email from the form (spec 18) and are added here by hand. If a database is
+  added later (spec 19), only this function changes.
 - `Reviews.tsx` (server) shows the slider or, with no reviews, the compact invitation. The "השאירו המלצה" button
   arrives with the submission form (spec 18); until then the invitation is heading and line only.
 - `ReviewsSlider.tsx` + `src/components/ui/carousel.tsx` (shadcn Carousel on Embla, written by hand, RTL). Embla loops
@@ -48,7 +48,7 @@ cloned slides hidden from assistive tech; the track is keyboard scrollable.
 - The "המלצות" menu link is filtered out while there are no reviews (`menuLinks()`, tested).
 - `/dev/reviews` renders the slider with marked sample data for tests. It is a dynamic route that returns 404 unless
   `ENABLE_DEV_PREVIEWS=1`, which only the Playwright web server sets.
-- Note line wording ("המלצות שנבחרו על ידי המשרד ומתפרסמות בהסכמת הלקוחות.") is a proposal for the owner.
+- Note line wording ("המלצות שנבחרו על ידי המשרד ומתפרסמות בהסכמת הלקוחות.") approved by the owner.
 
 ## Acceptance criteria
 - [ ] Desktop: 3 cards visible; 8 clicks forward and 8 back cycle through all reviews with no dead end.

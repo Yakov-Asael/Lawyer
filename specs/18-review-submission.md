@@ -27,13 +27,17 @@ Line under the title: "ההמלצה תפורסם באתר רק אחרי אישו
 - Server error: the form stays filled, a message explains and offers WhatsApp as a fallback.
 - Esc and the backdrop close the dialog; focus returns to the opener.
 
-## Backend
-- `POST /api/reviews` (Next.js route handler, serverless function on Netlify). Validates with the same Zod schema as the client.
-- Stores `{ id, name, area, text, phone?, consentVersion, consentAt, status: "pending", createdAt }`.
-- Spam protection: honeypot field, per-IP rate limit (5 per hour), Cloudflare Turnstile (invisible).
-- Notifies Yossi of a new pending review (email via Resend, or WhatsApp link in the email).
-- Privacy: phone stored only for verification and deleted on approval or after 30 days; rejected reviews deleted after
-  30 days. The privacy policy (spec 16) must describe this before launch.
+## Backend (decision 2026-10-03: option A, email and manual publishing)
+No database and no admin panel in v1. Volume is a few reviews a year; publishing stays a deliberate, manual act.
+
+- The form posts to **Netlify Forms** (free plan: 100 submissions/month). With the Next.js runtime the form also
+  needs a static copy in `public/` so Netlify can detect it at deploy time.
+- Netlify emails each submission to the site owner (form notification). Nothing is stored on our side.
+- Publishing: the approved review is added by hand to `content.reviews` with `consentConfirmed: true`, then deployed.
+  The site reads only `getApprovedReviews()`, so moving to a database later (spec 19) changes one function.
+- Spam protection: honeypot field (Netlify `netlify-honeypot`) plus Netlify's built-in reCAPTCHA if spam appears.
+- Privacy: the phone number exists only in the notification email and the Netlify form log; submissions are deleted
+  from Netlify after publishing or rejection. The privacy policy (spec 16) must describe this before launch.
 
 ## Rules
 - The site never shows a submitted review before approval.
@@ -42,7 +46,7 @@ Line under the title: "ההמלצה תפורסם באתר רק אחרי אישו
 
 ## Acceptance criteria
 - [ ] Empty submit shows 4 field errors and the consent error; focus lands on the first invalid field.
-- [ ] Valid submit creates a `pending` record and shows the thank-you state; nothing appears on the site.
+- [ ] Valid submit reaches Netlify Forms (and the notification email) and shows the thank-you state; nothing appears on the site.
 - [ ] `/review?area=torts` opens with "נזיקין וביטוח" selected.
-- [ ] A bot filling the honeypot gets a success response but no record is stored.
+- [ ] A bot filling the honeypot is dropped by Netlify (no submission, no email).
 - [ ] Keyboard-only and screen-reader flows work end to end at 390 and 1440.
