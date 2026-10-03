@@ -88,6 +88,13 @@ export const siteContent = {
     body: "היכרות ארוכת שנים עם העיר, עם בתי המשפט באזור ועם האנשים שפונים למשרד.",
   },
 
+  areas: {
+    eyebrow: "תחומי עיסוק",
+    line1: "ארבעה תחומים,",
+    line2: "עורך דין אחד.",
+    intro: "בחרו את הנושא ושלחו הודעה. ההודעה בוואטסאפ תיפתח עם שם התחום, כדי שתוכלו פשוט לכתוב מה קרה.",
+  },
+
   // Services are a first draft from the mockup and still need Yossi's confirmation.
   practiceAreas: [
     {
@@ -104,6 +111,7 @@ export const siteContent = {
       ],
       whatsappTopic: "דיני משפחה",
       ctaLabel: "שאלה בנושא משפחה",
+      servicesNote: "[placeholder: רשימה לאישור יוסי]",
     },
     {
       id: "torts",
@@ -113,6 +121,7 @@ export const siteContent = {
       services: ["תאונות דרכים", "נזקי גוף", "תביעות מול חברות ביטוח", "תאונות עבודה"],
       whatsappTopic: "נזיקין וביטוח",
       ctaLabel: "שאלה בנושא נזיקין",
+      servicesNote: "[placeholder: רשימה לאישור יוסי]",
     },
     {
       id: "real-estate",
@@ -122,6 +131,7 @@ export const siteContent = {
       services: ["קנייה ומכירה של דירה", "בדיקת חוזים וניסוחם", "רישום בטאבו", "הסכמי שכירות"],
       whatsappTopic: "מקרקעין וחוזים",
       ctaLabel: "שאלה בנושא נדל״ן",
+      servicesNote: "[placeholder: רשימה לאישור יוסי]",
     },
     {
       id: "notary",
@@ -131,6 +141,7 @@ export const siteContent = {
       services: ["אימות חתימה", "העתק נאמן למקור", "תרגום נוטריוני", "ייפוי כוח נוטריוני"],
       whatsappTopic: "שירותי נוטריון",
       ctaLabel: "תיאום אישור נוטריוני",
+      servicesNote: "[placeholder: רשימה לאישור יוסי]",
     },
   ],
 

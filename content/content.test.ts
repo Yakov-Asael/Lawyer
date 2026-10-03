@@ -20,7 +20,8 @@ describe("site content", () => {
   it("reports open placeholders by path", () => {
     const open = findPlaceholders(site);
     expect(open).toContain("about.paragraphs[0]");
-    expect(open.every((p) => p.startsWith("about.") || p.startsWith("faq["))).toBe(true);
+    expect(open).toContain("practiceAreas[0].servicesNote");
+    expect(open.every((p) => /^(about\.|faq\[|practiceAreas\[\d\]\.servicesNote)/.test(p))).toBe(true);
   });
 });
 

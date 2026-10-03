@@ -46,6 +46,8 @@ export const PracticeArea = z.object({
   services: z.array(copy).min(3).max(6),
   whatsappTopic: copy,
   ctaLabel: copy,
+  /** Shown under the service list while it is unconfirmed; a "[placeholder...]" note blocks production. */
+  servicesNote: copy.optional(),
 });
 
 export const ProcessStep = z.object({ title: copy, body: copy });
@@ -103,6 +105,8 @@ export const Site = z
     }),
     statement: z.object({ label: copy, text: copy, highlight: copy, footLabel: copy, footText: copy }),
     years: z.object({ eyebrow: copy, heading: copy, body: copy }),
+    /** Head of the practice-areas section (spec 06). */
+    areas: z.object({ eyebrow: copy, line1: copy, line2: copy, intro: copy }),
     practiceAreas: z.array(PracticeArea).length(4),
     process: z.array(ProcessStep).length(3),
     about: z.object({ paragraphs: z.array(copy).min(1) }),
