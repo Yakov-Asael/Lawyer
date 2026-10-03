@@ -140,6 +140,8 @@ export const Site = z
       signature: z.object({ viewBox: z.string().regex(/^\d+ \d+ \d+ \d+$/), path: z.string().min(10) }).optional(),
     }),
     // Reviews are not in this file: approved reviews come from the database (specs 18, 19).
+    /** FAQ section copy (spec 10). */
+    faqHead: z.object({ eyebrow: copy, heading: copy, intro: copy }),
     faq: z.array(Faq).min(3),
     finalCta: z.object({ line1: copy, line2: copy, body: copy }),
     legal: z.object({

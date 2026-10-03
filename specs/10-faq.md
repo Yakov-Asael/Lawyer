@@ -23,6 +23,16 @@ reduced motion.
 shadcn `Accordion` (`type="multiple"`) restyled, or native `<details>/<summary>` (works without JS).
 Emit `FAQPage` JSON-LD from the same content (see spec 16).
 
+## Implementation (built)
+- `src/components/sections/Faq.tsx` (server), native `<details>/<summary>`: keyboard operable and works without JS.
+  Chromium exposes each summary as a focusable disclosure with the right `expanded` state (checked in the AX tree).
+- Placeholder answers: `publishedFaq()` (`src/lib/faq.ts`, tested) keeps them on previews so the owner can see what is
+  open, and drops them on a production build. FAQ answers are therefore exempt from the production placeholder guard
+  (`blockingPlaceholders()` in `content/index.ts`); every other placeholder still blocks.
+- JSON-LD (`faqJsonLd()`) is built from exactly the rendered items.
+- Phone numbers inside answers render as isolated LTR runs (`splitNumbers()`, tested).
+- Head copy in `content.faqHead`; the head is sticky at 110px from 900px.
+
 ## Acceptance criteria
 - [ ] Each question is a keyboard-operable control with correct `aria-expanded`.
 - [ ] No placeholder answers in production; an item without an answer is excluded.

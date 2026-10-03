@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { findPlaceholders, Review, Site, site } from "./index";
+import { blockingPlaceholders, findPlaceholders, Review, Site, site } from "./index";
 import { siteContent } from "./site";
 
 describe("site content", () => {
@@ -15,6 +15,12 @@ describe("site content", () => {
 
   it("lists the four practice areas in the agreed order", () => {
     expect(site.practiceAreas.map((a) => a.id)).toEqual(["family", "torts", "real-estate", "notary"]);
+  });
+
+  it("does not let FAQ answers block production (unanswered items are excluded instead)", () => {
+    const blocking = blockingPlaceholders(site);
+    expect(blocking.some((p) => p.startsWith("faq["))).toBe(false);
+    expect(blocking).toContain("about.paragraphs[0]");
   });
 
   it("reports open placeholders by path", () => {
