@@ -322,6 +322,16 @@
   }
 }
 
+/* Process step titles (approved prototype). */
+@utility type-h3-step {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2vw, 1.75rem);
+  line-height: 1.2;
+  @media (max-width: 600px) {
+    font-size: 1.1rem;
+  }
+}
+
 @utility type-lead {
   font-size: 18px;
   line-height: 1.65;
@@ -584,11 +594,20 @@ html.motion:not(.intro) .hero-line > span {
   clip-path: inset(100% 0 0 0);
 }
 
+/* Process track fill (spec 07): grows with scroll under motion, full otherwise. */
+.motion .track-fill {
+  transform: scaleX(0);
+}
+
 /* Failsafe: MotionBoot armed motion but the app never hydrated (script error, blocked bundle).
    Reveal everything after 3s. Once React marks html.motion-ready, this rule stops matching. */
 html.motion:not(.motion-ready) .reveal,
 html.motion:not(.motion-ready) .mask .mask-piece > span,
 html.motion:not(.motion-ready) .scrub-word {
+  animation: motion-failsafe 0s 3s forwards;
+}
+
+html.motion:not(.motion-ready) .track-fill {
   animation: motion-failsafe 0s 3s forwards;
 }
 

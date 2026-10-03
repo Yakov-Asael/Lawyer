@@ -52,6 +52,7 @@ Frank Ruhl Libre reads larger than its nominal size; the phone scale compensates
 | Statement paragraph | `clamp(1.9rem, 4.1vw, 4rem)` | 1.2rem | 1.22 / 1.45 |
 | "30" numeral | `clamp(9rem, 26vw, 24rem)` weight 900 | 5.5rem | .8 |
 | File H3 | `clamp(1.9rem, 3.4vw, 3.1rem)` | 1.25rem | 1.08 |
+| Process step H3 | `clamp(1.4rem, 2vw, 1.75rem)` | 1.1rem | 1.2 |
 | Body | 17px | 15px | 1.65 |
 | Lead / section intro | 18px | 15px | 1.65 |
 | Eyebrow | 13px, weight 600, tracking .14em, `brass-deep` (`brass` on dark) | 12px | |
