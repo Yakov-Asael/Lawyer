@@ -46,6 +46,7 @@ Frank Ruhl Libre reads larger than its nominal size; the phone scale compensates
 |---|---|---|---|
 | Hero H1 | `clamp(2.9rem, 7.2vw, 7.4rem)` | 2rem | .98 / 1.08 |
 | Section H2 | `clamp(2.2rem, 4.4vw, 4rem)` | 1.55rem | 1.05 |
+| 30 years H2 | `clamp(2rem, 3.6vw, 3.4rem)` | 1.55rem | 1.12 |
 | Practice areas H2 | `clamp(2.3rem, 5vw, 4.6rem)` | 1.65rem | 1.02 |
 | Final CTA H2 | `clamp(2.6rem, 6.4vw, 6.2rem)` | 1.85rem | 1 |
 | Statement paragraph | `clamp(1.9rem, 4.1vw, 4rem)` | 1.2rem | 1.22 / 1.45 |

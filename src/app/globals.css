@@ -263,6 +263,16 @@
   }
 }
 
+/* The 30-years heading sits beside a huge numeral, so it runs smaller than a section H2 (approved prototype). */
+@utility type-h2-years {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  line-height: 1.12;
+  @media (max-width: 600px) {
+    font-size: 1.55rem;
+  }
+}
+
 @utility type-h2-areas {
   font-family: var(--font-serif);
   font-size: clamp(2.3rem, 5vw, 4.6rem);
@@ -561,12 +571,33 @@ html.motion:not(.intro) .hero-line > span {
   opacity: 0.16;
 }
 
+/* 30 years numeral (spec 05): the solid brass copy is clipped from the top and fills upwards with scroll.
+   Motion off: no clip, fully filled. */
+.years-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--brass) 55%, transparent);
+}
+
+.motion .years-fill {
+  clip-path: inset(100% 0 0 0);
+}
+
 /* Failsafe: MotionBoot armed motion but the app never hydrated (script error, blocked bundle).
    Reveal everything after 3s. Once React marks html.motion-ready, this rule stops matching. */
 html.motion:not(.motion-ready) .reveal,
 html.motion:not(.motion-ready) .mask .mask-piece > span,
 html.motion:not(.motion-ready) .scrub-word {
   animation: motion-failsafe 0s 3s forwards;
+}
+
+html.motion:not(.motion-ready) .years-fill {
+  animation: years-failsafe 0s 3s forwards;
+}
+
+@keyframes years-failsafe {
+  to {
+    clip-path: none;
+  }
 }
 
 @keyframes motion-failsafe {
