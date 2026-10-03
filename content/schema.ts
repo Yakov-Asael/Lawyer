@@ -87,6 +87,8 @@ export const Site = z
       /** Visible text of full-width call buttons (menu footer, dock). */
       callShort: copy,
       navLabel: copy,
+      /** Accessible name of the phone contact dock (spec 14). */
+      dockLabel: copy,
       menuLabel: copy,
       openMenu: copy,
       closeMenu: copy,
