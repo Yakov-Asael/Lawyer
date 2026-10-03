@@ -8,6 +8,7 @@ import { useMotion } from "@/components/motion";
 import { Ruled } from "@/components/shared";
 import { ButtonLink } from "@/components/ui/button";
 import { telLink, waLink } from "@/lib/contact";
+import { menuLinks } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
 import { Brand } from "./Brand";
 
@@ -24,7 +25,7 @@ function setPageInert(menu: HTMLElement, inert: boolean) {
 const subscribeNoop = () => () => {};
 
 /** Burger button + full-screen menu dialog for widths below 1000px (spec 02). */
-export function MobileMenu() {
+export function MobileMenu({ hasReviews }: { hasReviews: boolean }) {
   const [open, setOpen] = useState(false);
   const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const { stopScroll, startScroll, goToHash } = useMotion();
@@ -109,7 +110,7 @@ export function MobileMenu() {
       </div>
 
       <ul className="my-auto grid gap-1.5 py-10">
-        {site.navigation.menu.map((link, i) => (
+        {menuLinks(site.navigation.menu, hasReviews).map((link, i) => (
           <li key={link.href}>
             <a
               ref={i === 0 ? firstLinkRef : undefined}

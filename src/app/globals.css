@@ -28,6 +28,7 @@
   --seal-shadow: 0 12px 30px -10px rgb(0 0 0 / 0.6);
   --portrait-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.6);
   --portrait-edge: color-mix(in srgb, var(--on-dark) 16%, transparent);
+  --review-shadow: 0 24px 50px -30px rgb(0 0 0 / 0.55);
   --file-shadow: 0 -1px 0 rgb(0 0 0 / 0.04), 0 24px 50px -30px color-mix(in srgb, var(--ink) 45%, transparent);
 
   /* Focus ring. brass-deep on light grounds keeps the ring at 3:1+ against stone and paper;
@@ -133,6 +134,7 @@
   --shadow-seal: var(--seal-shadow);
   --shadow-portrait: var(--portrait-shadow);
   --shadow-file: var(--file-shadow);
+  --shadow-review: var(--review-shadow);
 
   /* Motion */
   --ease-out: var(--ease-out);
