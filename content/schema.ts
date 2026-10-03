@@ -150,6 +150,11 @@ export const Site = z
       disclaimer: copy,
       accessibilityStatementPath: z.string().startsWith("/"),
       privacyPath: z.string().startsWith("/"),
+      termsPath: z.string().startsWith("/"),
+      /** Link labels for the legal pages (footer, accessibility menu). */
+      accessibilityLabel: copy,
+      privacyLabel: copy,
+      termsLabel: copy,
     }),
   })
   .refine((s) => s.hero.sub.includes(s.hero.subEmphasis), {

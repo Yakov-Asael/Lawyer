@@ -208,16 +208,20 @@
 }
 
 @layer components {
-  /* Page frame (spec 00): inset around section cards, bottom room for the phone contact dock. */
+  /* Page frame (spec 00): inset around section cards. The footer after it reserves the phone dock's space. */
   .page-frame {
-    padding-inline: var(--inset);
-    padding-block: var(--inset) calc(var(--inset) + var(--dock-space) + env(safe-area-inset-bottom));
+    padding: var(--inset);
     overflow-x: clip;
   }
 
+  /* Room under the last content for the phone contact dock (spec 14), so nothing hides behind it. */
+  .dock-clearance {
+    padding-block-end: calc(var(--dock-space) + env(safe-area-inset-bottom));
+  }
+
   @media (min-width: 900px) {
-    .page-frame {
-      padding-block-end: var(--inset);
+    .dock-clearance {
+      padding-block-end: 0;
     }
   }
 
