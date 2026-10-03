@@ -3,6 +3,15 @@ import { siteContent } from "./site";
 
 export * from "./schema";
 
+/** True for a production deploy (Netlify CONTEXT=production); previews and dev are not. */
+export const isProductionBuild = process.env.CONTEXT === "production";
+
+/**
+ * Content paths whose placeholders do not block production because the UI drops the item instead:
+ * an FAQ item without an approved answer is excluded from the live site (spec 10).
+ */
+const EXCLUDED_WHEN_MISSING = [/^faq\[\d+\]\.answer$/];
+
 /** Paths of every string that still carries a "[placeholder...]" marker. */
 export function findPlaceholders(value: unknown, path = ""): string[] {
   if (typeof value === "string") return PLACEHOLDER_PATTERN.test(value) ? [path] : [];
@@ -23,10 +32,15 @@ export function practiceArea(id: PracticeAreaId): PracticeArea {
   return area;
 }
 
+/** Placeholders that would reach visitors and so must block a production build. */
+export function blockingPlaceholders(value: unknown): string[] {
+  return findPlaceholders(value).filter((path) => !EXCLUDED_WHEN_MISSING.some((rule) => rule.test(path)));
+}
+
 // Placeholders are fine in dev and previews; a production deploy must not ship them.
 // Netlify sets CONTEXT=production only for production deploys (deploy previews use "deploy-preview").
-if (process.env.CONTEXT === "production") {
-  const open = findPlaceholders(site);
+if (isProductionBuild) {
+  const open = blockingPlaceholders(site);
   if (open.length > 0) {
     throw new Error(`Content has unresolved placeholders:\n  ${open.join("\n  ")}`);
   }

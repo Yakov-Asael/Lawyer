@@ -195,6 +195,14 @@ export const siteContent = {
     ],
   },
 
+  faqHead: {
+    eyebrow: "שאלות נפוצות",
+    heading: "לפני שפונים.",
+    intro: "לא מצאתם תשובה? שלחו את השאלה בוואטסאפ.",
+  },
+
+  // Answers come from Yossi. An answer still marked "[placeholder...]" shows on previews only;
+  // the live site leaves that question out (spec 10).
   faq: [
     {
       question: "איך קובעים פגישה?",
