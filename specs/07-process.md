@@ -20,6 +20,15 @@ A `brass-deep` line fills the track from the first step to the last as the secti
 ## Semantics
 An ordered list (`<ol>`); the numbering is real information (a sequence), so it stays.
 
+## Implementation (built)
+- `src/components/sections/Process.tsx` (server) and `TrackFill.tsx` (client, `useScrollProgress` on the steps block,
+  fill window .25 to .6 as in the prototype).
+- Track geometry is CSS only: three equal columns with a 40px gap put each column centre `(100% - 80px) / 6` in from
+  the edges, so `inset-inline` at that value spans exactly first centre to last centre.
+- `transform-origin` is physical (`rtl:origin-right`): scaleX has no logical origin; the inline start is the right.
+- Heading copy is one string (`processHead.heading`) masked word by word, so it wraps like the prototype.
+- New type role `type-h3-step` (prototype values), added to tokens.md.
+
 ## Acceptance criteria
 - [ ] Circle center equals column center (measured offset 0) at 1440 and 390.
 - [ ] Track starts at the first circle's center and ends at the last circle's center.
