@@ -195,6 +195,13 @@ export const siteContent = {
     ],
   },
 
+  visit: {
+    eyebrow: "הגעה למשרד",
+    heading: "איפה אנחנו",
+    whatsappCta: "לתיאום פגישה בוואטסאפ",
+    mapLabel: "מפת המיקום של המשרד, פתיחה ב-Google Maps",
+  },
+
   faqHead: {
     eyebrow: "שאלות נפוצות",
     heading: "לפני שפונים.",
