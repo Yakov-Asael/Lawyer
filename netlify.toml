@@ -1,0 +1,9 @@
+# Netlify build settings, versioned with the code (Next.js is detected and served by the Netlify Next.js runtime).
+[build]
+  command = "pnpm build"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Production builds fail on purpose while content has "[placeholder...]" markers (content/index.ts).
+# Deploy previews (CONTEXT=deploy-preview) build normally.

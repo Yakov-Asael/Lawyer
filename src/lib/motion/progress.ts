@@ -32,3 +32,12 @@ export function readingProgress(
   if (span <= 0) return 1;
   return clamp01((viewportHeight * startAt - rect.top) / span);
 }
+
+/**
+ * How much of a stacked card is covered by the next one (practice-area files, spec 06):
+ * 0 when the next card's top is at or below this card's bottom, 1 when it covers the full height.
+ */
+export function overlapRatio(card: Pick<DOMRect, "bottom" | "height">, next: Pick<DOMRect, "top">): number {
+  if (card.height <= 0) return 0;
+  return clamp01((card.bottom - next.top) / card.height);
+}
