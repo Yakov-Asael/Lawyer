@@ -15,7 +15,9 @@ type SectionHeadingProps = {
   by?: "line" | "word";
   /** Type role from the scale: section H2 by default. */
   size?: "h2" | "areas" | "final" | "years";
-  /** Extra classes for the intro paragraph (measure, size). */
+  /** Intro type role: the lead size (default), or the larger closing size of the final CTA. */
+  introSize?: "lead" | "final";
+  /** Extra classes for the intro paragraph (measure, spacing). */
   introClassName?: string;
   className?: string;
 };
@@ -36,6 +38,7 @@ export function SectionHeading({
   intro,
   by,
   size = "h2",
+  introSize = "lead",
   introClassName,
   className,
 }: SectionHeadingProps) {
@@ -56,7 +59,11 @@ export function SectionHeading({
         className={sizeClass[size]}
       />
       {intro && (
-        <Reveal as="p" delay={120} className={cn("mt-6 max-w-[60ch] type-lead text-muted on-dark:text-on-dark-soft", introClassName)}>
+        <Reveal as="p" delay={120} className={cn(
+            "mt-6 max-w-[60ch] text-muted on-dark:text-on-dark-soft",
+            introSize === "final" ? "text-[15.5px] leading-[1.65] tablet:text-[19px]" : "type-lead",
+            introClassName,
+          )}>
           {intro}
         </Reveal>
       )}
