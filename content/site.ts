@@ -196,6 +196,24 @@ export const siteContent = {
     ],
   },
 
+  a11y: {
+    open: "תפריט נגישות",
+    title: "נגישות",
+    close: "סגירת תפריט הנגישות",
+    textSize: "גודל טקסט",
+    smaller: "הקטנת טקסט",
+    larger: "הגדלת טקסט",
+    reset: "איפוס הגדרות",
+    options: {
+      contrast: "ניגודיות גבוהה",
+      gray: "גווני אפור",
+      links: "הדגשת קישורים",
+      font: "גופן קריא",
+      still: "עצירת אנימציות",
+      cursor: "סמן גדול",
+    },
+  },
+
   visit: {
     eyebrow: "הגעה למשרד",
     heading: "איפה אנחנו",

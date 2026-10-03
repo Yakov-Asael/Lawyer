@@ -30,6 +30,8 @@
   --map-ground: color-mix(in srgb, var(--bark) 60%, var(--paper));
   --map-edge: color-mix(in srgb, var(--ink) 12%, transparent);
   --map-shadow: 0 30px 60px -40px color-mix(in srgb, var(--ink) 60%, transparent);
+  --fab-shadow: 0 12px 26px -10px color-mix(in srgb, var(--ink) 55%, transparent);
+  --panel-shadow: 0 30px 70px -20px color-mix(in srgb, var(--ink) 55%, transparent);
   --review-shadow: 0 24px 50px -30px rgb(0 0 0 / 0.55);
   --file-shadow: 0 -1px 0 rgb(0 0 0 / 0.04), 0 24px 50px -30px color-mix(in srgb, var(--ink) 45%, transparent);
 
@@ -140,6 +142,8 @@
   --shadow-file: var(--file-shadow);
   --shadow-review: var(--review-shadow);
   --shadow-map: var(--map-shadow);
+  --shadow-fab: var(--fab-shadow);
+  --shadow-panel: var(--panel-shadow);
 
   /* Motion */
   --ease-out: var(--ease-out);
@@ -649,6 +653,61 @@ html.motion:not(.intro) .hero-line > span {
   background-size: 100% 18px, 26px 100%, auto, auto;
   background-position: 0 56%, 34% 0, 0 0, 0 0;
   background-repeat: no-repeat, no-repeat, repeat, repeat;
+}
+
+/* Accessibility menu options (spec 15): each is a class on <html>, applied before paint by the boot script. */
+:root {
+  --a11y-zoom: 1;
+}
+
+main,
+footer {
+  zoom: var(--a11y-zoom);
+}
+
+/* High contrast: darker secondary text and lines, full-strength text on dark grounds. */
+html.a11y-contrast {
+  --muted: color-mix(in srgb, var(--ink) 85%, var(--stone));
+  --on-dark-soft: var(--on-dark);
+  --brass-deep: color-mix(in srgb, var(--brass) 45%, var(--ink));
+  --bark: color-mix(in srgb, var(--ink) 25%, var(--stone));
+  --line-dark: color-mix(in srgb, var(--on-dark) 40%, transparent);
+}
+
+html.a11y-gray :is(main, footer, header, [role="dialog"], nav[aria-label]) {
+  filter: grayscale(1);
+}
+
+html.a11y-links :is(main, footer, header, [role="dialog"]) a {
+  text-decoration-line: underline !important;
+  text-underline-offset: 4px;
+}
+
+html.a11y-font :is(h1, h2, h3, .font-serif, [class*="type-"]) {
+  font-family: var(--font-sans) !important;
+}
+
+html.a11y-font body {
+  letter-spacing: 0.01em;
+  word-spacing: 0.08em;
+}
+
+/* Stop animations: the same as reduced motion, chosen on the site. MotionProvider also drops html.motion. */
+html.a11y-still *,
+html.a11y-still *::before,
+html.a11y-still *::after {
+  animation-duration: 0.01ms !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+html.a11y-cursor,
+html.a11y-cursor * {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l15 10-7 1.5L8.5 21z' fill='%2314233A' stroke='%23fff' stroke-width='1.3'/%3E%3C/svg%3E")
+      4 2,
+    auto !important;
 }
 
 /* Failsafe: MotionBoot armed motion but the app never hydrated (script error, blocked bundle).

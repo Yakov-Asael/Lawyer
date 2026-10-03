@@ -28,6 +28,18 @@ IS 5568 compliance is achieved in the code itself, not by this menu.
 - Tiles are toggle buttons with `aria-pressed`. Size value announced via `aria-live`.
 - "Stop animations" must also remove the intro loader (regression found in prototype testing).
 
+## Implementation (built)
+- `src/components/a11y/A11yMenu.tsx` (client) in the root layout; state logic in `src/lib/a11y.ts` (tested).
+- Before first paint the boot script (`a11yBoot` in `src/lib/motion/boot.ts`) applies the saved classes and zoom; a
+  parity test keeps its parsing equal to `parseA11y`. With "stop animations" it boots as reduced motion: no
+  `html.motion`, no curtain, no Lenis.
+- "Stop animations" is one source of truth: the `a11y-still` class on `<html>`, followed by MotionProvider through
+  `useSyncExternalStore`. The menu reads stored choices the same way (no setState-in-effect, no hydration mismatch).
+- Text size zooms `main` and the footer (`--a11y-zoom`). High contrast overrides the tokens with color-mix of the
+  approved palette (the tokens.md values were for the old palette).
+- The panel's visibility switches at once on open and only after the fade on close, so focus can move into it
+  immediately (a visibility transition had blocked focus on desktop).
+
 ## Acceptance criteria
 - [ ] Every option visibly changes the page and survives a reload.
 - [ ] Reset returns to defaults and clears storage.

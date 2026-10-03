@@ -42,3 +42,14 @@ export function WazeIcon(props: SVGProps<SVGSVGElement>) {
     </StrokeIcon>
   );
 }
+
+/** The international accessibility figure (spec 01 allows a custom SVG for it). */
+export function AccessibilityIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <StrokeIcon {...props}>
+      <circle cx="12" cy="4.5" r="1.8" />
+      <path d="M5 8.5l7 1.6 7-1.6" />
+      <path d="M12 10.1v4.4l-3.2 6.5M12 14.5l3.2 6.5" />
+    </StrokeIcon>
+  );
+}
