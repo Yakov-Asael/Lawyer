@@ -28,7 +28,7 @@ Visual values come from `design/tokens.md`. Data comes from `specs/content-contr
 | 16 | [SEO, metadata and legal pages](16-seo-legal.md) | Draft |
 | 17 | [Terms of use (תקנון)](17-terms.md) | Draft |
 | 18 | [Review submission](18-review-submission.md) | Draft |
-| 19 | [Admin: review moderation](19-admin.md) | Draft |
+| 19 | [Admin: review moderation](19-admin.md) | Deferred |
 | 20 | [Press and cases page (phase 2)](20-press-and-cases.md) | Future |
 | - | [Content contract](content-contract.md) | Draft |
 
@@ -42,10 +42,8 @@ Rule: nothing that costs money. Every service below runs on its free plan; stay 
 | `embla-carousel-react` (via shadcn Carousel) | Endless reviews loop with RTL and swipe | MIT, no cost |
 | `zod` | Content contract | Already in the locked stack |
 | Netlify (free plan) | Hosting, deploy preview per branch, serverless functions for specs 18 and 19 | Monthly usage quota (bandwidth, function calls), ample for one landing page; commercial use allowed |
-| Neon Postgres (free plan) + `drizzle-orm` | Reviews storage and moderation (specs 18, 19) | 0.5 GB storage; DB sleeps when idle (first request slower) |
-| `next-auth` (Auth.js) | Google sign-in for Yossi only | Open source, no cost |
-| `resend` (free plan) | Email Yossi about new reviews | 3,000 emails/month, 100/day |
-| Cloudflare Turnstile | Bot protection on the form | Free |
+| Netlify Forms (free plan) | Review submissions emailed to the owner (spec 18, option A) | 100 submissions/month |
+| *Deferred:* Neon + `drizzle-orm`, `next-auth`, `resend`, Turnstile | Only if the admin panel (spec 19) is built later | Free plans as before |
 | Google Maps embed (iframe, no API key) | Map in the Visit section | Free; no Maps JavaScript API |
 
 Any new paid tier, API key with billing, or extra package: flag first.

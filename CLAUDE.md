@@ -24,7 +24,7 @@ or a phone call started. The site is Hebrew-only and RTL from day one, and must 
    lives in `/content`, never inline in components.
 
 ## Stack (locked)
-- Next.js (App Router): static pages plus serverless routes for the review form and the admin (specs 18, 19)
+- Next.js (App Router): static pages; the review form posts to Netlify Forms (spec 18, option A). The admin (spec 19) is deferred
 - TypeScript strict everywhere
 - Tailwind CSS + shadcn/ui, icons via `lucide-react` only
 - Zod for the content contract and any external input
@@ -87,8 +87,8 @@ Do not mark a task complete unless:
 Generic, templated, "default-looking" output is a failed result, not a done one.
 - Invoke the `ui-ux-pro-max` and `impeccable` skills before implementing UI; use `impeccable` audit/polish before
   calling a section done.
-- Brand aesthetic (prototype v1, pending approval): the emotional brief is seriousness, warmth, care. Eucalyptus ink
-  (#152420 / #24413A), brass (#B98A52, #7E5829 for text on light), limestone (#EEE9DF / #F7F4EE).
+- Brand aesthetic: the emotional brief is seriousness, warmth, care. Approved palette "cleangold": navy ink
+  (#14233A / #1F3452), gold (#CDAE6A, #7A5B18 for text on light), clean white grounds (#F8F7F4 / #FFFFFF).
   Frank Ruhl Libre for headings, Assistant for body. Scroll-driven motion is part of the design (see the direction
   contract in `.impeccable/surfaces/`), always with a `prefers-reduced-motion` fallback.
 - `design/prototype/index.html` is the visual source of truth once approved.
@@ -110,5 +110,5 @@ and ask one focused question.
 ## Out of scope (v1)
 CRM/lead integrations, blog/articles, English version, online booking, a general CMS.
 Phase 2 (planned, not now): press and cases page (spec 20).
-In v1 after all: the review form and Yossi's moderation panel (specs 18, 19).
+In v1: the review form (spec 18), emailed to the owner and published by hand. Deferred: the moderation panel (spec 19).
 If asked, acknowledge they're planned for a later version and don't implement them now.
