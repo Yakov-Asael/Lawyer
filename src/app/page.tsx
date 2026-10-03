@@ -1,6 +1,7 @@
 import { practiceArea, site } from "@content";
 import { Hero } from "@/components/hero/Hero";
 import { Statement } from "@/components/sections/Statement";
+import { Years } from "@/components/sections/Years";
 import { Reveal } from "@/components/motion";
 import { ContactButtons, Seal, SectionHeading } from "@/components/shared";
 import { ButtonLink } from "@/components/ui/button";
@@ -20,16 +21,12 @@ export default function Home() {
     <>
       <Hero />
       <Statement />
+      <Years />
 
-      <section id="about" className="px-gutter py-section" aria-labelledby="shell-years">
+      {/* Shared-component showcase until practice areas (spec 06) and visit (spec 11) replace it. */}
+      <div id="about" className="px-gutter py-section">
         <div className="mx-auto max-w-content">
-          <SectionHeading
-            id="shell-years"
-            eyebrow={site.years.eyebrow}
-            lines={[site.years.heading]}
-            intro={site.years.body}
-          />
-          <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4" data-testid="below-fold-reveal">
+          <Reveal delay={200} className=" flex flex-wrap items-center gap-4" data-testid="below-fold-reveal">
             <ContactButtons tone="light" topic={family.whatsappTopic} label={family.ctaLabel} />
             <ButtonLink href={wazeLink()} variant="line" shape="icon" aria-label={site.ui.wazeLabel} title="Waze">
               <WazeIcon strokeWidth={1.7} />
@@ -39,7 +36,7 @@ export default function Home() {
             </ButtonLink>
           </Reveal>
         </div>
-      </section>
+      </div>
 
       <section id="visit" className="on-dark relative isolate flex flex-col items-center overflow-hidden rounded-lg bg-ink px-gutter py-section text-center" aria-labelledby="shell-final">
         <Seal variant="stamp" className="mb-8" />

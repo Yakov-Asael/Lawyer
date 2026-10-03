@@ -22,6 +22,15 @@ Reduced motion / "stop animations": numeral fully filled.
 ## Accessibility
 The numeral is decorative (`aria-hidden`); the H2 carries the fact in words.
 
+## Implementation (built)
+- `src/components/sections/Years.tsx`; numeral layers `years-outline` / `years-fill` in globals.css.
+- **Fill window changed to meet the criterion below:** `remap(progress, .18, .32)` on the section's viewport progress,
+  i.e. full at progress .5 (section centre at viewport centre). The original `(progress - .18) / .5` only reaches
+  64% fill at that point.
+- Heading uses `SectionHeading` with `by="word"` and the `type-h2-years` size (prototype values, added to tokens.md).
+- Clip exists only under `html.motion`; reduced motion, stop animations, no JS and the no-hydration failsafe all show
+  the numeral filled.
+
 ## Acceptance criteria
 - [ ] Numeral fully filled by the time the section center passes the viewport center.
 - [ ] No invented claims in the body copy (years, city, courts only).
