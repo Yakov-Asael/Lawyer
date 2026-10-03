@@ -3,6 +3,7 @@
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { inPageHash } from "@/lib/in-page-hash";
 import { onFrame } from "@/lib/motion";
 
 /**
@@ -80,9 +81,11 @@ function handleAnchorClick(lenis: Lenis, event: MouseEvent) {
   if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
     return;
   }
-  const link = (event.target as Element | null)?.closest<HTMLAnchorElement>('a[href^="#"]');
-  const hash = link?.getAttribute("href");
-  if (!link || !hash) return;
+  const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("a[href]");
+  const href = link?.getAttribute("href");
+  if (!link || !href || link.target === "_blank") return;
+  const hash = inPageHash(href, window.location);
+  if (!hash) return;
   event.preventDefault();
   goToHash(hash, lenis);
 }
