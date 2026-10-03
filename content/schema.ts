@@ -111,7 +111,18 @@ export const Site = z
     /** Head of the process section (spec 07). */
     processHead: z.object({ eyebrow: copy, heading: copy }),
     process: z.array(ProcessStep).length(3),
-    about: z.object({ paragraphs: z.array(copy).min(1) }),
+    /** About (spec 08). Facts are derived from `office`; only their labels are copy here. */
+    about: z.object({
+      eyebrow: copy,
+      /** The office name split over two lines; joined with a space it must equal office.name. */
+      heading: z.tuple([copy, copy]),
+      paragraphs: z.array(copy).min(1),
+      factLabels: z.object({ experience: copy, license: copy, office: copy, education: copy, years: copy }),
+      /** Empty while the photo repeats the hero portrait (decorative); descriptive once it shows the office. */
+      photoAlt: z.string(),
+      /** Yossi's real signature as an SVG path. Omitted until it exists: never an illustrative stand-in. */
+      signature: z.object({ viewBox: z.string().regex(/^\d+ \d+ \d+ \d+$/), path: z.string().min(10) }).optional(),
+    }),
     // Reviews are not in this file: approved reviews come from the database (specs 18, 19).
     faq: z.array(Faq).min(3),
     finalCta: z.object({ line1: copy, line2: copy, body: copy }),
@@ -124,6 +135,10 @@ export const Site = z
   .refine((s) => s.hero.sub.includes(s.hero.subEmphasis), {
     message: "hero.subEmphasis must appear verbatim in hero.sub",
     path: ["hero", "subEmphasis"],
+  })
+  .refine((s) => s.about.heading.join(" ") === s.office.name, {
+    message: "about.heading lines must join to office.name",
+    path: ["about", "heading"],
   })
   .refine((s) => s.statement.text.includes(s.statement.highlight), {
     message: "statement.highlight must appear verbatim in statement.text",
