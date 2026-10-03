@@ -28,6 +28,8 @@ export default defineConfig({
     command: `pnpm start --port ${PORT}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
+    // Turns on the /dev preview routes (sample data for sections whose real content does not exist yet).
+    env: { ENABLE_DEV_PREVIEWS: "1" },
     timeout: 120_000,
   },
 });
