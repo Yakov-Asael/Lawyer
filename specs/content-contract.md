@@ -81,9 +81,9 @@ const Site = z.object({
 | Field | Status |
 |---|---|
 | `practiceAreas[].services` | Confirmed from Yossi's text (2026-10-04), notary list still a draft |
-| `hours`, `accessAndParking` | Missing |
-| `education` | Missing |
+| `hours`, `accessAndParking` | Hours and floor in; working days, elevator, access and parking missing |
+| `education` | Done |
 | `about.paragraphs` (personal paragraph) | Done, edited from Yossi's text |
-| `faq[].answer` for cost, what to bring, notary without a case, clients outside Hadera | Missing |
+| `faq[].answer` | Done except notary without a case. Never show prices (owner decision) |
 | `reviews` | None yet; owner curates with client consent |
 | High-resolution portrait, real signature, office photos | Missing |

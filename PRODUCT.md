@@ -41,6 +41,11 @@ Secondary facts: legal representation and notary services under one roof; mediat
 - Phone and WhatsApp: 052-252-1127
 - Email: shukruny@smile.net.il
 - Experience: 23 years
+- Floor: 1 (elevator, wheelchair access and parking: not yet answered)
+- Licensed: lawyer 2003, notary 2015
+- Education: law with business administration (combined track), המכללה האקדמית נתניה
+- Hours: by appointment, five days a week, 8:00 to 18:00 (which five days: not yet confirmed)
+- Prices: never shown on the site (owner decision)
 - Background: former insurance agent (Yossi's own statement)
 - Source copy from Yossi: `content/source/yossi-2026-10-04.md`
 
@@ -58,7 +63,7 @@ Secondary facts: legal representation and notary services under one roof; mediat
   claims. Copy that may cross the line is flagged for review, not published.
 
 **Open decisions (do not invent):**
-- Office hours.
+- Exact working days (five days a week, which ones?), elevator, wheelchair access, parking.
 - Notary sub-services beyond enduring power of attorney (draft list in the mockup; needs Yossi's confirmation).
 - Logo / wordmark: none exists; to be designed.
 - Education, admission year, memberships.
