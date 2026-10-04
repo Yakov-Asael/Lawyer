@@ -48,8 +48,8 @@ test.describe("motion on", () => {
 
   test("headings keep whole text for assistive tech", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("ליווי משפטי אישי. 30 שנה בחדרה.");
-    await expect(page.locator("#years-title")).toHaveText("שלושים שנה של עבודה משפטית בחדרה");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("ליווי משפטי אישי. 23 שנות ניסיון.");
+    await expect(page.locator("#years-title")).toHaveText("עשרים ושלוש שנה של ייעוץ וייצוג משפטי");
   });
 });
 
