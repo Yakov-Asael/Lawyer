@@ -40,7 +40,7 @@ test("dialog: opens with focus on the first field; Esc and the backdrop close it
   await expect(dialog.getByLabel("שם לפרסום")).toBeFocused();
   await expect(dialog).toContainText("ההמלצה תפורסם באתר רק אחרי אישור המשרד.");
   // Phones: a bottom sheet flush with the bottom edge. 700px+: a centred panel, at most 560px.
-  const sheet = await dialog.locator(".review-sheet").boundingBox();
+  const sheet = await dialog.locator(".sheet-panel").boundingBox();
   const vp = page.viewportSize()!;
   if (isMobile) {
     expect(Math.round(sheet!.y + sheet!.height)).toBe(vp.height);
@@ -139,10 +139,29 @@ test("honeypot: present for bots, hidden from people and assistive tech", async 
   expect((await page.request.get("/__forms.html")).status()).toBe(200);
 });
 
-test("opener sits in the slider foot when there are reviews", async ({ page }) => {
+test("opener sits centred under the slider when there are reviews", async ({ page }) => {
   await page.goto("/dev/reviews");
-  await expect(page.locator("#reviews").getByRole("button", { name: "השאירו המלצה" })).toBeVisible();
+  const opener = page.locator("#reviews").getByRole("button", { name: "השאירו המלצה" });
+  await expect(opener).toBeVisible();
+  const box = (await opener.boundingBox())!;
+  const vw = page.viewportSize()!.width;
+  expect(Math.abs(box.x + box.width / 2 - vw / 2)).toBeLessThan(12); // the page frame inset is not symmetric to the px
 });
+
+test("name and area share the same top and height; the select draws its own chevron", async ({ page, isMobile }) => {
+  test.skip(isMobile, "side by side from 700px");
+  const { dialog } = await openDialog(page);
+  // Measure once the sheet has finished rising, so both reads see the same frame.
+  await expect.poll(() => dialog.locator(".sheet-panel").evaluate((el) => getComputedStyle(el).transform)).toBe("none");
+  const name = (await dialog.getByLabel("שם לפרסום").boundingBox())!;
+  const area = dialog.getByLabel("תחום הטיפול");
+  const areaBox = (await area.boundingBox())!;
+  expect(Math.abs(name.y - areaBox.y)).toBeLessThanOrEqual(0.5);
+  expect(Math.abs(name.height - areaBox.height)).toBeLessThanOrEqual(0.5);
+  expect(await area.evaluate((el) => getComputedStyle(el).appearance)).toBe("none");
+  await expect(area.locator("xpath=following-sibling::*[local-name()='svg']")).toHaveCount(1);
+});
+
 
 test.describe("/review page", () => {
   test("?area=torts preselects נזיקין וביטוח; unknown values are ignored", async ({ page }) => {
@@ -191,7 +210,7 @@ test.describe("/review page", () => {
     const heading = page.getByRole("heading", { name: "תודה רבה", level: 2 });
     await expect(heading).toBeVisible();
     await expect(heading.locator("xpath=..")).toBeFocused();
-    expect(posts[0]!.get("area")).toBe("דיני משפחה ומעמד אישי");
+    expect(posts[0]!.get("area")).toBe("דיני משפחה וירושה");
     await expect(page.getByRole("link", { name: "חזרה לאתר" }).last()).toHaveAttribute("href", "/");
   });
 

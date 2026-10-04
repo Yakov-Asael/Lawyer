@@ -148,6 +148,7 @@
   --shadow-seal: var(--seal-shadow);
   --shadow-portrait: var(--portrait-shadow);
   --shadow-file: var(--file-shadow);
+  --shadow-sheet: var(--sheet-shadow);
   --shadow-review: var(--review-shadow);
   --shadow-map: var(--map-shadow);
   --shadow-fab: var(--fab-shadow);
@@ -623,15 +624,6 @@ html.motion:not(.intro) .hero-line > span {
   transform: scaleX(0);
 }
 
-/* Signature (spec 08): drawn with scroll under motion; complete otherwise. pathLength=1 on the path. */
-.signature-path {
-  stroke-dasharray: 1;
-}
-
-.motion .signature-path {
-  stroke-dashoffset: 1;
-}
-
 /* FAQ (spec 10): smooth open and close of native <details>. Instant under reduced motion (global rule). */
 :root {
   interpolate-size: allow-keywords;
@@ -731,15 +723,6 @@ html.motion:not(.motion-ready) .track-fill {
   animation: motion-failsafe 0s 3s forwards;
 }
 
-html.motion:not(.motion-ready) .signature-path {
-  animation: signature-failsafe 0s 3s forwards;
-}
-
-@keyframes signature-failsafe {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
 
 html.motion:not(.motion-ready) .years-fill {
   animation: years-failsafe 0s 3s forwards;
@@ -769,28 +752,28 @@ html.motion:not(.motion-ready) .years-fill {
   }
 }
 
-/* Review dialog (spec 18): scrim behind the native modal; the sheet rises in, the scrim fades in.
+/* Modal panel (SheetDialog, specs 09 and 18): scrim behind the native modal; the sheet rises in, the scrim fades in.
    Only under html.motion, so reduced motion and "stop animations" open it instantly. */
-.review-dialog::backdrop {
+.sheet-dialog::backdrop {
   background: var(--scrim);
 }
 
-html.motion .review-dialog::backdrop {
+html.motion .sheet-dialog::backdrop {
   transition: opacity 0.35s var(--ease-out);
 }
 
-html.motion .review-sheet {
+html.motion .sheet-panel {
   transition:
     transform 0.45s var(--ease-out),
     opacity 0.35s var(--ease-out);
 }
 
 @starting-style {
-  html.motion .review-dialog[open]::backdrop {
+  html.motion .sheet-dialog[open]::backdrop {
     opacity: 0;
   }
 
-  html.motion .review-dialog[open] .review-sheet {
+  html.motion .sheet-dialog[open] .sheet-panel {
     transform: translateY(40px);
     opacity: 0;
   }

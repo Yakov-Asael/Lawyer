@@ -14,7 +14,7 @@ Visual values come from `design/tokens.md`. Data comes from `specs/content-contr
 | 02 | [Header and mobile menu](02-header-menu.md) | Draft |
 | 03 | [Hero and intro loader](03-hero.md) | Draft |
 | 04 | [Statement](04-statement.md) | Draft |
-| 05 | [30 years](05-years.md) | Draft |
+| 05 | [Years of practice](05-years.md) | Draft |
 | 06 | [Practice areas (stacked files)](06-practice-areas.md) | Draft |
 | 07 | [Process](07-process.md) | Draft |
 | 08 | [About](08-about.md) | Draft |

@@ -5,11 +5,25 @@ import { expect, test } from "./fixtures";
 
 const FILES = "#areas article[data-file]";
 const AREAS = [
-  { tab: "דיני משפחה ומעמד אישי", topic: "דיני משפחה", cta: "שאלה בנושא משפחה" },
-  { tab: "נזיקין וביטוח", topic: "נזיקין וביטוח", cta: "שאלה בנושא נזיקין" },
-  { tab: "מקרקעין, נדל״ן וחוזים", topic: "מקרקעין וחוזים", cta: "שאלה בנושא נדל״ן" },
+  { tab: "דיני משפחה וירושה", topic: "דיני משפחה וירושה", cta: "שאלה בנושא משפחה" },
+  { tab: "מקרקעין ונדל״ן", topic: "מקרקעין ונדל״ן", cta: "שאלה בנושא נדל״ן" },
+  { tab: "נזיקין וביטוח", topic: "נזיקין וביטוח", cta: "שאלה בנושא ביטוח" },
+  { tab: "משפט אזרחי ומסחרי", topic: "משפט אזרחי ומסחרי", cta: "שאלה בנושא עסקי" },
   { tab: "נוטריון", topic: "שירותי נוטריון", cta: "תיאום אישור נוטריוני" },
 ];
+
+/** Scroll so file `index` (in flow order) has just reached the stick line at 128px. */
+async function arriveAt(page: Page, index: number) {
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await page.evaluate((i) => {
+    const file = document.querySelectorAll("#areas article[data-file]")[i]!;
+    window.scrollTo({ top: file.getBoundingClientRect().top + window.scrollY - 128, behavior: "instant" });
+  }, index);
+  await page.waitForTimeout(400);
+}
+
+const visibility = (page: Page) =>
+  page.locator(FILES).evaluateAll((files) => files.map((f) => getComputedStyle(f).visibility));
 
 const geometry = (page: Page) =>
   page.locator(FILES).evaluateAll((files) =>
@@ -19,10 +33,10 @@ const geometry = (page: Page) =>
     }),
   );
 
-test("four files in order, each an article with an h3 and a content-driven service list", async ({ page }) => {
+test("five files in order, each an article with an h3 and a content-driven service list", async ({ page }) => {
   await page.goto("/");
   const files = page.locator(FILES);
-  await expect(files).toHaveCount(4);
+  await expect(files).toHaveCount(5);
   for (const [i, area] of AREAS.entries()) {
     const file = files.nth(i);
     await expect(file.locator("> div").first()).toHaveText(area.tab);
@@ -30,11 +44,12 @@ test("four files in order, each an article with an h3 and a content-driven servi
     await expect(file.locator("ul > li")).not.toHaveCount(0);
   }
   await expect(files.first().locator("ul > li")).toHaveText([
-    "גירושין והסכמי גירושין",
-    "משמורת והסדרי שהות",
-    "מזונות",
-    "הסכמי ממון וידועים בציבור",
-    "ירושות וצוואות",
+    "גירושין וחלוקת רכוש",
+    "מחלוקות בין בני משפחה",
+    "צוואות, ירושות ועיזבונות",
+    "צווי ירושה",
+    "צווי הורות פסיקתיים",
+    "העברות במתנה",
   ]);
 });
 
@@ -58,54 +73,46 @@ test("tab and body touch with no gap; tab edge flush with the body's start edge"
   }
 });
 
-test("scrolling stacks all four tabs 44px apart, labels readable, bodies aligned", async ({ page }) => {
+test("the stack folds to two tabs: previous at 84px, current at 128px, older files hidden", async ({ page }) => {
   await page.goto("/");
-  // Scroll until the last file is pinned.
-  await page.evaluate(() => {
-    const last = document.querySelectorAll("#areas article[data-file]")[3]!;
-    const top = last.getBoundingClientRect().top + window.scrollY;
-    // The last file is the end of the stack: it arrives at its slot rather than sticking there.
-    window.scrollTo({ top: top - (84 + 3 * 44), behavior: "instant" });
-  });
-  await page.waitForTimeout(400);
+  await arriveAt(page, 3);
 
   const g = await geometry(page);
-  for (let i = 0; i < 4; i++) expect(Math.round(g[i]!.tab.top)).toBe(84 + i * 44);
-  // Labels readable: each tab fully visible, not covered by the next file's body.
-  for (const [i, area] of AREAS.entries()) {
-    const tab = page.locator(FILES).nth(i).locator("> div").first();
-    const box = (await tab.boundingBox())!;
+  expect(Math.round(g[2]!.tab.top)).toBe(84);
+  expect(Math.round(g[3]!.tab.top)).toBe(128);
+  const vis = await visibility(page);
+  expect(vis.slice(0, 2)).toEqual(["hidden", "hidden"]);
+  expect(vis.slice(2, 4)).toEqual(["visible", "visible"]);
+  // Labels readable: both visible tabs are on top at their centre.
+  for (const i of [2, 3]) {
+    const box = (await page.locator(FILES).nth(i).locator("> div").first().boundingBox())!;
     const hit = await page.evaluate(
       ([x, y]) => document.elementFromPoint(x!, y!)?.textContent ?? "",
       [box.x + box.width / 2, box.y + box.height / 2],
     );
-    expect(hit).toContain(area.tab);
+    expect(hit).toContain(AREAS[i]!.tab);
   }
-  // Same left and right edges for every body.
+  // Same left and right edges for every body (no scaling).
   const lefts = new Set(g.map((f) => Math.round(f.body.left)));
   const rights = new Set(g.map((f) => Math.round(f.body.right)));
   expect(lefts.size).toBe(1);
   expect(rights.size).toBe(1);
-
-  // Covered files dim; the top one does not.
+  // The covered file dims; the current one does not.
   const filters = await page.locator(FILES).evaluateAll((files) => files.map((f) => (f as HTMLElement).style.filter));
-  expect(filters[0]).toMatch(/brightness\(0\.\d+\)/);
+  expect(filters[2]).toMatch(/brightness\(0\.\d+\)/);
   expect(filters[3]).toBe("");
 });
 
 test.describe("reduced motion", () => {
   test.use({ reducedMotion: "reduce" });
-  test("stacking stays, dimming is off", async ({ page }) => {
+  test("no lift and no dimming; covered files are hidden under the current one", async ({ page }) => {
     await page.goto("/");
-    await page.evaluate(() => {
-      const last = document.querySelectorAll("#areas article[data-file]")[3]!;
-      window.scrollTo({ top: last.getBoundingClientRect().top + window.scrollY - 200, behavior: "instant" });
-    });
-    await page.waitForTimeout(300);
+    await arriveAt(page, 3);
     const g = await geometry(page);
-    expect(Math.round(g[0]!.tab.top)).toBe(84);
-    const filters = await page.locator(FILES).evaluateAll((files) => files.map((f) => getComputedStyle(f).filter));
-    expect(filters.every((f) => f === "none")).toBe(true);
+    expect(Math.round(g[3]!.tab.top)).toBe(128);
+    expect((await visibility(page)).slice(0, 3)).toEqual(["hidden", "hidden", "hidden"]);
+    const styles = await page.locator(FILES).evaluateAll((files) => files.map((f) => getComputedStyle(f)).map((c) => c.filter + c.transform));
+    expect(styles.every((s) => s === "nonenone")).toBe(true);
   });
 });
 
@@ -145,10 +152,6 @@ test("screenshots", async ({ page }, info) => {
   });
   await page.waitForTimeout(1500);
   await page.screenshot({ path: `test-results/screens/areas-head-${info.project.name}.png` });
-  await page.evaluate(() => {
-    const last = document.querySelectorAll("#areas article[data-file]")[3]!;
-    window.scrollTo({ top: last.getBoundingClientRect().top + window.scrollY - (84 + 3 * 44), behavior: "instant" });
-  });
-  await page.waitForTimeout(500);
+  await arriveAt(page, 3);
   await page.screenshot({ path: `test-results/screens/areas-stack-${info.project.name}.png` });
 });

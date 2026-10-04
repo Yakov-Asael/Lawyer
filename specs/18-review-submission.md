@@ -12,7 +12,7 @@ Let clients leave a testimonial on the site. Nothing is published until Yossi ap
 | Field | Rules | Published |
 |---|---|---|
 | שם לפרסום | Required, 2 to 40 chars. Hint: "אפשר גם שם פרטי ואות ראשונה" | Yes |
-| תחום הטיפול | Required, one of the 4 areas | Yes |
+| תחום הטיפול | Required, one of the 5 areas | Yes |
 | ההמלצה | Required, 40 to 600 chars, live counter | Yes (may be shortened by the office) |
 | טלפון | Optional, Israeli format, "לא יפורסם". Only for verification | Never |
 | Consent checkbox | Required: "אני מאשר/ת לפרסם את ההמלצה באתר בשם שכתבתי. ידוע לי שהמשרד רשאי לקצר אותה או לא לפרסם אותה." | No |
@@ -48,6 +48,7 @@ No database and no admin panel in v1. Volume is a few reviews a year; publishing
 - [x] Empty submit shows 4 field errors and the consent error; focus lands on the first invalid field.
 - [ ] Valid submit reaches Netlify Forms (and the notification email) and shows the thank-you state; nothing appears on the site.
 - [x] `/review?area=torts` opens with "נזיקין וביטוח" selected.
+- [x] Side-by-side fields (name, area) share the same top and height (measured); the select uses a custom chevron, not the native control.
 - [ ] A bot filling the honeypot is dropped by Netlify (no submission, no email).
 - [x] Keyboard-only and screen-reader flows work end to end at 390 and 1440.
 
@@ -61,11 +62,11 @@ No database and no admin panel in v1. Volume is a few reviews a year; publishing
   and `areaFromParam` (unknown values ignored).
 - **Netlify Forms**: `public/__forms.html` declares form `review` with `netlify-honeypot="bot-field"`; the site posts
   urlencoded to `/__forms.html`, as the Netlify Next.js runtime requires. A test keeps the field names in sync.
-- **Dialog** (`ReviewDialog.tsx`): a native `<dialog>` with `showModal()`. The browser handles the focus trap, Esc
+- **Dialog** (`ReviewDialog.tsx`): the shared `SheetDialog` (also the spec 09 reader), a native `<dialog>` with `showModal()`. The browser handles the focus trap, Esc
   and the inert page; the backdrop click, the Lenis scroll lock and the focus return are ours. Phones get a bottom
   sheet and 700px+ a centred panel at most 560px. It rises in under `html.motion` only. A typed draft survives a
   close; a sent form resets.
-- **Entry points**: "השאירו המלצה" (ghost, pen icon) sits in the slider foot opposite the arrows, or under the intro
+- **Entry points**: "השאירו המלצה" (ghost, pen icon) sits centred under the slider (owner feedback), or under the intro
   while there are no reviews. `/review` uses the legal template (shared `LegalTitleCard`), is `noindex` and stays out
   of the sitemap.
 - **Server error**: the typed values stay, plus an alert with a WhatsApp link that carries the review text.

@@ -15,7 +15,7 @@ Emotional brief: seriousness, warmth, care.
 |---|---|---|---|
 | `ink` | `#14233A` | Dark grounds (hero, final CTA, file 1), primary text on light | Seriousness |
 | `field` | `#1F3452` | Committed sections (years, reviews, file 2) | Seriousness |
-| `brass` | `#CDAE6A` | Accent and primary buttons on dark grounds, file 4 | Warmth |
+| `brass` | `#CDAE6A` | Accent and primary buttons on dark grounds, file 5 (notary) | Warmth |
 | `brass-deep` | `#7A5B18` | Accent text on light grounds (eyebrows, links, highlights) | Warmth |
 | `stone` | `#F8F7F4` | Page ground | Care |
 | `paper` | `#FFFFFF` | Raised surfaces (process card, file 3, review cards, panels) | Care |
