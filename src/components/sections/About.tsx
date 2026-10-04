@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { site } from "@content";
+import { site } from "@content/data";
 import { Parallax, Reveal } from "@/components/motion";
 import { SectionHeading } from "@/components/shared";
 import portrait from "../../../design/assets/yossi-shukrun-cohen-portrait.webp";

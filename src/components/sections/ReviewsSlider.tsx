@@ -2,7 +2,7 @@
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useRef, useState } from "react";
-import { site, type Review } from "@content";
+import { site, type Review } from "@content/data";
 import { Carousel, CarouselContent, CarouselItem, useCarousel } from "@/components/ui/carousel";
 import { SheetDialog, type SheetDialogHandle } from "@/components/ui/sheet-dialog";
 import { QUOTE_PATH, ReviewCard, ReviewReader } from "./ReviewCard";

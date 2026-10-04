@@ -1,4 +1,4 @@
-import { isProductionBuild, site } from "@content";
+import { isProductionBuild, site } from "@content/data";
 import { Reveal } from "@/components/motion";
 import { NumText, SectionHeading } from "@/components/shared";
 import { faqJsonLd, publishedFaq } from "@/lib/faq";

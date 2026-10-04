@@ -2,7 +2,7 @@
 
 import { PenLine } from "lucide-react";
 import { useRef, useState } from "react";
-import { site } from "@content";
+import { site } from "@content/data";
 import { Button } from "@/components/ui/button";
 import { SheetDialog, type SheetDialogHandle } from "@/components/ui/sheet-dialog";
 import { ReviewForm } from "./ReviewForm";

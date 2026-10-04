@@ -1,5 +1,5 @@
-import type { Review } from "@content";
-import { site } from "@content";
+import type { Review } from "@content/data";
+import { site } from "@content/data";
 import { ReviewDialog } from "@/components/review/ReviewDialog";
 import { SectionHeading } from "@/components/shared";
 import { getApprovedReviews } from "@/lib/reviews";

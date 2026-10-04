@@ -1,5 +1,5 @@
 import { MapPin, Phone } from "lucide-react";
-import { site } from "@content";
+import { site } from "@content/data";
 import { WazeIcon, WhatsAppIcon } from "@/components/icons";
 import { Seal } from "@/components/shared";
 import { mapsLink, telLink, waLink, wazeLink } from "@/lib/contact";
@@ -58,8 +58,8 @@ export function Footer() {
         </ul>
 
         {/* Dots only from 900px, where the links fit on one line; below that, gaps and no dots, so a wrapped line
-            never starts with a separator. */}
-        <ul className="mt-[22px] flex max-w-[36em] flex-wrap justify-center gap-x-5 gap-y-3 desk:max-w-none desk:flex-nowrap desk:gap-x-0">
+            never starts with a separator. Each link is a 44px-tall target for older thumbs. */}
+        <ul className="mt-[22px] flex max-w-[36em] flex-wrap justify-center gap-x-5 gap-y-0 desk:max-w-none desk:flex-nowrap desk:gap-x-0">
           {links.map((link, i) => (
             <li
               key={link.href}
@@ -71,7 +71,7 @@ export function Footer() {
             >
               <a
                 href={link.href}
-                className="text-ink underline decoration-bark underline-offset-[5px] transition-colors hover:decoration-brass-deep"
+                className="inline-flex min-h-11 items-center text-ink underline decoration-bark underline-offset-[5px] transition-colors hover:decoration-brass-deep"
               >
                 {link.label}
               </a>

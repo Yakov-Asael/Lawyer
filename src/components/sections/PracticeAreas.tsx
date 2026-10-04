@@ -1,4 +1,4 @@
-import { site, type PracticeArea } from "@content";
+import { site, type PracticeArea } from "@content/data";
 import { SectionHeading } from "@/components/shared";
 import { ButtonLink } from "@/components/ui/button";
 import { waLink } from "@/lib/contact";

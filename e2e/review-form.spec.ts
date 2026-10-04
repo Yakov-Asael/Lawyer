@@ -40,14 +40,15 @@ test("dialog: opens with focus on the first field; Esc and the backdrop close it
   await expect(dialog.getByLabel("שם לפרסום")).toBeFocused();
   await expect(dialog).toContainText("ההמלצה תפורסם באתר רק אחרי אישור המשרד.");
   // Phones: a bottom sheet flush with the bottom edge. 700px+: a centred panel, at most 560px.
-  const sheet = await dialog.locator(".sheet-panel").boundingBox();
+  // Polled: the sheet rises in over 450ms, so a single read under load can land mid-transition.
   const vp = page.viewportSize()!;
+  const box = async () => (await dialog.locator(".sheet-panel").boundingBox())!;
   if (isMobile) {
-    expect(Math.round(sheet!.y + sheet!.height)).toBe(vp.height);
-    expect(Math.round(sheet!.width)).toBe(vp.width);
+    await expect.poll(async () => Math.round((await box()).y + (await box()).height)).toBe(vp.height);
+    expect(Math.round((await box()).width)).toBe(vp.width);
   } else {
-    expect(sheet!.width).toBeLessThanOrEqual(560);
-    expect(Math.abs(sheet!.x + sheet!.width / 2 - vp.width / 2)).toBeLessThan(2);
+    expect((await box()).width).toBeLessThanOrEqual(560);
+    await expect.poll(async () => Math.abs((await box()).x + (await box()).width / 2 - vp.width / 2)).toBeLessThan(2);
   }
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();

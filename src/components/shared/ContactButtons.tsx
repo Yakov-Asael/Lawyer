@@ -1,5 +1,5 @@
 import { Phone } from "lucide-react";
-import { site } from "@content";
+import { site } from "@content/data";
 import { WhatsAppIcon } from "@/components/icons";
 import { ButtonLink, type ButtonVariantProps } from "@/components/ui/button";
 import { telLink, waLink } from "@/lib/contact";

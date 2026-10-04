@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { practiceArea, site, type Review } from "@content";
+import { practiceArea, site, type Review } from "@content/data";
 
 export const QUOTE_PATH =
   "M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z";

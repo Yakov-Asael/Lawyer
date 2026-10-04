@@ -1,4 +1,4 @@
-import { site } from "@content";
+import { site } from "@content/data";
 import { ringGlyphs } from "@/lib/seal";
 import { cn } from "@/lib/utils";
 import { SealSpin } from "./SealSpin";

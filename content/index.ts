@@ -1,3 +1,4 @@
+import { isProductionBuild, site } from "./data";
 import { accessibilityPage } from "./legal/accessibility";
 import { privacyPage } from "./legal/privacy";
 import { termsPage } from "./legal/terms";
@@ -6,15 +7,11 @@ import {
   PLACEHOLDER_PATTERN,
   Site,
   type LegalSlug,
-  type PracticeArea,
-  type PracticeAreaId,
 } from "./schema";
 import { siteContent } from "./site";
 
 export * from "./schema";
-
-/** True for a production deploy (Netlify CONTEXT=production); previews and dev are not. */
-export const isProductionBuild = process.env.CONTEXT === "production";
+export { isPracticeAreaId, isProductionBuild, practiceArea, PRACTICE_AREA_IDS, site } from "./data";
 
 /**
  * Content paths whose placeholders do not block production because the UI drops the item instead:
@@ -32,8 +29,11 @@ export function findPlaceholders(value: unknown, path = ""): string[] {
   return [];
 }
 
-/** Parse at import time so a malformed field fails the build, not the visitor. */
-export const site: Site = Site.parse(siteContent);
+/**
+ * Validated at import time so a malformed field fails the build, not the visitor. The root layout imports this
+ * module, so every build runs it. Components read the same (identical) object from ./data, without Zod.
+ */
+Site.parse(siteContent);
 
 /** Legal pages (specs 16, 17), validated like the rest of the content. */
 export const legalPages: readonly LegalPage[] = [accessibilityPage, privacyPage, termsPage].map((page) => LegalPage.parse(page));
@@ -55,13 +55,6 @@ export function legalPage(slug: LegalSlug): LegalPage {
 /** Legal pages Yossi has not approved yet; they block production like placeholders. */
 export function unapprovedLegalPages(pages: readonly Pick<LegalPage, "slug" | "approved">[]): string[] {
   return pages.filter((p) => !p.approved).map((p) => `legal/${p.slug} (not approved)`);
-}
-
-/** A practice area by id. The contract guarantees all four exist, so a miss is a programming error. */
-export function practiceArea(id: PracticeAreaId): PracticeArea {
-  const area = site.practiceAreas.find((a) => a.id === id);
-  if (!area) throw new Error(`Unknown practice area: ${id}`);
-  return area;
 }
 
 /** Placeholders that would reach visitors and so must block a production build. */

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { site } from "@content";
+import { site } from "@content/data";
 import { Ruled, Seal } from "@/components/shared";
 
 /**

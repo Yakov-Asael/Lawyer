@@ -1,4 +1,4 @@
-import type { Office } from "@content";
+import type { Office } from "@content/data";
 
 /**
  * JSON-LD for the office (spec 16): a LegalService with Yossi as its founder.

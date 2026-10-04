@@ -1,4 +1,4 @@
-import { site } from "@content";
+import { site } from "@content/data";
 import { Reveal } from "@/components/motion";
 import { ContactButtons, Ruled, Seal, SectionHeading } from "@/components/shared";
 

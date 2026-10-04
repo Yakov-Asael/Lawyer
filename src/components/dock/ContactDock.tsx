@@ -2,7 +2,7 @@
 
 import { Phone } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { site } from "@content";
+import { site } from "@content/data";
 import { WhatsAppIcon } from "@/components/icons";
 import { ButtonLink } from "@/components/ui/button";
 import { telLink, waLink } from "@/lib/contact";

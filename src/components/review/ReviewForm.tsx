@@ -1,8 +1,8 @@
 "use client";
 
 import { Check, ChevronDown } from "lucide-react";
-import { useId, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
-import { site, type PracticeAreaId } from "@content";
+import { useCallback, useId, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { site, type PracticeAreaId } from "@content/data";
 import { WhatsAppIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { waTextLink } from "@/lib/contact-links";
@@ -62,7 +62,8 @@ export function ReviewForm({ areaFromUrl = false, doneHeading = "h3", doneAction
   const [status, setStatus] = useState<Status>("idle");
   const formRef = useRef<HTMLFormElement>(null);
   const honeypotRef = useRef<HTMLInputElement>(null);
-  const doneRef = useRef<HTMLDivElement>(null);
+  // Stable, so it runs once when the thank-you mounts and never pulls focus back on a later render.
+  const focusOnMount = useCallback((el: HTMLElement | null) => el?.focus(), []);
 
   const current: ReviewValues = { ...values, area: pickedArea ?? urlArea };
   const errors: ReviewErrors = submitted ? validateReview(current) : {};
@@ -90,8 +91,6 @@ export function ReviewForm({ areaFromUrl = false, doneHeading = "h3", doneAction
       if (!res.ok) throw new Error(`Form post failed: ${res.status}`);
       setStatus("done");
       onSent?.();
-      // Move focus to the thank-you message so it is announced and keyboard users are not left on a removed button.
-      requestAnimationFrame(() => doneRef.current?.focus());
     } catch {
       setStatus("error");
     }
@@ -100,7 +99,9 @@ export function ReviewForm({ areaFromUrl = false, doneHeading = "h3", doneAction
   if (status === "done") {
     const Heading = doneHeading;
     return (
-      <div ref={doneRef} tabIndex={-1} className="grid justify-items-center gap-2.5 py-5 text-center outline-none">
+      // Focus moves to the thank-you as it mounts, so it is announced and keyboard users are not left on a removed
+      // button. A ref callback runs on commit, unlike a timer that can fire before React renders this state.
+      <div ref={focusOnMount} tabIndex={-1} className="grid justify-items-center gap-2.5 py-5 text-center outline-none">
         <span className="grid size-16 place-items-center rounded-full bg-ink text-stone">
           <Check className="size-[30px]" strokeWidth={2} aria-hidden="true" />
         </span>

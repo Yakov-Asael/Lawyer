@@ -1,21 +1,22 @@
 import { z } from "zod";
+import { PRACTICE_AREA_IDS } from "./ids";
 
 /**
  * Content contract (specs/content-contract.md).
  * Every piece of office data and site copy is validated here at build time.
  */
 
-/** Marker for copy that is still missing from the client. Never shipped to production. */
-export const PLACEHOLDER_PATTERN = /\[placeholder[^\]]*\]/;
+export { PLACEHOLDER_PATTERN } from "./ids";
 
 /** Copy rules from CLAUDE.md: no em-dashes, no emojis in site copy. */
 const EM_DASH = /—/;
 const EMOJI = /\p{Extended_Pictographic}/u;
 
+// Checked, not trimmed: the contract has no transforms, so the parsed content equals the raw object (see data.ts).
 const copy = z
   .string()
-  .trim()
   .min(1)
+  .refine((s) => s === s.trim(), "No leading or trailing whitespace in site copy")
   .refine((s) => !EM_DASH.test(s), "No em-dashes in site copy")
   .refine((s) => !EMOJI.test(s), "No emojis in site copy");
 
@@ -38,7 +39,7 @@ export const Office = z.object({
   education: copy.optional(),
 });
 
-export const PracticeAreaId = z.enum(["family", "real-estate", "torts", "civil", "notary"]);
+export const PracticeAreaId = z.enum(PRACTICE_AREA_IDS);
 
 export const PracticeArea = z.object({
   id: PracticeAreaId,

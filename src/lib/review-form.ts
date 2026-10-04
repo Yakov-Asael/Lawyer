@@ -1,4 +1,4 @@
-import { PracticeAreaId } from "@content";
+import { isPracticeAreaId, type PracticeAreaId } from "@content/data";
 
 /**
  * Review submission (spec 18): limits, validation and the Netlify Forms payload. Pure, so it is unit-tested
@@ -51,7 +51,7 @@ export function validateReview(v: ReviewValues): ReviewErrors {
   const errors: ReviewErrors = {};
   const name = charCount(v.name);
   if (name < LIMITS.name.min || name > LIMITS.name.max) errors.name = "name";
-  if (!PracticeAreaId.safeParse(v.area).success) errors.area = "area";
+  if (!isPracticeAreaId(v.area)) errors.area = "area";
   const review = charCount(v.review);
   if (review < LIMITS.review.min) errors.review = "reviewShort";
   else if (review > LIMITS.review.max) errors.review = "reviewLong";
@@ -83,6 +83,5 @@ export function encodeReview(v: ReviewValues, areaLabel: string, consentLabel: s
 
 /** A valid ?area= value, or "" (unknown values are ignored, never trusted). */
 export function areaFromParam(param: string | null | undefined): PracticeAreaId | "" {
-  const parsed = PracticeAreaId.safeParse(param);
-  return parsed.success ? parsed.data : "";
+  return isPracticeAreaId(param) ? param : "";
 }

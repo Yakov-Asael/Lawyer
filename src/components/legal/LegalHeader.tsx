@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { site } from "@content";
+import { site } from "@content/data";
 import { Brand } from "@/components/header/Brand";
 import { ContactButtons } from "@/components/shared";
 

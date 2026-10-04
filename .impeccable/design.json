@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T00:00:00Z",
+  "title": "Design System: עו״ד יוסי שוקרון כהן",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "Notary Ink"
+      },
+      "field": {
+        "role": "primary",
+        "displayName": "Committed Navy"
+      },
+      "brass": {
+        "role": "secondary",
+        "displayName": "Desk Brass"
+      },
+      "brass-deep": {
+        "role": "secondary",
+        "displayName": "Deep Brass"
+      },
+      "stone": {
+        "role": "neutral",
+        "displayName": "Stone"
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper"
+      },
+      "bark": {
+        "role": "neutral",
+        "displayName": "Bark"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted"
+      },
+      "danger": {
+        "role": "error",
+        "displayName": "Danger"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The hero headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings and legal page titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Step, clause and dialog headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraphs; 70ch max on legal pages."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "seal",
+        "value": "0 12px 30px -10px rgb(0 0 0 / 0.6)",
+        "purpose": "The notary seal over the portrait."
+      },
+      {
+        "name": "file",
+        "value": "0 -1px 0 rgb(0 0 0 / 0.04), 0 24px 50px -30px color-mix(in srgb, #14233A 45%, transparent)",
+        "purpose": "Paper cards on stone."
+      },
+      {
+        "name": "panel",
+        "value": "0 30px 70px -20px color-mix(in srgb, #14233A 55%, transparent)",
+        "purpose": "Accessibility panel."
+      },
+      {
+        "name": "sheet",
+        "value": "0 -20px 60px -20px color-mix(in srgb, #14233A 50%, transparent)",
+        "purpose": "Review dialog."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Reveals, hovers, the dialog rise."
+      },
+      {
+        "name": "ease-io",
+        "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+        "purpose": "Intro curtain and loader draw."
+      },
+      {
+        "name": "ease-stamp",
+        "value": "cubic-bezier(0.3, 1.4, 0.5, 1)",
+        "purpose": "The seal stamp in the final CTA only (deliberate overshoot)."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "600px"
+      },
+      {
+        "name": "desk",
+        "value": "900px"
+      },
+      {
+        "name": "nav",
+        "value": "1000px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (dark ground)",
+      "kind": "button",
+      "refersTo": "button-primary-dark",
+      "description": "WhatsApp call to action on navy sections.",
+      "html": "<div class=\"ds-dark\"><button class=\"ds-btn ds-btn-brass\">שלחו הודעה בוואטסאפ</button></div>",
+      "css": ".ds-dark{background:#14233A;padding:24px;direction:rtl}.ds-btn{height:52px;padding:0 26px;border-radius:999px;border:1.5px solid transparent;font:700 16px Assistant,Arial,sans-serif;cursor:pointer;transition:background-color .25s,transform .35s}.ds-btn-brass{background:#CDAE6A;color:#14233A}.ds-btn-brass:hover{background:color-mix(in srgb,#CDAE6A 80%,#fff);transform:translateY(-2px)}.ds-btn:focus-visible{outline:2px solid #CDAE6A;outline-offset:3px}"
+    },
+    {
+      "name": "Primary Button (light ground)",
+      "kind": "button",
+      "refersTo": "button-primary-light",
+      "description": "Primary action on paper and stone.",
+      "html": "<button class=\"ds-btn2 ds-btn-ink\">שליחת ההמלצה</button>",
+      "css": ".ds-btn2{height:52px;padding:0 26px;border-radius:999px;border:1.5px solid transparent;font:700 16px Assistant,Arial,sans-serif;cursor:pointer;transition:background-color .25s,transform .35s}.ds-btn-ink{background:#14233A;color:#F8F7F4}.ds-btn-ink:hover{background:#1F3452;transform:translateY(-2px)}.ds-btn2:focus-visible{outline:2px solid #7A5B18;outline-offset:3px}"
+    },
+    {
+      "name": "Line Button",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Secondary action on light grounds.",
+      "html": "<button class=\"ds-btn-line\">סגירה</button>",
+      "css": ".ds-btn-line{height:52px;padding:0 26px;border-radius:999px;border:1.5px solid #14233A;background:transparent;color:#14233A;font:700 16px Assistant,Arial,sans-serif;cursor:pointer;transition:background-color .25s,color .25s}.ds-btn-line:hover{background:#14233A;color:#F8F7F4}.ds-btn-line:focus-visible{outline:2px solid #7A5B18;outline-offset:3px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Form control with label, hint and error in words.",
+      "html": "<label class=\"ds-field\" dir=\"rtl\"><span class=\"ds-label\">שם לפרסום</span><input class=\"ds-input\" aria-invalid=\"true\"><span class=\"ds-err\">נא לכתוב שם לפרסום, בין 2 ל-40 תווים.</span></label>",
+      "css": ".ds-field{display:grid;gap:6px;font-family:Assistant,Arial,sans-serif;color:#14233A}.ds-label{font-weight:600;font-size:14.5px}.ds-input{font:16px Assistant,Arial,sans-serif;padding:12px 14px;border-radius:12px;border:1.5px solid color-mix(in srgb,#14233A 38%,#fff);background:#fff;color:#14233A}.ds-input:hover{border-color:#14233A}.ds-input:focus-visible{outline:2px solid #7A5B18;outline-offset:3px}.ds-input[aria-invalid=true]{border-color:#A3332B}.ds-err{font-size:13.5px;font-weight:600;color:#A3332B}"
+    },
+    {
+      "name": "Notary Seal",
+      "kind": "custom",
+      "description": "The brand mark: ink disc, brass rings, monogram.",
+      "html": "<svg class=\"ds-seal\" viewBox=\"0 0 200 200\"><circle cx=\"100\" cy=\"100\" r=\"100\" fill=\"#14233A\"/><circle cx=\"100\" cy=\"100\" r=\"92\" fill=\"none\" stroke=\"#CDAE6A\" stroke-width=\"1.2\"/><circle cx=\"100\" cy=\"100\" r=\"58\" fill=\"none\" stroke=\"#CDAE6A\" stroke-width=\"1.2\"/><text x=\"100\" y=\"112\" text-anchor=\"middle\" font-family=\"Frank Ruhl Libre, serif\" font-weight=\"700\" font-size=\"40\" fill=\"#F8F7F4\">ש״כ</text></svg>",
+      "css": ".ds-seal{width:160px;height:160px;border-radius:50%;box-shadow:0 12px 30px -10px rgb(0 0 0 / .6)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Notary's Desk",
+    "overview": "A personal lawyer, not a firm. Seriousness from deep navy and a document-like serif, warmth from sparing brass, care from clean white paper and generous space. The hand-made details carry the identity: the notary seal, ruled legal-pad hairlines, court-file folders, a signature that draws itself.",
+    "keyCharacteristics": [
+      "Inset rounded section cards on a stone page, alternating navy and paper grounds.",
+      "Frank Ruhl Libre headlines at display scale, Assistant for everything you read or tap.",
+      "Gold as an accent and as the primary button on dark grounds, never as text on light.",
+      "Scroll-told motion with one signature moment per section, always with a still fallback.",
+      "WhatsApp first, phone second, everywhere."
+    ],
+    "rules": [
+      {
+        "name": "The Brass Is Not Text Rule",
+        "body": "brass never colours text on a light ground; use brass-deep.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tokens Only Rule",
+        "body": "Components never hold a raw hex; every colour is a CSS variable on :root.",
+        "section": "colors"
+      },
+      {
+        "name": "The Isolated Number Rule",
+        "body": "Numbers inside Hebrew text sit in an isolated LTR run with tabular figures.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do put WhatsApp first and the phone second in every contact pair.",
+      "Do give every motion a still fallback.",
+      "Do keep copy in /content, and read it in client code from @content/data.",
+      "Do use [placeholder: ...] for anything the client has not confirmed."
+    ],
+    "donts": [
+      "Don't use stock courthouse imagery, scales of justice or a templated corporate grid.",
+      "Don't use emoji or em-dashes in site copy.",
+      "Don't set brass text on light grounds, or a raw hex inside a component.",
+      "Don't promise outcomes, show ratings, or invent stats or testimonials."
+    ]
+  }
+}
