@@ -208,18 +208,19 @@ export function A11yMenu() {
           })}
         </div>
 
-        <div className="mt-3.5 flex items-center justify-between gap-2.5 text-sm">
+        <div className="mt-3.5 grid gap-1 text-sm">
           <button
             type="button"
             onClick={() => update(DEFAULT_A11Y)}
-            className="py-2 font-bold text-brass-deep underline underline-offset-4"
+            className="justify-self-start py-2 font-bold text-brass-deep underline underline-offset-4"
           >
             {copy.reset}
           </button>
-          <ul className="flex flex-wrap justify-end gap-x-4 gap-y-1">
+          <ul className="flex flex-wrap gap-x-4 border-t border-bark pt-1.5">
             {[
               { href: site.legal.accessibilityStatementPath, label: site.legal.accessibilityLabel },
               { href: site.legal.privacyPath, label: site.legal.privacyLabel },
+              { href: site.legal.termsPath, label: site.legal.termsLabel },
             ].map((link) => (
               <li key={link.href}>
                 <a href={link.href} className="inline-block py-2 text-ink underline underline-offset-4">

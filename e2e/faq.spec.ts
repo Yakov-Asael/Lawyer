@@ -48,15 +48,19 @@ test("several items stay open at once; the toggle turns into a filled minus", as
   await expect(page.locator("#faq details[open]")).toHaveCount(2);
   const toggle = summaries.nth(0).locator("span[aria-hidden]");
   await expect.poll(() => toggle.evaluate((el) => getComputedStyle(el, "::after").transform)).toMatch(/^(none|matrix\(1, 0, 0, 1, 0, 0\))$/);
-  const [bg, ink] = await toggle.evaluate((el) => {
-    const probe = document.createElement("i");
-    probe.style.color = "var(--ink)";
-    document.body.append(probe);
-    const want = getComputedStyle(probe).color;
-    probe.remove();
-    return [getComputedStyle(el).backgroundColor, want];
-  });
-  expect(bg).toBe(ink);
+  // Polled: the fill is a 300ms background transition, so a single read under load can land mid-way.
+  await expect
+    .poll(() =>
+      toggle.evaluate((el) => {
+        const probe = document.createElement("i");
+        probe.style.color = "var(--ink)";
+        document.body.append(probe);
+        const want = getComputedStyle(probe).color;
+        probe.remove();
+        return getComputedStyle(el).backgroundColor === want;
+      }),
+    )
+    .toBe(true);
 });
 
 test("the phone number in an answer is an isolated LTR run", async ({ page }) => {

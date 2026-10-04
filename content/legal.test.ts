@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { LEGAL_PATHS, LegalPage, legalPage, legalPages, site, unapprovedLegalPages } from "./index";
+import { blockingPlaceholders, LEGAL_PATHS, LegalPage, legalPage, legalPages, site, unapprovedLegalPages } from "./index";
 import { accessibilityPage } from "./legal/accessibility";
 
 describe("legal pages (specs 16, 17)", () => {
@@ -21,6 +21,15 @@ describe("legal pages (specs 16, 17)", () => {
     const contact = page.sections.find((s) => s.contact)?.contact;
     expect(contact?.phoneE164).toBe(site.office.phoneE164);
     expect(contact?.email).toBe(site.office.email);
+  });
+
+  it("terms: the jurisdiction clause blocks production until Yossi fills it", () => {
+    const terms = legalPage("terms");
+    const clause = terms.sections.findIndex((s) => s.heading === "דין וסמכות שיפוט");
+    expect(clause).toBe(11);
+    expect(blockingPlaceholders({ legal: [terms] })).toContain(`legal[0].sections[${clause}].body[0]`);
+    expect(terms.sections[1]!.heading).toBe("אין ייעוץ משפטי");
+    expect(terms.sections[2]!.heading).toBe("אין יחסי עורך דין ולקוח");
   });
 
   it("an unapproved page blocks production; an approved one does not", () => {

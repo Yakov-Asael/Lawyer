@@ -223,6 +223,8 @@ export const LegalSection = z.object({
   body: z.array(copy).min(1),
   items: z.array(copy).min(1).optional(),
   contact: LegalContact.optional(),
+  /** Pointers to other pages (e.g. the privacy policy), rendered after the paragraphs. Internal paths only. */
+  links: z.array(z.object({ label: copy, href: z.string().regex(/^\/[a-z-]*$/) })).min(1).optional(),
 });
 
 /**
