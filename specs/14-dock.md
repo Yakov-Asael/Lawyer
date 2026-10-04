@@ -13,6 +13,15 @@ Keep the two conversion actions one tap away on phones, after the visitor has le
   viewport; slides out again when scrolling back to the hero.
 - Not shown while the mobile menu is open (the menu covers it).
 
+## Implementation (built)
+- `src/components/dock/ContactDock.tsx` (client), rendered in the root layout. Visibility from `dockVisible()`
+  (`src/lib/dock.ts`, tested) on the shared frame loop, measured only when the page scrolls or resizes. Pages without
+  a hero (legal pages) show it always.
+- While hidden the dock is `inert`, so keyboard and screen-reader users never reach off-screen buttons. The open
+  mobile menu covers it (higher layer) and makes it inert too.
+- Call button shows "חיוג" with the accessible name "חיוג ל-052-252-1127" (label in name).
+- Space reserved by the footer (`dock-clearance`), not by `<main>`.
+
 ## Acceptance criteria
 - [ ] Not visible on first load at 390x844; visible after scrolling past the hero.
 - [ ] Never covers the last lines of the footer (main reserves the space).

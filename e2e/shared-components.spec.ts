@@ -39,7 +39,10 @@ test("buttons pass 4.5:1 text contrast against their real background", async ({ 
       const f = (v: number) => ((v /= 255) <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
       return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
     };
-    const visible = (el: Element) => el.checkVisibility({ visibilityProperty: true, opacityProperty: true });
+    // Inert controls (the hidden phone dock, the closed menu) are not on screen for anyone; they are checked
+    // in their visible state by their own specs.
+    const visible = (el: Element) =>
+      !el.closest("[inert]") && el.checkVisibility({ visibilityProperty: true, opacityProperty: true });
     return [...document.querySelectorAll('[data-slot="button"]')].filter(visible).map((el) => {
       el.scrollIntoView({ block: "center" });
       const fg = lum(rgba(getComputedStyle(el).color));

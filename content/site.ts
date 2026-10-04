@@ -44,6 +44,7 @@ export const siteContent = {
     whatsappShort: "וואטסאפ",
     callShort: "חיוג",
     navLabel: "ניווט ראשי",
+    dockLabel: "יצירת קשר מהירה",
     menuLabel: "תפריט",
     openMenu: "פתיחת תפריט",
     closeMenu: "סגירת תפריט",
