@@ -9,11 +9,16 @@ test("name heading, content paragraphs and only content-backed facts", async ({ 
   await page.goto("/");
   await expect(page.locator("#about-title")).toHaveText("עו״ד יוסי שוקרון כהן");
   const facts = page.locator(`${SECTION} dl > div`);
-  await expect(facts.locator("dt")).toHaveText(["ניסיון", "הסמכה", "משרד"]);
-  await expect(facts.locator("dd")).toHaveText(["30 שנה", "עורך דין ונוטריון", "חדרה"]);
-  // Education is missing from content, so it is left out rather than shown as a placeholder.
-  await expect(page.locator(SECTION)).not.toContainText("השכלה");
+  await expect(facts.locator("dt")).toHaveText(["ניסיון", "הסמכה", "משרד", "השכלה"]);
+  await expect(facts.locator("dd")).toHaveText([
+    "23 שנה",
+    "עו״ד 2003 · נוטריון 2015",
+    "חדרה",
+    "משפטים ומנהל עסקים, המכללה האקדמית נתניה",
+  ]);
   await expect(page.locator(SECTION)).not.toContainText("[לאישור]");
+  // About is the one first-person section (owner decision).
+  await expect(page.locator(SECTION)).toContainText("העיקרון שמנחה אותי");
 });
 
 test("photo repeats the hero person, so it is decorative (empty alt)", async ({ page }) => {
@@ -23,19 +28,10 @@ test("photo repeats the hero person, so it is decorative (empty alt)", async ({ 
   await expect(img).toHaveAttribute("loading", "lazy");
 });
 
-test("no illustrative signature: omitted until the real one is in content", async ({ page }) => {
+test("no signature at all (owner decision)", async ({ page }) => {
   await page.goto("/");
-  const count = await page.locator(`${SECTION} [data-signature]`).count();
-  const hasSignature = await page.evaluate(async () => {
-    const res = await fetch("/");
-    return (await res.text()).includes("data-signature");
-  });
-  expect(count > 0).toBe(hasSignature);
+  await expect(page.locator(`${SECTION} svg path`)).toHaveCount(0);
 });
-
-/** Offset of the signature stroke: 1 = not drawn, 0 = complete. */
-const offset = (page: Page) =>
-  page.locator(`${SECTION} .signature-path`).evaluate((el) => Number(getComputedStyle(el).strokeDashoffset.replace("px", "")));
 
 async function centreSection(page: Page, fraction: number) {
   await page.evaluate((f) => {
@@ -44,29 +40,6 @@ async function centreSection(page: Page, fraction: number) {
   }, fraction);
   await page.waitForTimeout(300);
 }
-
-test.describe("signature drawing (runs once the real signature is in content)", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto("/");
-    test.skip((await page.locator(`${SECTION} [data-signature]`).count()) === 0, "no signature in content yet");
-  });
-
-  test("draws with scroll and is complete with the section centred", async ({ page }) => {
-    await expect(page.locator("html")).toHaveClass(/motion-ready/);
-    await centreSection(page, 1.6);
-    expect(await offset(page)).toBe(1);
-    await centreSection(page, 0.5);
-    await expect.poll(() => offset(page)).toBe(0);
-  });
-
-  test.describe("reduced motion", () => {
-    test.use({ reducedMotion: "reduce" });
-    test("static and complete", async ({ page }) => {
-      await centreSection(page, 1.6);
-      expect(await offset(page)).toBe(0);
-    });
-  });
-});
 
 test("screenshots", async ({ page }, info) => {
   await page.goto("/");
