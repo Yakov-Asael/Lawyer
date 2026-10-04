@@ -1,7 +1,7 @@
-# 05 30 years
+# 05 Years of practice
 
 ## Purpose
-Make the one hard number the office has (30 years) physical and memorable.
+Make the one hard number the office has (23 years) physical and memorable.
 
 ## Content
 `office.yearsOfPractice`, `years.heading`, `years.body`, `office.education` (optional; omitted if missing).
@@ -34,4 +34,4 @@ The numeral is decorative (`aria-hidden`); the H2 carries the fact in words.
 ## Acceptance criteria
 - [ ] Numeral fully filled by the time the section center passes the viewport center.
 - [ ] No invented claims in the body copy (years, city, courts only).
-- [ ] Education line renders only when `office.education` exists.
+- [x] Education moved to the About facts (prototype, 2026-10-04); the body carries the licensing years.
