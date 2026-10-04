@@ -41,6 +41,22 @@ Rules:
   no smooth scroll; everything renders in its final state.
 - One rAF loop for the whole page, paused when the tab is hidden.
 
+## Implementation (built)
+| Piece | File | API |
+|---|---|---|
+| Pure math | `src/lib/motion/progress.ts` | `clamp01`, `viewportProgress(rect, vh)`, `remap(p, start, span)` |
+| Frame loop | `src/lib/motion/scroll-loop.ts` | `onFrame(cb)` returns unsubscribe; runs only with subscribers, pauses when hidden |
+| Reveal observer | `src/lib/motion/reveal-observer.ts` | One shared IntersectionObserver, `observeOnce(el, cb)` |
+| Provider | `src/components/motion/MotionProvider.tsx` | `useMotion()`: `enabled`, `stilled` / `setStilled` (for spec 15), `stopScroll()` / `startScroll()` (for menus) |
+| `<Reveal>` | `src/components/motion/Reveal.tsx` | `as`, `delay` (ms) |
+| `<MaskText>` | `src/components/motion/MaskText.tsx` | `as`, `lines[]`, `by: "line" \| "word"`, `stacked`, `delay`, `stagger`, `lineClassNames[]` |
+| `useScrollProgress` | `src/components/motion/use-scroll-progress.ts` | `useScrollProgress(ref, (p) => ...)`: a callback that writes styles, so scrolling never re-renders React. Called once with `1` when motion is off |
+
+Notes:
+- `html.motion` is the only switch for hidden start states. The transition sits on the revealed state, so arming
+  motion after hydration hides instantly instead of fading content out.
+- Lenis anchor scrolling moves focus to the target (tabindex -1 if needed) and updates the URL hash, like a native anchor.
+
 ## Acceptance criteria
 - [ ] `lang="he"` and `dir="rtl"` on `<html>`; skip link works with Tab + Enter.
 - [ ] No horizontal scroll at 320, 390, 768, 1024, 1440px.
