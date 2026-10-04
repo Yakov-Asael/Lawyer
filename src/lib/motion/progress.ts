@@ -17,3 +17,18 @@ export function remap(progress: number, start: number, span: number): number {
   if (span <= 0) return progress >= start ? 1 : 0;
   return clamp01((progress - start) / span);
 }
+
+/**
+ * Reading progress through a block of text (statement scrub, spec 04): 0 when the block's top reaches
+ * `startAt` of the viewport height, 1 after scrolling the block's height plus `extra` of the viewport.
+ */
+export function readingProgress(
+  rect: Pick<DOMRect, "top" | "height">,
+  viewportHeight: number,
+  startAt = 0.82,
+  extra = 0.25,
+): number {
+  const span = rect.height + viewportHeight * extra;
+  if (span <= 0) return 1;
+  return clamp01((viewportHeight * startAt - rect.top) / span);
+}

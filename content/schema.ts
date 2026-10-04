@@ -103,7 +103,7 @@ export const Site = z
       subEmphasis: copy,
       portraitAlt: copy,
     }),
-    statement: z.object({ text: copy, highlight: copy, footLabel: copy, footText: copy }),
+    statement: z.object({ label: copy, text: copy, highlight: copy, footLabel: copy, footText: copy }),
     years: z.object({ eyebrow: copy, heading: copy, body: copy }),
     practiceAreas: z.array(PracticeArea).length(5),
     process: z.array(ProcessStep).length(3),
