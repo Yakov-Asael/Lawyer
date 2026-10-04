@@ -1,11 +1,12 @@
 import { expect, test } from "./fixtures";
 
-/** Spec 16: metadata, structured data, sitemap/robots and the legal pages. */
+/** Specs 16 and 17: metadata, structured data, sitemap/robots and the legal pages. */
 
 const OFFICE = { name: "עו״ד יוסי שוקרון כהן", address: "הרברט סמואל 27", city: "חדרה", phone: "+972522521127" };
 const LEGAL = [
   { path: "/accessibility-statement", title: "הצהרת נגישות" },
   { path: "/privacy-policy", title: "מדיניות פרטיות" },
+  { path: "/terms", title: "תקנון האתר" },
 ] as const;
 
 test.describe("home metadata", () => {
@@ -132,7 +133,7 @@ for (const { path, title } of LEGAL) {
   });
 }
 
-test("footer and accessibility menu link to both legal pages", async ({ page }) => {
+test("footer and accessibility menu link to every legal page", async ({ page }) => {
   await page.goto("/");
   const footer = page.getByRole("contentinfo");
   for (const { path, title } of LEGAL) await expect(footer.getByRole("link", { name: title })).toHaveAttribute("href", path);
@@ -146,4 +147,31 @@ test("legal pages are reachable from the footer of a legal page", async ({ page 
   await page.getByRole("contentinfo").getByRole("link", { name: "מדיניות פרטיות" }).click();
   await expect(page).toHaveURL(/\/privacy-policy$/);
   await expect(page.locator("h1")).toHaveText("מדיניות פרטיות");
+});
+
+test.describe("terms (spec 17)", () => {
+  test("no-advice and no-relationship clauses are visible without expanding anything", async ({ page }) => {
+    await page.goto("/terms");
+    for (const [n, heading] of [[2, "אין ייעוץ משפטי"], [3, "אין יחסי עורך דין ולקוח"]] as const) {
+      const clause = page.locator(`#clause-${n}`);
+      await expect(clause.locator("h2")).toHaveText(`${n}.${heading}`);
+      await expect(clause.locator("p").first()).toBeVisible();
+    }
+  });
+
+  test("every clause has a working anchor; clause links lead to privacy and accessibility", async ({ page }) => {
+    await page.goto("/terms");
+    const count = await page.locator("article > section").count();
+    expect(count).toBe(13);
+    for (let n = 1; n <= count; n++) await expect(page.locator(`#clause-${n} h2`)).toHaveText(new RegExp(`^${n}\\.`));
+    await page.goto("/terms#clause-12");
+    await expect(page.locator("#clause-12")).toBeInViewport();
+    await page.locator("#clause-8").getByRole("link", { name: "מדיניות פרטיות" }).click();
+    await expect(page).toHaveURL(/\/privacy-policy$/);
+    await page.goto("/terms");
+    await expect(page.locator("#clause-9").getByRole("link", { name: "הצהרת נגישות" })).toHaveAttribute(
+      "href",
+      "/accessibility-statement",
+    );
+  });
 });

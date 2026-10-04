@@ -45,7 +45,19 @@ Texts live in `/content/legal/*.ts`, not in components.
 - Linked from the footer ("תקנון האתר") and from the accessibility menu footer.
 
 ## Acceptance criteria
-- [ ] `/terms` renders from content, with an "updated" date and working in-page anchors for every clause.
-- [ ] Clauses 2 and 3 (no advice, no attorney-client relationship) are present and visible without expanding anything.
-- [ ] Footer and accessibility menu link to `/terms`; the page passes the same accessibility checks as the home page.
-- [ ] Jurisdiction clause is filled before launch (build fails on the placeholder).
+- [x] `/terms` renders from content, with an "updated" date and working in-page anchors for every clause.
+- [x] Clauses 2 and 3 (no advice, no attorney-client relationship) are present and visible without expanding anything.
+- [x] Footer and accessibility menu link to `/terms`; the page passes the same accessibility checks as the home page.
+- [x] Jurisdiction clause is filled before launch (build fails on the placeholder).
+
+## Implementation (built)
+- Route `/terms` in `src/app/(legal)/terms`, rendered by the shared `LegalDocument` template from spec 16
+  (title card, updated date, sticky TOC on desktop / `<details>` on phones, numbered clauses with `#clause-N`
+  anchors, contact card). Paths stay as in content: `/accessibility-statement`, `/privacy-policy`, `/terms`.
+- Content in `content/legal/terms.ts`: the 13 clauses of the outline. Clauses 8 and 9 point to the privacy policy
+  and the accessibility statement through a new optional `links` field on `LegalSection` (internal paths only).
+- Clause 12 (jurisdiction) carries a placeholder, so a production build fails until Yossi sets it; the page is also
+  `approved: false` like the other drafts.
+- Accessibility menu footer: reset on its own line, then the three legal links under a hairline.
+- Tests: unit (jurisdiction blocks production, clause order) and e2e (clauses 2 and 3 visible without expanding,
+  13 anchors, links to privacy and accessibility, the shared contrast, console, TOC and contact checks).

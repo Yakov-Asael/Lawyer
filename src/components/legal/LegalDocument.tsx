@@ -1,4 +1,4 @@
-import { ChevronDown } from "lucide-react";
+import { ArrowLeft, ChevronDown } from "lucide-react";
 import type { LegalPage } from "@content";
 import { site } from "@content";
 import { Ruled, Seal } from "@/components/shared";
@@ -106,6 +106,22 @@ export function LegalDocument({ page }: { page: LegalPage }) {
                           className="relative ps-6 before:absolute before:start-0 before:top-[0.72em] before:size-[6px] before:rounded-full before:bg-brass"
                         >
                           {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {section.links && (
+                    <ul className="flex flex-wrap gap-x-6 gap-y-2">
+                      {section.links.map((link) => (
+                        <li key={link.href}>
+                          <a
+                            href={link.href}
+                            className="inline-flex min-h-11 items-center gap-2 font-semibold text-ink underline decoration-bark underline-offset-[5px] transition-colors hover:decoration-brass-deep"
+                          >
+                            {link.label}
+                            {/* "Forward" points left in RTL. */}
+                            <ArrowLeft className="size-4 text-brass-deep" strokeWidth={1.8} aria-hidden="true" />
+                          </a>
                         </li>
                       ))}
                     </ul>

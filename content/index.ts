@@ -1,5 +1,6 @@
 import { accessibilityPage } from "./legal/accessibility";
 import { privacyPage } from "./legal/privacy";
+import { termsPage } from "./legal/terms";
 import {
   LegalPage,
   PLACEHOLDER_PATTERN,
@@ -34,8 +35,8 @@ export function findPlaceholders(value: unknown, path = ""): string[] {
 /** Parse at import time so a malformed field fails the build, not the visitor. */
 export const site: Site = Site.parse(siteContent);
 
-/** Legal pages (specs 16, 17), validated like the rest of the content. Terms join in spec 17. */
-export const legalPages: readonly LegalPage[] = [accessibilityPage, privacyPage].map((page) => LegalPage.parse(page));
+/** Legal pages (specs 16, 17), validated like the rest of the content. */
+export const legalPages: readonly LegalPage[] = [accessibilityPage, privacyPage, termsPage].map((page) => LegalPage.parse(page));
 
 /** The route of each legal page, from the paths the footer and accessibility menu already link to. */
 export const LEGAL_PATHS: Record<LegalSlug, string> = {
