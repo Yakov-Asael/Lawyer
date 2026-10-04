@@ -31,12 +31,14 @@ export const Office = z.object({
   whatsappE164: z.string().regex(/^9725\d{8}$/),
   email: z.email(),
   yearsOfPractice: z.number().int().positive(),
+  /** Years of admission, as confirmed by Yossi (lawyer, notary). */
+  licensed: z.object({ lawyer: z.number().int().min(1950), notary: z.number().int().min(1950) }),
   hours: copy.optional(),
   accessAndParking: copy.optional(),
   education: copy.optional(),
 });
 
-export const PracticeAreaId = z.enum(["family", "torts", "real-estate", "notary"]);
+export const PracticeAreaId = z.enum(["family", "real-estate", "torts", "civil", "notary"]);
 
 export const PracticeArea = z.object({
   id: PracticeAreaId,
@@ -107,7 +109,7 @@ export const Site = z
     years: z.object({ eyebrow: copy, heading: copy, body: copy }),
     /** Head of the practice-areas section (spec 06). */
     areas: z.object({ eyebrow: copy, line1: copy, line2: copy, intro: copy }),
-    practiceAreas: z.array(PracticeArea).length(4),
+    practiceAreas: z.array(PracticeArea).length(5),
     /** Reviews section copy (spec 09). */
     reviewsHead: z.object({
       eyebrow: copy,
@@ -120,7 +122,9 @@ export const Site = z
       prev: copy,
       next: copy,
       readMore: copy,
-      readLess: copy,
+      /** Reader dialog (owner feedback): accessible title and close button. */
+      readerTitle: copy,
+      close: copy,
     }),
     /** Approved reviews only, each with the client's consent (option A: added by hand from the submission email). */
     reviews: z.array(Review),
@@ -133,11 +137,17 @@ export const Site = z
       /** The office name split over two lines; joined with a space it must equal office.name. */
       heading: z.tuple([copy, copy]),
       paragraphs: z.array(copy).min(1),
-      factLabels: z.object({ experience: copy, license: copy, office: copy, education: copy, years: copy }),
+      factLabels: z.object({
+        experience: copy,
+        license: copy,
+        office: copy,
+        education: copy,
+        years: copy,
+        /** Licensing fact, e.g. "עו״ד 2003 · נוטריון 2015": {lawyer} and {notary} come from office.licensed. */
+        licenseValue: copy.refine((s) => s.includes("{lawyer}") && s.includes("{notary}"), "needs {lawyer} and {notary}"),
+      }),
       /** Empty while the photo repeats the hero portrait (decorative); descriptive once it shows the office. */
       photoAlt: z.string(),
-      /** Yossi's real signature as an SVG path. Omitted until it exists: never an illustrative stand-in. */
-      signature: z.object({ viewBox: z.string().regex(/^\d+ \d+ \d+ \d+$/), path: z.string().min(10) }).optional(),
     }),
     // Reviews are not in this file: approved reviews come from the database (specs 18, 19).
     /** Visit section copy (spec 11). Address, hours and access come from `office`. */
@@ -172,7 +182,7 @@ export const Site = z
   .refine(
     (s) =>
       s.practiceAreas.map((a) => a.id).join() === PracticeAreaId.options.join(),
-    { message: "practiceAreas must be family, torts, real-estate, notary in that order", path: ["practiceAreas"] },
+    { message: "practiceAreas must be family, real-estate, torts, civil, notary in that order", path: ["practiceAreas"] },
   );
 
 export type Office = z.infer<typeof Office>;
