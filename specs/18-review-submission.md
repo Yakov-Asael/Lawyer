@@ -45,8 +45,35 @@ No database and no admin panel in v1. Volume is a few reviews a year; publishing
 - Copy must not ask for case details; the hint says to avoid personal or case-identifying information.
 
 ## Acceptance criteria
-- [ ] Empty submit shows 4 field errors and the consent error; focus lands on the first invalid field.
+- [x] Empty submit shows 4 field errors and the consent error; focus lands on the first invalid field.
 - [ ] Valid submit reaches Netlify Forms (and the notification email) and shows the thank-you state; nothing appears on the site.
-- [ ] `/review?area=torts` opens with "נזיקין וביטוח" selected.
+- [x] `/review?area=torts` opens with "נזיקין וביטוח" selected.
 - [ ] A bot filling the honeypot is dropped by Netlify (no submission, no email).
-- [ ] Keyboard-only and screen-reader flows work end to end at 390 and 1440.
+- [x] Keyboard-only and screen-reader flows work end to end at 390 and 1440.
+
+## Implementation (built)
+- **Form** (`src/components/review/ReviewForm.tsx`): shared by the dialog and the page. Validation runs on submit,
+  then live so a fixed error clears. Each error sits under its field in words, with `aria-invalid` and
+  `aria-describedby`. Focus moves to the first invalid field. The counter shows `n / 600`. Copy lives in
+  `site.reviewForm`, and the limits live in `src/lib/review-form.ts`; a test checks that the copy quotes them.
+- **Logic** (`src/lib/review-form.ts`, unit-tested): `validateReview`, `normalizeIlPhone` (mobile, 07X and
+  landlines; accepts +972), `encodeReview` (area sent as its label so the email reads naturally, phone normalised)
+  and `areaFromParam` (unknown values ignored).
+- **Netlify Forms**: `public/__forms.html` declares form `review` with `netlify-honeypot="bot-field"`; the site posts
+  urlencoded to `/__forms.html`, as the Netlify Next.js runtime requires. A test keeps the field names in sync.
+- **Dialog** (`ReviewDialog.tsx`): a native `<dialog>` with `showModal()`. The browser handles the focus trap, Esc
+  and the inert page; the backdrop click, the Lenis scroll lock and the focus return are ours. Phones get a bottom
+  sheet and 700px+ a centred panel at most 560px. It rises in under `html.motion` only. A typed draft survives a
+  close; a sent form resets.
+- **Entry points**: "השאירו המלצה" (ghost, pen icon) sits in the slider foot opposite the arrows, or under the intro
+  while there are no reviews. `/review` uses the legal template (shared `LegalTitleCard`), is `noindex` and stays out
+  of the sitemap.
+- **Server error**: the typed values stay, plus an alert with a WhatsApp link that carries the review text.
+- **Dock**: the phone dock steps aside while a text field has focus, so it never covers the field or sits on the
+  keyboard.
+- **Privacy policy**: the review-form clause now names the fields, says the phone is used only to verify the review
+  and is never published, and says the submission is deleted after publishing or rejection.
+- **Verified with Playwright stubs** (the container cannot reach Netlify): the payload, the thank-you, the error
+  path, the keyboard flow, the honeypot wiring, and `?area=torts` → נזיקין וביטוח.
+- **Open: verify on a Netlify deploy preview.** Submit once and confirm the email arrives. Then fill the honeypot
+  and confirm Netlify drops it. Form notifications: Netlify UI → Forms → review → Form notifications → Email.

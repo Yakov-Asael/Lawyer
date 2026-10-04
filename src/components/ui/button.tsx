@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef, ComponentPropsWithRef } from "react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -60,7 +60,7 @@ export function Button({
   size,
   type = "button",
   ...props
-}: ComponentPropsWithoutRef<"button"> & ButtonVariantProps) {
+}: ComponentPropsWithRef<"button"> & ButtonVariantProps) {
   return <button type={type} data-slot="button" className={cn(buttonVariants({ variant, shape, size }), className)} {...props} />;
 }
 

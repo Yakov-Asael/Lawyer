@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import type { ReactNode } from "react";
 import { site, type Review } from "@content";
 import { Carousel, CarouselContent, CarouselItem, useCarousel } from "@/components/ui/carousel";
 import { ReviewCard } from "./ReviewCard";
@@ -9,7 +10,7 @@ import { ReviewCard } from "./ReviewCard";
  * Endless reviews slider (spec 09). Embla loops by moving the real slides, so there are no clones and assistive tech
  * meets each review once. Phones: one centred card with peeks, swipe only. 900px+: three cards and arrows.
  */
-export function ReviewsSlider({ reviews }: { reviews: readonly Review[] }) {
+export function ReviewsSlider({ reviews, action }: { reviews: readonly Review[]; action?: ReactNode }) {
   const labels = site.reviewsHead;
 
   return (
@@ -30,7 +31,11 @@ export function ReviewsSlider({ reviews }: { reviews: readonly Review[] }) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <Arrows prevLabel={labels.prev} nextLabel={labels.next} />
+      {/* Foot row: the "leave a review" action at the start, desktop arrows at the end. */}
+      <div className="mt-[18px] flex items-center justify-between gap-4 px-gutter desk:px-0">
+        <div>{action}</div>
+        <Arrows prevLabel={labels.prev} nextLabel={labels.next} />
+      </div>
     </Carousel>
   );
 }
@@ -42,7 +47,7 @@ function Arrows({ prevLabel, nextLabel }: { prevLabel: string; nextLabel: string
     "grid size-[52px] place-items-center rounded-full border-[1.5px] border-on-dark/35 text-on-dark transition-colors duration-[250ms] hover:border-brass hover:bg-brass hover:text-ink [&_svg]:size-5";
 
   return (
-    <div data-arrows className="mt-[18px] hidden justify-end gap-2.5 desk:flex">
+    <div data-arrows className="hidden gap-2.5 desk:flex">
       <button type="button" aria-label={prevLabel} onClick={scrollPrev} className={button}>
         <ArrowRight strokeWidth={1.8} aria-hidden="true" />
       </button>
