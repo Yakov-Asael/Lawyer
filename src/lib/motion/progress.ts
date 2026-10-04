@@ -41,3 +41,22 @@ export function overlapRatio(card: Pick<DOMRect, "bottom" | "height">, next: Pic
   if (card.height <= 0) return 0;
   return clamp01((card.bottom - next.top) / card.height);
 }
+
+/** Practice-area stack geometry (spec 06): every file sticks here; each tab is this tall. */
+export const FILE_STICK_TOP = 128;
+export const FILE_TAB = 44;
+/** Distance over which a file lifts as the next one arrives. */
+export const FILE_FOLD_SPAN = 220;
+
+/**
+ * How far the next file has arrived (0..1), from its untransformed top. The current file lifts by
+ * `FILE_TAB * foldProgress`, so at rest only the previous tab (at 84px) and the current tab (at 128px) show.
+ */
+export function foldProgress(nextTop: number, stick = FILE_STICK_TOP, span = FILE_FOLD_SPAN): number {
+  return clamp01((stick + span - nextTop) / span);
+}
+
+/** A file is hidden once the file two places later has (nearly) reached the stick line, so no wider tab peeks out. */
+export function foldHidden(laterTop: number | undefined, stick = FILE_STICK_TOP, margin = 60): boolean {
+  return laterTop !== undefined && laterTop < stick + margin;
+}

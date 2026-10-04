@@ -6,7 +6,7 @@ before launch.
 
 ## Metadata
 - `<title>`: "עו״ד יוסי שוקרון כהן | עורך דין ונוטריון בחדרה".
-- Description (≤155 chars) naming the four practice areas and Hadera.
+- Description (≤155 chars) naming the five practice areas and Hadera.
 - Canonical URL (domain TBD), Open Graph + Twitter card with a designed 1200x630 image (seal + name on `ink`).
 - Favicon and app icons from the seal monogram.
 
