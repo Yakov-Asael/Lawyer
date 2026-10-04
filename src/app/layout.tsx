@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Assistant, Frank_Ruhl_Libre } from "next/font/google";
 import { site } from "@content";
+import { A11yMenu } from "@/components/a11y/A11yMenu";
 import { ContactDock } from "@/components/dock/ContactDock";
 import { Footer } from "@/components/footer/Footer";
 import { Header } from "@/components/header/Header";
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </main>
           <Footer />
           <ContactDock />
+          <A11yMenu />
         </MotionProvider>
       </body>
     </html>

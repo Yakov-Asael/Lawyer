@@ -2,7 +2,7 @@
 
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useSyncExternalStore } from "react";
 import { inPageHash } from "@/lib/in-page-hash";
 import { onFrame } from "@/lib/motion";
 
@@ -40,6 +40,17 @@ const MotionContext = createContext<MotionContextValue>({
 export const useMotion = () => useContext(MotionContext);
 
 const subscribeNever = () => () => {};
+
+/** "Stop animations" lives as a class on <html> (set before paint by the boot script); React follows it. */
+const STILL_CLASS = "a11y-still";
+
+function subscribeStill(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+  return () => observer.disconnect();
+}
+
+const setStilledClass = (stilled: boolean) => document.documentElement.classList.toggle(STILL_CLASS, stilled);
 
 const REDUCED_QUERY = "(prefers-reduced-motion: reduce)";
 
@@ -92,7 +103,11 @@ function handleAnchorClick(lenis: Lenis, event: MouseEvent) {
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
   const reduced = usePrefersReducedMotion();
-  const [stilled, setStilled] = useState(false);
+  const stilled = useSyncExternalStore(
+    subscribeStill,
+    () => document.documentElement.classList.contains(STILL_CLASS),
+    () => false,
+  );
   const enabled = !reduced && !stilled;
   const lenisRef = useRef<Lenis | null>(null);
 
@@ -127,7 +142,7 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
   const goTo = useCallback((hash: string) => goToHash(hash, lenisRef.current), []);
 
   const value = useMemo(
-    () => ({ enabled, stilled, setStilled, stopScroll, startScroll, goToHash: goTo }),
+    () => ({ enabled, stilled, setStilled: setStilledClass, stopScroll, startScroll, goToHash: goTo }),
     [enabled, stilled, stopScroll, startScroll, goTo],
   );
 

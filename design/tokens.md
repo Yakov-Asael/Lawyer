@@ -30,8 +30,8 @@ Verified contrast (WCAG): ink on stone 14.7:1, muted on stone 6.8:1, muted on ba
 ink on brass 7.4:1, brass-deep on stone 5.9:1, on-dark on field 11.7:1, on-dark-soft on field 6.9:1.
 **Never use `brass` for text on light grounds.**
 
-High-contrast mode (accessibility menu) overrides: `muted #2B312D`, `on-dark-soft #FFFFFF`, `brass-deep #5E4019`,
-`bark #B9B2A2`, `line-dark rgba(255,255,255,.4)`.
+High-contrast mode (accessibility menu) overrides, derived from the palette: `muted` = ink 85% + stone,
+`on-dark-soft` = on-dark, `brass-deep` = brass 45% + ink, `bark` = ink 25% + stone, `line-dark` = on-dark at 40%.
 
 ## Typography
 
