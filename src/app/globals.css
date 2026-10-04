@@ -35,6 +35,10 @@
   --review-shadow: 0 24px 50px -30px rgb(0 0 0 / 0.55);
   --file-shadow: 0 -1px 0 rgb(0 0 0 / 0.04), 0 24px 50px -30px color-mix(in srgb, var(--ink) 45%, transparent);
   --sheet-shadow: 0 -20px 60px -20px color-mix(in srgb, var(--ink) 50%, transparent);
+
+  /* Forms (spec 18): control edges at 3:1+ on paper; errors in a deep red that holds 4.5:1 on paper and stone. */
+  --control-edge: color-mix(in srgb, var(--ink) 38%, var(--paper));
+  --danger: #a3332b;
   --scrim: color-mix(in srgb, var(--ink) 55%, transparent);
 
   /* Focus ring. brass-deep on light grounds keeps the ring at 3:1+ against stone and paper;
@@ -100,6 +104,8 @@
   --color-line-dark: var(--line-dark);
   --color-brass-hover: var(--brass-hover);
   --color-focus: var(--focus);
+  --color-control-edge: var(--control-edge);
+  --color-danger: var(--danger);
   --color-map-ground: var(--map-ground);
   --color-map-edge: var(--map-edge);
 
@@ -147,6 +153,7 @@
   --shadow-map: var(--map-shadow);
   --shadow-fab: var(--fab-shadow);
   --shadow-panel: var(--panel-shadow);
+  --shadow-sheet: var(--sheet-shadow);
 
   /* Motion */
   --ease-out: var(--ease-out);

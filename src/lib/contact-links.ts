@@ -20,6 +20,11 @@ export function waLink(office: WaOffice, copy: WhatsappCopy, topic?: string): st
   return `https://wa.me/${office.whatsappE164}?text=${encodeURIComponent(whatsappMessage(copy, topic))}`;
 }
 
+/** https://wa.me/<number>?text=<encoded free text>, e.g. a review sent by WhatsApp when the form fails. */
+export function waTextLink(office: WaOffice, text: string): string {
+  return `https://wa.me/${office.whatsappE164}?text=${encodeURIComponent(text)}`;
+}
+
 /** tel:+972... */
 export function telLink(office: TelOffice): string {
   return `tel:${office.phoneE164}`;

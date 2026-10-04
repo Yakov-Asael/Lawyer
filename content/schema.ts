@@ -184,6 +184,32 @@ export const Site = z
       tocLabel: copy,
       contactLabels: z.object({ phone: copy, email: copy, address: copy }),
     }),
+    /** Review submission form (spec 18). Error texts quote the limits in src/lib/review-form.ts (tested). */
+    reviewForm: z.object({
+      open: copy,
+      title: copy,
+      note: copy,
+      close: copy,
+      labels: z.object({ name: copy, area: copy, review: copy, phone: copy }),
+      hints: z.object({ name: copy, review: copy, phone: copy }),
+      areaPlaceholder: copy,
+      consent: copy,
+      submit: copy,
+      sending: copy,
+      errors: z.object({
+        name: copy,
+        area: copy,
+        reviewShort: copy,
+        reviewLong: copy,
+        phone: copy,
+        consent: copy,
+        server: copy,
+      }),
+      serverFallback: copy,
+      whatsappMessage: copy,
+      doneTitle: copy,
+      doneBody: copy,
+    }),
     /** Search and sharing metadata (spec 16). */
     seo: z.object({
       description: copy.max(155),

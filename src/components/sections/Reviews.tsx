@@ -1,12 +1,13 @@
 import type { Review } from "@content";
 import { site } from "@content";
+import { ReviewDialog } from "@/components/review/ReviewDialog";
 import { SectionHeading } from "@/components/shared";
 import { getApprovedReviews } from "@/lib/reviews";
 import { ReviewsSlider } from "./ReviewsSlider";
 
 /**
  * Reviews (spec 09): curated by the office, published with consent. With no approved reviews the slider is not
- * rendered and the section shows a compact invitation instead.
+ * rendered and the section shows a compact invitation instead. Either way it offers "leave a review" (spec 18).
  */
 export function Reviews({ reviews = getApprovedReviews() }: { reviews?: readonly Review[] }) {
   const head = site.reviewsHead;
@@ -26,8 +27,21 @@ export function Reviews({ reviews = getApprovedReviews() }: { reviews?: readonly
           intro={empty ? head.empty : head.note}
           introClassName="mt-3.5 max-w-[26em]"
         />
+        {empty && (
+          <div className="mt-8">
+            <ReviewDialog />
+          </div>
+        )}
       </div>
-      {!empty && <ReviewsSlider reviews={reviews} />}
+      {!empty && (
+        <>
+          <ReviewsSlider reviews={reviews} />
+          {/* Centred under the slider (spec 09, owner feedback). */}
+          <div className="mt-[18px] flex justify-center px-gutter">
+            <ReviewDialog />
+          </div>
+        </>
+      )}
     </section>
   );
 }

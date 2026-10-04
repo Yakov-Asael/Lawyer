@@ -25,9 +25,12 @@ Emotional brief: seriousness, warmth, care.
 | `on-dark-soft` | `rgba(248,247,244,.72)` | Secondary text on dark grounds | |
 | `line-dark` | `rgba(248,247,244,.14)` | Hairlines on dark grounds | |
 | `focus` | `brass-deep` on light, `brass` inside `.on-dark` | Keyboard focus ring (2px, 3px offset) | |
+| `control-edge` | ink 38% + paper | Form control borders (3:1+ on paper) | |
+| `danger` | `#A3332B` | Form errors: text and invalid borders (spec 18) | |
+| `scrim` | ink at 55% | Backdrop behind the review dialog | |
 
 Verified contrast (WCAG): ink on stone 14.7:1, muted on stone 6.8:1, muted on bark 5.7:1, brass on ink 7.4:1,
-ink on brass 7.4:1, brass-deep on stone 5.9:1, on-dark on field 11.7:1, on-dark-soft on field 6.9:1.
+ink on brass 7.4:1, brass-deep on stone 5.9:1, danger on paper 6.8:1, danger on stone 6.4:1, on-dark on field 11.7:1, on-dark-soft on field 6.9:1.
 **Never use `brass` for text on light grounds.**
 
 High-contrast mode (accessibility menu) overrides, derived from the palette: `muted` = ink 85% + stone,
