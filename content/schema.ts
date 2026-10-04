@@ -59,6 +59,9 @@ export const Review = z.object({
   consentConfirmed: z.literal(true),
 });
 
+/** In-page navigation target: "#" + a section id. */
+export const NavLink = z.object({ label: copy, href: z.string().regex(/^#[a-z][a-z-]*$/) });
+
 export const Faq = z.object({ question: copy, answer: copy });
 
 /** Pre-filled WhatsApp messages. `{topic}` is replaced with a practice area's whatsappTopic. */
@@ -79,9 +82,19 @@ export const Site = z
       callLabel: copy.refine((s) => s.includes("{phone}"), "callLabel must contain {phone}"),
       wazeLabel: copy,
       mapsLabel: copy,
+      /** Short WhatsApp label for the compact header button. */
+      whatsappShort: copy,
+      /** Visible text of full-width call buttons (menu footer, dock). */
+      callShort: copy,
+      navLabel: copy,
+      menuLabel: copy,
+      openMenu: copy,
+      closeMenu: copy,
     }),
     /** Seal brand mark (spec 01): ring text around the monogram, and the word under it. */
     brand: z.object({ sealRing: copy, sealSub: copy }),
+    /** Header nav (desktop) and the fuller mobile menu (spec 02). */
+    navigation: z.object({ header: z.array(NavLink).min(1), menu: z.array(NavLink).min(1) }),
     hero: z.object({ line1: copy, line2: copy, sub: copy }),
     statement: z.object({ text: copy, highlight: copy, footLabel: copy, footText: copy }),
     years: z.object({ eyebrow: copy, heading: copy, body: copy }),
@@ -113,5 +126,6 @@ export type PracticeAreaId = z.infer<typeof PracticeAreaId>;
 export type ProcessStep = z.infer<typeof ProcessStep>;
 export type Review = z.infer<typeof Review>;
 export type Faq = z.infer<typeof Faq>;
+export type NavLink = z.infer<typeof NavLink>;
 export type WhatsappCopy = z.infer<typeof WhatsappCopy>;
 export type Site = z.infer<typeof Site>;

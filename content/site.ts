@@ -41,11 +41,33 @@ export const siteContent = {
     callLabel: "חיוג ל-{phone}",
     wazeLabel: "ניווט למשרד ב-Waze",
     mapsLabel: "המשרד ב-Google Maps",
+    whatsappShort: "וואטסאפ",
+    callShort: "חיוג",
+    navLabel: "ניווט ראשי",
+    menuLabel: "תפריט",
+    openMenu: "פתיחת תפריט",
+    closeMenu: "סגירת תפריט",
   },
 
   brand: {
     sealRing: `${office.title} · ${office.city} · שוקרון כהן ·`,
     sealSub: "נוטריון",
+  },
+
+  navigation: {
+    header: [
+      { label: "תחומי עיסוק", href: "#areas" },
+      { label: "אודות", href: "#about" },
+      { label: "שאלות נפוצות", href: "#faq" },
+      { label: "הגעה למשרד", href: "#visit" },
+    ],
+    menu: [
+      { label: "תחומי עיסוק", href: "#areas" },
+      { label: "אודות", href: "#about" },
+      { label: "המלצות", href: "#reviews" },
+      { label: "שאלות נפוצות", href: "#faq" },
+      { label: "הגעה למשרד", href: "#visit" },
+    ],
   },
 
   hero: {

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Assistant, Frank_Ruhl_Libre } from "next/font/google";
 import { site } from "@content";
+import { Header } from "@/components/header/Header";
 import { MotionProvider } from "@/components/motion";
 import "./globals.css";
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {site.ui.skipLink}
         </a>
         <MotionProvider>
+          <Header />
           <main id="content" tabIndex={-1} className="page-frame">
             {children}
           </main>

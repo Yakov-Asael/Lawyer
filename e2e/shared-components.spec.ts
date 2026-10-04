@@ -23,18 +23,25 @@ test("buttons pass 4.5:1 text contrast against their real background", async ({ 
       const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data;
       return { r: r!, g: g!, b: b!, a: a! / 255 };
     };
-    const bgOf = (el: Element | null): { r: number; g: number; b: number } => {
-      for (; el; el = el.parentElement) {
-        const c = rgba(getComputedStyle(el).backgroundColor);
+    // The ground actually painted behind the element: its own background, else the first opaque layer under its centre.
+    const bgOf = (el: Element) => {
+      const own = rgba(getComputedStyle(el).backgroundColor);
+      if (own.a > 0.99) return own;
+      const r = el.getBoundingClientRect();
+      for (const under of document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2)) {
+        if (under === el || el.contains(under)) continue;
+        const c = rgba(getComputedStyle(under).backgroundColor);
         if (c.a > 0.99) return c;
       }
-      return { r: 255, g: 255, b: 255 };
+      return rgba(getComputedStyle(document.body).backgroundColor);
     };
     const lum = ({ r, g, b }: { r: number; g: number; b: number }) => {
       const f = (v: number) => ((v /= 255) <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
       return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
     };
-    return [...document.querySelectorAll('[data-slot="button"]')].map((el) => {
+    const visible = (el: Element) => el.checkVisibility({ visibilityProperty: true, opacityProperty: true });
+    return [...document.querySelectorAll('[data-slot="button"]')].filter(visible).map((el) => {
+      el.scrollIntoView({ block: "center" });
       const fg = lum(rgba(getComputedStyle(el).color));
       const bg = lum(bgOf(el));
       const ratio = (Math.max(fg, bg) + 0.05) / (Math.min(fg, bg) + 0.05);
@@ -97,7 +104,11 @@ test("contact links open the right targets in a new tab", async ({ page }) => {
 
 test("buttons show a 2px focus ring on keyboard focus", async ({ page, isMobile }) => {
   test.skip(isMobile, "keyboard flow is checked on desktop");
-  for (let i = 0; i < 2; i++) await page.keyboard.press("Tab"); // skip link, then the first button
+  // Tab until the first button gets focus (skip link and header links come first).
+  for (let i = 0; i < 20; i++) {
+    await page.keyboard.press("Tab");
+    if (await page.evaluate(() => document.activeElement?.getAttribute("data-slot") === "button")) break;
+  }
   const ring = await page.evaluate(() => {
     const el = document.activeElement!;
     const s = getComputedStyle(el);

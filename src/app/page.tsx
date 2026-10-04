@@ -1,6 +1,6 @@
 import { practiceArea, site } from "@content";
 import { MaskText, Reveal } from "@/components/motion";
-import { ContactButtons, Seal, SectionHeading } from "@/components/shared";
+import { ContactButtons, Ruled, Seal, SectionHeading } from "@/components/shared";
 import { ButtonLink } from "@/components/ui/button";
 import { mapsLink, wazeLink } from "@/lib/contact";
 import { WazeIcon } from "@/components/icons";
@@ -16,7 +16,8 @@ export default function Home() {
 
   return (
     <>
-      <section className="on-dark rounded-lg bg-ink px-gutter py-section" aria-labelledby="shell-title">
+      <section className="on-dark relative isolate overflow-hidden rounded-lg bg-ink px-gutter pt-[120px] pb-section" aria-labelledby="shell-title">
+        <Ruled />
         <div className="mx-auto grid max-w-content items-center gap-12 desk:grid-cols-[1fr_auto]">
           <div>
             <MaskText
@@ -39,7 +40,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-gutter py-section" aria-labelledby="shell-years">
+      <section id="about" className="px-gutter py-section" aria-labelledby="shell-years">
         <div className="mx-auto max-w-content">
           <SectionHeading
             id="shell-years"
@@ -59,7 +60,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="on-dark flex flex-col items-center rounded-lg bg-ink px-gutter py-section text-center" aria-labelledby="shell-final">
+      <section id="visit" className="on-dark relative isolate flex flex-col items-center overflow-hidden rounded-lg bg-ink px-gutter py-section text-center" aria-labelledby="shell-final">
         <Seal variant="stamp" className="mb-8" />
         <SectionHeading
           id="shell-final"
