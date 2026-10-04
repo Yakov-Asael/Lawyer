@@ -176,7 +176,6 @@ export const siteContent = {
   reviewsHead: {
     eyebrow: "המלצות",
     heading: "מה אומרים לקוחות.",
-    // Wording proposed for the owner's confirmation (spec 09 left it open).
     note: "המלצות שנבחרו על ידי המשרד ומתפרסמות בהסכמת הלקוחות.",
     empty: "היו הראשונים לשתף איך היה לעבוד איתנו.",
     carouselLabel: "המלצות לקוחות",
@@ -188,7 +187,8 @@ export const siteContent = {
     close: "סגירה",
   },
 
-  // Approved reviews, newest first. Each needs the client's consent; none exist yet.
+  // Approved reviews, newest first, added by hand from the submission email (spec 18, option A).
+  // Each needs the client's consent; none exist yet.
   reviews: [],
 
   processHead: {

@@ -1,5 +1,9 @@
 # 19 Admin: review moderation (for Yossi)
 
+> **Deferred (decision 2026-10-03, option A).** v1 publishes reviews by hand from the submission email (spec 18).
+> This spec stays as the upgrade path if Yossi later wants to approve reviews himself; only `getApprovedReviews()`
+> and the form's target would change.
+
 ## Purpose
 A simple, private place where Yossi approves, edits or rejects submitted reviews. Built so it can later hold press
 items and cases (spec 20) without a redesign.

@@ -3,7 +3,8 @@
 Source of truth for every visual value. Extracted from the approved prototype (`design/prototype/index.html`).
 In code these live only as CSS variables / Tailwind theme values. Components never use raw values.
 
-Status: **palette pending Yossi's approval.** Changing a color means changing its value here and in the theme file.
+Status: **palette approved by the owner: cleangold** (clean white, deep navy, a touch of gold). Changing a color means
+changing its value here and in the theme file (`src/app/globals.css`).
 Nothing else.
 
 ## Color
@@ -12,21 +13,22 @@ Emotional brief: seriousness, warmth, care.
 
 | Token | Value | Role | Emotion |
 |---|---|---|---|
-| `ink` | `#152420` | Dark grounds (hero, final CTA, file 1), primary text on light | Seriousness |
-| `field` | `#24413A` | Committed sections (years, reviews, file 2) | Seriousness |
-| `brass` | `#B98A52` | Accent and primary buttons on dark grounds, file 5 (notary) | Warmth |
-| `brass-deep` | `#7E5829` | Accent text on light grounds (eyebrows, links, highlights) | Warmth |
-| `stone` | `#EEE9DF` | Page ground | Care |
-| `paper` | `#F7F4EE` | Raised surfaces (process card, file 3, review cards, panels) | Care |
-| `bark` | `#DCD6C9` | Secondary surface (visit), hairlines on light | Care |
-| `muted` | `#535A55` | Secondary text on light | |
-| `on-dark` | `#EEE9DF` | Text on dark grounds | |
-| `on-dark-soft` | `rgba(238,233,223,.72)` | Secondary text on dark grounds | |
-| `line-dark` | `rgba(238,233,223,.14)` | Hairlines on dark grounds | |
+| `ink` | `#14233A` | Dark grounds (hero, final CTA, file 1), primary text on light | Seriousness |
+| `field` | `#1F3452` | Committed sections (years, reviews, file 2) | Seriousness |
+| `brass` | `#CDAE6A` | Accent and primary buttons on dark grounds, file 5 (notary) | Warmth |
+| `brass-deep` | `#7A5B18` | Accent text on light grounds (eyebrows, links, highlights) | Warmth |
+| `stone` | `#F8F7F4` | Page ground | Care |
+| `paper` | `#FFFFFF` | Raised surfaces (process card, file 3, review cards, panels) | Care |
+| `bark` | `#E6E3DC` | Secondary surface (visit), hairlines on light | Care |
+| `muted` | `#55565C` | Secondary text on light | |
+| `on-dark` | `#F8F7F4` | Text on dark grounds | |
+| `on-dark-soft` | `rgba(248,247,244,.72)` | Secondary text on dark grounds | |
+| `line-dark` | `rgba(248,247,244,.14)` | Hairlines on dark grounds | |
 | `focus` | `brass-deep` on light, `brass` inside `.on-dark` | Keyboard focus ring (2px, 3px offset) | |
 
-Verified contrast (WCAG): ink on stone 13.3:1, muted on stone 5.9:1, muted on bark 4.9:1, brass on ink 5.2:1, ink on brass 5.2:1,
-brass-deep on stone 5.2:1, on-dark on field 9.1:1. **Never use `brass` for text on light grounds** (2.5:1).
+Verified contrast (WCAG): ink on stone 14.7:1, muted on stone 6.8:1, muted on bark 5.7:1, brass on ink 7.4:1,
+ink on brass 7.4:1, brass-deep on stone 5.9:1, on-dark on field 11.7:1, on-dark-soft on field 6.9:1.
+**Never use `brass` for text on light grounds.**
 
 High-contrast mode (accessibility menu) overrides: `muted #2B312D`, `on-dark-soft #FFFFFF`, `brass-deep #5E4019`,
 `bark #B9B2A2`, `line-dark rgba(255,255,255,.4)`.
@@ -95,7 +97,7 @@ Every motion has a `prefers-reduced-motion: reduce` fallback (content fully visi
 "Ruled legal pad": `repeating-linear-gradient` hairlines every 44px at 4.5% opacity on dark grounds, plus one brass
 margin line at 22% opacity near the inline end. Used in hero, final CTA and the mobile menu only.
 
-## Palette options (under review)
+## Palette options (history; cleangold chosen)
 
 The owner asked for warmer, softer options that still read as serious. All ten pass the same contrast checks
 (body text ≥4.5:1 on every ground it sits on). Switch live in the prototype with the "פלטות" button; each has its own
@@ -103,9 +105,9 @@ link (`#p-<name>`). The cooler midnight, olive and charcoal options were dropped
 
 | Name | ink | field | brass | brass-deep | stone | paper | bark | muted |
 |---|---|---|---|---|---|---|---|---|
-| eucalyptus (current) | #152420 | #24413A | #B98A52 | #7E5829 | #EEE9DF | #F7F4EE | #DCD6C9 | #535A55 |
+| eucalyptus (prototype v1) | #152420 | #24413A | #B98A52 | #7E5829 | #EEE9DF | #F7F4EE | #DCD6C9 | #535A55 |
 | navygold (first mockup) | #0B1220 | #16233A | #C9A24B | #7A5B18 | #F6F2E9 | #FBF8F2 | #E4DFD3 | #555A63 |
-| cleangold (clean, navy + gold) | #14233A | #1F3452 | #CDAE6A | #7A5B18 | #F8F7F4 | #FFFFFF | #E6E3DC | #55565C |
+| **cleangold (approved)** | #14233A | #1F3452 | #CDAE6A | #7A5B18 | #F8F7F4 | #FFFFFF | #E6E3DC | #55565C |
 | clean (clean, navy + steel) | #1B2F4B | #264468 | #D5E0EC | #1E3A5F | #F7F7F8 | #FFFFFF | #E4E4E7 | #52525B |
 | walnut | #2A1D17 | #4A3328 | #C8935B | #85502A | #F2EBE2 | #FAF6F0 | #E3D8CA | #5E534B |
 | cedar | #2B1A14 | #5A2E22 | #DDA65E | #86521A | #F3ECE4 | #FAF7F2 | #E6DACD | #5F534B |

@@ -6,21 +6,20 @@
 
 /*
  * Design tokens: the only place raw values live (design/tokens.md).
- * Palette is pending Yossi's approval, so every color is a variable: swapping a palette
- * means changing the values in this block and nothing else.
+ * Every color is a variable: changing the palette means changing the values in this block and nothing else.
  */
 :root {
   color-scheme: light;
 
-  /* Palette: eucalyptus (default) */
-  --ink: #152420;
-  --field: #24413a;
-  --brass: #b98a52;
-  --brass-deep: #7e5829;
-  --stone: #eee9df;
-  --paper: #f7f4ee;
-  --bark: #dcd6c9;
-  --muted: #535a55;
+  /* Palette: cleangold, the owner's final choice (clean, navy and gold). */
+  --ink: #14233a;
+  --field: #1f3452;
+  --brass: #cdae6a;
+  --brass-deep: #7a5b18;
+  --stone: #f8f7f4;
+  --paper: #ffffff;
+  --bark: #e6e3dc;
+  --muted: #55565c;
   --on-dark: var(--stone);
   --on-dark-soft: color-mix(in srgb, var(--on-dark) 72%, transparent);
   --line-dark: color-mix(in srgb, var(--on-dark) 14%, transparent);
