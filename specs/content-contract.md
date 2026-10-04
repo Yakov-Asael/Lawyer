@@ -86,4 +86,4 @@ const Site = z.object({
 | `about.paragraphs` (personal paragraph) | Done, edited from Yossi's text |
 | `faq[].answer` | Done except notary without a case. Never show prices (owner decision) |
 | `reviews` | None yet; owner curates with client consent |
-| High-resolution portrait, real signature, office photos | Missing |
+| High-resolution portrait, office photos | Missing (no signature: owner decision) |

@@ -171,7 +171,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .areas-head h2{font-size:clamp(2.3rem,5vw,4.6rem);line-height:1.02}
 .areas-head p{max-width:34em;color:var(--muted)}
 .files{display:grid;gap:clamp(24px,4vh,40px)}
-.file{position:sticky;top:calc(var(--i) * 44px + 84px)}
+.file{position:sticky;top:128px;will-change:transform}
 .file-tab{min-height:44px;box-sizing:border-box}
 .file-tab{display:flex;width:fit-content;align-items:center;gap:10px;margin-block-end:-1px;padding:10px 22px 12px;border-radius:14px 14px 0 0;font-size:14px;font-weight:700;letter-spacing:.06em}
 .file-body{border-radius:0 var(--r-md) var(--r-md) var(--r-md);padding:clamp(28px,4vw,52px);display:grid;gap:28px;min-height:clamp(340px,44vh,420px);box-shadow:0 -1px 0 rgba(0,0,0,.04),0 24px 50px -30px color-mix(in srgb,var(--ink) 45%,transparent)}
@@ -224,10 +224,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .fact:nth-child(odd){padding-inline-end:18px}
 .fact dt{font-size:13px;color:var(--muted);letter-spacing:.06em}
 .fact dd{margin:0;font-family:var(--serif);font-size:21px;font-weight:500}
-.signature{margin-block-start:34px;display:grid;gap:4px}
-.signature svg{width:min(300px,80%);height:auto}
-.signature path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.signature small{font-size:12px;color:var(--muted);opacity:.8}
 
 /* ---------- Reviews slider (curated by the office) ---------- */
 .reviews{position:relative;overflow:hidden;border-radius:var(--r-lg);background:var(--field);color:var(--on-dark);padding:clamp(70px,9vw,130px) 0}
@@ -250,8 +246,14 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .rs-card figcaption{margin-block-start:auto;padding-block-start:18px;font-weight:700;color:var(--brass-deep)}
 .rs-card figcaption span{display:block;font-weight:400;font-size:14px;color:var(--muted)}
 .rs-foot{display:flex;align-items:center;justify-content:center;gap:16px;margin-block-start:18px;padding-inline:var(--gutter)}
-.rs-arrows{display:none;gap:10px}
-@media (min-width:900px){.rs-foot{justify-content:space-between;padding-inline:0}.rs-arrows{display:flex}}
+.rs-stage{position:relative}
+.rs-arrows{display:none}
+/* Desktop: arrows sit on both sides of the cards, vertically centred on them (prev on the right in RTL). */
+@media (min-width:900px){
+  .rs{max-width:1316px;padding-inline:calc(var(--gutter) + 68px)}
+  .rs-arrows{display:flex;position:absolute;inset-block:6px 24px;inset-inline:-68px;align-items:center;justify-content:space-between;pointer-events:none}
+  .rs-btn{pointer-events:auto}
+}
 .rs-add{min-height:48px;font-size:15px}
 .rs-btn{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:transparent;border:1.5px solid color-mix(in srgb,var(--on-dark) 35%,transparent);color:var(--on-dark);transition:background .25s,border-color .25s,opacity .25s}
 .rs-btn:hover{background:var(--brass);border-color:var(--brass);color:var(--ink)}
@@ -716,10 +718,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
         <div class="fact"><dt>משרד</dt><dd>חדרה</dd></div>
         <div class="fact"><dt>השכלה</dt><dd>משפטים ומנהל עסקים, המכללה האקדמית נתניה</dd></div>
       </dl>
-      <div class="signature" aria-hidden="true">
-        <svg viewBox="0 0 320 90"><path data-sign d="M14 58 C 30 20, 46 18, 44 44 S 36 78, 58 60 S 84 22, 96 40 S 104 70, 124 52 C 138 40, 146 30, 152 46 S 168 66, 186 44 S 214 18, 222 42 S 240 64, 262 46 C 276 36, 290 34, 306 40 M 30 76 C 110 70, 200 70, 300 62"/></svg>
-        <small>חתימה להמחשה</small>
-      </div>
     </div>
   </section>
 
@@ -731,6 +729,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
       <p class="reviews-note rv" style="--d:.12s">[המלצות שנבחרו על ידי המשרד ופורסמו בהסכמת הלקוחות]</p>
     </div>
     <div class="rs" role="region" aria-roledescription="קרוסלה" aria-label="המלצות לקוחות">
+      <div class="rs-stage">
       <ul class="rs-track" tabindex="0">
         <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד פותחת אותו במלואו בחלון קריאה, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-haspopup="dialog" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>משפחה וירושה</span></figcaption></figure></li>
         <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד פותחת אותו במלואו בחלון קריאה, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-haspopup="dialog" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>נזיקין וביטוח</span></figcaption></figure></li>
@@ -739,12 +738,13 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
         <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד פותחת אותו במלואו בחלון קריאה, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-haspopup="dialog" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>משפחה וירושה</span></figcaption></figure></li>
         <li class="rs-card" data-rs><figure style="display:contents"><svg class="rs-q" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V15C0 6.7 4.4 1.7 13 0l1.5 3.4C9.6 5 7.2 8 7 12h7v14zm19 0V15c0-8.3 4.4-13.3 13-15l1.5 3.4C28.6 5 26.2 8 26 12h7v14z"/></svg><blockquote>[ציטוט מלא מההמלצה של הלקוח, כפי שנמסר ובהסכמתו. טקסט ארוך נחתך אחרי ארבע שורות, ולחיצה על קראו עוד פותחת אותו במלואו בחלון קריאה, בלי לצאת מהדף.]</blockquote><button class="rs-more" type="button" aria-haspopup="dialog" hidden>קראו עוד</button><figcaption>[שם הלקוח]<span>נזיקין וביטוח</span></figcaption></figure></li>
       </ul>
-      <div class="rs-foot">
-        <button class="btn btn-ghost rs-add" type="button" data-review-open aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>השאירו המלצה</button>
         <div class="rs-arrows">
           <button class="rs-btn" type="button" data-rs-prev aria-label="ההמלצות הקודמות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           <button class="rs-btn" type="button" data-rs-next aria-label="ההמלצות הבאות"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
         </div>
+      </div>
+      <div class="rs-foot">
+        <button class="btn btn-ghost rs-add" type="button" data-review-open aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>השאירו המלצה</button>
       </div>
     </div>
   </section>
@@ -1241,12 +1241,9 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   const spin = document.querySelector('[data-spin]');
   const fill = document.querySelector('[data-fill]');
   const track = document.querySelector('[data-track]');
-  const sign = document.querySelector('[data-sign]');
   const files = [...document.querySelectorAll('[data-file]')];
   const dock = document.querySelector('.dock');
   const hero = document.querySelector('.hero');
-  const signLen = sign.getTotalLength();
-  sign.style.strokeDasharray = signLen;
 
   function frame(t) {
     if (lenis && root.classList.contains('a11y-still')) { lenis.destroy(); lenis = null; }
@@ -1272,15 +1269,19 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
     const tp = clamp01((progress(track.closest(".steps-wrap")) - .25) / .35);
     track.style.transform = `scaleX(${tp})`;
 
-    const gp = clamp01((progress(sign.closest('.signature')) - .3) / .35);
-    sign.style.strokeDashoffset = signLen * (1 - gp);
-
     files.forEach((f, i) => {
       const next = files[i + 1];
       if (!next) return;
       const nr = next.getBoundingClientRect(), fr = f.getBoundingClientRect();
       const overlap = clamp01((fr.bottom - nr.top) / fr.height);
       f.style.filter = `brightness(${1 - overlap * 0.25})`;
+      // Fold the stack: as the next file arrives, this one lifts one tab height (44px), so only the previous
+      // and the current tab stay visible; older files end up exactly under the previous one.
+      const arrive = clamp01((128 + 220 - (nr.top - (parseFloat(next.style.transform.slice(11)) || 0))) / 220);
+      f.style.transform = `translateY(${-44 * arrive}px)`;
+      // Two files ahead: this one is fully folded under the previous tab, hide it so a wider tab never peeks out.
+      const after = files[i + 2];
+      f.style.visibility = after && after.getBoundingClientRect().top < 128 + 60 ? 'hidden' : '';
     });
 
     dock.classList.toggle('show', hero.getBoundingClientRect().bottom < vh * 0.4);

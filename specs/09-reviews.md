@@ -14,12 +14,12 @@ from day one. The "המלצות" nav link is hidden while empty.
 - Rounded `field` card; head (eyebrow, H2, note) in the 1180px container.
 - Cards: `paper` ground, `ink` text, 24px radius, brass quote mark SVG, quote 17px (15.5px phones) clamped to
   4 lines, "קראו עוד" button (only when the text overflows), name in `brass-deep` 700 + area in `muted`.
-- ≥900px: three cards visible in the container, arrows centered below (52px round, `on-dark` border; hover `brass`).
+- ≥900px: three cards visible in the container; arrows on both sides of the cards, vertically centered on them
+  (52px round, `on-dark` border; hover `brass`; "previous" on the right, "next" on the left in RTL). Owner feedback.
 - <900px: one centered card (`100vw - 2 * 11vw - 20px`) with the neighbors peeking on both sides; no arrows, swipe only.
 
 ## Adding a review
-A "השאירו המלצה" ghost button with a pen icon sits under the slider (desktop: at the start, arrows at the end;
-phones: centered). It opens the submission dialog (spec 18).
+A "השאירו המלצה" ghost button with a pen icon sits centered under the slider. It opens the submission dialog (spec 18).
 
 ## Behavior
 - Endless loop in both directions (arrows and swipe never hit an edge).

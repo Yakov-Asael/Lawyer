@@ -18,8 +18,10 @@ real estate, torts and insurance, civil and commercial, notary.
   `ink` button on light files).
 
 ## Motion (signature)
-- Files are `position: sticky`, `top: 84px + index * 44px` (44px = tab height), so each new file slides over the
-  previous one and the tabs stack in one even column, every label fully readable.
+- Files are `position: sticky`, `top: 128px`, so each new file slides over the previous one.
+- The stack folds to two tabs (owner feedback): as the next file arrives, the current one lifts 44px (one tab height)
+  with `translateY`, so at rest only the previous tab (at 84px) and the current tab (at 128px) are visible. Files two
+  or more back sit exactly under the previous one and are hidden (`visibility`), so a wider tab never peeks out.
 - A covered file only dims (`brightness(1 - overlap * .25)`). No scaling: every file keeps the same width so edges and
   tabs stay aligned (owner feedback).
 
@@ -36,6 +38,6 @@ Each file is an `<article>` with its headline as `<h3>`; service lists are `<ul>
 ## Acceptance criteria
 - [ ] Tab and body touch with zero gap (measured) at 1440 and 390; tab right edge equals body right edge.
 - [ ] Each CTA opens WhatsApp with its own topic in the message.
-- [ ] Scrolling shows all five tabs stacked 44px apart, labels fully readable, before the section ends.
+- [ ] While scrolling the stack, at most two tabs are visible at rest (previous at 84px, current at 128px), labels fully readable.
 - [ ] All five bodies share the same left and right edges while stacked (measured).
 - [ ] Service lists come from content; no hardcoded items.
