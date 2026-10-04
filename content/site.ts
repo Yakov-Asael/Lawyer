@@ -194,7 +194,19 @@ export const siteContent = {
   ],
 
   about: {
-    // First person (owner decision, 2026-10-04); the rest of the site stays neutral.
+    eyebrow: "אודות",
+    heading: ["עו״ד יוסי", "שוקרון כהן"],
+    factLabels: {
+      experience: "ניסיון",
+      license: "הסמכה",
+      office: "משרד",
+      education: "השכלה",
+      years: "שנה",
+      licenseValue: "עו״ד {lawyer} · נוטריון {notary}",
+    },
+    // Same portrait as the hero for now (decorative, so no alt). An office or at-work photo is an open item.
+    photoAlt: "",
+    // First person (owner decision, 2026-10-04); the rest of the site stays neutral. No signature (owner decision).
     paragraphs: [
       "העיקרון שמנחה אותי הוא שאין שני תיקים זהים ואין שני לקוחות זהים. לכן כל מקרה מתחיל בהיכרות עם האדם שמאחורי הבעיה: העובדות, המטרות, הצרכים והחששות. רק אחר כך בוחנים את כל האפשרויות, המשפטיות והמעשיות, ובוחרים יחד את הדרך המתאימה.",
       "לא בכל מחלוקת חייבים להגיע לבית המשפט. לעיתים הדרך הנכונה היא פתרון מוסכם, במשא ומתן או בגישור, שחוסך זמן, עלויות והליך ממושך. כשפתרון בהסכמה אינו אפשרי, אני מעניק ייצוג משפטי מלא לאורך כל ההליך.",

@@ -611,6 +611,7 @@ html.motion:not(.motion-ready) .track-fill {
   animation: motion-failsafe 0s 3s forwards;
 }
 
+
 html.motion:not(.motion-ready) .years-fill {
   animation: years-failsafe 0s 3s forwards;
 }

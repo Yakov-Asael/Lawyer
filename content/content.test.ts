@@ -57,6 +57,11 @@ describe("contract rules", () => {
     expect(Site.safeParse({ ...siteContent, practiceAreas: [b, a, c, d, e] }).success).toBe(false);
   });
 
+  it("keeps the about heading equal to the office name", () => {
+    const bad = { ...siteContent, about: { ...siteContent.about, heading: ["עו״ד יוסי", "כהן"] as [string, string] } };
+    expect(Site.safeParse(bad).success).toBe(false);
+  });
+
   it("requires review consent", () => {
     const review = { quote: "x".repeat(40), clientName: "ד״כ", area: "family", consentConfirmed: false };
     expect(Review.safeParse(review).success).toBe(false);
