@@ -92,7 +92,7 @@ test("contact links open the right targets in a new tab", async ({ page }) => {
     els.map((a) => new URL((a as HTMLAnchorElement).href).searchParams.get("text")),
   );
   expect(texts).toContain("שלום עו״ד שוקרון כהן, אשמח להתייעץ.");
-  expect(texts).toContain("שלום עו״ד שוקרון כהן, אשמח להתייעץ בנושא דיני משפחה.");
+  expect(texts).toContain("שלום עו״ד שוקרון כהן, אשמח להתייעץ בנושא דיני משפחה וירושה.");
 
   for (const link of await page.locator('a[href^="https://"], a[href^="tel:"]').all()) {
     await expect(link).toHaveAttribute("target", "_blank");

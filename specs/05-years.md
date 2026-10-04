@@ -1,7 +1,7 @@
-# 05 30 years
+# 05 Years of practice
 
 ## Purpose
-Make the one hard number the office has (30 years) physical and memorable.
+Make the one hard number the office has (23 years) physical and memorable.
 
 ## Content
 `office.yearsOfPractice`, `years.heading`, `years.body`, `office.education` (optional; omitted if missing).
