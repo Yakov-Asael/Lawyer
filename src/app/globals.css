@@ -603,6 +603,23 @@ html.motion:not(.intro) .hero-line > span {
   transform: scaleX(0);
 }
 
+/* FAQ (spec 10): smooth open and close of native <details>. Instant under reduced motion (global rule). */
+:root {
+  interpolate-size: allow-keywords;
+}
+
+.faq-item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.5s var(--ease-out),
+    content-visibility 0.5s allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+
 /* Failsafe: MotionBoot armed motion but the app never hydrated (script error, blocked bundle).
    Reveal everything after 3s. Once React marks html.motion-ready, this rule stops matching. */
 html.motion:not(.motion-ready) .reveal,

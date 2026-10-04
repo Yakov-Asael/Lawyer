@@ -150,6 +150,8 @@ export const Site = z
       photoAlt: z.string(),
     }),
     // Reviews are not in this file: approved reviews come from the database (specs 18, 19).
+    /** FAQ section copy (spec 10). */
+    faqHead: z.object({ eyebrow: copy, heading: copy, intro: copy }),
     faq: z.array(Faq).min(3),
     finalCta: z.object({ line1: copy, line2: copy, body: copy }),
     legal: z.object({

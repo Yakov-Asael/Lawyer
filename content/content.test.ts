@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { findPlaceholders, Review, Site, site } from "./index";
+import { blockingPlaceholders, findPlaceholders, Review, Site, site } from "./index";
 import { siteContent } from "./site";
 
 describe("site content", () => {
@@ -19,6 +19,12 @@ describe("site content", () => {
 
   it("never shows a price (owner decision)", () => {
     expect(JSON.stringify(siteContent)).not.toMatch(/₪|ש״ח|שקל/);
+  });
+
+  it("does not let FAQ answers block production (unanswered items are excluded instead)", () => {
+    const blocking = blockingPlaceholders(site);
+    expect(blocking.some((p) => p.startsWith("faq["))).toBe(false);
+    expect(blocking).toContain("office.accessAndParking");
   });
 
   it("reports open placeholders by path", () => {
