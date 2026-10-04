@@ -3,6 +3,7 @@ import { Reveal } from "@/components/motion";
 import { SectionHeading } from "@/components/shared";
 import { faqJsonLd, publishedFaq } from "@/lib/faq";
 import { splitNumbers } from "@/lib/numbers";
+import { jsonLdScript } from "@/lib/structured-data";
 
 /**
  * FAQ (spec 10). Native <details>/<summary>: keyboard operable, exposes its expanded state, and works without JS.
@@ -64,8 +65,8 @@ export function Faq() {
 
       <script
         type="application/ld+json"
-        // Built from the same items as the visible list; content is our own, serialised by JSON.stringify.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(items)).replace(/</g, "\\u003c") }}
+        // Built from the same items as the visible list.
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(faqJsonLd(items)) }}
       />
     </section>
   );

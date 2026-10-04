@@ -8,7 +8,7 @@ import type { Site } from "./schema";
  * Unknown optional facts (hours, parking, education) are omitted, not invented.
  */
 
-const office = {
+export const office = {
   name: "עו״ד יוסי שוקרון כהן",
   shortName: "יוסי שוקרון כהן",
   monogram: "ש״כ",
@@ -259,5 +259,15 @@ export const siteContent = {
     accessibilityLabel: "הצהרת נגישות",
     privacyLabel: "מדיניות פרטיות",
     termsLabel: "תקנון האתר",
+    backLabel: "חזרה לאתר",
+    updatedLabel: "עודכן לאחרונה",
+    tocLabel: "תוכן העניינים",
+    contactLabels: { phone: "טלפון", email: "דוא״ל", address: "כתובת" },
+  },
+
+  seo: {
+    // At most 155 characters (enforced by the contract): the four areas and the city.
+    description: `${office.name}, ${office.title} ב${office.city}: דיני משפחה, נזיקין וביטוח, מקרקעין וחוזים ושירותי נוטריון. ${office.yearsOfPractice} שנות ניסיון, פנייה בוואטסאפ או בטלפון.`,
+    ogImageAlt: `${office.name}, ${office.title} ב${office.city}`,
   },
 } satisfies z.input<typeof Site>;
