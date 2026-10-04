@@ -13,14 +13,18 @@ describe("site content", () => {
     expect(site.office.whatsappE164).toBe(`972${digits}`);
   });
 
-  it("lists the four practice areas in the agreed order", () => {
-    expect(site.practiceAreas.map((a) => a.id)).toEqual(["family", "torts", "real-estate", "notary"]);
+  it("lists the five practice areas in the agreed order", () => {
+    expect(site.practiceAreas.map((a) => a.id)).toEqual(["family", "real-estate", "torts", "civil", "notary"]);
+  });
+
+  it("never shows a price (owner decision)", () => {
+    expect(JSON.stringify(siteContent)).not.toMatch(/₪|ש״ח|שקל/);
   });
 
   it("reports open placeholders by path", () => {
     const open = findPlaceholders(site);
-    expect(open).toContain("about.paragraphs[0]");
-    expect(open.every((p) => p.startsWith("about.") || p.startsWith("faq["))).toBe(true);
+    expect(open).toContain("office.accessAndParking");
+    expect(open.every((p) => p === "office.accessAndParking" || p.startsWith("faq["))).toBe(true);
   });
 });
 
@@ -48,8 +52,8 @@ describe("contract rules", () => {
   });
 
   it("rejects practice areas out of order", () => {
-    const [a, b, c, d] = siteContent.practiceAreas;
-    expect(Site.safeParse({ ...siteContent, practiceAreas: [b, a, c, d] }).success).toBe(false);
+    const [a, b, c, d, e] = siteContent.practiceAreas;
+    expect(Site.safeParse({ ...siteContent, practiceAreas: [b, a, c, d, e] }).success).toBe(false);
   });
 
   it("requires review consent", () => {

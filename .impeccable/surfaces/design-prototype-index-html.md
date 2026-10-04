@@ -20,4 +20,4 @@ FORM: Scroll-told single page; signature interactions: seal rotates with scroll 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
 ## Open decisions
-Voice (first or third person), sub-services per area, hours, parking, education, real signature, high-res portrait, office photos, logo.
+Voice (first or third person), sub-services per area, hours, parking, education, high-res portrait, office photos, logo.

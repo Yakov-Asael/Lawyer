@@ -31,12 +31,14 @@ export const Office = z.object({
   whatsappE164: z.string().regex(/^9725\d{8}$/),
   email: z.email(),
   yearsOfPractice: z.number().int().positive(),
+  /** Years of admission, as confirmed by Yossi (lawyer, notary). */
+  licensed: z.object({ lawyer: z.number().int().min(1950), notary: z.number().int().min(1950) }),
   hours: copy.optional(),
   accessAndParking: copy.optional(),
   education: copy.optional(),
 });
 
-export const PracticeAreaId = z.enum(["family", "torts", "real-estate", "notary"]);
+export const PracticeAreaId = z.enum(["family", "real-estate", "torts", "civil", "notary"]);
 
 export const PracticeArea = z.object({
   id: PracticeAreaId,
@@ -103,7 +105,7 @@ export const Site = z
     }),
     statement: z.object({ text: copy, highlight: copy, footLabel: copy, footText: copy }),
     years: z.object({ eyebrow: copy, heading: copy, body: copy }),
-    practiceAreas: z.array(PracticeArea).length(4),
+    practiceAreas: z.array(PracticeArea).length(5),
     process: z.array(ProcessStep).length(3),
     about: z.object({ paragraphs: z.array(copy).min(1) }),
     // Reviews are not in this file: approved reviews come from the database (specs 18, 19).
@@ -126,7 +128,7 @@ export const Site = z
   .refine(
     (s) =>
       s.practiceAreas.map((a) => a.id).join() === PracticeAreaId.options.join(),
-    { message: "practiceAreas must be family, torts, real-estate, notary in that order", path: ["practiceAreas"] },
+    { message: "practiceAreas must be family, real-estate, torts, civil, notary in that order", path: ["practiceAreas"] },
   );
 
 export type Office = z.infer<typeof Office>;
