@@ -33,5 +33,35 @@ Legal texts to be reviewed by Yossi (he is the lawyer). We provide structure and
 
 ## Acceptance criteria
 - [ ] Rich Results Test passes for LegalService and FAQPage.
-- [ ] NAP in JSON-LD equals `office` content byte for byte.
-- [ ] Both legal pages exist and are linked from the footer and the accessibility menu.
+- [x] NAP in JSON-LD equals `office` content byte for byte.
+- [x] Both legal pages exist and are linked from the footer and the accessibility menu.
+
+## Implementation (built)
+- **Metadata** (`src/app/layout.tsx`): title, description from `site.seo` (Zod caps it at 155 chars), `metadataBase`
+  from `SITE_URL`, else Netlify's build-time `URL`, else localhost (`src/lib/site-url.ts`). Each page sets its own
+  canonical. Open Graph + Twitter card use `public/og.png`.
+- **Brand rasters**: `/dev/brand` (dev only, `ENABLE_DEV_PREVIEWS=1`) draws the 1200x630 share card and the seal
+  icon with the real fonts and tokens. `pnpm brand-assets` screenshots them into `public/og.png`,
+  `src/app/icon.png` (512), `src/app/apple-icon.png` (180) and `src/app/favicon.ico` (48, PNG in ICO).
+- **JSON-LD**: `LegalService` + `founder` Person from `officeJsonLd(office)` (`src/lib/structured-data.ts`), emitted
+  on the home page. NAP is copied straight from `office` (unit + e2e tested). No `AggregateRating`. `geo` and
+  `openingHours` are left out until confirmed: `hours` is free text today, and schema.org needs
+  `Mo-Th 09:00-17:00`. `FAQPage` stays with the FAQ section.
+- **robots.txt / sitemap.xml**: only a production deploy (`CONTEXT=production`) is indexable; previews disallow `/`.
+  The sitemap lists `/` and every legal page.
+- **Route groups**: `(home)` brings the intro curtain, the hero header and `<main>`; `(legal)` brings a slim header
+  (brand, "חזרה לאתר", contact pair from 1000px; phones use the dock) and `<main>`. Footer, dock and accessibility
+  menu stay in the root layout. Links back home are full loads, so the home page boots its motion state first.
+- **Legal template** (`src/components/legal/LegalDocument.tsx`, shared with spec 17): dark title card with the
+  ruled texture and a seal watermark, updated date (dd.mm.yyyy), a table of contents (sticky on desktop, a
+  `<details>` on phones), numbered clauses with anchors `#clause-N`, 70ch column, contact card with tel/mailto links.
+  No scroll animations.
+- **Content**: `content/legal/accessibility.ts` and `content/legal/privacy.ts` (`LegalPage` contract, as in spec 17,
+  plus `approved`, `intro`, `items` and `contact`). Drafts only: `approved: false` blocks a production build until
+  Yossi signs off, like a placeholder. Open placeholders: physical accessibility of the office; the privacy rights
+  clause. The accessibility coordinator is the office (name, phone, email) until Yossi names someone.
+- **Cookie notice**: not needed. No analytics, no Maps embed (the map is a static drawing), no cookies. The
+  accessibility choices and the intro flag live in the visitor's browser storage only, as the privacy page says.
+- **Accessibility menu**: links to both legal pages; terms joins in spec 17.
+- **Open**: domain (set `SITE_URL` in Netlify when known); Rich Results Test must run against a public URL (the
+  container cannot reach it); the browser list in the accessibility statement assumes the pending Safari/Firefox check.

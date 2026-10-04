@@ -4,9 +4,8 @@ import { site } from "@content";
 import { A11yMenu } from "@/components/a11y/A11yMenu";
 import { ContactDock } from "@/components/dock/ContactDock";
 import { Footer } from "@/components/footer/Footer";
-import { Header } from "@/components/header/Header";
-import { IntroCurtain } from "@/components/hero/IntroCurtain";
 import { MotionBoot, MotionProvider } from "@/components/motion";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const serif = Frank_Ruhl_Libre({
@@ -23,10 +22,22 @@ const sans = Assistant({
   variable: "--font-assistant",
 });
 
-const { office } = site;
+const { office, seo } = site;
 
+/** Site-wide metadata (spec 16). Each page sets its own canonical; the share image is design/og (pnpm og). */
 export const metadata: Metadata = {
-  title: `${office.name} | ${office.title} ב${office.city}`,
+  metadataBase: siteUrl,
+  title: { default: `${office.name} | ${office.title} ב${office.city}`, template: `%s | ${office.name}` },
+  description: seo.description,
+  applicationName: office.name,
+  formatDetection: { telephone: false, email: false, address: false },
+  openGraph: {
+    type: "website",
+    locale: "he_IL",
+    siteName: office.name,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: seo.ogImageAlt }],
+  },
+  twitter: { card: "summary_large_image", images: [{ url: "/og.png", alt: seo.ogImageAlt }] },
 };
 
 export const viewport: Viewport = {
@@ -42,15 +53,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="he" dir="rtl" className={`${serif.variable} ${sans.variable}`} suppressHydrationWarning>
       <body>
         <MotionBoot />
-        <IntroCurtain />
         <a href="#content" className="skip-link">
           {site.ui.skipLink}
         </a>
         <MotionProvider>
-          <Header />
-          <main id="content" tabIndex={-1} className="page-frame">
-            {children}
-          </main>
+          {/* Each route group brings its own header and <main id="content"> (home: hero header; legal: slim). */}
+          {children}
           <Footer />
           <ContactDock />
           <A11yMenu />

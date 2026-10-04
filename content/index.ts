@@ -1,4 +1,13 @@
-import { PLACEHOLDER_PATTERN, Site, type PracticeArea, type PracticeAreaId } from "./schema";
+import { accessibilityPage } from "./legal/accessibility";
+import { privacyPage } from "./legal/privacy";
+import {
+  LegalPage,
+  PLACEHOLDER_PATTERN,
+  Site,
+  type LegalSlug,
+  type PracticeArea,
+  type PracticeAreaId,
+} from "./schema";
 import { siteContent } from "./site";
 
 export * from "./schema";
@@ -25,6 +34,28 @@ export function findPlaceholders(value: unknown, path = ""): string[] {
 /** Parse at import time so a malformed field fails the build, not the visitor. */
 export const site: Site = Site.parse(siteContent);
 
+/** Legal pages (specs 16, 17), validated like the rest of the content. Terms join in spec 17. */
+export const legalPages: readonly LegalPage[] = [accessibilityPage, privacyPage].map((page) => LegalPage.parse(page));
+
+/** The route of each legal page, from the paths the footer and accessibility menu already link to. */
+export const LEGAL_PATHS: Record<LegalSlug, string> = {
+  accessibility: site.legal.accessibilityStatementPath,
+  privacy: site.legal.privacyPath,
+  terms: site.legal.termsPath,
+};
+
+/** A legal page by slug. A miss is a programming error (a route without its content). */
+export function legalPage(slug: LegalSlug): LegalPage {
+  const page = legalPages.find((p) => p.slug === slug);
+  if (!page) throw new Error(`Unknown legal page: ${slug}`);
+  return page;
+}
+
+/** Legal pages Yossi has not approved yet; they block production like placeholders. */
+export function unapprovedLegalPages(pages: readonly Pick<LegalPage, "slug" | "approved">[]): string[] {
+  return pages.filter((p) => !p.approved).map((p) => `legal/${p.slug} (not approved)`);
+}
+
 /** A practice area by id. The contract guarantees all four exist, so a miss is a programming error. */
 export function practiceArea(id: PracticeAreaId): PracticeArea {
   const area = site.practiceAreas.find((a) => a.id === id);
@@ -40,7 +71,7 @@ export function blockingPlaceholders(value: unknown): string[] {
 // Placeholders are fine in dev and previews; a production deploy must not ship them.
 // Netlify sets CONTEXT=production only for production deploys (deploy previews use "deploy-preview").
 if (isProductionBuild) {
-  const open = blockingPlaceholders(site);
+  const open = [...blockingPlaceholders(site), ...blockingPlaceholders({ legal: legalPages }), ...unapprovedLegalPages(legalPages)];
   if (open.length > 0) {
     throw new Error(`Content has unresolved placeholders:\n  ${open.join("\n  ")}`);
   }

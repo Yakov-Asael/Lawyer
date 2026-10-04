@@ -216,9 +216,18 @@ export function A11yMenu() {
           >
             {copy.reset}
           </button>
-          <a href={site.legal.accessibilityStatementPath} className="text-ink underline underline-offset-4">
-            {site.legal.accessibilityLabel}
-          </a>
+          <ul className="flex flex-wrap justify-end gap-x-4 gap-y-1">
+            {[
+              { href: site.legal.accessibilityStatementPath, label: site.legal.accessibilityLabel },
+              { href: site.legal.privacyPath, label: site.legal.privacyLabel },
+            ].map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="inline-block py-2 text-ink underline underline-offset-4">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>

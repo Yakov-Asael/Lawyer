@@ -178,6 +178,16 @@ export const Site = z
       accessibilityLabel: copy,
       privacyLabel: copy,
       termsLabel: copy,
+      /** Legal page template copy (specs 16, 17). */
+      backLabel: copy,
+      updatedLabel: copy,
+      tocLabel: copy,
+      contactLabels: z.object({ phone: copy, email: copy, address: copy }),
+    }),
+    /** Search and sharing metadata (spec 16). */
+    seo: z.object({
+      description: copy.max(155),
+      ogImageAlt: copy,
     }),
   })
   .refine((s) => s.hero.sub.includes(s.hero.subEmphasis), {
@@ -198,6 +208,37 @@ export const Site = z
     { message: "practiceAreas must be family, real-estate, torts, civil, notary in that order", path: ["practiceAreas"] },
   );
 
+/** Contact details printed on a legal page (e.g. the accessibility coordinator). */
+export const LegalContact = z.object({
+  name: copy,
+  phoneDisplay: Office.shape.phoneDisplay,
+  phoneE164: Office.shape.phoneE164,
+  email: z.email(),
+  address: copy.optional(),
+});
+
+/** One numbered clause. Lists render as bullets after the paragraphs. */
+export const LegalSection = z.object({
+  heading: copy,
+  body: z.array(copy).min(1),
+  items: z.array(copy).min(1).optional(),
+  contact: LegalContact.optional(),
+});
+
+/**
+ * A legal page (specs 16, 17). `approved` stays false until Yossi, as the lawyer, signs off on the wording;
+ * an unapproved page blocks a production build like a placeholder does.
+ */
+export const LegalPage = z.object({
+  slug: z.enum(["accessibility", "privacy", "terms"]),
+  title: copy,
+  /** ISO date, shown as dd.mm.yyyy. */
+  updatedAt: z.iso.date(),
+  approved: z.boolean(),
+  intro: copy.optional(),
+  sections: z.array(LegalSection).min(1),
+});
+
 export type Office = z.infer<typeof Office>;
 export type PracticeArea = z.infer<typeof PracticeArea>;
 export type PracticeAreaId = z.infer<typeof PracticeAreaId>;
@@ -207,3 +248,7 @@ export type Faq = z.infer<typeof Faq>;
 export type NavLink = z.infer<typeof NavLink>;
 export type WhatsappCopy = z.infer<typeof WhatsappCopy>;
 export type Site = z.infer<typeof Site>;
+export type LegalContact = z.infer<typeof LegalContact>;
+export type LegalSection = z.infer<typeof LegalSection>;
+export type LegalPage = z.infer<typeof LegalPage>;
+export type LegalSlug = LegalPage["slug"];

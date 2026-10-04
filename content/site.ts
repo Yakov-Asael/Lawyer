@@ -8,7 +8,7 @@ import type { Site } from "./schema";
  * Unknown optional facts are omitted, not invented. Yossi's own words: content/source/yossi-2026-10-04.md.
  */
 
-const office = {
+export const office = {
   name: "עו״ד יוסי שוקרון כהן",
   shortName: "יוסי שוקרון כהן",
   monogram: "ש״כ",
@@ -303,5 +303,15 @@ export const siteContent = {
     accessibilityLabel: "הצהרת נגישות",
     privacyLabel: "מדיניות פרטיות",
     termsLabel: "תקנון האתר",
+    backLabel: "חזרה לאתר",
+    updatedLabel: "עודכן לאחרונה",
+    tocLabel: "תוכן העניינים",
+    contactLabels: { phone: "טלפון", email: "דוא״ל", address: "כתובת" },
+  },
+
+  seo: {
+    // From the approved prototype; the contract caps it at 155 characters.
+    description: `${office.name}, ${office.title} ב${office.city}, ${office.yearsOfPractice} שנות ניסיון. דיני משפחה וירושה, מקרקעין ונדל״ן, נזיקין וביטוח, משפט אזרחי ומסחרי, גישור ושירותי נוטריון.`,
+    ogImageAlt: `${office.name}, ${office.title} ב${office.city}`,
   },
 } satisfies z.input<typeof Site>;
