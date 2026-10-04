@@ -12,7 +12,7 @@ Let clients leave a testimonial on the site. Nothing is published until Yossi ap
 | Field | Rules | Published |
 |---|---|---|
 | שם לפרסום | Required, 2 to 40 chars. Hint: "אפשר גם שם פרטי ואות ראשונה" | Yes |
-| תחום הטיפול | Required, one of the 4 areas | Yes |
+| תחום הטיפול | Required, one of the 5 areas | Yes |
 | ההמלצה | Required, 40 to 600 chars, live counter | Yes (may be shortened by the office) |
 | טלפון | Optional, Israeli format, "לא יפורסם". Only for verification | Never |
 | Consent checkbox | Required: "אני מאשר/ת לפרסם את ההמלצה באתר בשם שכתבתי. ידוע לי שהמשרד רשאי לקצר אותה או לא לפרסם אותה." | No |
@@ -44,5 +44,6 @@ Line under the title: "ההמלצה תפורסם באתר רק אחרי אישו
 - [ ] Empty submit shows 4 field errors and the consent error; focus lands on the first invalid field.
 - [ ] Valid submit creates a `pending` record and shows the thank-you state; nothing appears on the site.
 - [ ] `/review?area=torts` opens with "נזיקין וביטוח" selected.
+- [ ] Side-by-side fields (name, area) share the same top and height (measured); the select uses a custom chevron, not the native control.
 - [ ] A bot filling the honeypot gets a success response but no record is stored.
 - [ ] Keyboard-only and screen-reader flows work end to end at 390 and 1440.
