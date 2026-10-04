@@ -27,6 +27,9 @@
   --seal-shadow: 0 12px 30px -10px rgb(0 0 0 / 0.6);
   --portrait-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.6);
   --portrait-edge: color-mix(in srgb, var(--on-dark) 16%, transparent);
+  --map-ground: color-mix(in srgb, var(--bark) 60%, var(--paper));
+  --map-edge: color-mix(in srgb, var(--ink) 12%, transparent);
+  --map-shadow: 0 30px 60px -40px color-mix(in srgb, var(--ink) 60%, transparent);
   --review-shadow: 0 24px 50px -30px rgb(0 0 0 / 0.55);
   --file-shadow: 0 -1px 0 rgb(0 0 0 / 0.04), 0 24px 50px -30px color-mix(in srgb, var(--ink) 45%, transparent);
   --sheet-shadow: 0 -20px 60px -20px color-mix(in srgb, var(--ink) 50%, transparent);
@@ -95,6 +98,8 @@
   --color-line-dark: var(--line-dark);
   --color-brass-hover: var(--brass-hover);
   --color-focus: var(--focus);
+  --color-map-ground: var(--map-ground);
+  --color-map-edge: var(--map-edge);
 
   /* shadcn semantic colors */
   --color-background: var(--background);
@@ -137,6 +142,7 @@
   --shadow-file: var(--file-shadow);
   --shadow-sheet: var(--sheet-shadow);
   --shadow-review: var(--review-shadow);
+  --shadow-map: var(--map-shadow);
 
   /* Motion */
   --ease-out: var(--ease-out);
@@ -618,6 +624,21 @@ html.motion:not(.intro) .hero-line > span {
 
 .faq-item[open]::details-content {
   block-size: auto;
+}
+
+/* Static styled map (spec 11): paper "streets" on a soft ground, slightly rotated. No tiles, no cookies. */
+.map-streets {
+  position: absolute;
+  inset: -10%;
+  transform: rotate(-8deg);
+  background-image:
+    linear-gradient(var(--paper) 0 0),
+    linear-gradient(var(--paper) 0 0),
+    repeating-linear-gradient(90deg, transparent 0 86px, var(--paper) 86px 94px),
+    repeating-linear-gradient(0deg, transparent 0 64px, var(--paper) 64px 70px);
+  background-size: 100% 18px, 26px 100%, auto, auto;
+  background-position: 0 56%, 34% 0, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, repeat;
 }
 
 /* Failsafe: MotionBoot armed motion but the app never hydrated (script error, blocked bundle).

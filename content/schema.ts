@@ -150,6 +150,8 @@ export const Site = z
       photoAlt: z.string(),
     }),
     // Reviews are not in this file: approved reviews come from the database (specs 18, 19).
+    /** Visit section copy (spec 11). Address, hours and access come from `office`. */
+    visit: z.object({ eyebrow: copy, heading: copy, whatsappCta: copy, mapLabel: copy }),
     /** FAQ section copy (spec 10). */
     faqHead: z.object({ eyebrow: copy, heading: copy, intro: copy }),
     faq: z.array(Faq).min(3),
