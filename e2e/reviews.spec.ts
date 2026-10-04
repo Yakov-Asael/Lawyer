@@ -124,20 +124,42 @@ test.describe("slider (sample data)", () => {
     expect(peeks).toEqual({ left: true, right: true });
   });
 
-  test("read more only on clamped quotes, toggling aria-expanded", async ({ page }) => {
+  test("read more only on clamped quotes; opens the full review in a reader dialog", async ({ page }) => {
     const cards = page.locator(`${REGION} figure`);
     const long = cards.nth(0);
-    const short = cards.nth(1);
-    await expect(short.getByRole("button")).toHaveCount(0);
+    await expect(cards.nth(1).getByRole("button")).toHaveCount(0);
+    const heights = () => cards.evaluateAll((els) => els.map((el) => Math.round(el.getBoundingClientRect().height)));
+    const before = await heights();
+
     const more = long.getByRole("button", { name: "קראו עוד" });
-    await expect(more).toHaveAttribute("aria-expanded", "false");
-    const before = (await long.locator("blockquote").boundingBox())!.height;
+    await expect(more).toHaveAttribute("aria-haspopup", "dialog");
     await more.click();
-    const less = long.getByRole("button", { name: "הצג פחות" });
-    await expect(less).toHaveAttribute("aria-expanded", "true");
-    expect((await long.locator("blockquote").boundingBox())!.height).toBeGreaterThan(before);
-    // Only its own card expands.
-    await expect(cards.nth(2).getByRole("button", { name: "קראו עוד" })).toBeVisible();
+    const reader = page.getByRole("dialog", { name: "המלצה" });
+    await expect(reader).toBeVisible();
+    await expect(reader.locator("blockquote")).toHaveText((await long.locator("blockquote").textContent())!);
+    await expect(reader.locator("figcaption")).toContainText((await long.locator("figcaption").textContent())!.slice(0, 8));
+    await expect(reader.getByRole("button", { name: "סגירה" })).toBeFocused();
+    // Cards never change height, so the carousel row stays even.
+    expect(await heights()).toEqual(before);
+
+    await page.keyboard.press("Escape");
+    await expect(reader).toBeHidden();
+    await expect(more).toBeFocused();
+  });
+
+  test("desktop: arrows sit on both sides of the cards, vertically centred on them", async ({ page, isMobile }) => {
+    test.skip(isMobile, "desktop only");
+    const track = (await page.locator(`${REGION} [role=group]`).first().boundingBox())!;
+    const cards = await page.locator(`${REGION} figure`).evaluateAll((els) => {
+      const rs = els.map((e) => e.getBoundingClientRect()).filter((r) => r.left >= 0 && r.right <= window.innerWidth);
+      return { left: Math.min(...rs.map((r) => r.left)), right: Math.max(...rs.map((r) => r.right)) };
+    });
+    const prev = (await page.getByRole("button", { name: "ההמלצות הקודמות" }).boundingBox())!;
+    const next = (await page.getByRole("button", { name: "ההמלצות הבאות" }).boundingBox())!;
+    expect(prev.x).toBeGreaterThanOrEqual(cards.right); // previous: right side (RTL)
+    expect(next.x + next.width).toBeLessThanOrEqual(cards.left);
+    const mid = track.y + track.height / 2;
+    for (const b of [prev, next]) expect(Math.abs(b.y + b.height / 2 - mid)).toBeLessThan(track.height * 0.1);
   });
 
   test("screenshots", async ({ page }, info) => {

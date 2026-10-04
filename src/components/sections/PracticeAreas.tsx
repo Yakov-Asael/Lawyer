@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import { site, type PracticeArea } from "@content";
 import { SectionHeading } from "@/components/shared";
 import { ButtonLink } from "@/components/ui/button";
@@ -7,8 +6,8 @@ import { cn } from "@/lib/utils";
 import { FileStack } from "./FileStack";
 
 /**
- * Practice areas as stacked court files (spec 06). Each file is sticky 44px (one tab) lower than the previous,
- * so the tabs pile up in one even column. Colours follow the file order: ink, field, paper, brass.
+ * Practice areas as stacked court files (spec 06). Every file sticks at 128px; FileStack folds the stack so only the
+ * previous and the current tab show. Colours follow the file order: ink, field, paper, ink, brass.
  */
 
 type Tone = { surface: string; dot: string; lead: string; rule: string; cta: "brass" | "ink" };
@@ -17,6 +16,7 @@ const TONES: readonly Tone[] = [
   { surface: "on-dark bg-ink text-on-dark", dot: "before:bg-brass", lead: "text-on-dark-soft", rule: "border-line-dark", cta: "brass" },
   { surface: "on-dark bg-field text-on-dark", dot: "before:bg-brass", lead: "text-on-dark-soft", rule: "border-line-dark", cta: "brass" },
   { surface: "bg-paper text-ink", dot: "before:bg-ink", lead: "text-muted", rule: "border-bark", cta: "ink" },
+  { surface: "on-dark bg-ink text-on-dark", dot: "before:bg-brass", lead: "text-on-dark-soft", rule: "border-line-dark", cta: "brass" },
   // Brass ground: the default brass-deep focus ring would vanish, so it switches to ink.
   { surface: "bg-brass text-ink [--focus:var(--ink)]", dot: "before:bg-ink", lead: "text-ink", rule: "border-ink/20", cta: "ink" },
 ];
@@ -29,8 +29,7 @@ function CourtFile({ area, index }: { area: PracticeArea; index: number }) {
     <article
       data-file
       aria-labelledby={headingId}
-      style={{ "--i": index } as CSSProperties}
-      className="sticky top-[calc(84px+var(--i)*44px)]"
+      className="sticky top-[128px]"
     >
       <div
         className={cn(

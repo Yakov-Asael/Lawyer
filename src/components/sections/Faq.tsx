@@ -1,8 +1,7 @@
 import { isProductionBuild, site } from "@content";
 import { Reveal } from "@/components/motion";
-import { SectionHeading } from "@/components/shared";
+import { NumText, SectionHeading } from "@/components/shared";
 import { faqJsonLd, publishedFaq } from "@/lib/faq";
-import { splitNumbers } from "@/lib/numbers";
 
 /**
  * FAQ (spec 10). Native <details>/<summary>: keyboard operable, exposes its expanded state, and works without JS.
@@ -47,15 +46,7 @@ export function Faq() {
                 />
               </summary>
               <p className="max-w-[36em] pb-[26px] text-[15px] text-muted tablet:text-[17px]">
-                {splitNumbers(item.answer).map((run, j) =>
-                  run.number ? (
-                    <span key={j} className="num">
-                      {run.text}
-                    </span>
-                  ) : (
-                    run.text
-                  ),
-                )}
+                <NumText text={item.answer} />
               </p>
             </details>
           </Reveal>

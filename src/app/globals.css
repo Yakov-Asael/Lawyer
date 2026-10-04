@@ -34,6 +34,8 @@
   --panel-shadow: 0 30px 70px -20px color-mix(in srgb, var(--ink) 55%, transparent);
   --review-shadow: 0 24px 50px -30px rgb(0 0 0 / 0.55);
   --file-shadow: 0 -1px 0 rgb(0 0 0 / 0.04), 0 24px 50px -30px color-mix(in srgb, var(--ink) 45%, transparent);
+  --sheet-shadow: 0 -20px 60px -20px color-mix(in srgb, var(--ink) 50%, transparent);
+  --scrim: color-mix(in srgb, var(--ink) 55%, transparent);
 
   /* Focus ring. brass-deep on light grounds keeps the ring at 3:1+ against stone and paper;
      dark grounds (.on-dark) switch it to brass. */
@@ -140,6 +142,7 @@
   --shadow-seal: var(--seal-shadow);
   --shadow-portrait: var(--portrait-shadow);
   --shadow-file: var(--file-shadow);
+  --shadow-sheet: var(--sheet-shadow);
   --shadow-review: var(--review-shadow);
   --shadow-map: var(--map-shadow);
   --shadow-fab: var(--fab-shadow);
@@ -614,15 +617,6 @@ html.motion:not(.intro) .hero-line > span {
   transform: scaleX(0);
 }
 
-/* Signature (spec 08): drawn with scroll under motion; complete otherwise. pathLength=1 on the path. */
-.signature-path {
-  stroke-dasharray: 1;
-}
-
-.motion .signature-path {
-  stroke-dashoffset: 1;
-}
-
 /* FAQ (spec 10): smooth open and close of native <details>. Instant under reduced motion (global rule). */
 :root {
   interpolate-size: allow-keywords;
@@ -722,15 +716,6 @@ html.motion:not(.motion-ready) .track-fill {
   animation: motion-failsafe 0s 3s forwards;
 }
 
-html.motion:not(.motion-ready) .signature-path {
-  animation: signature-failsafe 0s 3s forwards;
-}
-
-@keyframes signature-failsafe {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
 
 html.motion:not(.motion-ready) .years-fill {
   animation: years-failsafe 0s 3s forwards;
@@ -757,5 +742,32 @@ html.motion:not(.motion-ready) .years-fill {
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Modal panel (SheetDialog, specs 09 and 18): scrim behind the native modal; the sheet rises in, the scrim fades in.
+   Only under html.motion, so reduced motion and "stop animations" open it instantly. */
+.sheet-dialog::backdrop {
+  background: var(--scrim);
+}
+
+html.motion .sheet-dialog::backdrop {
+  transition: opacity 0.35s var(--ease-out);
+}
+
+html.motion .sheet-panel {
+  transition:
+    transform 0.45s var(--ease-out),
+    opacity 0.35s var(--ease-out);
+}
+
+@starting-style {
+  html.motion .sheet-dialog[open]::backdrop {
+    opacity: 0;
+  }
+
+  html.motion .sheet-dialog[open] .sheet-panel {
+    transform: translateY(40px);
+    opacity: 0;
   }
 }
