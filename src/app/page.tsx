@@ -3,6 +3,7 @@ import { Hero } from "@/components/hero/Hero";
 import { Statement } from "@/components/sections/Statement";
 import { About } from "@/components/sections/About";
 import { PracticeAreas } from "@/components/sections/PracticeAreas";
+import { Reviews } from "@/components/sections/Reviews";
 import { Process } from "@/components/sections/Process";
 import { Years } from "@/components/sections/Years";
 import { Reveal } from "@/components/motion";
@@ -28,6 +29,7 @@ export default function Home() {
       <PracticeAreas />
       <Process />
       <About />
+      <Reviews />
 
       {/* Shared-component showcase until practice areas (spec 06) and visit (spec 11) replace it. */}
       <div className="px-gutter py-section">

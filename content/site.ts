@@ -173,6 +173,24 @@ export const siteContent = {
     },
   ],
 
+  reviewsHead: {
+    eyebrow: "המלצות",
+    heading: "מה אומרים לקוחות.",
+    // Wording proposed for the owner's confirmation (spec 09 left it open).
+    note: "המלצות שנבחרו על ידי המשרד ומתפרסמות בהסכמת הלקוחות.",
+    empty: "היו הראשונים לשתף איך היה לעבוד איתנו.",
+    carouselLabel: "המלצות לקוחות",
+    roleDescription: "קרוסלה",
+    prev: "ההמלצות הקודמות",
+    next: "ההמלצות הבאות",
+    readMore: "קראו עוד",
+    readerTitle: "המלצה",
+    close: "סגירה",
+  },
+
+  // Approved reviews, newest first. Each needs the client's consent; none exist yet.
+  reviews: [],
+
   processHead: {
     eyebrow: "איך מתחילים",
     heading: "שלושה צעדים, והראשון לוקח דקה.",

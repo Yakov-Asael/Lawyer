@@ -110,6 +110,24 @@ export const Site = z
     /** Head of the practice-areas section (spec 06). */
     areas: z.object({ eyebrow: copy, line1: copy, line2: copy, intro: copy }),
     practiceAreas: z.array(PracticeArea).length(5),
+    /** Reviews section copy (spec 09). */
+    reviewsHead: z.object({
+      eyebrow: copy,
+      heading: copy,
+      note: copy,
+      /** Shown instead of the slider while there are no approved reviews. */
+      empty: copy,
+      carouselLabel: copy,
+      roleDescription: copy,
+      prev: copy,
+      next: copy,
+      readMore: copy,
+      /** Reader dialog (owner feedback): accessible title and close button. */
+      readerTitle: copy,
+      close: copy,
+    }),
+    /** Approved reviews only, each with the client's consent (option A: added by hand from the submission email). */
+    reviews: z.array(Review),
     /** Head of the process section (spec 07). */
     processHead: z.object({ eyebrow: copy, heading: copy }),
     process: z.array(ProcessStep).length(3),

@@ -1,5 +1,6 @@
 import { site } from "@content";
 import { ContactButtons } from "@/components/shared";
+import { getApprovedReviews } from "@/lib/reviews";
 import { Brand } from "./Brand";
 import { MobileMenu } from "./MobileMenu";
 
@@ -23,7 +24,7 @@ export function Header() {
         ))}
       </nav>
       <ContactButtons tone="dark" size="compact" label={site.ui.whatsappShort} className="hidden nav:flex" />
-      <MobileMenu />
+      <MobileMenu hasReviews={getApprovedReviews().length > 0} />
     </header>
   );
 }

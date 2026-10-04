@@ -38,9 +38,30 @@ between two cloned sets (`aria-hidden`, `inert`) and a silent jump when scrollin
 `role="region" aria-roledescription="קרוסלה" aria-label="המלצות לקוחות"`; arrows labeled "ההמלצות הקודמות/הבאות";
 cloned slides hidden from assistive tech; the track is keyboard scrollable.
 
+## Implementation (built)
+- Source: `getApprovedReviews()` (`src/lib/reviews.ts`) reads `content.reviews` (approved, with consent). Pending the
+  owner's choice between adding reviews by hand from the submission email (option A) and a database with an admin
+  panel (specs 18, 19), only this function would change.
+- `Reviews.tsx` (server) shows the slider or, with no reviews, the compact invitation. The "השאירו המלצה" button
+  arrives with the submission form (spec 18); until then the invitation is heading and line only.
+- `ReviewsSlider.tsx` + `src/components/ui/carousel.tsx` (shadcn Carousel on Embla, written by hand, RTL). Embla loops
+  by moving real slides: no clones, so each review is announced once. Keyboard: Left = next, Right = previous.
+- `ReviewCard.tsx`: 4-line clamp; "קראו עוד" appears only when the quote overflows (measured, ResizeObserver).
+- The "המלצות" menu link is filtered out while there are no reviews (`menuLinks()`, tested).
+- `/dev/reviews` renders the slider with marked sample data for tests. It is a dynamic route that returns 404 unless
+  `ENABLE_DEV_PREVIEWS=1`, which only the Playwright web server sets.
+- Note line wording ("המלצות שנבחרו על ידי המשרד ומתפרסמות בהסכמת הלקוחות.") is a proposal for the owner.
+
 ## Acceptance criteria
 - [ ] Desktop: 3 cards visible; 8 clicks forward and 8 back cycle through all reviews with no dead end.
 - [ ] Phone: swipe cycles endlessly; no arrows rendered; peeks visible on both sides after the first swipe.
 - [ ] A screen reader announces each real review once (clones excluded).
 - [ ] "קראו עוד" appears only on clamped quotes, opens the reader dialog with the full text, and focus returns on close.
 - [ ] Only approved reviews render; with zero approved reviews the compact invitation shows instead of the slider.
+
+## Implementation update (2026-10-04, owner feedback)
+- Desktop arrows sit on both sides of the cards (`data-arrows`, absolutely positioned over the 68px side gutters),
+  vertically centred on them.
+- "קראו עוד" opens one shared reader built on `SheetDialog` (`src/components/ui/sheet-dialog.tsx`), the native
+  modal shared with spec 18: bottom sheet on phones, centred from 700px, focus on the close button, Esc/backdrop/close
+  return focus to the button. Cards never change height.
