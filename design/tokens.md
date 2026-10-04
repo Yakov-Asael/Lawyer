@@ -14,7 +14,7 @@ Emotional brief: seriousness, warmth, care.
 |---|---|---|---|
 | `ink` | `#152420` | Dark grounds (hero, final CTA, file 1), primary text on light | Seriousness |
 | `field` | `#24413A` | Committed sections (years, reviews, file 2) | Seriousness |
-| `brass` | `#B98A52` | Accent and primary buttons on dark grounds, file 4 | Warmth |
+| `brass` | `#B98A52` | Accent and primary buttons on dark grounds, file 5 (notary) | Warmth |
 | `brass-deep` | `#7E5829` | Accent text on light grounds (eyebrows, links, highlights) | Warmth |
 | `stone` | `#EEE9DF` | Page ground | Care |
 | `paper` | `#F7F4EE` | Raised surfaces (process card, file 3, review cards, panels) | Care |
@@ -23,6 +23,7 @@ Emotional brief: seriousness, warmth, care.
 | `on-dark` | `#EEE9DF` | Text on dark grounds | |
 | `on-dark-soft` | `rgba(238,233,223,.72)` | Secondary text on dark grounds | |
 | `line-dark` | `rgba(238,233,223,.14)` | Hairlines on dark grounds | |
+| `focus` | `brass-deep` on light, `brass` inside `.on-dark` | Keyboard focus ring (2px, 3px offset) | |
 
 Verified contrast (WCAG): ink on stone 13.3:1, muted on stone 5.9:1, muted on bark 4.9:1, brass on ink 5.2:1, ink on brass 5.2:1,
 brass-deep on stone 5.2:1, on-dark on field 9.1:1. **Never use `brass` for text on light grounds** (2.5:1).

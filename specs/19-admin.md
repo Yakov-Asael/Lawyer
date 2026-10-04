@@ -29,13 +29,13 @@ Mobile first: Yossi will mostly approve from his phone. Hebrew RTL. No motion be
 ## Data and stack (flag: new dependencies, see README)
 | Need | Choice | Why |
 |---|---|---|
-| Database | Postgres via Vercel Marketplace (Neon), free tier | Relational, backups, works with Vercel previews |
+| Database | Postgres on Neon, free plan (connected directly, `DATABASE_URL` env var) | Relational, backups, works with Netlify deploy previews |
 | ORM / queries | Drizzle | Typed, light, SQL-first |
 | Auth | Auth.js (Google provider) | No password handling |
 | Email | Resend | New-review notifications |
 | Bot protection | Cloudflare Turnstile | Free, privacy-friendly |
 
-This moves the site from a pure static export to static pages plus serverless routes on Vercel.
+This moves the site from a pure static export to static pages plus serverless routes on Netlify.
 
 ## Acceptance criteria
 - [ ] A non-allowlisted Google account cannot reach any `/admin` data (server-side check on every request).

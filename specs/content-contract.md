@@ -19,12 +19,12 @@ const Office = z.object({
   phoneE164: z.string().regex(/^\+9725\d{8}$/),   // "+972522521127"
   whatsappE164: z.string().regex(/^9725\d{8}$/),  // "972522521127" (wa.me format, no plus)
   email: z.string().email(),
-  yearsOfPractice: z.number().int().positive(),   // 30
+  yearsOfPractice: z.number().int().positive(),   // 23
+  licensed: z.object({ lawyer: z.number(), notary: z.number() }), // 2003, 2015
   hours: z.string().optional(),                   // OPEN
   accessAndParking: z.string().optional(),        // OPEN
   education: z.string().optional(),               // OPEN
-  wazeUrl: z.string().url(),
-  mapsUrl: z.string().url(),
+  // Waze and Maps links are derived from address + city (see helpers), not stored.
 });
 
 const PracticeArea = z.object({
@@ -48,12 +48,19 @@ const Review = z.object({
 
 const Faq = z.object({ question: z.string(), answer: z.string() });
 
+const WhatsappCopy = z.object({
+  message: z.string(),                 // "שלום עו״ד שוקרון כהן, אשמח להתייעץ."
+  topicMessage: z.string(),            // same, with "בנושא {topic}." ({topic} required)
+});
+
 const Site = z.object({
   office: Office,
+  whatsapp: WhatsappCopy,              // pre-filled message copy lives in content, not in helpers
+  ui: z.object({ skipLink: z.string() }), // interface strings owned by no single section
   hero: z.object({ line1: z.string(), line2: z.string(), sub: z.string() }),
   statement: z.object({ text: z.string(), highlight: z.string(), footLabel: z.string(), footText: z.string() }),
   years: z.object({ heading: z.string(), body: z.string() }),
-  practiceAreas: z.array(PracticeArea).length(4),
+  practiceAreas: z.array(PracticeArea).length(5),
   process: z.array(ProcessStep).length(3),
   about: z.object({ paragraphs: z.array(z.string()).min(1) }),
   // reviews are not in this file: they come from the database (approved only), see specs 18 and 19
@@ -67,24 +74,32 @@ const Site = z.object({
 
 | Helper | Output |
 |---|---|
-| `waLink(topic?)` | `https://wa.me/{whatsappE164}?text=` + encoded `שלום עו״ד שוקרון כהן, אשמח להתייעץ[ בנושא {topic}].` |
+| `waLink(topic?)` | `https://wa.me/{whatsappE164}?text=` + encoded `whatsapp.message`, or `whatsapp.topicMessage` with `{topic}` filled |
 | `telLink()` | `tel:{phoneE164}` |
-| `wazeLink()` / `mapsLink()` | From `office`, with the address URL-encoded |
+| `mailLink()` | `mailto:{email}` |
+| `wazeLink()` / `mapsLink()` | From `office.address` + `office.city`, URL-encoded |
+
+Pure builders take their data as arguments (`src/lib/contact-links.ts`, unit-tested); `src/lib/contact.ts` binds them
+to the site content for components.
+
+Implementation: `content/schema.ts` (contract), `content/site.ts` (data), `content/index.ts` (parsed `site`,
+imported as `@content`). Every string is also checked for em-dashes and emojis.
 
 ## Rules for copy
 - No em-dashes. No emojis. No promised outcomes (Israel Bar advertising rules).
 - No invented facts. Unknown values stay optional and the UI omits them; they never render as brackets in production.
+- Required copy that is still missing is written as `[placeholder: ...]`. A production build (Netlify `CONTEXT=production`)
+  fails while any remains; previews and dev show them.
 - Reviews require `consentConfirmed: true`.
 
 ## Open items to collect from Yossi
 
 | Field | Status |
 |---|---|
-| `practiceAreas[].services` | Draft exists, needs confirmation |
-| `hours`, `accessAndParking` | Missing |
-| `education` | Missing |
-| `about.paragraphs` (personal paragraph) | Missing |
-| `faq[].answer` for cost, what to bring, notary without a case, clients outside Hadera | Missing |
+| `practiceAreas[].services` | Confirmed from Yossi's text (2026-10-04), notary list still a draft |
+| `hours`, `accessAndParking` | Hours and floor in; working days, elevator, access and parking missing |
+| `education` | Done |
+| `about.paragraphs` (personal paragraph) | Done, edited from Yossi's text |
+| `faq[].answer` | Done except notary without a case. Never show prices (owner decision) |
 | `reviews` | None yet; owner curates with client consent |
-| Voice (first vs. third person) | Prototype uses neutral / third person |
-| High-resolution portrait, real signature, office photos | Missing |
+| High-resolution portrait, office photos | Missing (no signature: owner decision) |
