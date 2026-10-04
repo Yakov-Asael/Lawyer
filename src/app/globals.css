@@ -599,15 +599,6 @@ html.motion:not(.intro) .hero-line > span {
   transform: scaleX(0);
 }
 
-/* Signature (spec 08): drawn with scroll under motion; complete otherwise. pathLength=1 on the path. */
-.signature-path {
-  stroke-dasharray: 1;
-}
-
-.motion .signature-path {
-  stroke-dashoffset: 1;
-}
-
 /* Failsafe: MotionBoot armed motion but the app never hydrated (script error, blocked bundle).
    Reveal everything after 3s. Once React marks html.motion-ready, this rule stops matching. */
 html.motion:not(.motion-ready) .reveal,
@@ -620,15 +611,6 @@ html.motion:not(.motion-ready) .track-fill {
   animation: motion-failsafe 0s 3s forwards;
 }
 
-html.motion:not(.motion-ready) .signature-path {
-  animation: signature-failsafe 0s 3s forwards;
-}
-
-@keyframes signature-failsafe {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
 
 html.motion:not(.motion-ready) .years-fill {
   animation: years-failsafe 0s 3s forwards;
