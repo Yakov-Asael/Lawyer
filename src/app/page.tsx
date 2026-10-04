@@ -2,6 +2,7 @@ import { practiceArea, site } from "@content";
 import { Hero } from "@/components/hero/Hero";
 import { Statement } from "@/components/sections/Statement";
 import { PracticeAreas } from "@/components/sections/PracticeAreas";
+import { Process } from "@/components/sections/Process";
 import { Years } from "@/components/sections/Years";
 import { Reveal } from "@/components/motion";
 import { ContactButtons, Seal, SectionHeading } from "@/components/shared";
@@ -24,6 +25,7 @@ export default function Home() {
       <Statement />
       <Years />
       <PracticeAreas />
+      <Process />
 
       {/* Shared-component showcase until practice areas (spec 06) and visit (spec 11) replace it. */}
       <div id="about" className="px-gutter py-section">

@@ -110,6 +110,8 @@ export const Site = z
     /** Head of the practice-areas section (spec 06). */
     areas: z.object({ eyebrow: copy, line1: copy, line2: copy, intro: copy }),
     practiceAreas: z.array(PracticeArea).length(5),
+    /** Head of the process section (spec 07). */
+    processHead: z.object({ eyebrow: copy, heading: copy }),
     process: z.array(ProcessStep).length(3),
     about: z.object({ paragraphs: z.array(copy).min(1) }),
     // Reviews are not in this file: approved reviews come from the database (specs 18, 19).

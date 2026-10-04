@@ -173,6 +173,11 @@ export const siteContent = {
     },
   ],
 
+  processHead: {
+    eyebrow: "איך מתחילים",
+    heading: "שלושה צעדים, והראשון לוקח דקה.",
+  },
+
   process: [
     {
       title: "שולחים הודעה או מתקשרים",
