@@ -668,7 +668,7 @@ html.a11y-contrast {
   --line-dark: color-mix(in srgb, var(--on-dark) 40%, transparent);
 }
 
-html.a11y-gray :is(main, footer, header, [role="dialog"], nav[aria-label]) {
+html.a11y-gray :is(main, footer, header, [role="dialog"], dialog, nav[aria-label]) {
   filter: grayscale(1);
 }
 
