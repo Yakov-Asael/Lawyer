@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Assistant, Frank_Ruhl_Libre } from "next/font/google";
 import { site } from "@content";
+import { Footer } from "@/components/footer/Footer";
 import { Header } from "@/components/header/Header";
 import { IntroCurtain } from "@/components/hero/IntroCurtain";
 import { MotionBoot, MotionProvider } from "@/components/motion";
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <main id="content" tabIndex={-1} className="page-frame">
             {children}
           </main>
+          <Footer />
         </MotionProvider>
       </body>
     </html>

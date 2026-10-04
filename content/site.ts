@@ -280,5 +280,9 @@ export const siteContent = {
     disclaimer: "המידע באתר אינו מהווה ייעוץ משפטי.",
     accessibilityStatementPath: "/accessibility-statement",
     privacyPath: "/privacy-policy",
+    termsPath: "/terms",
+    accessibilityLabel: "הצהרת נגישות",
+    privacyLabel: "מדיניות פרטיות",
+    termsLabel: "תקנון האתר",
   },
 } satisfies z.input<typeof Site>;
