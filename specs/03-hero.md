@@ -1,10 +1,10 @@
 # 03 Hero and intro loader
 
 ## Purpose
-In one viewport: who this is (a face and a name), why him (personal, 30 years in Hadera), and how to reach him.
+In one viewport: who this is (a face and a name), why him (personal, 23 years of practice), and how to reach him.
 
 ## Content
-`hero.line1` ("ליווי משפטי אישי."), `hero.line2` ("30 שנה בחדרה."), `hero.sub`, `office.address`, `office.title`,
+`hero.line1` ("ליווי משפטי אישי."), `hero.line2` ("23 שנות ניסיון."), `hero.sub`, `office.address`, `office.title`,
 portrait image, seal.
 
 ## Intro loader

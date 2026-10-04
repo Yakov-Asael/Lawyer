@@ -19,7 +19,7 @@ const Office = z.object({
   phoneE164: z.string().regex(/^\+9725\d{8}$/),   // "+972522521127"
   whatsappE164: z.string().regex(/^9725\d{8}$/),  // "972522521127" (wa.me format, no plus)
   email: z.string().email(),
-  yearsOfPractice: z.number().int().positive(),   // 30
+  yearsOfPractice: z.number().int().positive(),   // 23
   hours: z.string().optional(),                   // OPEN
   accessAndParking: z.string().optional(),        // OPEN
   education: z.string().optional(),               // OPEN
@@ -53,7 +53,7 @@ const Site = z.object({
   hero: z.object({ line1: z.string(), line2: z.string(), sub: z.string() }),
   statement: z.object({ text: z.string(), highlight: z.string(), footLabel: z.string(), footText: z.string() }),
   years: z.object({ heading: z.string(), body: z.string() }),
-  practiceAreas: z.array(PracticeArea).length(4),
+  practiceAreas: z.array(PracticeArea).length(5),
   process: z.array(ProcessStep).length(3),
   about: z.object({ paragraphs: z.array(z.string()).min(1) }),
   // reviews are not in this file: they come from the database (approved only), see specs 18 and 19
@@ -80,11 +80,11 @@ const Site = z.object({
 
 | Field | Status |
 |---|---|
-| `practiceAreas[].services` | Draft exists, needs confirmation |
+| `practiceAreas[].services` | Confirmed from Yossi's text (2026-10-04), notary list still a draft |
 | `hours`, `accessAndParking` | Missing |
 | `education` | Missing |
-| `about.paragraphs` (personal paragraph) | Missing |
+| `about.paragraphs` (personal paragraph) | Done, edited from Yossi's text |
 | `faq[].answer` for cost, what to bring, notary without a case, clients outside Hadera | Missing |
 | `reviews` | None yet; owner curates with client consent |
-| Voice (first vs. third person) | Prototype uses neutral / third person |
+| Voice (first vs. third person) | About in first person, rest neutral |
 | High-resolution portrait, real signature, office photos | Missing |

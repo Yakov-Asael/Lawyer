@@ -4,17 +4,17 @@
 Let the visitor find their topic in seconds and start a WhatsApp conversation already labeled with it.
 
 ## Content
-`practiceAreas[4]`: tabLabel, headline, lead, services (3 to 6), whatsappTopic, ctaLabel. Order: family, torts,
-real estate, notary.
+`practiceAreas[5]`: tabLabel, headline, lead, services (3 to 6), whatsappTopic, ctaLabel. Order: family and inheritance,
+real estate, torts and insurance, civil and commercial, notary.
 
 ## Layout
-- Section head: eyebrow "תחומי עיסוק", H2 "ארבעה תחומים, / עורך דין אחד.", intro paragraph.
-- Four "court files", each = tab + body:
+- Section head: eyebrow "תחומי עיסוק", H2 "חמישה תחומים, / עורך דין אחד.", intro paragraph.
+- Five "court files", each = tab + body:
   - Tab: `display:flex; width:fit-content`, flush with the body's start edge, `margin-block-end:-1px` (no gap),
     top radius 14px, 14px / 700 / tracking .06em, small dot before the label.
   - Body: `radius-md` with the start-top corner square (where the tab sits), padding `clamp(28px, 4vw, 52px)`,
     min-height `clamp(340px, 44vh, 420px)`. ≥900px two columns: headline + lead + CTA / service list. Phones: one column.
-- Colors per file: 1 `ink`, 2 `field`, 3 `paper`, 4 `brass` (text and CTA variant adapt: `brass` button on dark files,
+- Colors per file: 1 `ink`, 2 `field`, 3 `paper`, 4 `ink`, 5 `brass` (text and CTA variant adapt: `brass` button on dark files,
   `ink` button on light files).
 
 ## Motion (signature)
@@ -36,6 +36,6 @@ Each file is an `<article>` with its headline as `<h3>`; service lists are `<ul>
 ## Acceptance criteria
 - [ ] Tab and body touch with zero gap (measured) at 1440 and 390; tab right edge equals body right edge.
 - [ ] Each CTA opens WhatsApp with its own topic in the message.
-- [ ] Scrolling shows all four tabs stacked 44px apart, labels fully readable, before the section ends.
-- [ ] All four bodies share the same left and right edges while stacked (measured).
+- [ ] Scrolling shows all five tabs stacked 44px apart, labels fully readable, before the section ends.
+- [ ] All five bodies share the same left and right edges while stacked (measured).
 - [ ] Service lists come from content; no hardcoded items.

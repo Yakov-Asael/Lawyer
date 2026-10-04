@@ -32,7 +32,7 @@ reuses instead of inventing its own.
 |---|---|
 | `<Reveal delay>` | opacity/translateY 28px → 0, 900ms `ease-out`, plays once at 12% visibility (IntersectionObserver, rootMargin -12% bottom) |
 | `<MaskText>` | Splits into lines/words wrapped in overflow-hidden spans; inner span 112% → 0, 1100ms, stagger via delay |
-| `useScrollProgress(ref)` | One shared rAF loop returns 0..1 progress of an element through the viewport. Used by parallax, statement scrub, 30 fill, process track, signature, file stacking |
+| `useScrollProgress(ref)` | One shared rAF loop returns 0..1 progress of an element through the viewport. Used by parallax, statement scrub, years fill, process track, signature, file stacking |
 | `SmoothScroll` provider | Lenis (`lerp: 0.1`); anchor links scroll via Lenis with -12px offset; exposes `stop()/start()` for menus |
 
 Rules:

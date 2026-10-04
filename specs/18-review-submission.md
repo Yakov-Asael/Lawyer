@@ -12,7 +12,7 @@ Let clients leave a testimonial on the site. Nothing is published until Yossi ap
 | Field | Rules | Published |
 |---|---|---|
 | שם לפרסום | Required, 2 to 40 chars. Hint: "אפשר גם שם פרטי ואות ראשונה" | Yes |
-| תחום הטיפול | Required, one of the 4 areas | Yes |
+| תחום הטיפול | Required, one of the 5 areas | Yes |
 | ההמלצה | Required, 40 to 600 chars, live counter | Yes (may be shortened by the office) |
 | טלפון | Optional, Israeli format, "לא יפורסם". Only for verification | Never |
 | Consent checkbox | Required: "אני מאשר/ת לפרסם את ההמלצה באתר בשם שכתבתי. ידוע לי שהמשרד רשאי לקצר אותה או לא לפרסם אותה." | No |

@@ -24,9 +24,9 @@ testimonials, which Yossi approves in a private panel before anything is publish
 ## Positioning
 Two facts no neighboring office can copy:
 1. **Personal handling.** The client works with Yossi himself, not with an associate or intern.
-2. **30 years in Hadera.** Three decades of practice in the city and its courts.
+2. **23 years of practice** (confirmed by Yossi, 2026-10-04), plus inside knowledge of insurers as a former insurance agent.
 
-Secondary fact: legal representation and notary services under one roof.
+Secondary facts: legal representation and notary services under one roof; mediation and negotiated settlement before litigation.
 
 ## Operating Context
 - Visitors arrive from Google search, Google Maps, Golden Pages (d.co.il) and word of mouth.
@@ -40,13 +40,16 @@ Secondary fact: legal representation and notary services under one roof.
 - Address: הרברט סמואל 27, חדרה
 - Phone and WhatsApp: 052-252-1127
 - Email: shukruny@smile.net.il
-- Experience: 30 years
+- Experience: 23 years
+- Background: former insurance agent (Yossi's own statement)
+- Source copy from Yossi: `content/source/yossi-2026-10-04.md`
 
-**Practice areas (four, in this order):**
-1. דיני משפחה ומעמד אישי
-2. נזיקין וביטוח
-3. מקרקעין, נדל"ן וחוזים
-4. נוטריון
+**Practice areas (five, in this order; confirmed 2026-10-04):**
+1. דיני משפחה וירושה
+2. מקרקעין ונדל״ן (including planning and building)
+3. נזיקין וביטוח
+4. משפט אזרחי ומסחרי (contracts, litigation, mediation)
+5. נוטריון (including enduring power of attorney)
 
 **Constraints:**
 - Hebrew only, RTL.
@@ -55,8 +58,8 @@ Secondary fact: legal representation and notary services under one roof.
 
 **Open decisions (do not invent):**
 - Office hours.
-- Sub-services under each practice area (a first draft exists in the mockup; needs Yossi's confirmation).
-- Voice: first person ("אני מלווה") or third person ("עו״ד שוקרון כהן מלווה").
+- Notary sub-services beyond enduring power of attorney (draft list in the mockup; needs Yossi's confirmation).
+- Voice: About is first person (Yossi's own text); the rest stays neutral / third person. Confirm with Yakov.
 - Logo / wordmark: none exists; to be designed.
 - Education, admission year, memberships.
 - Domain name.
@@ -80,7 +83,7 @@ Secondary fact: legal representation and notary services under one roof.
 
 ## Product Principles
 1. **One tap to Yossi.** Every screen, on every device, offers WhatsApp and a call without scrolling.
-2. **Trust through verifiable truth.** Only facts that can be backed up: 30 years, the address, the credentials.
+2. **Trust through verifiable truth.** Only facts that can be backed up: 23 years, the address, the credentials.
    Restraint reads as confidence; inflated claims read as a sales pitch and may breach Bar rules.
 3. **Personal, not corporate.** The page is about a person the client will actually meet, not a faceless firm.
 4. **Calm for people under stress.** Plain Hebrew, no legalese, short sections, obvious next step.
