@@ -20,6 +20,7 @@ const Office = z.object({
   whatsappE164: z.string().regex(/^9725\d{8}$/),  // "972522521127" (wa.me format, no plus)
   email: z.string().email(),
   yearsOfPractice: z.number().int().positive(),   // 23
+  licensed: z.object({ lawyer: z.number(), notary: z.number() }), // 2003, 2015
   hours: z.string().optional(),                   // OPEN
   accessAndParking: z.string().optional(),        // OPEN
   education: z.string().optional(),               // OPEN
