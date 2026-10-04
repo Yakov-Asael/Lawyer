@@ -95,7 +95,14 @@ export const Site = z
     brand: z.object({ sealRing: copy, sealSub: copy }),
     /** Header nav (desktop) and the fuller mobile menu (spec 02). */
     navigation: z.object({ header: z.array(NavLink).min(1), menu: z.array(NavLink).min(1) }),
-    hero: z.object({ line1: copy, line2: copy, sub: copy }),
+    hero: z.object({
+      line1: copy,
+      line2: copy,
+      sub: copy,
+      /** The personal-handling sentence inside `sub`, set in on-dark 600 (spec 03). */
+      subEmphasis: copy,
+      portraitAlt: copy,
+    }),
     statement: z.object({ text: copy, highlight: copy, footLabel: copy, footText: copy }),
     years: z.object({ eyebrow: copy, heading: copy, body: copy }),
     practiceAreas: z.array(PracticeArea).length(5),
@@ -109,6 +116,10 @@ export const Site = z
       accessibilityStatementPath: z.string().startsWith("/"),
       privacyPath: z.string().startsWith("/"),
     }),
+  })
+  .refine((s) => s.hero.sub.includes(s.hero.subEmphasis), {
+    message: "hero.subEmphasis must appear verbatim in hero.sub",
+    path: ["hero", "subEmphasis"],
   })
   .refine((s) => s.statement.text.includes(s.statement.highlight), {
     message: "statement.highlight must appear verbatim in statement.text",

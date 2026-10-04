@@ -4,7 +4,11 @@ import { useEffect, useState, type RefObject } from "react";
 import { observeOnce } from "@/lib/motion";
 import { useMotion } from "./MotionProvider";
 
-/** True once the element has entered the viewport. Always true when motion is off. */
+/**
+ * True once the element has entered the viewport while motion runs.
+ * Never true on the server or during hydration, so the markup carries no revealed state that hydration would undo.
+ * With motion off the value does not matter: without html.motion nothing is hidden.
+ */
 export function useInViewOnce(ref: RefObject<Element | null>): boolean {
   const { enabled } = useMotion();
   const [seen, setSeen] = useState(false);
@@ -15,5 +19,5 @@ export function useInViewOnce(ref: RefObject<Element | null>): boolean {
     return observeOnce(el, () => setSeen(true));
   }, [enabled, seen, ref]);
 
-  return seen || !enabled;
+  return seen;
 }

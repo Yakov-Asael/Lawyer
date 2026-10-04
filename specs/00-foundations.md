@@ -53,6 +53,10 @@ Rules:
 | `useScrollProgress` | `src/components/motion/use-scroll-progress.ts` | `useScrollProgress(ref, (p) => ...)`: a callback that writes styles, so scrolling never re-renders React. Called once with `1` when motion is off |
 
 Notes:
+- `html.motion` is set before first paint by `MotionBoot` (inline script), not at hydration: arming at hydration made
+  above-the-fold content paint, vanish and re-animate. No JS at all: the script never runs, so nothing is hidden.
+  App fails after the script: a 3s CSS failsafe reveals everything until React marks `html.motion-ready`.
+- Server HTML never carries `data-in`; reveals are set on the client only.
 - `html.motion` is the only switch for hidden start states. The transition sits on the revealed state, so arming
   motion after hydration hides instantly instead of fading content out.
 - Lenis anchor scrolling moves focus to the target (tabindex -1 if needed) and updates the URL hash, like a native anchor.

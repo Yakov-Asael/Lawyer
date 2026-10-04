@@ -8,8 +8,8 @@ import { onFrame } from "@/lib/motion";
 /**
  * Motion state for the whole page (spec 00).
  * Motion runs only when the visitor allows it: no prefers-reduced-motion and no "stop animations"
- * from the accessibility menu. When it runs, <html> gets the `motion` class, which is the only
- * thing that arms hidden initial states, so content is readable before JS and without motion.
+ * from the accessibility menu. The `motion` class on <html> is the only thing that arms hidden initial states.
+ * MotionBoot sets it before first paint; this provider keeps it in sync afterwards.
  */
 
 type MotionContextValue = {
@@ -37,6 +37,8 @@ const MotionContext = createContext<MotionContextValue>({
 });
 
 export const useMotion = () => useContext(MotionContext);
+
+const subscribeNever = () => () => {};
 
 const REDUCED_QUERY = "(prefers-reduced-motion: reduce)";
 
@@ -91,9 +93,16 @@ export function MotionProvider({ children }: { children: React.ReactNode }) {
   const enabled = !reduced && !stilled;
   const lenisRef = useRef<Lenis | null>(null);
 
+  const hydrated = useSyncExternalStore(subscribeNever, () => true, () => false);
+
+  // MotionBoot arms html.motion before first paint. From hydration on, React owns the class: it drops it when
+  // motion gets switched off, and marks `motion-ready` so the no-JS failsafe in globals.css stands down.
   useEffect(() => {
-    document.documentElement.classList.toggle("motion", enabled);
-  }, [enabled]);
+    if (!hydrated) return;
+    const root = document.documentElement;
+    root.classList.toggle("motion", enabled);
+    root.classList.toggle("motion-ready", enabled);
+  }, [enabled, hydrated]);
 
   useEffect(() => {
     if (!enabled) return;

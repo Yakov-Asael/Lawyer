@@ -1,6 +1,7 @@
 import { practiceArea, site } from "@content";
-import { MaskText, Reveal } from "@/components/motion";
-import { ContactButtons, Ruled, Seal, SectionHeading } from "@/components/shared";
+import { Hero } from "@/components/hero/Hero";
+import { Reveal } from "@/components/motion";
+import { ContactButtons, Seal, SectionHeading } from "@/components/shared";
 import { ButtonLink } from "@/components/ui/button";
 import { mapsLink, wazeLink } from "@/lib/contact";
 import { WazeIcon } from "@/components/icons";
@@ -16,29 +17,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="on-dark relative isolate overflow-hidden rounded-lg bg-ink px-gutter pt-[120px] pb-section" aria-labelledby="shell-title">
-        <Ruled />
-        <div className="mx-auto grid max-w-content items-center gap-12 desk:grid-cols-[1fr_auto]">
-          <div>
-            <MaskText
-              as="h1"
-              id="shell-title"
-              lines={[site.hero.line1, site.hero.line2]}
-              lineClassNames={[undefined, "text-brass"]}
-              delay={150}
-              stagger={150}
-              className="type-hero"
-            />
-            <Reveal as="p" delay={400} className="mt-6 max-w-[60ch] type-lead text-on-dark-soft">
-              {site.hero.sub}
-            </Reveal>
-            <Reveal delay={550} className="mt-10">
-              <ContactButtons tone="dark" size="hero" />
-            </Reveal>
-          </div>
-          <Seal variant="hero" className="w-[104px] desk:w-32" />
-        </div>
-      </section>
+      <Hero />
 
       <section id="about" className="px-gutter py-section" aria-labelledby="shell-years">
         <div className="mx-auto max-w-content">
