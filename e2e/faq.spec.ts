@@ -92,3 +92,11 @@ test("screenshots", async ({ page }, info) => {
   await page.waitForTimeout(1300);
   await page.locator("#faq").screenshot({ path: `test-results/screens/faq-${info.project.name}.png` });
 });
+
+test("answers from Yossi; never a price (owner decision)", async ({ page }) => {
+  await page.goto("/");
+  const faq = page.locator("#faq");
+  await expect(faq).toContainText("את עלות הפגישה הראשונה אפשר לברר מראש");
+  await expect(faq).toContainText("כן. המשרד מלווה לקוחות גם מחוץ לחדרה.");
+  await expect(faq).not.toContainText(/₪|ש״ח|שקל/);
+});

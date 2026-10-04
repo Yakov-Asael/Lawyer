@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { clamp01, overlapRatio, readingProgress, remap, viewportProgress } from "./progress";
+import { clamp01, foldHidden, foldProgress, overlapRatio, readingProgress, remap, viewportProgress } from "./progress";
 
 describe("clamp01", () => {
   it("clamps to the unit range", () => {
@@ -66,5 +66,20 @@ describe("overlapRatio", () => {
   it("caps at 1 and survives a zero-height card", () => {
     expect(overlapRatio(card, { top: 0 })).toBe(1);
     expect(overlapRatio({ bottom: 0, height: 0 }, { top: 0 })).toBe(0);
+  });
+});
+
+describe("file stack fold (spec 06)", () => {
+  it("lifts from 0 to 1 over the fold span as the next file reaches the stick line", () => {
+    expect(foldProgress(128 + 220)).toBe(0);
+    expect(foldProgress(128 + 110)).toBe(0.5);
+    expect(foldProgress(128)).toBe(1);
+    expect(foldProgress(900)).toBe(0);
+  });
+
+  it("hides a file once the file two later is near the stick line", () => {
+    expect(foldHidden(undefined)).toBe(false);
+    expect(foldHidden(400)).toBe(false);
+    expect(foldHidden(150)).toBe(true);
   });
 });
