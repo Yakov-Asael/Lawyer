@@ -40,6 +40,19 @@ Eyebrow + H2 with `<MaskText>`; optional intro paragraph with `<Reveal delay=120
 `lucide-react` for UI icons. Custom inline SVG only for: WhatsApp, Waze, the accessibility figure, the seal.
 Stroke 1.8, round caps. No emojis, no image icons.
 
+## Implementation (built)
+| Piece | File | Notes |
+|---|---|---|
+| Button, ButtonLink, `buttonVariants` | `src/components/ui/button.tsx` | shadcn pattern written by hand (registry host blocked). `variant`: brass, ink, ghost, line. `shape`: pill, icon. `size`: default (52px), hero (48px below 600px). No Radix Slot: links use `ButtonLink`, which adds `target="_blank" rel="noopener"` to external hrefs |
+| ContactButtons | `src/components/shared/ContactButtons.tsx` | `tone` dark/light, optional `topic`, `label`, `size`. Copy from `ui.whatsappCta` / `ui.callLabel` |
+| Eyebrow | `src/components/shared/Eyebrow.tsx` | `on-dark:` variant switches brass-deep to brass |
+| SectionHeading | `src/components/shared/SectionHeading.tsx` | `size`: h2, areas, final (type scale utilities `type-*` in globals.css) |
+| Seal | `src/components/shared/Seal.tsx` | `variant`: hero, stamp, mark. Ring text from `brand.sealRing`, laid out by `ringGlyphs()` in `src/lib/seal.ts` (graphemes, counter-clockwise from the top) |
+| Icons | `src/components/icons.tsx` | WhatsApp, Waze. Phone and map pin come from lucide |
+
+The prototype has `data-ring` groups but no script that lays them out, so the ring layout was built from this spec,
+not copied from the prototype.
+
 ## Acceptance criteria
 - [ ] All buttons pass 4.5:1 text contrast and have a visible focus ring.
 - [ ] Measured text center within 1.5px of the button's vertical center at 1440 and 390.

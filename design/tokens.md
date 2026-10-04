@@ -80,6 +80,7 @@ header nav ≥1000px.
 |---|---|---|
 | `ease-out` | `cubic-bezier(.16,1,.3,1)` | Reveals, hovers, springs |
 | `ease-io` | `cubic-bezier(.65,0,.35,1)` | Loader draw and curtain |
+| `ease-stamp` | `cubic-bezier(.3,1.4,.5,1)` | Seal stamp landing in the final CTA only (deliberate overshoot) |
 | Reveal | opacity 0 → 1, translateY 28px → 0, 900ms, stagger via `--d` | Blocks entering the viewport (once) |
 | Mask reveal | inner span translateY 112% → 0, 1100ms | Headings, line by line |
 | Hover lift | translateY -2px, 350ms | Buttons |

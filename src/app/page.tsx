@@ -1,50 +1,83 @@
-import { site } from "@content";
+import { practiceArea, site } from "@content";
 import { MaskText, Reveal } from "@/components/motion";
+import { ContactButtons, Seal, SectionHeading } from "@/components/shared";
+import { ButtonLink } from "@/components/ui/button";
+import { mapsLink, wazeLink } from "@/lib/contact";
+import { WazeIcon } from "@/components/icons";
+import { MapPin } from "lucide-react";
 
 /**
  * Foundations placeholder. Sections replace this one by one as their specs are approved (specs 02-14).
- * It only proves the shell: RTL, fonts, tokens, frame, the content contract and the motion primitives.
+ * It exercises the shell and every shared component from spec 01 on both grounds.
  */
 export default function Home() {
   const { office } = site;
+  const family = practiceArea("family");
 
   return (
     <>
       <section className="on-dark rounded-lg bg-ink px-gutter py-section" aria-labelledby="shell-title">
-        <div className="mx-auto max-w-content">
-          <MaskText
-            as="h1"
-            id="shell-title"
-            lines={[site.hero.line1, site.hero.line2]}
-            lineClassNames={[undefined, "text-brass"]}
-            delay={150}
-            stagger={150}
-            className="font-serif text-[clamp(2rem,7.2vw,7.4rem)] leading-[1.08] tablet:leading-[0.98]"
-          />
-          <Reveal as="p" delay={400} className="mt-6 max-w-[60ch] text-on-dark-soft">
-            {site.hero.sub}
-          </Reveal>
-          <Reveal as="p" delay={550} className="mt-10 text-on-dark-soft">
-            {office.name} · {office.title} · {office.address}, {office.city} ·{" "}
-            <span className="num">{office.phoneDisplay}</span>
-          </Reveal>
+        <div className="mx-auto grid max-w-content items-center gap-12 desk:grid-cols-[1fr_auto]">
+          <div>
+            <MaskText
+              as="h1"
+              id="shell-title"
+              lines={[site.hero.line1, site.hero.line2]}
+              lineClassNames={[undefined, "text-brass"]}
+              delay={150}
+              stagger={150}
+              className="type-hero"
+            />
+            <Reveal as="p" delay={400} className="mt-6 max-w-[60ch] type-lead text-on-dark-soft">
+              {site.hero.sub}
+            </Reveal>
+            <Reveal delay={550} className="mt-10">
+              <ContactButtons tone="dark" size="hero" />
+            </Reveal>
+          </div>
+          <Seal variant="hero" className="w-[104px] desk:w-32" />
         </div>
       </section>
 
       <section className="px-gutter py-section" aria-labelledby="shell-years">
         <div className="mx-auto max-w-content">
-          <MaskText
+          <SectionHeading
             id="shell-years"
+            eyebrow={site.years.eyebrow}
             lines={[site.years.heading]}
-            by="word"
-            stagger={60}
-            className="font-serif text-[clamp(2.2rem,4.4vw,4rem)] leading-[1.05]"
+            intro={site.years.body}
           />
-          <Reveal as="p" delay={150} className="mt-6 max-w-[60ch] text-muted" data-testid="below-fold-reveal">
-            {site.years.body}
+          <Reveal delay={200} className="mt-10 flex flex-wrap items-center gap-4" data-testid="below-fold-reveal">
+            <ContactButtons tone="light" topic={family.whatsappTopic} label={family.ctaLabel} />
+            <ButtonLink href={wazeLink()} variant="line" shape="icon" aria-label={site.ui.wazeLabel} title="Waze">
+              <WazeIcon strokeWidth={1.7} />
+            </ButtonLink>
+            <ButtonLink href={mapsLink()} variant="line" shape="icon" aria-label={site.ui.mapsLabel} title="Google Maps">
+              <MapPin strokeWidth={1.7} aria-hidden="true" />
+            </ButtonLink>
           </Reveal>
         </div>
       </section>
+
+      <section className="on-dark flex flex-col items-center rounded-lg bg-ink px-gutter py-section text-center" aria-labelledby="shell-final">
+        <Seal variant="stamp" className="mb-8" />
+        <SectionHeading
+          id="shell-final"
+          size="final"
+          lines={[site.finalCta.line1, site.finalCta.line2]}
+          lineClassNames={[undefined, "text-brass"]}
+          intro={site.finalCta.body}
+          className="items-center"
+        />
+        <ContactButtons tone="dark" className="mt-10" />
+      </section>
+
+      <div className="flex items-center gap-4 px-gutter py-12">
+        <Seal variant="mark" />
+        <p className="text-muted">
+          {office.name} · {office.title} · {office.address}, {office.city}
+        </p>
+      </div>
     </>
   );
 }

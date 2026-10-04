@@ -37,6 +37,15 @@ export const siteContent = {
 
   ui: {
     skipLink: "דלג לתוכן",
+    whatsappCta: "שלחו הודעה בוואטסאפ",
+    callLabel: "חיוג ל-{phone}",
+    wazeLabel: "ניווט למשרד ב-Waze",
+    mapsLabel: "המשרד ב-Google Maps",
+  },
+
+  brand: {
+    sealRing: `${office.title} · ${office.city} · שוקרון כהן ·`,
+    sealSub: "נוטריון",
   },
 
   hero: {
@@ -53,6 +62,7 @@ export const siteContent = {
   },
 
   years: {
+    eyebrow: "ותק",
     heading: "עשרים ושלוש שנה של ייעוץ וייצוג משפטי",
     body: `ניסיון מעשי בייעוץ, במשא ומתן, בגישור ובניהול הליכים בבתי המשפט, בתחומי המשפט האזרחי והמסחרי. עורך דין משנת ${office.licensed.lawyer}, נוטריון משנת ${office.licensed.notary}.`,
   },
