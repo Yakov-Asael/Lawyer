@@ -14,7 +14,7 @@ test.describe("home metadata", () => {
     await expect(page).toHaveTitle("עו״ד יוסי שוקרון כהן | עורך דין ונוטריון בחדרה");
     const description = await page.locator('meta[name="description"]').getAttribute("content");
     expect(description!.length).toBeLessThanOrEqual(155);
-    for (const word of ["משפחה", "נזיקין", "מקרקעין", "נוטריון", "חדרה"]) expect(description).toContain(word);
+    for (const word of ["משפחה", "מקרקעין", "נזיקין", "אזרחי ומסחרי", "נוטריון", "חדרה"]) expect(description).toContain(word);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /^https?:\/\/[^/]+\/?$/);
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", /\/og\.png$/);
     await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute("content", "1200");

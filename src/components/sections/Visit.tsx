@@ -2,7 +2,7 @@ import { MapPin } from "lucide-react";
 import { site } from "@content";
 import { WazeIcon, WhatsAppIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion";
-import { SectionHeading } from "@/components/shared";
+import { NumText, SectionHeading } from "@/components/shared";
 import { ButtonLink } from "@/components/ui/button";
 import { mapsLink, waLink, wazeLink } from "@/lib/contact";
 
@@ -24,12 +24,12 @@ export function Visit() {
           </Reveal>
           {office.accessAndParking && (
             <Reveal as="p" delay={120} data-testid="visit-access" className="mt-3 max-w-[28em] text-[15px] text-muted tablet:text-[17px]">
-              {office.accessAndParking}
+              <NumText text={office.accessAndParking} />
             </Reveal>
           )}
           {office.hours && (
             <Reveal as="p" delay={140} data-testid="visit-hours" className="mt-1.5 text-muted">
-              {office.hours}
+              <NumText text={office.hours} />
             </Reveal>
           )}
           <Reveal delay={180} className="mt-7">

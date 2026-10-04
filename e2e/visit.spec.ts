@@ -5,13 +5,14 @@ import { expect, test } from "./fixtures";
 const SECTION = "#visit";
 const QUERY = "הרברט סמואל 27 חדרה";
 
-test("address from content; hours and access omitted while missing", async ({ page }) => {
+test("address, floor and hours from content; times are isolated LTR runs", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("#visit-title")).toHaveText("איפה אנחנו");
   await expect(page.locator(SECTION)).toContainText("הרברט סמואל 27, חדרה");
-  await expect(page.getByTestId("visit-hours")).toHaveCount(0);
-  await expect(page.getByTestId("visit-access")).toHaveCount(0);
-  await expect(page.locator(SECTION)).not.toContainText("[");
+  await expect(page.getByTestId("visit-access")).toContainText("קומה 1.");
+  const hours = page.getByTestId("visit-hours");
+  await expect(hours).toHaveText("קבלת קהל בתיאום מראש, חמישה ימים בשבוע בין 8:00 ל-18:00, ולפי הצורך גם מחוץ לשעות האלה.");
+  await expect(hours.locator(".num")).toHaveText(["8:00", "18:00"]);
 });
 
 test("Waze and Maps open the office address in a new tab", async ({ page }) => {
