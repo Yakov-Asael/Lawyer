@@ -7,7 +7,7 @@ import { splitAround } from "@/lib/emphasis";
 import portrait from "../../../design/assets/yossi-shukrun-cohen-portrait.webp";
 
 /**
- * Hero (spec 03): who (face and name), why him (personal, 30 years in Hadera), how to reach him.
+ * Hero (spec 03): who (face and name), why him (personal, 23 years of practice), how to reach him.
  * Dark inset card; the header sits over its top padding.
  * The entrance is CSS-only (`hero-in`, `hero-line` in globals.css): always in view at load, it needs no observer,
  * and the LCP text never waits for JavaScript.

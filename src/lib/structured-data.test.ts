@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { site } from "@content";
+import { site } from "@content/data";
 import { jsonLdScript, officeJsonLd } from "./structured-data";
 
 const data = officeJsonLd(site.office, {

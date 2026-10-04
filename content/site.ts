@@ -5,7 +5,7 @@ import type { Site } from "./schema";
  * Raw site content. Validated in ./index.ts; components import from "@content", never from here.
  *
  * Missing client copy is written as "[placeholder: ...]" and blocks a production build.
- * Unknown optional facts (hours, parking, education) are omitted, not invented.
+ * Unknown optional facts are omitted, not invented. Yossi's own words: content/source/yossi-2026-10-04.md.
  */
 
 export const office = {
@@ -19,8 +19,12 @@ export const office = {
   phoneE164: "+972522521127",
   whatsappE164: "972522521127",
   email: "shukruny@smile.net.il",
-  yearsOfPractice: 30,
-  // hours, accessAndParking, education: open items, waiting for Yossi.
+  yearsOfPractice: 23,
+  licensed: { lawyer: 2003, notary: 2015 },
+  education: "משפטים ומנהל עסקים, המכללה האקדמית נתניה",
+  hours: "קבלת קהל בתיאום מראש, חמישה ימים בשבוע בין 8:00 ל-18:00, ולפי הצורך גם מחוץ לשעות האלה.",
+  accessAndParking: "קומה 1. [placeholder: מעלית, נגישות לנכים וחניה, לאישור יוסי]",
+  // Source: content/source/yossi-2026-10-04.md. Prices are never shown (owner decision).
 } satisfies z.input<typeof Site>["office"];
 
 export const siteContent = {
@@ -69,77 +73,101 @@ export const siteContent = {
 
   hero: {
     line1: "ליווי משפטי אישי.",
-    line2: "30 שנה בחדרה.",
-    sub: "דיני משפחה, נזיקין וביטוח, מקרקעין וחוזים ושירותי נוטריון. את התיק שלכם מלווה עו״ד שוקרון כהן בעצמו, מהשיחה הראשונה ועד סוף הטיפול.",
+    line2: `${office.yearsOfPractice} שנות ניסיון.`,
+    sub: "משפחה וירושה, מקרקעין ונדל״ן, נזיקין וביטוח, משפט אזרחי ומסחרי ושירותי נוטריון. את התיק שלכם מלווה עו״ד שוקרון כהן בעצמו, מהשיחה הראשונה ועד סוף הטיפול.",
     subEmphasis: "את התיק שלכם מלווה עו״ד שוקרון כהן בעצמו",
     portraitAlt: office.name,
   },
 
   statement: {
     label: "גישה אישית",
-    text: "כשעומדים מול גירושין, תאונה או עסקה גדולה, הדבר החשוב ביותר הוא לדעת שיש מי שמכיר את התיק שלכם לעומק, עונה לטלפון, ומסביר כל שלב בשפה פשוטה.",
-    highlight: "הדבר החשוב ביותר",
+    text: "כשמשפחה, נכס, כסף או זכות שלכם עומדים על הפרק, חשוב לדעת שיש לצידכם עורך דין שרואה את התמונה המלאה, מקשיב, ובונה יחד אתכם את הדרך הנכונה לפעול.",
+    highlight: "חשוב לדעת",
     footLabel: "בלי מתווכים",
     footText: "אתם מדברים ישירות עם עורך הדין שמטפל בתיק.",
   },
 
   years: {
     eyebrow: "ותק",
-    heading: "שלושים שנה של עבודה משפטית בחדרה",
-    body: "היכרות ארוכת שנים עם העיר, עם בתי המשפט באזור ועם האנשים שפונים למשרד.",
+    heading: "עשרים ושלוש שנה של ייעוץ וייצוג משפטי",
+    body: `ניסיון מעשי בייעוץ, במשא ומתן, בגישור ובניהול הליכים בבתי המשפט, בתחומי המשפט האזרחי והמסחרי. עורך דין משנת ${office.licensed.lawyer}, נוטריון משנת ${office.licensed.notary}.`,
   },
 
   areas: {
     eyebrow: "תחומי עיסוק",
-    line1: "ארבעה תחומים,",
+    line1: "חמישה תחומים,",
     line2: "עורך דין אחד.",
     intro: "בחרו את הנושא ושלחו הודעה. ההודעה בוואטסאפ תיפתח עם שם התחום, כדי שתוכלו פשוט לכתוב מה קרה.",
   },
 
-  // Services are a first draft from the mockup and still need Yossi's confirmation.
+  // Five areas, in this order, confirmed with Yossi on 2026-10-04. The notary list is still a draft.
   practiceAreas: [
     {
       id: "family",
-      tabLabel: "דיני משפחה ומעמד אישי",
+      tabLabel: "דיני משפחה וירושה",
       headline: "כשהמשפחה משתנה, צריך מישהו יציב לצידכם.",
-      lead: "ליווי רגיש ודיסקרטי בהליכים שנוגעים בדברים הכי אישיים.",
+      lead: "מעבר להיבטים המשפטיים, מצבים משפחתיים דורשים שיקול דעת, רגישות והבנה של ההשלכות לטווח הארוך.",
       services: [
-        "גירושין והסכמי גירושין",
-        "משמורת והסדרי שהות",
-        "מזונות",
-        "הסכמי ממון וידועים בציבור",
-        "ירושות וצוואות",
+        "גירושין וחלוקת רכוש",
+        "מחלוקות בין בני משפחה",
+        "צוואות, ירושות ועיזבונות",
+        "צווי ירושה",
+        "צווי הורות פסיקתיים",
+        "העברות במתנה",
       ],
-      whatsappTopic: "דיני משפחה",
+      whatsappTopic: "דיני משפחה וירושה",
       ctaLabel: "שאלה בנושא משפחה",
-      servicesNote: "[placeholder: רשימה לאישור יוסי]",
+    },
+    {
+      id: "real-estate",
+      tabLabel: "מקרקעין ונדל״ן",
+      headline: "העסקה הגדולה בחיים ראויה לבדיקה יסודית.",
+      lead: "עסקאות ומחלוקות בנכסים ובזכויות במקרקעין, מבדיקת ההסכם ועד ניהול הליך כשאין פתרון בהסכמה.",
+      services: [
+        "ליווי עסקאות קנייה ומכירה",
+        "בחינת הסכמים",
+        "מחלוקות בין בעלי זכויות",
+        "בעלות ושימוש בנכסים",
+        "תכנון ובנייה",
+      ],
+      whatsappTopic: "מקרקעין ונדל״ן",
+      ctaLabel: "שאלה בנושא נדל״ן",
     },
     {
       id: "torts",
       tabLabel: "נזיקין וביטוח",
-      headline: "אחרי פגיעה, הזמן שלכם צריך ללכת להחלמה.",
-      lead: "טיפול בתביעה ובהתנהלות מול חברות הביטוח, כדי שלא תצטרכו לעשות את זה לבד.",
-      services: ["תאונות דרכים", "נזקי גוף", "תביעות מול חברות ביטוח", "תאונות עבודה"],
+      headline: "כשחברת הביטוח לא ממהרת להכיר בזכאות.",
+      lead: "כסוכן ביטוח לשעבר, עו״ד שוקרון כהן מכיר את ההתנהלות בחברות הביטוח מבפנים, מהגשת ההצעה ועד התביעה.",
+      services: [
+        "דחיית תביעות ביטוח",
+        "מחלוקות על הכיסוי ופרשנות הפוליסה",
+        "מחלוקות על היקף הנזק והפיצוי",
+        "תאונות ונזקי גוף",
+      ],
       whatsappTopic: "נזיקין וביטוח",
-      ctaLabel: "שאלה בנושא נזיקין",
-      servicesNote: "[placeholder: רשימה לאישור יוסי]",
+      ctaLabel: "שאלה בנושא ביטוח",
     },
     {
-      id: "real-estate",
-      tabLabel: "מקרקעין, נדל״ן וחוזים",
-      headline: "העסקה הגדולה בחיים ראויה לבדיקה יסודית.",
-      lead: "ליווי משפטי בקנייה, במכירה ובכל חוזה שחשוב לכם להבין לפני שחותמים.",
-      services: ["קנייה ומכירה של דירה", "בדיקת חוזים וניסוחם", "רישום בטאבו", "הסכמי שכירות"],
-      whatsappTopic: "מקרקעין וחוזים",
-      ctaLabel: "שאלה בנושא נדל״ן",
-      servicesNote: "[placeholder: רשימה לאישור יוסי]",
+      id: "civil",
+      tabLabel: "משפט אזרחי ומסחרי",
+      headline: "לא כל מחלוקת חייבת להגיע לבית המשפט.",
+      lead: "קודם בודקים אם אפשר להגיע להסכמה, במשא ומתן או בגישור. כשאין ברירה, ייצוג מלא לאורך כל ההליך.",
+      services: [
+        "הפרת חוזים והסכמים",
+        "מחלוקות כספיות ועסקיות",
+        "ניסוח ובדיקת הסכמים",
+        "ליטיגציה אזרחית ומסחרית",
+        "גישור ויישוב סכסוכים",
+      ],
+      whatsappTopic: "משפט אזרחי ומסחרי",
+      ctaLabel: "שאלה בנושא עסקי",
     },
     {
       id: "notary",
       tabLabel: "נוטריון",
       headline: "אישור נוטריוני, באותו משרד ובאותה שיחה.",
-      lead: "אימותים, תרגומים וייפויי כוח, בלי לחפש משרד נוסף.",
-      services: ["אימות חתימה", "העתק נאמן למקור", "תרגום נוטריוני", "ייפוי כוח נוטריוני"],
+      lead: "אימותים, תרגומים וייפויי כוח, כולל ייפוי כוח מתמשך, בלי לחפש משרד נוסף.",
+      services: ["אימות חתימה", "העתק נאמן למקור", "תרגום נוטריוני", "ייפוי כוח נוטריוני", "ייפוי כוח מתמשך"],
       whatsappTopic: "שירותי נוטריון",
       ctaLabel: "תיאום אישור נוטריוני",
       servicesNote: "[placeholder: רשימה לאישור יוסי]",
@@ -156,7 +184,8 @@ export const siteContent = {
     prev: "ההמלצות הקודמות",
     next: "ההמלצות הבאות",
     readMore: "קראו עוד",
-    readLess: "הצג פחות",
+    readerTitle: "המלצה",
+    close: "סגירה",
   },
 
   // Approved reviews, newest first, added by hand from the submission email (spec 18, option A).
@@ -171,11 +200,11 @@ export const siteContent = {
   process: [
     {
       title: "שולחים הודעה או מתקשרים",
-      body: "כמה משפטים על מה שקרה מספיקים. אין צורך להכין מסמכים מראש.",
+      body: "כמה משפטים על מה שקרה מספיקים. בשיחה קצרה תדעו בדיוק אילו מסמכים להביא.",
     },
     {
       title: "נפגשים במשרד",
-      body: `פגישה אישית ב${office.address}, שבה עוברים על המצב ועל האפשרויות.`,
+      body: `פגישה אישית בתיאום מראש, ב${office.address}, שבה עוברים על המצב ועל האפשרויות.`,
     },
     {
       title: "ליווי עד סוף הטיפול",
@@ -186,13 +215,20 @@ export const siteContent = {
   about: {
     eyebrow: "אודות",
     heading: ["עו״ד יוסי", "שוקרון כהן"],
-    factLabels: { experience: "ניסיון", license: "הסמכה", office: "משרד", education: "השכלה", years: "שנה" },
+    factLabels: {
+      experience: "ניסיון",
+      license: "הסמכה",
+      office: "משרד",
+      education: "השכלה",
+      years: "שנה",
+      licenseValue: "עו״ד {lawyer} · נוטריון {notary}",
+    },
     // Same portrait as the hero for now (decorative, so no alt). An office or at-work photo is an open item.
     photoAlt: "",
-    // signature: added when Yossi's real signature is converted to an SVG path.
+    // First person (owner decision, 2026-10-04); the rest of the site stays neutral. No signature (owner decision).
     paragraphs: [
-      `${office.title}, ${office.yearsOfPractice} שנה במשרד ב${office.city}. [placeholder: פסקה אישית קצרה של יוסי, למה בחר במקצוע ואיך הוא עובד עם לקוחות]`,
-      "המשרד מטפל בתיקים בדיני משפחה, נזיקין וביטוח, מקרקעין וחוזים, ומעניק שירותי נוטריון.",
+      "העיקרון שמנחה אותי הוא שאין שני תיקים זהים ואין שני לקוחות זהים. לכן כל מקרה מתחיל בהיכרות עם האדם שמאחורי הבעיה: העובדות, המטרות, הצרכים והחששות. רק אחר כך בוחנים את כל האפשרויות, המשפטיות והמעשיות, ובוחרים יחד את הדרך המתאימה.",
+      "לא בכל מחלוקת חייבים להגיע לבית המשפט. לעיתים הדרך הנכונה היא פתרון מוסכם, במשא ומתן או בגישור, שחוסך זמן, עלויות והליך ממושך. כשפתרון בהסכמה אינו אפשרי, אני מעניק ייצוג משפטי מלא לאורך כל ההליך.",
     ],
   },
 
@@ -234,15 +270,23 @@ export const siteContent = {
       question: "איך קובעים פגישה?",
       answer: `שולחים הודעה בוואטסאפ או מתקשרים ל-${office.phoneDisplay}. כמה משפטים על מה שקרה מספיקים כדי להתחיל.`,
     },
-    { question: "כמה עולה פגישת הייעוץ הראשונה?", answer: "[placeholder: תשובה של יוסי]" },
-    { question: "מה כדאי להביא לפגישה?", answer: "[placeholder: תשובה של יוסי, לפי תחום]" },
+    // Never a price on the site (owner decision).
+    {
+      question: "כמה עולה פגישת הייעוץ הראשונה?",
+      answer: "את עלות הפגישה הראשונה אפשר לברר מראש, בשיחת הטלפון הקצרה שלפני הפגישה, כך שמגיעים בלי הפתעות.",
+    },
+    {
+      question: "מה כדאי להביא לפגישה?",
+      answer:
+        "לפני הפגישה מתקיימת שיחת טלפון קצרה. מספרים בה בכמה משפטים על המקרה, ועו״ד שוקרון כהן אומר בדיוק אילו מסמכים להביא.",
+    },
     {
       question: "האם מה שאני מספר בפגישה נשאר חסוי?",
       answer:
         "כן. הדברים שנאמרים לעורך דין במסגרת הייעוץ מוגנים בחיסיון עורך דין ולקוח. [placeholder: לאישור נוסח עם יוסי]",
     },
     { question: "אפשר לקבל אישור נוטריוני בלי תיק במשרד?", answer: "[placeholder: תשובה של יוסי]" },
-    { question: "האם המשרד מטפל בלקוחות מחוץ לחדרה?", answer: "[placeholder: תשובה של יוסי]" },
+    { question: "האם המשרד מטפל בלקוחות מחוץ לחדרה?", answer: "כן. המשרד מלווה לקוחות גם מחוץ לחדרה." },
   ],
 
   finalCta: {
@@ -296,8 +340,8 @@ export const siteContent = {
   },
 
   seo: {
-    // At most 155 characters (enforced by the contract): the four areas and the city.
-    description: `${office.name}, ${office.title} ב${office.city}: דיני משפחה, נזיקין וביטוח, מקרקעין וחוזים ושירותי נוטריון. ${office.yearsOfPractice} שנות ניסיון, פנייה בוואטסאפ או בטלפון.`,
+    // From the approved prototype; the contract caps it at 155 characters.
+    description: `${office.name}, ${office.title} ב${office.city}, ${office.yearsOfPractice} שנות ניסיון. דיני משפחה וירושה, מקרקעין ונדל״ן, נזיקין וביטוח, משפט אזרחי ומסחרי, גישור ושירותי נוטריון.`,
     ogImageAlt: `${office.name}, ${office.title} ב${office.city}`,
   },
 } satisfies z.input<typeof Site>;

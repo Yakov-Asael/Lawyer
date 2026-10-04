@@ -18,21 +18,25 @@ describe("site content", () => {
     expect(site.office.whatsappE164).toBe(`972${digits}`);
   });
 
-  it("lists the four practice areas in the agreed order", () => {
-    expect(site.practiceAreas.map((a) => a.id)).toEqual(["family", "torts", "real-estate", "notary"]);
+  it("lists the five practice areas in the agreed order", () => {
+    expect(site.practiceAreas.map((a) => a.id)).toEqual(["family", "real-estate", "torts", "civil", "notary"]);
+  });
+
+  it("never shows a price (owner decision)", () => {
+    expect(JSON.stringify(siteContent)).not.toMatch(/₪|ש״ח|שקל/);
   });
 
   it("does not let FAQ answers block production (unanswered items are excluded instead)", () => {
     const blocking = blockingPlaceholders(site);
     expect(blocking.some((p) => p.startsWith("faq["))).toBe(false);
-    expect(blocking).toContain("about.paragraphs[0]");
+    expect(blocking).toContain("office.accessAndParking");
   });
 
   it("reports open placeholders by path", () => {
     const open = findPlaceholders(site);
-    expect(open).toContain("about.paragraphs[0]");
-    expect(open).toContain("practiceAreas[0].servicesNote");
-    expect(open.every((p) => /^(about\.|faq\[|practiceAreas\[\d\]\.servicesNote)/.test(p))).toBe(true);
+    expect(open).toContain("office.accessAndParking");
+    expect(open).toContain("practiceAreas[4].servicesNote");
+    expect(open.every((p) => /^(office\.accessAndParking|faq\[|practiceAreas\[4\]\.servicesNote)/.test(p))).toBe(true);
   });
 });
 
@@ -60,8 +64,8 @@ describe("contract rules", () => {
   });
 
   it("rejects practice areas out of order", () => {
-    const [a, b, c, d] = siteContent.practiceAreas;
-    expect(Site.safeParse({ ...siteContent, practiceAreas: [b, a, c, d] }).success).toBe(false);
+    const [a, b, c, d, e] = siteContent.practiceAreas;
+    expect(Site.safeParse({ ...siteContent, practiceAreas: [b, a, c, d, e] }).success).toBe(false);
   });
 
   it("keeps the about heading equal to the office name", () => {

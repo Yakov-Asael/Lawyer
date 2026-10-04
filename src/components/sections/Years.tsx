@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { site } from "@content/data";
-import { Reveal, useScrollProgress } from "@/components/motion";
+import { useScrollProgress } from "@/components/motion";
 import { SectionHeading } from "@/components/shared";
 import { remap } from "@/lib/motion";
 
@@ -11,8 +11,9 @@ const FILL_START = 0.18;
 const FILL_SPAN = 0.32;
 
 /**
- * 30 years (spec 05): the office's one hard number, made physical.
- * The numeral is decorative (aria-hidden); the heading states the fact in words.
+ * Years of practice (spec 05): the office's one hard number, made physical.
+ * The numeral is decorative (aria-hidden); the heading states the fact in words, the body the licensing years.
+ * Education lives in the About facts (prototype, 2026-10-04).
  */
 export function Years() {
   const { office, years } = site;
@@ -49,11 +50,6 @@ export function Years() {
           intro={years.body}
           introClassName="mt-[18px] max-w-[30em]"
         />
-        {office.education && (
-          <Reveal as="p" delay={200} className="mt-3 max-w-[30em] type-lead text-on-dark-soft" data-testid="education">
-            {office.education}
-          </Reveal>
-        )}
       </div>
     </section>
   );

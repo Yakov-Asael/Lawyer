@@ -33,7 +33,15 @@ export function Reviews({ reviews = getApprovedReviews() }: { reviews?: readonly
           </div>
         )}
       </div>
-      {!empty && <ReviewsSlider reviews={reviews} action={<ReviewDialog />} />}
+      {!empty && (
+        <>
+          <ReviewsSlider reviews={reviews} />
+          {/* Centred under the slider (spec 09, owner feedback). */}
+          <div className="mt-[18px] flex justify-center px-gutter">
+            <ReviewDialog />
+          </div>
+        </>
+      )}
     </section>
   );
 }
