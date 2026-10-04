@@ -1,6 +1,6 @@
 import { ArrowLeft, ChevronDown } from "lucide-react";
-import type { LegalPage } from "@content";
-import { site } from "@content";
+import type { LegalPage } from "@content/data";
+import { site } from "@content/data";
 import { formatDate } from "@/lib/format-date";
 import { LegalContactCard } from "./LegalContactCard";
 import { LegalTitleCard } from "./LegalTitleCard";

@@ -1,4 +1,4 @@
-import { site } from "@content";
+import { site } from "@content/data";
 import * as links from "./contact-links";
 
 /** Contact links bound to the office content. Components use these, never build URLs themselves. */

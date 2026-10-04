@@ -7,6 +7,11 @@ describe("site content", () => {
     expect(() => Site.parse(siteContent)).not.toThrow();
   });
 
+  it("parses to exactly the raw object, so client code can read it without Zod (content/data.ts)", () => {
+    expect(Site.parse(siteContent)).toStrictEqual(siteContent);
+    expect(site).toBe(siteContent);
+  });
+
   it("keeps phone, WhatsApp and display number consistent", () => {
     const digits = site.office.phoneDisplay.replaceAll("-", "").slice(1);
     expect(site.office.phoneE164).toBe(`+972${digits}`);

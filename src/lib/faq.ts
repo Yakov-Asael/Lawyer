@@ -1,4 +1,4 @@
-import { PLACEHOLDER_PATTERN, type Faq } from "@content";
+import { PLACEHOLDER_PATTERN, type Faq } from "@content/data";
 
 /**
  * The FAQ items to publish (spec 10). On a production build an item whose answer is missing or still a

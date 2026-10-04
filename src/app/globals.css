@@ -52,6 +52,8 @@
   --content-wide: 1280px;
   --section-pad: clamp(70px, 9vw, 130px);
   --dock-space: 84px;
+  /* The accessibility button above the dock: 52px plus a gap. */
+  --fab-space: 68px;
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
@@ -227,9 +229,10 @@
     overflow-x: clip;
   }
 
-  /* Room under the last content for the phone contact dock (spec 14), so nothing hides behind it. */
+  /* Room under the last content for the phone contact dock (spec 14) and the accessibility button that floats
+     above it (spec 15), so nothing hides behind either. */
   .dock-clearance {
-    padding-block-end: calc(var(--dock-space) + env(safe-area-inset-bottom));
+    padding-block-end: calc(var(--dock-space) + var(--fab-space) + env(safe-area-inset-bottom));
   }
 
   @media (min-width: 900px) {

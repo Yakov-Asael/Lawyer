@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { site } from "@content";
+import { site } from "@content/data";
 import { Fragment, type CSSProperties } from "react";
 import { Parallax } from "@/components/motion";
 import { ContactButtons, Ruled, Seal } from "@/components/shared";

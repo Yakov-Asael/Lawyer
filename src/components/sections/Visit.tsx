@@ -1,5 +1,5 @@
 import { MapPin } from "lucide-react";
-import { site } from "@content";
+import { site } from "@content/data";
 import { WazeIcon, WhatsAppIcon } from "@/components/icons";
 import { Reveal } from "@/components/motion";
 import { SectionHeading } from "@/components/shared";

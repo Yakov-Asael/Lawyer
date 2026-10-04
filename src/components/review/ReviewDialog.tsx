@@ -2,7 +2,7 @@
 
 import { PenLine, X } from "lucide-react";
 import { useRef, useState } from "react";
-import { site } from "@content";
+import { site } from "@content/data";
 import { useMotion } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { ReviewForm } from "./ReviewForm";

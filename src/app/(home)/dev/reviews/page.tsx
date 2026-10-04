@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import type { Review } from "@content";
+import type { Review } from "@content/data";
 import { Reviews } from "@/components/sections/Reviews";
 
 /**

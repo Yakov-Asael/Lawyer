@@ -1,5 +1,5 @@
-import type { LegalContact } from "@content";
-import { site } from "@content";
+import type { LegalContact } from "@content/data";
+import { site } from "@content/data";
 import { mailLink, telLink } from "@/lib/contact-links";
 
 /** The contact block closing a legal page (e.g. the accessibility coordinator). Phone and email are live links. */

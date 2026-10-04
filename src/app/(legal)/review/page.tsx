@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site } from "@content";
+import { site } from "@content/data";
 import { LegalTitleCard } from "@/components/legal/LegalTitleCard";
 import { ReviewForm } from "@/components/review/ReviewForm";
 import { buttonVariants } from "@/components/ui/button";

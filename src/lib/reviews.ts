@@ -1,4 +1,4 @@
-import { site, type Review } from "@content";
+import { site, type Review } from "@content/data";
 
 /**
  * The single source of published reviews (spec 09). Today they live in content, added by hand once approved;

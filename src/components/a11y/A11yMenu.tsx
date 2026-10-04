@@ -2,7 +2,7 @@
 
 import { CirclePause, Contrast, Link, Minus, MousePointer2, Palette, Plus, Type, X } from "lucide-react";
 import { useCallback, useEffect, useId, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
-import { site } from "@content";
+import { site } from "@content/data";
 import { AccessibilityIcon } from "@/components/icons";
 import {
   A11Y_OPTIONS,

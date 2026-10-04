@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState, useSyncExternalStore, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
-import { site } from "@content";
+import { site } from "@content/data";
 import { WhatsAppIcon } from "@/components/icons";
 import { useMotion } from "@/components/motion";
 import { Ruled } from "@/components/shared";

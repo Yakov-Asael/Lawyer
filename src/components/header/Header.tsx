@@ -1,4 +1,4 @@
-import { site } from "@content";
+import { site } from "@content/data";
 import { ContactButtons } from "@/components/shared";
 import { getApprovedReviews } from "@/lib/reviews";
 import { Brand } from "./Brand";
@@ -12,12 +12,12 @@ export function Header() {
   return (
     <header className="on-dark absolute inset-x-inset top-inset z-10 flex items-center justify-between gap-6 px-gutter py-[22px]">
       <Brand />
-      <nav aria-label={site.ui.navLabel} className="hidden gap-[30px] text-[15px] nav:flex">
+      <nav aria-label={site.ui.navLabel} className="hidden items-center gap-[30px] text-[15px] nav:flex">
         {site.navigation.header.map((link) => (
           <a
             key={link.href}
             href={link.href}
-            className="text-on-dark-soft no-underline transition-colors duration-200 hover:text-on-dark"
+            className="inline-flex min-h-11 items-center text-on-dark-soft no-underline transition-colors duration-200 hover:text-on-dark"
           >
             {link.label}
           </a>

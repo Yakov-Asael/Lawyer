@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { site } from "@content";
+import { site } from "@content/data";
 import { Reveal, useScrollProgress } from "@/components/motion";
 import { Eyebrow } from "@/components/shared";
 import { readingProgress } from "@/lib/motion";

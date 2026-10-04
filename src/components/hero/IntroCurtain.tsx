@@ -1,4 +1,4 @@
-import { site } from "@content";
+import { site } from "@content/data";
 
 /**
  * Intro loader (spec 03): seal rings draw, monogram and name appear, the curtain slides up.

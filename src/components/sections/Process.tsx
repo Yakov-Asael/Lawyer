@@ -1,4 +1,4 @@
-import { site } from "@content";
+import { site } from "@content/data";
 import { Reveal } from "@/components/motion";
 import { SectionHeading } from "@/components/shared";
 import { TrackFill } from "./TrackFill";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { practiceArea, site, type Review } from "@content";
+import { practiceArea, site, type Review } from "@content/data";
 
 /** One review (spec 09): quote clamped to four lines, with "קראו עוד" only when the text actually overflows. */
 export function ReviewCard({ review }: { review: Review }) {

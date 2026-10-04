@@ -2,7 +2,7 @@
 
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { ReactNode } from "react";
-import { site, type Review } from "@content";
+import { site, type Review } from "@content/data";
 import { Carousel, CarouselContent, CarouselItem, useCarousel } from "@/components/ui/carousel";
 import { ReviewCard } from "./ReviewCard";
 
