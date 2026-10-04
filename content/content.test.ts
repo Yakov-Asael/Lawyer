@@ -24,7 +24,8 @@ describe("site content", () => {
   it("reports open placeholders by path", () => {
     const open = findPlaceholders(site);
     expect(open).toContain("office.accessAndParking");
-    expect(open.every((p) => p === "office.accessAndParking" || p.startsWith("faq["))).toBe(true);
+    expect(open).toContain("practiceAreas[4].servicesNote");
+    expect(open.every((p) => /^(office\.accessAndParking|faq\[|practiceAreas\[4\]\.servicesNote)/.test(p))).toBe(true);
   });
 });
 

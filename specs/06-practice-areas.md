@@ -35,9 +35,26 @@ Phones: body top padding 52px so a covered file shows only a clean strip, not th
 ## Accessibility
 Each file is an `<article>` with its headline as `<h3>`; service lists are `<ul>`.
 
+## Implementation (built)
+- `src/components/sections/PracticeAreas.tsx` (server) renders the head and the four `<article>` files;
+  `FileStack.tsx` (client) only adds the dimming, from `overlapRatio()` (`src/lib/motion/progress.ts`, tested), on the
+  shared frame loop. Stacking is pure CSS (`sticky`, `top: calc(84px + var(--i) * 44px)`).
+- The last file is the end of the stack: it arrives at its 44px slot instead of sticking (no room left in its
+  container). That moment is when all four tabs are stacked, and what the test measures.
+- Colours per file are presentation in the component (`TONES`), not content. On the brass file the focus ring switches
+  to ink, because brass-deep on brass is too faint.
+- Section head copy lives in `content.areas`. While services are unconfirmed each file shows
+  `servicesNote` ("[placeholder: רשימה לאישור יוסי]"), which also blocks a production build.
+
 ## Acceptance criteria
 - [ ] Tab and body touch with zero gap (measured) at 1440 and 390; tab right edge equals body right edge.
 - [ ] Each CTA opens WhatsApp with its own topic in the message.
 - [ ] While scrolling the stack, at most two tabs are visible at rest (previous at 84px, current at 128px), labels fully readable.
 - [ ] All five bodies share the same left and right edges while stacked (measured).
 - [ ] Service lists come from content; no hardcoded items.
+
+## Implementation update (2026-10-04, owner feedback)
+- Five files (family, real estate, torts, civil and commercial, notary); colours ink, field, paper, ink, brass.
+- Every file is `sticky top-[128px]`. `FileStack` folds the stack: the current file lifts `44px * foldProgress`
+  as the next one arrives (`foldProgress` in `src/lib/motion/progress.ts`, over 220px), and a file two places back is
+  hidden (`foldHidden`). With motion off there is no lift or dimming; covered files are hidden under the current one.

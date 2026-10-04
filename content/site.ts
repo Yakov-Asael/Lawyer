@@ -92,6 +92,13 @@ export const siteContent = {
     body: `ניסיון מעשי בייעוץ, במשא ומתן, בגישור ובניהול הליכים בבתי המשפט, בתחומי המשפט האזרחי והמסחרי. עורך דין משנת ${office.licensed.lawyer}, נוטריון משנת ${office.licensed.notary}.`,
   },
 
+  areas: {
+    eyebrow: "תחומי עיסוק",
+    line1: "חמישה תחומים,",
+    line2: "עורך דין אחד.",
+    intro: "בחרו את הנושא ושלחו הודעה. ההודעה בוואטסאפ תיפתח עם שם התחום, כדי שתוכלו פשוט לכתוב מה קרה.",
+  },
+
   // Five areas, in this order, confirmed with Yossi on 2026-10-04. The notary list is still a draft.
   practiceAreas: [
     {
@@ -162,6 +169,7 @@ export const siteContent = {
       services: ["אימות חתימה", "העתק נאמן למקור", "תרגום נוטריוני", "ייפוי כוח נוטריוני", "ייפוי כוח מתמשך"],
       whatsappTopic: "שירותי נוטריון",
       ctaLabel: "תיאום אישור נוטריוני",
+      servicesNote: "[placeholder: רשימה לאישור יוסי]",
     },
   ],
 
