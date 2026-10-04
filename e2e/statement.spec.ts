@@ -5,7 +5,7 @@ import { expect, test } from "./fixtures";
 
 const SECTION = 'section[aria-label="גישה אישית"]';
 const TEXT =
-  "כשעומדים מול גירושין, תאונה או עסקה גדולה, הדבר החשוב ביותר הוא לדעת שיש מי שמכיר את התיק שלכם לעומק, עונה לטלפון, ומסביר כל שלב בשפה פשוטה.";
+  "כשמשפחה, נכס, כסף או זכות שלכם עומדים על הפרק, חשוב לדעת שיש לצידכם עורך דין שרואה את התמונה המלאה, מקשיב, ובונה יחד אתכם את הדרך הנכונה לפעול.";
 
 /** Scroll so the paragraph's top sits at `fraction` of the viewport height, then let the frame loop catch up. */
 async function placeParagraph(page: Page, fraction: number) {
@@ -49,7 +49,7 @@ test("words light up with reading progress, all lit before the paragraph leaves 
 test("highlight is exactly the content phrase, in brass-deep", async ({ page }) => {
   await page.goto("/");
   const hl = page.locator(`${SECTION} .scrub-word.text-brass-deep`);
-  expect((await hl.allTextContents()).join(" ")).toBe("הדבר החשוב ביותר");
+  expect((await hl.allTextContents()).join(" ")).toBe("חשוב לדעת");
   const [color, expected] = await hl.first().evaluate((el) => {
     const probe = document.createElement("span");
     probe.style.color = "var(--brass-deep)";

@@ -3,11 +3,11 @@ import { site } from "@content";
 import { Parallax, Reveal } from "@/components/motion";
 import { SectionHeading } from "@/components/shared";
 import portrait from "../../../design/assets/yossi-shukrun-cohen-portrait.webp";
-import { Signature } from "./Signature";
 
 /**
  * About (spec 08): the person the client will meet, with verifiable facts only.
- * Every fact is derived from `office`; a fact without content (education) is left out, never shown as a placeholder.
+ * Every fact is derived from `office`; a fact without content is left out, never shown as a placeholder.
+ * No signature (owner decision, 2026-10-04).
  */
 export function About() {
   const { about, office } = site;
@@ -15,7 +15,12 @@ export function About() {
 
   const facts = [
     { label: labels.experience, value: `${office.yearsOfPractice} ${labels.years}` },
-    { label: labels.license, value: office.title },
+    {
+      label: labels.license,
+      value: labels.licenseValue
+        .replace("{lawyer}", String(office.licensed.lawyer))
+        .replace("{notary}", String(office.licensed.notary)),
+    },
     { label: labels.office, value: office.city },
     ...(office.education ? [{ label: labels.education, value: office.education }] : []),
   ];
@@ -64,8 +69,6 @@ export function About() {
             ))}
           </dl>
         </Reveal>
-
-        {about.signature && <Signature viewBox={about.signature.viewBox} path={about.signature.path} />}
       </div>
     </section>
   );
