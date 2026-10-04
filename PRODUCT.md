@@ -52,6 +52,7 @@ Secondary facts: legal representation and notary services under one roof; mediat
 5. נוטריון (including enduring power of attorney)
 
 **Constraints:**
+- Voice (decided 2026-10-04): About section in first person ("אני מלווה"), the rest of the site neutral / third person.
 - Hebrew only, RTL.
 - Must comply with the Israel Bar Association advertising rules: no promised outcomes, no misleading or comparative
   claims. Copy that may cross the line is flagged for review, not published.
@@ -59,7 +60,6 @@ Secondary facts: legal representation and notary services under one roof; mediat
 **Open decisions (do not invent):**
 - Office hours.
 - Notary sub-services beyond enduring power of attorney (draft list in the mockup; needs Yossi's confirmation).
-- Voice: About is first person (Yossi's own text); the rest stays neutral / third person. Confirm with Yakov.
 - Logo / wordmark: none exists; to be designed.
 - Education, admission year, memberships.
 - Domain name.

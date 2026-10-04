@@ -86,5 +86,4 @@ const Site = z.object({
 | `about.paragraphs` (personal paragraph) | Done, edited from Yossi's text |
 | `faq[].answer` for cost, what to bring, notary without a case, clients outside Hadera | Missing |
 | `reviews` | None yet; owner curates with client consent |
-| Voice (first vs. third person) | About in first person, rest neutral |
 | High-resolution portrait, real signature, office photos | Missing |
