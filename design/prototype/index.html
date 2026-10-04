@@ -8,16 +8,16 @@
 :root{
   color-scheme: light;
   /* Seriousness */
-  --ink:#152420;          /* eucalyptus ink: hero, text, footer */
-  --field:#24413A;        /* eucalyptus: committed sections */
+  --ink:#14233A;          /* deep navy: hero, text, footer */
+  --field:#1F3452;        /* navy: committed sections */
   /* Warmth */
-  --brass:#B98A52;        /* accent on dark grounds */
-  --brass-deep:#7E5829;   /* accent text on light grounds */
+  --brass:#CDAE6A;        /* gold accent on dark grounds */
+  --brass-deep:#7A5B18;   /* gold text on light grounds */
   /* Care */
-  --stone:#EEE9DF;        /* warm limestone ground */
-  --bark:#DCD6C9;         /* secondary surface, hairlines */
-  --paper:#F7F4EE;        /* raised surfaces */
-  --muted:#535A55;        /* body text on light */
+  --stone:#F8F7F4;        /* clean white ground */
+  --bark:#E6E3DC;         /* secondary surface, hairlines */
+  --paper:#FFFFFF;        /* raised surfaces */
+  --muted:#55565C;        /* body text on light */
   --on-dark:var(--stone);
   --on-dark-soft:color-mix(in srgb,var(--on-dark) 72%,transparent);
   --line-dark:color-mix(in srgb,var(--on-dark) 14%,transparent);
@@ -368,35 +368,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .a11y-still .stamp{opacity:1!important;transform:rotate(-8deg)!important}
 .a11y-cursor,.a11y-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l15 10-7 1.5L8.5 21z' fill='%23152420' stroke='%23fff' stroke-width='1.3'/%3E%3C/svg%3E") 4 2,auto!important}
 
-/* ---------- Palette review tool (prototype only, not part of the site) ---------- */
-[data-palette="cleangold"]{--ink:#14233A;--field:#1F3452;--brass:#CDAE6A;--brass-deep:#7A5B18;--stone:#F8F7F4;--paper:#FFFFFF;--bark:#E6E3DC;--muted:#55565C}
-[data-palette="clean"]{--ink:#1B2F4B;--field:#264468;--brass:#D5E0EC;--brass-deep:#1E3A5F;--stone:#F7F7F8;--paper:#FFFFFF;--bark:#E4E4E7;--muted:#52525B}
-[data-palette="navygold"]{--ink:#0B1220;--field:#16233A;--brass:#C9A24B;--brass-deep:#7A5B18;--stone:#F6F2E9;--paper:#FBF8F2;--bark:#E4DFD3;--muted:#555A63}
-[data-palette="walnut"]{--ink:#2A1D17;--field:#4A3328;--brass:#C8935B;--brass-deep:#85502A;--stone:#F2EBE2;--paper:#FAF6F0;--bark:#E3D8CA;--muted:#5E534B}
-[data-palette="cedar"]{--ink:#2B1A14;--field:#5A2E22;--brass:#DDA65E;--brass-deep:#86521A;--stone:#F3ECE4;--paper:#FAF7F2;--bark:#E6DACD;--muted:#5F534B}
-[data-palette="cocoa"]{--ink:#26201C;--field:#5C4033;--brass:#D6A676;--brass-deep:#88572A;--stone:#F4EEE6;--paper:#FBF8F3;--bark:#E7DDD0;--muted:#5E554D}
-[data-palette="plum"]{--ink:#24161F;--field:#4A2A3D;--brass:#D9A95F;--brass-deep:#7E5520;--stone:#F3ECE6;--paper:#FAF7F3;--bark:#E4D9D1;--muted:#5E545A}
-[data-palette="tobacco"]{--ink:#211C16;--field:#4A4232;--brass:#CFA066;--brass-deep:#7E5A2E;--stone:#F2EDE3;--paper:#FAF7F0;--bark:#E2DBCC;--muted:#5C5850}
-[data-palette="oxblood"]{--ink:#221416;--field:#4A2026;--brass:#D3AA6B;--brass-deep:#7A5220;--stone:#F1EBE3;--paper:#F9F6F1;--bark:#E0D6CA;--muted:#5F5755}
-.pal-fab{position:fixed;z-index:110;inset-inline-end:16px;bottom:calc(86px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 10px;border-radius:999px;background:var(--paper);color:var(--ink);border:1.5px solid var(--ink);font-weight:700;font-size:14px;box-shadow:0 12px 26px -12px color-mix(in srgb,var(--ink) 55%,transparent)}
-.pal-fab i{display:flex}
-.pal-fab i b{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--paper);margin-inline-start:-5px}
-@media (min-width:900px){.pal-fab{bottom:24px;inset-inline-end:24px}}
-.pal-panel{position:fixed;z-index:111;inset-inline-end:16px;bottom:calc(140px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 32px));max-height:calc(100svh - 170px);overflow-y:auto;padding:18px;border-radius:22px;background:var(--paper);color:var(--ink);border:1px solid var(--bark);box-shadow:0 30px 70px -20px color-mix(in srgb,var(--ink) 55%,transparent);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .3s var(--ease-out),transform .35s var(--ease-out),visibility .3s}
-@media (min-width:900px){.pal-panel{bottom:80px;inset-inline-end:24px}}
-.pal-panel.open{opacity:1;visibility:visible;transform:none}
-.pal-panel header{display:flex;justify-content:space-between;align-items:baseline;margin-block-end:4px}
-.pal-panel header b{font-family:var(--serif);font-size:21px}
-.pal-panel header small{font-size:12px;color:var(--muted)}
-.pal-list{display:grid;gap:8px;margin-block-start:12px}
-.pal-opt{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;padding:12px;border-radius:14px;border:1.5px solid var(--bark);background:transparent;text-align:start;color:var(--ink)}
-.pal-opt[aria-pressed="true"]{border-color:var(--ink);background:var(--stone)}
-.pal-sw{grid-row:span 2;display:flex;border-radius:10px;overflow:hidden;border:1px solid color-mix(in srgb,var(--ink) 15%,transparent)}
-.pal-sw span{width:14px;height:40px}
-.pal-opt b{font-size:15px}
-.pal-opt small{font-size:13px;color:var(--muted);line-height:1.4}
-.pal-share{margin-block-start:12px;font-size:12.5px;color:var(--muted)}
-
 /* Light hero variant (review tool): same layout, paper ground, ink text */
 [data-hero="light"] .hero{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 1px var(--bark);--on-dark:var(--ink);--on-dark-soft:var(--muted);--line-dark:color-mix(in srgb,var(--ink) 14%,transparent)}
 [data-hero="light"] .hero h1 .l2{color:var(--brass-deep)}
@@ -404,11 +375,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 [data-hero="light"] .hero .seal{--on-dark:var(--stone);--on-dark-soft:color-mix(in srgb,var(--stone) 72%,transparent)}
 [data-hero="light"] .hero .btn-ghost:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
 [data-hero="light"] .hero .portrait{box-shadow:0 30px 70px -35px color-mix(in srgb,var(--ink) 45%,transparent)}
-.pal-mode{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-block-start:10px;padding:10px 12px;border-radius:14px;background:var(--stone)}
-.pal-mode span{font-weight:700;font-size:14px}
-.pal-mode div{display:flex;gap:4px;padding:3px;border-radius:999px;background:var(--paper);border:1px solid var(--bark)}
-.pal-mode button{border:0;background:transparent;padding:7px 14px;border-radius:999px;font-weight:600;font-size:13.5px;color:var(--ink)}
-.pal-mode button[aria-pressed="true"]{background:var(--ink);color:var(--stone)}
 
 /* ---------- Review submission dialog ---------- */
 .rvd{position:fixed;inset:0;z-index:130;display:grid;align-items:end;justify-items:center;visibility:hidden}
@@ -891,26 +857,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   </div>
 </div>
 
-<button class="pal-fab" type="button" aria-expanded="false" aria-controls="pal-panel"><i aria-hidden="true"><b style="background:var(--ink)"></b><b style="background:var(--field)"></b><b style="background:var(--brass)"></b></i>פלטות</button>
-<div class="pal-panel" id="pal-panel" role="dialog" aria-label="בחירת פלטת צבעים" inert>
-  <header><b>פלטות צבעים</b><small>כלי לבחירה בלבד</small></header>
-  <div class="pal-mode"><span id="pal-mode-label">פתיח</span><div role="group" aria-labelledby="pal-mode-label"><button type="button" data-hero-mode="dark" aria-pressed="true">כהה</button><button type="button" data-hero-mode="light" aria-pressed="false">בהיר</button></div></div>
-
-  <div class="pal-list">
-    <button class="pal-opt" type="button" data-pal="eucalyptus" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#152420"></span><span style="background:#24413A"></span><span style="background:#B98A52"></span><span style="background:#DCD6C9"></span><span style="background:#EEE9DF"></span></span><b>אקליפטוס ופליז</b><small>הנוכחית. העץ של חדרה, ירוק עמוק עם חום של פליז.</small></button>
-    <button class="pal-opt" type="button" data-pal="navygold" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#0B1220"></span><span style="background:#16233A"></span><span style="background:#C9A24B"></span><span style="background:#E4DFD3"></span><span style="background:#F6F2E9"></span></span><b>נייבי וזהב</b><small>הכיוון מהמוקאפ הראשון. סמכות קלאסית ומכובדת.</small></button>
-    <button class="pal-opt" type="button" data-pal="cleangold" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#14233A"></span><span style="background:#1F3452"></span><span style="background:#CDAE6A"></span><span style="background:#E6E3DC"></span><span style="background:#F8F7F4"></span></span><b>נקי: נייבי וזהב</b><small>לבן נקי עם נייבי עמוק ונגיעת זהב. הכי אלגנטית.</small></button>
-    <button class="pal-opt" type="button" data-pal="clean" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#1B2F4B"></span><span style="background:#264468"></span><span style="background:#D5E0EC"></span><span style="background:#E4E4E7"></span><span style="background:#F7F7F8"></span></span><b>נקי: נייבי ופלדה</b><small>לבן, נייבי ותכלת פלדה. מודרני ומדויק, בסגנון המוקאפ השני.</small></button>
-    <button class="pal-opt" type="button" data-pal="walnut" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#2A1D17"></span><span style="background:#4A3328"></span><span style="background:#C8935B"></span><span style="background:#E3D8CA"></span><span style="background:#F2EBE2"></span></span><b>אגוז וקרמל</b><small>עץ כהה של שולחן עבודה ותיק. חם, מכובד ורך.</small></button>
-    <button class="pal-opt" type="button" data-pal="cedar" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#2B1A14"></span><span style="background:#5A2E22"></span><span style="background:#DDA65E"></span><span style="background:#E6DACD"></span><span style="background:#F3ECE4"></span></span><b>ארז וענבר</b><small>עץ אדמדם ואור ענבר. חם מאוד, ועדיין רציני.</small></button>
-    <button class="pal-opt" type="button" data-pal="cocoa" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#26201C"></span><span style="background:#5C4033"></span><span style="background:#D6A676"></span><span style="background:#E7DDD0"></span><span style="background:#F4EEE6"></span></span><b>קקאו ושמנת</b><small>חום רך ועוטף. הכי פחות נוקשה.</small></button>
-    <button class="pal-opt" type="button" data-pal="plum" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#24161F"></span><span style="background:#4A2A3D"></span><span style="background:#D9A95F"></span><span style="background:#E4D9D1"></span><span style="background:#F3ECE6"></span></span><b>שזיף ודבש</b><small>עומק סגלגל עם זהב דבש. אלגנטי ושונה.</small></button>
-    <button class="pal-opt" type="button" data-pal="tobacco" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#211C16"></span><span style="background:#4A4232"></span><span style="background:#CFA066"></span><span style="background:#E2DBCC"></span><span style="background:#F2EDE3"></span></span><b>טבק ומרווה</b><small>חום עם נגיעה ירקרקה. רגוע ומאופק.</small></button>
-    <button class="pal-opt" type="button" data-pal="oxblood" aria-pressed="false"><span class="pal-sw" aria-hidden="true"><span style="background:#221416"></span><span style="background:#4A2026"></span><span style="background:#D3AA6B"></span><span style="background:#E0D6CA"></span><span style="background:#F1EBE3"></span></span><b>בורדו וחיטה</b><small>כובד משקל של ספרייה משפטית. דרמטית וחמה.</small></button>
-  </div>
-  <p class="pal-share">הקישור בדפדפן מתעדכן לפי הפלטה, כך שאפשר לשלוח ליוסי קישור ישיר לכל אחת.</p>
-</div>
-
 <button class="a11y-fab" type="button" aria-label="תפריט נגישות" aria-expanded="false" aria-controls="a11y-panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.6" r="1.9"/><path d="M4.5 8.6l7.5 1.6 7.5-1.6M12 10.2v4.6M12 14.8l-3.2 6M12 14.8l3.2 6"/></svg></button>
 <div class="a11y-panel" id="a11y-panel" role="dialog" aria-label="התאמות נגישות" inert>
   <div class="a11y-head"><b>נגישות</b><button class="a11y-x" type="button" aria-label="סגירת תפריט הנגישות"></button></div>
@@ -1095,43 +1041,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
     apply();
   })();
 
-  // Palette review tool: prototype only. Hash (#p-<name>) wins, then the stored choice.
-  (() => {
-    const KEY = 'shc-palette';
-    const fab = document.querySelector('.pal-fab');
-    const panel = document.getElementById('pal-panel');
-    const opts = [...panel.querySelectorAll('[data-pal]')];
-    const names = opts.map(o => o.dataset.pal);
-    const set = (name, write) => {
-      if (!names.includes(name)) name = 'eucalyptus';
-      if (name === 'eucalyptus') root.removeAttribute('data-palette'); else root.setAttribute('data-palette', name);
-      opts.forEach(o => o.setAttribute('aria-pressed', String(o.dataset.pal === name)));
-      if (write) {
-        try { localStorage.setItem(KEY, name); } catch (e) {}
-        try { history.replaceState(null, '', '#p-' + name); } catch (e) {}
-      }
-    };
-    let initial = location.hash.startsWith('#p-') ? location.hash.slice(3) : null;
-    if (!initial) { try { initial = localStorage.getItem(KEY); } catch (e) {} }
-    set(initial || 'eucalyptus', false);
-    opts.forEach(o => o.addEventListener('click', () => set(o.dataset.pal, true)));
-    // Hero mode (dark / light), stored separately from the palette.
-    const HKEY = 'shc-hero';
-    const modeBtns = [...panel.querySelectorAll('[data-hero-mode]')];
-    const setMode = (m, write) => {
-      if (m !== 'light') m = 'dark';
-      if (m === 'light') root.setAttribute('data-hero', 'light'); else root.removeAttribute('data-hero');
-      modeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.heroMode === m)));
-      if (write) { try { localStorage.setItem(HKEY, m); } catch (e) {} }
-    };
-    let m0 = null; try { m0 = localStorage.getItem(HKEY); } catch (e) {}
-    setMode(m0, false);
-    modeBtns.forEach(b => b.addEventListener('click', () => setMode(b.dataset.heroMode, true)));
-    const open = v => { panel.classList.toggle('open', v); panel.inert = !v; fab.setAttribute('aria-expanded', String(v)); };
-    fab.addEventListener('click', () => open(!panel.classList.contains('open')));
-    addEventListener('keydown', e => { if (e.key === 'Escape' && panel.classList.contains('open')) { open(false); fab.focus(); } });
-    document.addEventListener('pointerdown', e => { if (panel.classList.contains('open') && !panel.contains(e.target) && !fab.contains(e.target)) open(false); });
-  })();
 
   // Review submission dialog (prototype: validation and success state only, nothing is sent).
   (() => {
