@@ -37,7 +37,7 @@ test.describe("motion on", () => {
 
   test("mask keeps the heading as whole text for assistive tech", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("ליווי משפטי אישי. 30 שנה בחדרה.");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("ליווי משפטי אישי. 23 שנות ניסיון.");
   });
 });
 
