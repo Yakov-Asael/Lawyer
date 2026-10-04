@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 import { expect, test } from "./fixtures";
 
-/** Spec 05: 30 years. */
+/** Spec 05: years of practice. */
 
 const SECTION = "section[aria-labelledby=years-title]";
 
@@ -30,11 +30,11 @@ const filled = (page: Page) =>
 test("numeral is decorative, LTR, from content; heading carries the fact", async ({ page }) => {
   await page.goto("/");
   const numeral = page.locator(`${SECTION} [aria-hidden=true][dir=ltr]`);
-  await expect(numeral.locator(".years-outline")).toHaveText("30");
-  await expect(page.locator("#years-title")).toHaveText("שלושים שנה של עבודה משפטית בחדרה");
+  await expect(numeral.locator(".years-outline")).toHaveText("23");
+  await expect(page.locator("#years-title")).toHaveText("עשרים ושלוש שנה של ייעוץ וייצוג משפטי");
   await expect(page.locator(SECTION)).toMatchAriaSnapshot(`
-    - heading "שלושים שנה של עבודה משפטית בחדרה" [level=2]
-    - paragraph: היכרות ארוכת שנים עם העיר, עם בתי המשפט באזור ועם האנשים שפונים למשרד.
+    - heading "עשרים ושלוש שנה של ייעוץ וייצוג משפטי" [level=2]
+    - paragraph: ניסיון מעשי בייעוץ, במשא ומתן, בגישור ובניהול הליכים בבתי המשפט, בתחומי המשפט האזרחי והמסחרי. עורך דין משנת 2003, נוטריון משנת 2015.
   `);
 });
 
@@ -57,9 +57,11 @@ test("fills from bottom to top, full when the section centre reaches the viewpor
   await expect.poll(() => filled(page)).toBe(1);
 });
 
-test("education line is omitted while office.education is missing", async ({ page }) => {
+test("the body states the licensing years; education lives in About, not here", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByTestId("education")).toHaveCount(0);
+  const section = page.locator("section[aria-labelledby=years-title]");
+  await expect(section).toContainText("עורך דין משנת 2003, נוטריון משנת 2015.");
+  await expect(section).not.toContainText("המכללה האקדמית נתניה");
 });
 
 test.describe("reduced motion", () => {
