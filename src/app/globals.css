@@ -603,12 +603,14 @@ html.motion:not(.intro) .hero-line > span {
 }
 
 /* Statement scrub (spec 04): words start dim and light up with reading progress. Motion off: all lit. */
+/* Unlit words stay readable (muted holds 6.8:1 on stone, IS 5568 / WCAG 1.4.3); lighting up brings them to ink, and
+   the highlight to brass-deep. Colour, not opacity, so no word is ever below 4.5:1. */
 .motion .scrub-word {
-  transition: opacity 0.25s linear;
+  transition: color 0.25s linear;
 }
 
 .motion .scrub-word:not(.is-lit) {
-  opacity: 0.16;
+  color: var(--muted);
 }
 
 /* 30 years numeral (spec 05): the solid brass copy is clipped from the top and fills upwards with scroll.

@@ -20,7 +20,7 @@ async function placeParagraph(page: Page, fraction: number) {
 const litRatio = (page: Page) =>
   page.evaluate(() => {
     const words = [...document.querySelectorAll(".scrub-word")];
-    return words.filter((w) => Number(getComputedStyle(w).opacity) > 0.9).length / words.length;
+    return words.filter((w) => w.classList.contains("is-lit")).length / words.length;
   });
 
 test("words light up with reading progress, all lit before the paragraph leaves the upper half", async ({ page }) => {
@@ -50,6 +50,11 @@ test("highlight is exactly the content phrase, in brass-deep", async ({ page }) 
   await page.goto("/");
   const hl = page.locator(`${SECTION} .scrub-word.text-brass-deep`);
   expect((await hl.allTextContents()).join(" ")).toBe("חשוב לדעת");
+  // Read once lit: unlit words are muted by design.
+  await expect(page.locator("html")).toHaveClass(/motion-ready/);
+  await placeParagraph(page, 0.1);
+  await expect(hl.first()).toHaveClass(/is-lit/);
+  await page.waitForTimeout(300); // the 0.25s colour transition
   const [color, expected] = await hl.first().evaluate((el) => {
     const probe = document.createElement("span");
     probe.style.color = "var(--brass-deep)";
@@ -70,10 +75,15 @@ test("assistive tech gets the sentence as one text, not word by word", async ({ 
 
 test.describe("reduced motion", () => {
   test.use({ reducedMotion: "reduce" });
-  test("all words at full opacity", async ({ page }) => {
+  test("every word in its full colour from the start", async ({ page }) => {
     await page.goto("/");
     await placeParagraph(page, 0.95);
-    expect(await litRatio(page)).toBe(1);
+    const colours = await page.locator(`${SECTION} p`).evaluate((p) => {
+      const base = getComputedStyle(p).color;
+      return [...p.querySelectorAll(".scrub-word:not(.text-brass-deep)")].map((w) => getComputedStyle(w).color === base);
+    });
+    expect(colours.length).toBeGreaterThan(0);
+    expect(colours.every(Boolean)).toBe(true);
   });
 });
 
@@ -87,4 +97,35 @@ test("screenshots", async ({ page }, info) => {
   await placeParagraph(page, 0.57 - height / vh - 0.01);
   await page.waitForTimeout(700);
   await page.screenshot({ path: `test-results/screens/statement-${info.project.name}.png` });
+});
+
+test("unlit words stay readable: at least 4.5:1 against the page", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveClass(/motion-ready/);
+  await placeParagraph(page, 0.95);
+  const ratios = await page.locator(`${SECTION} .scrub-word:not(.is-lit)`).evaluateAll((words) => {
+    const ctx = Object.assign(document.createElement("canvas"), { width: 1, height: 1 }).getContext("2d", { willReadFrequently: true })!;
+    const rgb = (css: string) => {
+      ctx.clearRect(0, 0, 1, 1);
+      ctx.fillStyle = css;
+      ctx.fillRect(0, 0, 1, 1);
+      const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+      return [r!, g!, b!];
+    };
+    const lum = (c: number[]) => {
+      const [r, g, b] = c.map((v) => ((v /= 255) <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+      return 0.2126 * r! + 0.7152 * g! + 0.0722 * b!;
+    };
+    const bg = lum(rgb(getComputedStyle(document.body).backgroundColor));
+    return words.map((w) => {
+      const s = getComputedStyle(w);
+      const fg = lum(rgb(s.color));
+      return { ratio: (Math.max(fg, bg) + 0.05) / (Math.min(fg, bg) + 0.05), opacity: Number(s.opacity) };
+    });
+  });
+  expect(ratios.length).toBeGreaterThan(0);
+  for (const r of ratios) {
+    expect(r.opacity).toBe(1);
+    expect(r.ratio).toBeGreaterThanOrEqual(4.5);
+  }
 });
