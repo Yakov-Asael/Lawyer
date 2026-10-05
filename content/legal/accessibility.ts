@@ -10,7 +10,7 @@ import { office } from "../site";
 export const accessibilityPage = {
   slug: "accessibility",
   title: "הצהרת נגישות",
-  updatedAt: "2026-10-04",
+  updatedAt: "2026-10-05",
   approved: false,
   intro: `${office.name} רואה חשיבות בכך שכל אדם, כולל אנשים עם מוגבלות, יוכל לקרוא את המידע באתר וליצור קשר עם המשרד בקלות. הצהרה זו מתארת את הנגישות של האתר ואת הדרך לפנות אלינו בנושא.`,
   sections: [
