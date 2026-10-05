@@ -9,9 +9,9 @@ test("address, floor and hours from content; times are isolated LTR runs", async
   await page.goto("/");
   await expect(page.locator("#visit-title")).toHaveText("איפה אנחנו");
   await expect(page.locator(SECTION)).toContainText("הרברט סמואל 27, חדרה");
-  await expect(page.getByTestId("visit-access")).toContainText("קומה 1.");
+  await expect(page.getByTestId("visit-access")).toHaveText("קומה 1. יש חניה בקרבת המשרד, ליד פוליצר.");
   const hours = page.getByTestId("visit-hours");
-  await expect(hours).toHaveText("קבלת קהל בתיאום מראש, חמישה ימים בשבוע בין 8:00 ל-18:00, ולפי הצורך גם מחוץ לשעות האלה.");
+  await expect(hours).toHaveText("קבלת קהל בתיאום מראש, בימים א׳ עד ה׳ בין 8:00 ל-18:00, ולפי הצורך גם מחוץ לשעות האלה.");
   await expect(hours.locator(".num")).toHaveText(["8:00", "18:00"]);
 });
 
