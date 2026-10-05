@@ -29,14 +29,13 @@ describe("site content", () => {
   it("does not let FAQ answers block production (unanswered items are excluded instead)", () => {
     const blocking = blockingPlaceholders(site);
     expect(blocking.some((p) => p.startsWith("faq["))).toBe(false);
-    expect(blocking).toContain("office.accessAndParking");
+    expect(blocking).toContain("practiceAreas[4].servicesNote");
   });
 
   it("reports open placeholders by path", () => {
     const open = findPlaceholders(site);
-    expect(open).toContain("office.accessAndParking");
     expect(open).toContain("practiceAreas[4].servicesNote");
-    expect(open.every((p) => /^(office\.accessAndParking|faq\[|practiceAreas\[4\]\.servicesNote)/.test(p))).toBe(true);
+    expect(open.every((p) => /^(faq\[|practiceAreas\[4\]\.servicesNote)/.test(p))).toBe(true);
   });
 });
 

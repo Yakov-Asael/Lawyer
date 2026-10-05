@@ -22,8 +22,10 @@ export const office = {
   yearsOfPractice: 23,
   licensed: { lawyer: 2003, notary: 2015 },
   education: "משפטים ומנהל עסקים, המכללה האקדמית נתניה",
-  hours: "קבלת קהל בתיאום מראש, חמישה ימים בשבוע בין 8:00 ל-18:00, ולפי הצורך גם מחוץ לשעות האלה.",
-  accessAndParking: "קומה 1. [placeholder: מעלית, נגישות לנכים וחניה, לאישור יוסי]",
+  hours: "קבלת קהל בתיאום מראש, בימים א׳ עד ה׳ בין 8:00 ל-18:00, ולפי הצורך גם מחוץ לשעות האלה.",
+  // Yossi (2026-10-05): no elevator and no real wheelchair access; not mentioned here at his request. The
+  // accessibility statement still has to describe it (service-accessibility regulations).
+  accessAndParking: "קומה 1. יש חניה בקרבת המשרד, ליד פוליצר.",
   // Source: content/source/yossi-2026-10-04.md. Prices are never shown (owner decision).
 } satisfies z.input<typeof Site>["office"];
 
