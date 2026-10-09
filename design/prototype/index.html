@@ -170,12 +170,15 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 .areas-head{display:grid;gap:18px;margin-block-end:clamp(40px,6vw,70px)}
 .areas-head h2{font-size:clamp(2.3rem,5vw,4.6rem);line-height:1.02}
 .areas-head p{max-width:34em;color:var(--muted)}
-.files{display:grid;gap:clamp(24px,4vh,40px)}
-.file{position:sticky;top:128px;will-change:transform}
-.file-tab{min-height:44px;box-sizing:border-box}
-.file-tab{display:flex;width:fit-content;align-items:center;gap:10px;margin-block-end:-1px;padding:10px 22px 12px;border-radius:14px 14px 0 0;font-size:14px;font-weight:700;letter-spacing:.06em}
+.files{--n:5;--tg:8px;--tw:calc((100% - (var(--n) - 1) * var(--tg)) / var(--n));display:grid;gap:clamp(24px,4vh,40px)}
+/* Divider tabs: every file sticks at the same top and its tab sits in its own slot of one row,
+   so the tabs of all files already passed stay readable while the newest file covers the bodies. */
+.file{position:sticky;top:84px}
+.file-tab{min-height:44px;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:var(--tw);margin-inline-start:calc(var(--i) * (var(--tw) + var(--tg)));margin-block-end:-1px;padding:10px 18px 12px;border-radius:14px 14px 0 0;font-size:14px;font-weight:700;letter-spacing:.06em;white-space:nowrap;overflow:hidden}
+.file-tab .t-short{display:none}
 .file-body{border-radius:0 var(--r-md) var(--r-md) var(--r-md);padding:clamp(28px,4vw,52px);display:grid;gap:28px;min-height:clamp(340px,44vh,420px);box-shadow:0 -1px 0 rgba(0,0,0,.04),0 24px 50px -30px color-mix(in srgb,var(--ink) 45%,transparent)}
 [dir="rtl"] .file-body{border-radius:var(--r-md) 0 var(--r-md) var(--r-md)}
+[dir="rtl"] .file:not(.f1) .file-body{border-radius:var(--r-md)}
 @media (min-width:900px){.file-body{grid-template-columns:1.1fr 1fr;align-items:start}}
 .file h3{font-size:clamp(1.9rem,3.4vw,3.1rem);line-height:1.08}
 .file-lead{margin-block-start:14px;font-size:18px;max-width:28em}
@@ -445,8 +448,11 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   .years p,.about-text,.file-lead,.step p,.visit-desc,.qa .ans{font-size:15px}
   .file h3{font-size:1.25rem}
   .file li{font-size:15px;padding-block:10px}
-  .file-tab{font-size:13px;padding:9px 18px 10px}
-  .file-body{padding-block-start:52px}
+  .files{--tg:4px}
+  .file-tab{justify-content:center;font-size:12.5px;letter-spacing:.02em;padding:9px 4px 10px;border-radius:10px 10px 0 0}
+  .file-tab::before{display:none}
+  .file-tab .t-full{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .file-tab .t-short{display:inline}
   .step h3{font-size:1.1rem}
   .fact dd{font-size:16px}
   .rs-card blockquote{font-size:15.5px}
@@ -580,7 +586,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 
     <div class="files">
       <article class="file f1" style="--i:0" data-file>
-        <div class="file-tab">דיני משפחה וירושה</div>
+        <div class="file-tab"><span class="t-full">דיני משפחה וירושה</span><span class="t-short" aria-hidden="true">משפחה</span></div>
         <div class="file-body">
           <div>
             <h3>כשהמשפחה משתנה, צריך מישהו יציב לצידכם.</h3>
@@ -594,7 +600,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
       </article>
 
       <article class="file f2" style="--i:1" data-file>
-        <div class="file-tab">מקרקעין ונדל״ן</div>
+        <div class="file-tab"><span class="t-full">מקרקעין ונדל״ן</span><span class="t-short" aria-hidden="true">נדל״ן</span></div>
         <div class="file-body">
           <div>
             <h3>העסקה הגדולה בחיים ראויה לבדיקה יסודית.</h3>
@@ -608,7 +614,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
       </article>
 
       <article class="file f3" style="--i:2" data-file>
-        <div class="file-tab">נזיקין וביטוח</div>
+        <div class="file-tab"><span class="t-full">נזיקין וביטוח</span><span class="t-short" aria-hidden="true">ביטוח</span></div>
         <div class="file-body">
           <div>
             <h3>כשחברת הביטוח לא ממהרת להכיר בזכאות.</h3>
@@ -622,7 +628,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
       </article>
 
       <article class="file f4" style="--i:3" data-file>
-        <div class="file-tab">משפט אזרחי ומסחרי</div>
+        <div class="file-tab"><span class="t-full">משפט אזרחי ומסחרי</span><span class="t-short" aria-hidden="true">אזרחי</span></div>
         <div class="file-body">
           <div>
             <h3>לא כל מחלוקת חייבת להגיע לבית המשפט.</h3>
@@ -636,7 +642,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
       </article>
 
       <article class="file f5" style="--i:4" data-file>
-        <div class="file-tab">נוטריון</div>
+        <div class="file-tab"><span class="t-full">נוטריון</span><span class="t-short" aria-hidden="true">נוטריון</span></div>
         <div class="file-body">
           <div>
             <h3>אישור נוטריוני, באותו משרד ובאותה שיחה.</h3>
@@ -1184,13 +1190,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
       const nr = next.getBoundingClientRect(), fr = f.getBoundingClientRect();
       const overlap = clamp01((fr.bottom - nr.top) / fr.height);
       f.style.filter = `brightness(${1 - overlap * 0.25})`;
-      // Fold the stack: as the next file arrives, this one lifts one tab height (44px), so only the previous
-      // and the current tab stay visible; older files end up exactly under the previous one.
-      const arrive = clamp01((128 + 220 - (nr.top - (parseFloat(next.style.transform.slice(11)) || 0))) / 220);
-      f.style.transform = `translateY(${-44 * arrive}px)`;
-      // Two files ahead: this one is fully folded under the previous tab, hide it so a wider tab never peeks out.
-      const after = files[i + 2];
-      f.style.visibility = after && after.getBoundingClientRect().top < 128 + 60 ? 'hidden' : '';
     });
 
     dock.classList.toggle('show', hero.getBoundingClientRect().bottom < vh * 0.4);

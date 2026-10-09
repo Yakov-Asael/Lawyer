@@ -18,10 +18,12 @@ real estate, torts and insurance, civil and commercial, notary.
   `ink` button on light files).
 
 ## Motion (signature)
-- Files are `position: sticky`, `top: 128px`, so each new file slides over the previous one.
-- The stack folds to two tabs (owner feedback): as the next file arrives, the current one lifts 44px (one tab height)
-  with `translateY`, so at rest only the previous tab (at 84px) and the current tab (at 128px) are visible. Files two
-  or more back sit exactly under the previous one and are hidden (`visibility`), so a wider tab never peeks out.
+- Divider tabs (owner feedback, 2026-10-09): every file is `position: sticky; top: 84px`, and its tab sits in its own
+  slot of a single row (`width: (100% - 4 * gap) / 5`, `margin-inline-start: i * (tab width + gap)`). When a new file
+  slides over the previous one it covers only the body, so the tabs of every file already passed stay readable, like
+  dividers in a binder. The section never grows taller than one tab row plus one body.
+- Phones: the same row with short labels (משפחה, נדל״ן, ביטוח, אזרחי, נוטריון); the full label stays available to
+  screen readers.
 - A covered file only dims (`brightness(1 - overlap * .25)`). No scaling: every file keeps the same width so edges and
   tabs stay aligned (owner feedback).
 
@@ -30,7 +32,6 @@ CTA → `waLink(whatsappTopic)`, e.g. "...אשמח להתייעץ בנושא ד�
 
 ## Fallbacks
 Reduced motion: no dimming (stacking remains, it is layout, not animation).
-Phones: body top padding 52px so a covered file shows only a clean strip, not the top of its heading.
 
 ## Accessibility
 Each file is an `<article>` with its headline as `<h3>`; service lists are `<ul>`.
@@ -38,6 +39,6 @@ Each file is an `<article>` with its headline as `<h3>`; service lists are `<ul>
 ## Acceptance criteria
 - [ ] Tab and body touch with zero gap (measured) at 1440 and 390; tab right edge equals body right edge.
 - [ ] Each CTA opens WhatsApp with its own topic in the message.
-- [ ] While scrolling the stack, at most two tabs are visible at rest (previous at 84px, current at 128px), labels fully readable.
+- [ ] While scrolling, the tabs of all files already reached stay visible in one row, labels fully readable, at 390 and 1440.
 - [ ] All five bodies share the same left and right edges while stacked (measured).
 - [ ] Service lists come from content; no hardcoded items.
