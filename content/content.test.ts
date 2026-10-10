@@ -35,7 +35,8 @@ describe("site content", () => {
   it("reports open placeholders by path", () => {
     const open = findPlaceholders(site);
     expect(open).toContain("practiceAreas[4].servicesNote");
-    expect(open.every((p) => /^(faq\[|practiceAreas\[4\]\.servicesNote)/.test(p))).toBe(true);
+    expect(open).toContain("reviews[2].clientName");
+    expect(open.every((p) => /^(faq\[|practiceAreas\[4\]\.servicesNote|reviews\[2\]\.clientName)/.test(p))).toBe(true);
   });
 });
 
@@ -75,5 +76,10 @@ describe("contract rules", () => {
   it("requires review consent", () => {
     const review = { quote: "x".repeat(40), clientName: "ד״כ", area: "family", consentConfirmed: false };
     expect(Review.safeParse(review).success).toBe(false);
+  });
+
+  it("allows a review without an area", () => {
+    const review = { quote: "x".repeat(40), clientName: "ד״כ", consentConfirmed: true };
+    expect(Review.safeParse(review).success).toBe(true);
   });
 });

@@ -5,6 +5,7 @@ import { expect, test } from "./fixtures";
 const LINKS = [
   ["תחומי עיסוק", "/#areas"],
   ["אודות", "/#about"],
+  ["המלצות", "/#reviews"],
   ["שאלות נפוצות", "/#faq"],
   ["הגעה למשרד", "/#visit"],
   ["תקנון האתר", "/terms"],
@@ -44,7 +45,7 @@ test("icon links: labelled, at least 44px, correct targets", async ({ page }) =>
   }
 });
 
-test("links from content; no reviews link while there are no reviews", async ({ page }) => {
+test("links from content, with the reviews link once reviews exist", async ({ page }) => {
   await page.goto("/");
   const links = page.getByRole("contentinfo").locator("ul").nth(1).getByRole("link");
   await expect(links).toHaveText(LINKS.map(([label]) => label));

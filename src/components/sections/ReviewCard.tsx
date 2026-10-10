@@ -44,8 +44,7 @@ export function ReviewCard({ review, onReadMore }: { review: Review; onReadMore:
         </button>
       )}
       <figcaption className="mt-auto pt-[18px] font-bold text-brass-deep">
-        {review.clientName}
-        <span className="block text-sm font-normal text-muted">{practiceArea(review.area).tabLabel}</span>
+        <Attribution review={review} />
       </figcaption>
     </figure>
   );
@@ -57,9 +56,18 @@ export function ReviewReader({ review }: { review: Review }) {
     <figure className="grid gap-[18px]">
       <blockquote className="font-serif text-[clamp(1.15rem,2.2vw,1.35rem)] leading-[1.75]">{review.quote}</blockquote>
       <figcaption className="border-t border-bark pt-4 font-bold text-brass-deep">
-        {review.clientName}
-        <span className="block text-sm font-normal text-muted">{practiceArea(review.area).tabLabel}</span>
+        <Attribution review={review} />
       </figcaption>
     </figure>
+  );
+}
+
+/** Client name, then the practice area when the review names one. */
+function Attribution({ review }: { review: Review }) {
+  return (
+    <>
+      {review.clientName}
+      {review.area && <span className="block text-sm font-normal text-muted">{practiceArea(review.area).tabLabel}</span>}
+    </>
   );
 }

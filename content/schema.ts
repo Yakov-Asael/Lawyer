@@ -58,7 +58,8 @@ export const ProcessStep = z.object({ title: copy, body: copy });
 export const Review = z.object({
   quote: copy.pipe(z.string().min(40)),
   clientName: copy,
-  area: PracticeAreaId,
+  /** Optional: a review the office received outside the form may not name its area yet; the card then omits it. */
+  area: PracticeAreaId.optional(),
   consentConfirmed: z.literal(true),
 });
 

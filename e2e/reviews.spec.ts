@@ -1,27 +1,33 @@
 import type { Page } from "@playwright/test";
 import { expect, test } from "./fixtures";
 
-/** Spec 09: reviews. The live page has no approved reviews yet; /dev/reviews renders the slider with sample data. */
+/** Spec 09: reviews. The live page shows the approved reviews; /dev/reviews renders sample data and the empty state. */
 
 const REGION = '[role="region"][aria-label="המלצות לקוחות"]';
 
-test.describe("live page, no approved reviews", () => {
-  test("compact invitation instead of the slider", async ({ page }) => {
+test.describe("live page", () => {
+  test("shows the approved reviews in the slider", async ({ page }) => {
     await page.goto("/");
     const section = page.locator("#reviews");
     await expect(section.locator("#reviews-title")).toHaveText("מה אומרים לקוחות.");
-    await expect(section).toContainText("היו הראשונים לשתף איך היה לעבוד איתנו.");
-    await expect(page.locator(REGION)).toHaveCount(0);
+    await expect(page.locator(REGION)).toHaveCount(1);
+    await expect(page.locator(REGION)).toContainText("דליה אריאלי");
   });
 
-  test("menu has no reviews link while empty", async ({ page, isMobile }) => {
+  test("menu links to the reviews", async ({ page, isMobile }) => {
     test.skip(!isMobile, "the reviews link lives in the mobile menu");
     await page.goto("/");
     await page.getByRole("button", { name: "פתיחת תפריט" }).click();
     const dialog = page.getByRole("dialog", { name: "תפריט" });
-    await expect(dialog.getByRole("link", { name: "אודות" })).toBeVisible();
-    await expect(dialog.getByRole("link", { name: "המלצות" })).toHaveCount(0);
+    await expect(dialog.getByRole("link", { name: "המלצות" })).toHaveAttribute("href", "#reviews");
   });
+});
+
+test("no reviews: compact invitation instead of the slider", async ({ page }) => {
+  await page.goto("/dev/reviews?empty=1");
+  const section = page.locator("#reviews");
+  await expect(section).toContainText("היו הראשונים לשתף איך היה לעבוד איתנו.");
+  await expect(page.locator(REGION)).toHaveCount(0);
 });
 
 /** Index (1-based, from aria-label "n / 6") of the slides fully inside the viewport, in visual order right to left. */
