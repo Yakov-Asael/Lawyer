@@ -102,6 +102,8 @@ export const Site = z
     /** Header nav (desktop) and the fuller mobile menu (spec 02). */
     navigation: z.object({ header: z.array(NavLink).min(1), menu: z.array(NavLink).min(1) }),
     hero: z.object({
+      /** Small line opening the H1: the local search phrase (spec 03, spec 16). */
+      kicker: copy,
       line1: copy,
       line2: copy,
       sub: copy,
