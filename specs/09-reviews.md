@@ -4,7 +4,7 @@
 Social proof from real clients, curated by the office (not a Google feed), in a compact endless slider.
 
 ## Content
-`reviews[]`: quote, clientName, area, `consentConfirmed: true`. Source: approved rows from the reviews table (spec 19),
+`reviews[]`: quote, clientName, area (optional; the card omits it when unknown), `consentConfirmed: true`. Source: approved rows from the reviews table (spec 19),
 ordered as set in the admin. Section heading "מה אומרים לקוחות." and a note line
 (final wording TBD). **If `reviews` is empty** the slider is not rendered; the section shows a compact invitation instead
 (heading, one line "היו הראשונים לשתף איך היה לעבוד איתנו", and the "השאירו המלצה" button), so the form stays reachable

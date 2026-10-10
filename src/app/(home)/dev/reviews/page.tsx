@@ -3,7 +3,7 @@ import type { Review } from "@content/data";
 import { Reviews } from "@/components/sections/Reviews";
 
 /**
- * Dev-only preview of the reviews slider with sample data (there are no approved reviews yet).
+ * Dev-only preview of the reviews slider with sample data; `?empty=1` renders the empty-state invitation.
  * 404 unless ENABLE_DEV_PREVIEWS=1, which only the Playwright web server sets; never on Netlify.
  */
 export const dynamic = "force-dynamic";
@@ -20,7 +20,8 @@ const samples: Review[] = AREAS.map((area, i) => ({
   consentConfirmed: true,
 }));
 
-export default function ReviewsPreview() {
+export default async function ReviewsPreview({ searchParams }: { searchParams: Promise<{ empty?: string }> }) {
   if (process.env.ENABLE_DEV_PREVIEWS !== "1") notFound();
-  return <Reviews reviews={samples} />;
+  const { empty } = await searchParams;
+  return <Reviews reviews={empty === "1" ? [] : samples} />;
 }
