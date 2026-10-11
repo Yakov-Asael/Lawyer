@@ -23,6 +23,8 @@ export const office = {
   licensed: { lawyer: 2003, notary: 2015 },
   education: "משפטים ומנהל עסקים, המכללה האקדמית נתניה",
   hours: "קבלת קהל בתיאום מראש, בימים א׳ עד ה׳ בין 8:00 ל-18:00, ולפי הצורך גם מחוץ לשעות האלה.",
+  // The same hours for JSON-LD and Google Business Profile; keep in step with `hours` (Yossi, 2026-10-05).
+  openingHours: { days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"], opens: "08:00", closes: "18:00" },
   // Yossi (2026-10-05): no elevator and no real wheelchair access; not mentioned here at his request. The
   // accessibility statement still has to describe it (service-accessibility regulations).
   accessAndParking: "קומה 1. יש חניה בקרבת המשרד, ליד פוליצר.",

@@ -31,7 +31,7 @@ Secondary facts: legal representation and notary services under one roof; mediat
 ## Operating Context
 - Visitors arrive from Google search, Google Maps, Golden Pages (d.co.il) and word of mouth.
 - The office currently has **no Google Business Profile**. Setting one up is a parallel workstream
-  (`docs/google-business-profile.md`). Name, address and phone must be identical on the site, Google and Golden Pages.
+  (`docs/google-business-profile.md`); domain and Search Console in `docs/domain-and-search-console.md`. Name, address and phone must be identical on the site, Google and Golden Pages.
 - Contact happens by WhatsApp or phone to the same number; email is secondary.
 
 ## Capabilities and Constraints
@@ -41,10 +41,11 @@ Secondary facts: legal representation and notary services under one roof; mediat
 - Phone and WhatsApp: 052-252-1127
 - Email: shukruny@smile.net.il
 - Experience: 23 years
-- Floor: 1 (elevator, wheelchair access and parking: not yet answered)
+- Floor: 1, no elevator, not wheelchair accessible; parking nearby, by Politzer (Yossi, 2026-10-05)
 - Licensed: lawyer 2003, notary 2015
 - Education: law with business administration (combined track), המכללה האקדמית נתניה
-- Hours: by appointment, five days a week, 8:00 to 18:00 (which five days: not yet confirmed)
+- Hours: by appointment, Sunday to Thursday, 8:00 to 18:00 (Yossi, 2026-10-05)
+- Domain: yossi-shukrun.com (registered by Yakov at GoDaddy, DNS on Netlify)
 - Prices: never shown on the site (owner decision)
 - Background: former insurance agent (Yossi's own statement)
 - Source copy from Yossi: `content/source/yossi-2026-10-04.md`
@@ -63,11 +64,9 @@ Secondary facts: legal representation and notary services under one roof; mediat
   claims. Copy that may cross the line is flagged for review, not published.
 
 **Open decisions (do not invent):**
-- Exact working days (five days a week, which ones?), elevator, wheelchair access, parking.
 - Notary sub-services beyond enduring power of attorney (draft list in the mockup; needs Yossi's confirmation).
 - Logo / wordmark: none exists; to be designed.
 - Education, admission year, memberships.
-- Domain name.
 - Google Maps embed in the visit section: planned for later; needs the privacy notice (Maps sets cookies).
 
 ## Brand Commitments

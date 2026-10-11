@@ -4,7 +4,8 @@ import type { Office } from "@content/data";
  * JSON-LD for the office (spec 16): a LegalService with Yossi as its founder.
  * Name, address and phone come straight from `office`, so they always match the visible NAP and the
  * Google Business Profile. No AggregateRating: the reviews are self-curated (Google disallows self-serving markup).
- * Geo and openingHours wait for confirmed facts (hours is free text today; schema.org needs "Mo-Th 09:00-17:00").
+ * Hours come from the structured `office.openingHours`, never parsed from the visible sentence.
+ * Geo, hasMap and sameAs wait for the Google Business Profile pin and URL (docs/google-business-profile.md).
  */
 export function officeJsonLd(office: Office, opts: { url: string; image: string; description: string }) {
   const id = (fragment: string) => `${opts.url}#${fragment}`;
@@ -24,6 +25,14 @@ export function officeJsonLd(office: Office, opts: { url: string; image: string;
       addressLocality: office.city,
       addressCountry: "IL",
     },
+    ...(office.openingHours && {
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: office.openingHours.days,
+        opens: office.openingHours.opens,
+        closes: office.openingHours.closes,
+      },
+    }),
     areaServed: { "@type": "City", name: office.city },
     knowsLanguage: "he",
     founder: {

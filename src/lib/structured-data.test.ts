@@ -18,6 +18,22 @@ describe("officeJsonLd", () => {
     expect(data.areaServed.name).toBe(site.office.city);
   });
 
+  it("publishes the structured hours, not the visible sentence", () => {
+    expect(data.openingHoursSpecification).toEqual({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: site.office.openingHours!.days,
+      opens: site.office.openingHours!.opens,
+      closes: site.office.openingHours!.closes,
+    });
+  });
+
+  it("leaves hours out when they are unknown", () => {
+    const rest = { ...site.office, openingHours: undefined };
+    expect(officeJsonLd(rest, { url: "https://e.co.il/", image: "", description: "" })).not.toHaveProperty(
+      "openingHoursSpecification",
+    );
+  });
+
   it("links Yossi as founder and never claims a rating", () => {
     expect(data.founder["@type"]).toBe("Person");
     expect(data.founder.worksFor["@id"]).toBe(data["@id"]);
