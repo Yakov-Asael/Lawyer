@@ -7,15 +7,21 @@ before launch.
 ## Metadata
 - `<title>`: "עו״ד יוסי שוקרון כהן | עורך דין ונוטריון בחדרה".
 - Description (≤155 chars) naming the five practice areas and Hadera.
-- Canonical URL (domain TBD), Open Graph + Twitter card with a designed 1200x630 image (seal + name on `ink`).
+- Canonical URL on `https://yossi-shukrun.com` (from `SITE_URL`, set in Netlify for production only; setup in
+  `docs/domain-and-search-console.md`), Open Graph + Twitter card with a designed 1200x630 image (seal + name on `ink`).
 - Favicon and app icons from the seal monogram.
 
 ## Structured data (JSON-LD, generated from content)
-- `LegalService` (or `Attorney`) with name, address, telephone, geo, openingHours (when known), url, image,
-  `areaServed: חדרה`. Name, address and phone must match Google Business Profile and Golden Pages exactly.
+- `LegalService` (or `Attorney`) with name, address, telephone, url, image, `areaServed: חדרה`, and
+  `openingHoursSpecification` from the structured `office.openingHours` (Sunday to Thursday, 08:00 to 18:00).
+  `geo`, `hasMap` and `sameAs` follow once the Google Business Profile is verified (pin and profile URL). Name, address and phone must match Google Business Profile and Golden Pages exactly.
 - `FAQPage` from the visible FAQ items.
 - `Person` for Yossi, linked as `founder`.
 - No `AggregateRating` (reviews are self-curated; Google disallows self-serving review markup).
+
+## Keywords and headings
+The H1 opens with "עורך דין ונוטריון בחדרה" (spec 03 kicker); the title carries the same phrase. Section headings
+stay human, not keyword-stuffed.
 
 ## Technical SEO
 Static export, `sitemap.xml`, `robots.txt`, Hebrew `lang`, one H1, semantic sections, image alts, Core Web Vitals
@@ -32,7 +38,8 @@ within the targets in spec 00.
 Legal texts to be reviewed by Yossi (he is the lawyer). We provide structure and draft, not legal advice.
 
 ## Acceptance criteria
-- [ ] Rich Results Test passes for LegalService and FAQPage.
+- [ ] Rich Results Test on `https://yossi-shukrun.com/` detects the local business (LegalService) and FAQ with no
+      errors (FAQ rich results only show for government and health sites since 2023; detection is the bar).
 - [x] NAP in JSON-LD equals `office` content byte for byte.
 - [x] Both legal pages exist and are linked from the footer and the accessibility menu.
 
