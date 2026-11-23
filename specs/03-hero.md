@@ -4,8 +4,8 @@
 In one viewport: who this is (a face and a name), why him (personal, 23 years of practice), and how to reach him.
 
 ## Content
-`hero.line1` ("ליווי משפטי אישי."), `hero.line2` ("23 שנות ניסיון."), `hero.sub`, `office.address`, `office.title`,
-portrait image, seal.
+`hero.kicker` ("עורך דין ונוטריון בחדרה", built from `office.title` + `office.city`), `hero.line1`
+("ליווי משפטי אישי."), `hero.line2` ("23 שנות ניסיון."), `hero.sub`, `office.address`, portrait image, seal.
 
 ## Intro loader
 - Full-screen `ink` curtain: seal rings draw (stroke-dashoffset, 1.1s `ease-io`), monogram and name fade in,
@@ -19,10 +19,13 @@ portrait image, seal.
   content bottom-aligned, top padding clears the header.
 - ≥900px: two columns `1.35fr / .8fr`, text at start (right), portrait at end (left).
 - <900px: stacked, text first, portrait below at `min(78%, 340px)`.
-- H1: serif 700, line 2 in `brass` weight 500. Sub: max 34em, `on-dark-soft`, with the personal-handling sentence in
+- H1 opens with the kicker: a block line in the eyebrow voice (Assistant 600, letter-spacing .14em, `brass`),
+  `clamp(14px, 1.05vw, 16px)` (13px phones), `clamp(6px, .8vw, 12px)` above line 1. It is part of the H1 so the main
+  heading carries the local search phrase (spec 16; owner approved 2026-10-10).
+- H1 display lines: serif 700, line 2 in `brass` weight 500. Sub: max 34em, `on-dark-soft`, with the personal-handling sentence in
   `on-dark` 600.
 - Actions: ContactButtons ("שלחו הודעה בוואטסאפ" + round call icon). On phones a two-column grid `1fr auto`, 48px.
-- Meta row: address and title with small brass dots.
+- Meta row: the address with a small brass dot (the title moved into the kicker).
 - Portrait: arched top (`999px 999px radius-md radius-md`), 4:5, object-position 50% 30%, inner parallax 8%.
 - Seal (`hero` variant) overlaps the portrait's bottom-start corner, 128px (104px phones), rotates `scrollY * 0.12deg`.
 
@@ -31,7 +34,7 @@ portrait image, seal.
 dark hero until the owner chooses.
 
 ## Motion
-H1 lines mask-reveal after the loader (1.55s, 1.7s); sub, actions, meta and portrait rise in sequence (1.8s to 2.25s).
+The kicker rises first (1.4s), then the H1 lines mask-reveal after the loader (1.55s, 1.7s); sub, actions, meta and portrait rise in sequence (1.8s to 2.25s).
 Without the loader (repeat visit or reduced motion) the same sequence starts at 0.
 
 ## Assets

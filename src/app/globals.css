@@ -368,6 +368,18 @@
   }
 }
 
+/* The hero H1's opening line (spec 03): eyebrow voice, a step larger on desktop. */
+@utility type-kicker {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 1.05vw, 16px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  @media (max-width: 600px) {
+    font-size: 13px;
+  }
+}
+
 @utility type-eyebrow {
   font-size: 13px;
   font-weight: 600;

@@ -8,6 +8,8 @@ const WA_GENERIC = "שלום עו״ד שוקרון כהן, אשמח להתייע
 test("one h1, portrait alt, decorative seal", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("h1")).toHaveCount(1);
+  // The local search phrase opens the H1 (spec 16), as its own words, not glued to line 1.
+  await expect(page.getByRole("heading", { level: 1 })).toHaveAccessibleName(/^עורך דין ונוטריון בחדרה ליווי משפטי אישי\./);
   await expect(page.getByRole("img", { name: "עו״ד יוסי שוקרון כהן" })).toBeAttached();
   const hero = page.locator("section[aria-labelledby=hero-title]");
   await expect(hero.locator("[aria-hidden=true] svg").first()).toBeAttached();

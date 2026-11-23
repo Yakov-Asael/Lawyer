@@ -30,6 +30,10 @@ export function Hero() {
       <div className="grid items-end gap-10 desk:grid-cols-[minmax(0,1.35fr)_minmax(0,0.8fr)] desk:gap-[clamp(40px,5vw,90px)]">
         <div>
           <h1 id="hero-title" className="type-hero font-bold">
+            {/* Part of the H1 so the main heading carries the local search phrase (spec 16). */}
+            <span style={delay(0)} className="hero-in mb-[clamp(6px,0.8vw,12px)] block type-kicker text-brass">
+              {hero.kicker}
+            </span>{" "}
             {[hero.line1, hero.line2].map((line, i) => (
               <Fragment key={i}>
                 {/* A real space between the stacked lines, so the heading reads as two sentences. */}
@@ -57,16 +61,12 @@ export function Hero() {
               className="grid grid-cols-[minmax(0,1fr)_auto] gap-2.5 tablet:flex tablet:gap-3"
             />
           </div>
-          <ul
+          <p
             style={delay(700)}
-            className="hero-in mt-[30px] flex flex-wrap gap-x-[22px] gap-y-2 text-[13px] text-on-dark-soft tablet:text-sm"
+            className="hero-in mt-[30px] flex items-center gap-2 text-[13px] text-on-dark-soft before:size-[5px] before:rounded-full before:bg-brass tablet:text-sm"
           >
-            {[`${office.address}, ${office.city}`, office.title].map((item) => (
-              <li key={item} className="inline-flex items-center gap-2 before:size-[5px] before:rounded-full before:bg-brass">
-                {item}
-              </li>
-            ))}
-          </ul>
+            {office.address}, {office.city}
+          </p>
         </div>
 
         <div style={delay(250)} className="hero-in relative w-[min(78%,340px)] justify-self-center desk:w-[min(100%,420px)]">

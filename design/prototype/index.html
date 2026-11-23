@@ -130,6 +130,8 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 @media (min-width:900px){.hero-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr);gap:clamp(40px,5vw,90px)}}
 .hero h1{font-size:clamp(2.9rem,7.2vw,7.4rem);line-height:.98;font-weight:700}
 .hero h1 .l2{color:var(--brass);font-weight:500}
+/* Kicker: part of the H1 (local keyword for search), styled as the eyebrow so the display lines keep the stage */
+.hero h1 .kicker{display:block;font-family:var(--sans);font-size:clamp(14px,1.05vw,16px);font-weight:600;line-height:1.4;letter-spacing:.14em;color:var(--brass);margin-block-end:clamp(6px,.8vw,12px)}
 .hero-sub{margin-block-start:28px;max-width:34em;font-size:clamp(17px,1.35vw,20px);color:var(--on-dark-soft)}
 .hero-sub strong{color:var(--on-dark);font-weight:600}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-block-start:34px}
@@ -370,7 +372,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
 
 /* Light hero variant (review tool): same layout, paper ground, ink text */
 [data-hero="light"] .hero{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 1px var(--bark);--on-dark:var(--ink);--on-dark-soft:var(--muted);--line-dark:color-mix(in srgb,var(--ink) 14%,transparent)}
-[data-hero="light"] .hero h1 .l2{color:var(--brass-deep)}
+[data-hero="light"] .hero h1 .l2,[data-hero="light"] .hero h1 .kicker{color:var(--brass-deep)}
 [data-hero="light"] .hero .ruled{background-image:repeating-linear-gradient(to bottom,transparent 0 43px,color-mix(in srgb,var(--ink) 5%,transparent) 43px 44px)}
 [data-hero="light"] .hero .seal{--on-dark:var(--stone);--on-dark-soft:color-mix(in srgb,var(--stone) 72%,transparent)}
 [data-hero="light"] .hero .btn-ghost:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
@@ -429,6 +431,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
   .brand b{font-size:19px}
   .eyebrow{font-size:12px}
   .hero h1{font-size:2rem;line-height:1.08}
+  .hero h1 .kicker{font-size:13px;margin-block-end:6px}
   .hero-sub{font-size:15px;margin-block-start:18px}
   .hero-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;margin-block-start:24px}
   .hero-actions .btn{min-height:48px;padding:0 12px;font-size:15px;gap:8px}
@@ -515,6 +518,7 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
     <div class="hero-grid">
       <div>
         <h1 id="hero-title">
+          <span class="kicker hero-in" style="--d:1.4s">עורך דין ונוטריון בחדרה</span>
           <span class="m"><span style="--d:1.55s">ליווי משפטי אישי.</span></span><br>
           <span class="m"><span class="l2" style="--d:1.7s">23 שנות ניסיון.</span></span>
         </h1>
@@ -528,7 +532,6 @@ main{padding-inline:var(--inset);padding-block:var(--inset) calc(var(--inset) + 
         </div>
         <div class="hero-meta hero-in" style="--d:2.25s">
           <span>הרברט סמואל 27, חדרה</span>
-          <span>עורך דין ונוטריון</span>
         </div>
       </div>
 
