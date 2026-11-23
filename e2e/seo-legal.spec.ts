@@ -38,6 +38,7 @@ test.describe("home metadata", () => {
     expect(office.address.addressLocality).toBe(OFFICE.city);
     expect(office.telephone).toBe(OFFICE.phone);
     expect(office.founder["@type"]).toBe("Person");
+    expect(office.openingHoursSpecification.dayOfWeek).toEqual(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]);
     expect(JSON.stringify(blocks)).not.toContain("AggregateRating");
     expect(blocks.some((b) => b["@type"] === "FAQPage")).toBe(true);
   });

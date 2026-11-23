@@ -20,6 +20,17 @@ const copy = z
   .refine((s) => !EM_DASH.test(s), "No em-dashes in site copy")
   .refine((s) => !EMOJI.test(s), "No emojis in site copy");
 
+const time = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, "HH:MM, 24-hour");
+
+/** Machine-readable hours for JSON-LD and the Google Business Profile; `hours` is the visible sentence. */
+export const OpeningHours = z
+  .object({
+    days: z.array(z.enum(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"])).min(1),
+    opens: time,
+    closes: time,
+  })
+  .refine((h) => h.opens < h.closes, { message: "opens must be before closes", path: ["closes"] });
+
 export const Office = z.object({
   name: copy,
   shortName: copy,
@@ -35,6 +46,7 @@ export const Office = z.object({
   /** Years of admission, as confirmed by Yossi (lawyer, notary). */
   licensed: z.object({ lawyer: z.number().int().min(1950), notary: z.number().int().min(1950) }),
   hours: copy.optional(),
+  openingHours: OpeningHours.optional(),
   accessAndParking: copy.optional(),
   education: copy.optional(),
 });

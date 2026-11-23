@@ -63,6 +63,12 @@ describe("contract rules", () => {
     expect(Site.safeParse(bad).success).toBe(false);
   });
 
+  it("rejects opening hours that close before they open", () => {
+    const hours = { ...siteContent.office.openingHours, opens: "18:00", closes: "08:00" };
+    const bad = { ...siteContent, office: { ...siteContent.office, openingHours: hours } };
+    expect(Site.safeParse(bad).success).toBe(false);
+  });
+
   it("rejects practice areas out of order", () => {
     const [a, b, c, d, e] = siteContent.practiceAreas;
     expect(Site.safeParse({ ...siteContent, practiceAreas: [b, a, c, d, e] }).success).toBe(false);
