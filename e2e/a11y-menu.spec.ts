@@ -62,6 +62,8 @@ test("every option visibly changes the page, and survives a reload", async ({ pa
       };
     });
 
+  // The zoom lands a frame or so after the click in current Chromium; wait for it instead of racing it.
+  await expect.poll(async () => (await check()).zoom).toBe("1.1");
   const after = await check();
   expect(after.muted).not.toBe(before.muted);
   expect(after.gray).toContain("grayscale(1)");
@@ -73,8 +75,7 @@ test("every option visibly changes the page, and survives a reload", async ({ pa
   expect(after.zoom).toBe("1.1");
 
   await page.reload();
-  const reloaded = await check();
-  expect(reloaded).toEqual(after);
+  await expect.poll(check).toEqual(after);
   await openMenu(page);
   await expect(tile(page, "ניגודיות גבוהה")).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator(`${PANEL} output`)).toHaveText("110%");
