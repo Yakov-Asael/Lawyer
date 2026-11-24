@@ -4,14 +4,14 @@ import { office } from "../site";
 
 /**
  * Privacy policy (spec 16). Describes the site as built: no analytics, no cookies, no Maps embed; the review form
- * (spec 18) goes through Netlify Forms. A draft for Yossi: `approved` stays false until he signs off.
+ * (spec 18) goes through Netlify Forms. Approved by Yossi on 2026-11-24.
  * If analytics or a Maps embed are ever added, this page and a cookie notice must change with them.
  */
 export const privacyPage = {
   slug: "privacy",
   title: "מדיניות פרטיות",
-  updatedAt: "2026-10-04",
-  approved: false,
+  updatedAt: "2026-11-24",
+  approved: true,
   intro: `${office.name} מכבד את הפרטיות שלכם. מדיניות זו מסבירה איזה מידע נאסף כשאתם משתמשים באתר, למה, ומה הזכויות שלכם.`,
   sections: [
     {
@@ -54,7 +54,7 @@ export const privacyPage = {
     {
       heading: "הזכויות שלכם",
       body: [
-        "לפי חוק הגנת הפרטיות, התשמ״א-1981, אתם רשאים לבקש לעיין במידע שנשמר עליכם אצל המשרד, ולבקש לתקן או למחוק אותו. [placeholder: לאישור נוסח עם יוסי]",
+        "לפי חוק הגנת הפרטיות, התשמ״א-1981, אתם רשאים לבקש לעיין במידע שנשמר עליכם אצל המשרד, ולבקש לתקן או למחוק אותו.",
       ],
     },
     {

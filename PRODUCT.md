@@ -51,11 +51,11 @@ Secondary facts: legal representation and notary services under one roof; mediat
 - Source copy from Yossi: `content/source/yossi-2026-10-04.md`
 
 **Practice areas (five, in this order; confirmed 2026-10-04):**
-1. דיני משפחה וירושה
+1. דיני משפחה וירושה (including enduring power of attorney; not a notary service, Yossi 2026-11-24)
 2. מקרקעין ונדל״ן (including planning and building)
 3. נזיקין וביטוח
 4. משפט אזרחי ומסחרי (contracts, litigation, mediation)
-5. נוטריון (including enduring power of attorney)
+5. נוטריון (signature verification, certified copies, notarial translation, notarial power of attorney)
 
 **Constraints:**
 - Voice (decided 2026-10-04): About section in first person ("אני מלווה"), the rest of the site neutral / third person.
@@ -64,7 +64,6 @@ Secondary facts: legal representation and notary services under one roof; mediat
   claims. Copy that may cross the line is flagged for review, not published.
 
 **Open decisions (do not invent):**
-- Notary sub-services beyond enduring power of attorney (draft list in the mockup; needs Yossi's confirmation).
 - Logo / wordmark: none exists; to be designed.
 - Education, admission year, memberships.
 - Google Maps embed in the visit section: planned for later; needs the privacy notice (Maps sets cookies).

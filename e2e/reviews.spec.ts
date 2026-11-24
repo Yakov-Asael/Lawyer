@@ -11,7 +11,8 @@ test.describe("live page", () => {
     const section = page.locator("#reviews");
     await expect(section.locator("#reviews-title")).toHaveText("מה אומרים לקוחות.");
     await expect(page.locator(REGION)).toHaveCount(1);
-    await expect(page.locator(REGION)).toContainText("דליה אריאלי");
+    // The four approved reviews, by the names their writers chose (2026-11-24).
+    for (const name of ["זהבה רון", "ב״י, חדרה", "ד״א", "ס״א"]) await expect(page.locator(REGION)).toContainText(name);
   });
 
   test("menu links to the reviews", async ({ page, isMobile }) => {

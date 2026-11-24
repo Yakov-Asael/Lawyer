@@ -50,7 +50,10 @@ test("five files in order, each an article with an h3 and a content-driven servi
     "צווי ירושה",
     "צווי הורות פסיקתיים",
     "העברות במתנה",
+    "ייפוי כוח מתמשך",
   ]);
+  // Approved 2026-11-24: the enduring power of attorney is not a notary service.
+  await expect(files.last().locator("ul > li")).toHaveText(["אימות חתימה", "העתק נאמן למקור", "תרגום נוטריוני", "ייפוי כוח נוטריוני"]);
 });
 
 test("each CTA opens WhatsApp with its own topic", async ({ page }) => {

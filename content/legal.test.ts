@@ -23,11 +23,12 @@ describe("legal pages (specs 16, 17)", () => {
     expect(contact?.email).toBe(site.office.email);
   });
 
-  it("terms: the jurisdiction clause blocks production until Yossi fills it", () => {
+  it("terms: the jurisdiction clause names the Haifa district (approved 2026-11-24)", () => {
     const terms = legalPage("terms");
     const clause = terms.sections.findIndex((s) => s.heading === "דין וסמכות שיפוט");
     expect(clause).toBe(11);
-    expect(blockingPlaceholders({ legal: [terms] })).toContain(`legal[0].sections[${clause}].body[0]`);
+    expect(terms.sections[clause]!.body.join(" ")).toContain("בתי המשפט המוסמכים במחוז חיפה");
+    expect(blockingPlaceholders({ legal: [terms] })).toEqual([]);
     expect(terms.sections[1]!.heading).toBe("אין ייעוץ משפטי");
     expect(terms.sections[2]!.heading).toBe("אין יחסי עורך דין ולקוח");
   });
