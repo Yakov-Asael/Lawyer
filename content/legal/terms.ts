@@ -6,13 +6,13 @@ const { legal } = siteContent;
 
 /**
  * Terms of use (spec 17). Clauses 2 and 3 (no legal advice, no attorney-client relationship) are the heart of the
- * page. A draft for Yossi: `approved` stays false, and the jurisdiction placeholder blocks production on its own.
+ * page. Approved by Yossi on 2026-11-24, including the jurisdiction clause (Haifa district).
  */
 export const termsPage = {
   slug: "terms",
   title: "תקנון האתר",
-  updatedAt: "2026-10-04",
-  approved: false,
+  updatedAt: "2026-11-24",
+  approved: true,
   intro: "התקנון מסביר מה האתר הוא, ומה הוא לא. כדאי לקרוא במיוחד את הסעיפים על ייעוץ משפטי ועל יחסי עורך דין ולקוח.",
   sections: [
     {
@@ -85,7 +85,7 @@ export const termsPage = {
     {
       heading: "דין וסמכות שיפוט",
       body: [
-        "על התקנון ועל השימוש באתר יחול הדין הישראלי בלבד. [placeholder: סמכות השיפוט הבלעדית, למשל בתי המשפט המוסמכים במחוז חיפה, לקביעת יוסי]",
+        "על התקנון ועל השימוש באתר יחול הדין הישראלי בלבד. סמכות השיפוט הבלעדית בכל עניין הנוגע לאתר נתונה לבתי המשפט המוסמכים במחוז חיפה.",
       ],
     },
     {

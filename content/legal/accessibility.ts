@@ -4,14 +4,14 @@ import { office } from "../site";
 
 /**
  * Accessibility statement (spec 16), drafted to the Equal Rights for Persons with Disabilities regulations
- * (service accessibility, 2013), section 35. A draft for Yossi: `approved` stays false until he signs off.
+ * (service accessibility, 2013), section 35. Approved by Yossi on 2026-11-24.
  * The coordinator is the office itself until Yossi names someone else.
  */
 export const accessibilityPage = {
   slug: "accessibility",
   title: "הצהרת נגישות",
-  updatedAt: "2026-10-08",
-  approved: false,
+  updatedAt: "2026-11-24",
+  approved: true,
   intro: `${office.name} רואה חשיבות בכך שכל אדם, כולל אנשים עם מוגבלות, יוכל לקרוא את המידע באתר וליצור קשר עם המשרד בקלות. הצהרה זו מתארת את הנגישות של האתר ואת הדרך לפנות אלינו בנושא.`,
   sections: [
     {
@@ -59,7 +59,7 @@ export const accessibilityPage = {
     {
       heading: "נגישות המשרד",
       body: [
-        `המשרד נמצא ברחוב ${office.address}, ${office.city}, בקומה 1 של בניין ישן ללא מעלית. המשרד אינו נגיש לאנשים עם מוגבלות בניידות.`,
+        `המשרד נמצא ברחוב ${office.address}, ${office.city}, בקומה 1 של בניין ישן ללא מעלית. למרבה הצער, המשרד אינו נגיש לאנשים עם מוגבלות בניידות. בכניסה יש מאחז יד שיכול לסייע לאנשים המתקשים בעלייה במדרגות, אך הוא אינו הופך את המשרד לנגיש.`,
         "לקוחות שאינם יכולים להגיע למשרד מוזמנים לתאם פגישה בביתם. אפשר לתאם בטלפון, בוואטסאפ או בדוא״ל, בפרטים שבסעיף הבא.",
         "יש חניה בקרבת המשרד, ליד פוליצר.",
       ],

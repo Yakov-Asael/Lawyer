@@ -58,7 +58,7 @@ export const PracticeArea = z.object({
   tabLabel: copy,
   headline: copy,
   lead: copy,
-  services: z.array(copy).min(3).max(6),
+  services: z.array(copy).min(3).max(7),
   whatsappTopic: copy,
   ctaLabel: copy,
   /** Shown under the service list while it is unconfirmed; a "[placeholder...]" note blocks production. */

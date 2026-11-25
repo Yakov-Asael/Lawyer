@@ -26,17 +26,18 @@ describe("site content", () => {
     expect(JSON.stringify(siteContent)).not.toMatch(/₪|ש״ח|שקל/);
   });
 
+  it("has no open placeholders: everything was approved for launch (2026-11-24)", () => {
+    expect(findPlaceholders(site)).toEqual([]);
+  });
+
   it("does not let FAQ answers block production (unanswered items are excluded instead)", () => {
-    const blocking = blockingPlaceholders(site);
-    expect(blocking.some((p) => p.startsWith("faq["))).toBe(false);
-    expect(blocking).toContain("practiceAreas[4].servicesNote");
+    const sample = { faq: [{ question: "ש", answer: "[placeholder: תשובה]" }], note: "[placeholder: חסר]" };
+    expect(blockingPlaceholders(sample)).toEqual(["note"]);
   });
 
   it("reports open placeholders by path", () => {
-    const open = findPlaceholders(site);
-    expect(open).toContain("practiceAreas[4].servicesNote");
-    expect(open).toContain("reviews[2].clientName");
-    expect(open.every((p) => /^(faq\[|practiceAreas\[4\]\.servicesNote|reviews\[2\]\.clientName)/.test(p))).toBe(true);
+    const sample = { practiceAreas: [{ servicesNote: "[placeholder: רשימה]" }], reviews: [{ clientName: "ok" }, { clientName: "[placeholder]" }] };
+    expect(findPlaceholders(sample)).toEqual(["practiceAreas[0].servicesNote", "reviews[1].clientName"]);
   });
 });
 

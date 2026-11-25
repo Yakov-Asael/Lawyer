@@ -43,8 +43,9 @@ Each file is an `<article>` with its headline as `<h3>`; service lists are `<ul>
   container). That moment is when all four tabs are stacked, and what the test measures.
 - Colours per file are presentation in the component (`TONES`), not content. On the brass file the focus ring switches
   to ink, because brass-deep on brass is too faint.
-- Section head copy lives in `content.areas`. While services are unconfirmed each file shows
-  `servicesNote` ("[placeholder: רשימה לאישור יוסי]"), which also blocks a production build.
+- Section head copy lives in `content.areas`. A file whose services are unconfirmed can show `servicesNote` (a
+  placeholder blocks a production build). All five lists were approved on 2026-11-24, so none shows a note. Up to 7
+  services per file (family has 7 since the enduring power of attorney moved there from notary).
 
 ## Acceptance criteria
 - [ ] Tab and body touch with zero gap (measured) at 1440 and 390; tab right edge equals body right edge.
