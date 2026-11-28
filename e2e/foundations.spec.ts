@@ -15,8 +15,8 @@ test.describe("foundations shell", () => {
     await page.goto("/");
     await page.evaluate(() => document.fonts.ready);
     const families = await page.evaluate(() => [...document.fonts].filter((f) => f.status === "loaded").map((f) => f.family));
-    expect(families.join(" ")).toMatch(/Frank Ruhl Libre/);
-    expect(families.join(" ")).toMatch(/Assistant/);
+    // Self-hosted (src/app/fonts): next/font/local names each face after its variable in layout.tsx.
+    for (const face of ["frankRuhlHebrew", "frankRuhlLatin", "assistantHebrew", "assistantLatin"]) expect(families).toContain(face);
   });
 
   test("skip link is the first tab stop and moves focus to main", async ({ page, isMobile }) => {
