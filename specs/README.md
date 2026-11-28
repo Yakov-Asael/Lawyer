@@ -42,6 +42,7 @@ Rule: nothing that costs money. Every service below runs on its free plan; stay 
 | `embla-carousel-react` (via shadcn Carousel) | Endless reviews loop with RTL and swipe | MIT, no cost |
 | `zod` | Content contract | Already in the locked stack |
 | Netlify (free plan) | Hosting, deploy preview per branch, serverless functions for specs 18 and 19 | Monthly usage quota (bandwidth, function calls), ample for one landing page; commercial use allowed |
+| `@netlify/plugin-nextjs` (dev) | Netlify's official Next.js runtime; without it the deploy serves 404 on every path | MIT, no cost |
 | Netlify Forms (free plan) | Review submissions emailed to the owner (spec 18, option A) | 100 submissions/month |
 | *Deferred:* Neon + `drizzle-orm`, `next-auth`, `resend`, Turnstile | Only if the admin panel (spec 19) is built later | Free plans as before |
 | Google Maps embed (iframe, no API key) | Map in the Visit section | Free; no Maps JavaScript API |

@@ -1,9 +1,17 @@
 # Netlify build settings, versioned with the code (Next.js is detected and served by the Netlify Next.js runtime).
 [build]
   command = "pnpm build"
+  # Pinned here so a dashboard setting cannot override it: with "/" Netlify uploads the repository root and every
+  # path returns its own 404 (the production deploy of 2026-11-25). ".next" lets the Next.js runtime serve the app.
+  publish = ".next"
+
+# Netlify's Next.js runtime: turns the .next output into the pages and server functions Netlify serves. Netlify did
+# not install it on its own for this project (deploys showed "No functions deployed" and 404 on every path).
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [build.environment]
   NODE_VERSION = "22"
 
-# Production builds fail on purpose while content has "[placeholder...]" markers (content/index.ts).
-# Deploy previews (CONTEXT=deploy-preview) build normally.
+# Production builds fail on purpose while content has "[placeholder...]" markers or unapproved legal pages
+# (content/index.ts). Deploy previews (CONTEXT=deploy-preview) build normally.
