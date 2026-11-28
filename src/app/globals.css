@@ -130,8 +130,8 @@
   --color-ring: var(--ring);
 
   /* Type: fonts come from next/font in the root layout */
-  --font-serif: var(--font-frank-ruhl), "Frank Ruhl Libre", "David Libre", "Times New Roman", serif;
-  --font-sans: var(--font-assistant), "Assistant", "Heebo", Arial, sans-serif;
+  --font-serif: var(--font-frank-ruhl), var(--font-frank-ruhl-latin), "Frank Ruhl Libre", "David Libre", "Times New Roman", serif;
+  --font-sans: var(--font-assistant), var(--font-assistant-latin), "Assistant", "Heebo", Arial, sans-serif;
 
   /* Shape */
   --radius-lg: var(--radius-lg);
